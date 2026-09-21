@@ -3,604 +3,330 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuvera Form | Advanced Bio-Cellular Peptides & Longevity Formulations</title>
-    <meta name="description" content="Nuvera Form supplies >99% pure HPLC-tested research peptides with full COA traceability. Fast US & Global dispatch. Save with volume discounts.">
-    <meta name="keywords" content="Nuvera Form, Peptides, Buy Peptides, BPC-157, GHK-Cu, NAD+, Longevity Science, Bio-peptides">
-    <link rel="canonical" href="https://nuveraform.com/">
-
-    <!-- Tailwind CSS CDN & Icons -->
+    <title>Nuvera Form | Clinical Research & Bio-Cellular Solutions</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
 
-    <!-- Tailwind Config -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            dark: '#070C18',
-                            slate: '#0F172A',
-                            navy: '#1E293B',
-                            cyan: '#00F2FE',
-                            blue: '#4FACFE',
-                            emerald: '#10B981',
-                            gold: '#F59E0B',
-                            rose: '#F43F5E'
+                        clinical: {
+                            base: '#FFFFFF',
+                            slate: '#F8FAFC',
+                            text: '#1E293B',
+                            accent: '#0EA5E9',
+                            dark: '#0F172A',
+                            gold: '#B59410'
                         }
                     },
                     fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                        heading: ['Space Grotesk', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
 
-    <!-- Schema.org Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "MedicalBusiness",
-      "name": "Nuvera Form",
-      "url": "https://nuveraform.com",
-      "description": "High-purity bio-cellular research peptides, custom synthesis, and analytical longevity compounds.",
-      "priceRange": "$$$"
-    }
-    </script>
-
     <style>
-        .glass-nav {
-            background: rgba(7, 12, 24, 0.88);
+        .glass-header {
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
         }
-        .hero-gradient {
-            background: radial-gradient(circle at 50% 20%, rgba(0, 242, 254, 0.15) 0%, rgba(7, 12, 24, 1) 70%);
+        .clinical-shadow {
+            box-shadow: 0 4px 20px rgba(14, 165, 233, 0.08);
         }
-        .glow-cyan {
-            box-shadow: 0 0 25px rgba(0, 242, 254, 0.25);
-        }
-        .glow-cyan:hover {
-            box-shadow: 0 0 35px rgba(0, 242, 254, 0.45);
+        .gated-blur {
+            filter: blur(8px);
+            pointer-events: none;
+            user-select: none;
         }
         .strike-price {
             text-decoration: line-through;
-            opacity: 0.6;
+            opacity: 0.5;
         }
     </style>
 </head>
-<body class="bg-brand-dark text-slate-100 font-sans antialiased selection:bg-brand-cyan selection:text-brand-dark">
+<body class="bg-clinical-base text-clinical-text font-sans antialiased">
 
-    <!-- TOP FLASH SALE & ANNOUNCEMENT BAR -->
-    <div id="top-banner" class="bg-gradient-to-r from-brand-navy via-brand-slate to-brand-navy border-b border-slate-800 text-xs py-2 px-4 relative z-50">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2 text-center md:text-left">
-            
-            <div class="flex items-center gap-2">
-                <span class="bg-brand-rose/20 text-brand-rose border border-brand-rose/30 px-2 py-0.5 rounded-full font-bold uppercase text-[10px] tracking-wider animate-pulse">
-                    <i class="fa-solid fa-fire mr-1"></i> Flash Sale
-                </span>
-                <span class="text-slate-300">
-                    Use code <strong class="text-brand-cyan font-mono">NUVERA10</strong> for an extra 10% OFF at checkout!
-                </span>
+    <div class="bg-clinical-dark text-white text-[10px] py-2 px-4 uppercase tracking-[0.2em] font-bold">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <span><i class="fa-solid fa-microscope mr-2 text-clinical-accent"></i> Analytical Research Standards</span>
+            <div class="hidden sm:flex gap-6">
+                <span>Free US Shipping $200+</span>
+                <span>ISO 9001:2015 Compliant</span>
             </div>
-
-            <div class="flex items-center gap-4">
-                <!-- Countdown Timer -->
-                <div class="hidden sm:flex items-center gap-1.5 font-mono text-slate-300">
-                    <i class="fa-solid fa-clock text-brand-gold"></i>
-                    <span>Ends in: <strong id="sale-timer" class="text-white">05h 42m 18s</strong></span>
-                </div>
-
-                <!-- Currency Switcher -->
-                <select id="currency-select" onchange="changeCurrency(this.value)" class="bg-brand-dark text-slate-300 text-xs rounded border border-slate-700 px-2 py-1 outline-none cursor-pointer hover:border-brand-cyan">
-                    <option value="USD">🇺🇸 USD ($)</option>
-                    <option value="EUR">🇪🇺 EUR (€)</option>
-                    <option value="GBP">🇬🇧 GBP (£)</option>
-                    <option value="CAD">🇨🇦 CAD ($)</option>
-                </select>
-            </div>
-
         </div>
     </div>
 
-    <!-- MAIN NAVIGATION HEADER -->
-    <header class="sticky top-0 z-40 glass-nav border-b border-slate-800/80">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            
-            <!-- Logo -->
-            <a href="#" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-cyan to-brand-blue flex items-center justify-center font-heading font-bold text-brand-dark text-xl shadow-lg shadow-brand-cyan/20 group-hover:scale-105 transition-transform">
-                    N
-                </div>
+    <header class="sticky top-0 z-50 glass-header">
+        <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded bg-clinical-dark flex items-center justify-center font-heading font-bold text-white text-xl">N</div>
                 <div>
-                    <span class="font-heading font-bold text-xl tracking-wider text-white uppercase block leading-none">Nuvera<span class="text-brand-cyan">Form</span></span>
-                    <span class="text-[9px] tracking-[0.2em] text-slate-400 uppercase font-semibold">Bio-Cellular Research</span>
+                    <span class="font-heading font-bold text-xl tracking-tight text-clinical-dark block leading-none">NUVERA<span class="text-clinical-accent">FORM</span></span>
+                    <span class="text-[9px] tracking-[0.25em] text-slate-500 uppercase font-medium">Precision Bio-Cellular</span>
                 </div>
             </a>
 
-            <!-- Navigation Links -->
-            <nav class="hidden lg:flex items-center gap-8 text-sm font-medium">
-                <a href="#catalog" class="text-slate-300 hover:text-brand-cyan transition-colors">Catalog</a>
-                <a href="#bulk-discount" class="text-slate-300 hover:text-brand-cyan transition-colors flex items-center gap-1">
-                    <i class="fa-solid fa-tags text-brand-emerald"></i> Multi-Buy Savings
-                </a>
-                <a href="#quiz" class="text-slate-300 hover:text-brand-cyan transition-colors flex items-center gap-1.5">
-                    <i class="fa-solid fa-compass text-brand-cyan"></i> Compound Finder
-                </a>
-                <a href="#coa-checker" class="text-slate-300 hover:text-brand-cyan transition-colors">Verify COA</a>
-                <a href="#faq" class="text-slate-300 hover:text-brand-cyan transition-colors">Compliance & FAQ</a>
+            <nav class="hidden lg:flex items-center gap-8 text-[11px] font-bold uppercase tracking-widest">
+                <a href="#catalog" class="hover:text-clinical-accent transition-colors">Compounds</a>
+                <a href="#fresh" class="hover:text-clinical-accent transition-colors">Nuvera Fresh</a>
+                <a href="#affiliate" class="text-clinical-gold hover:opacity-80 transition-opacity"><i class="fa-solid fa-handshake mr-1"></i> Affiliate Portal</a>
+                <a href="#compliance" class="hover:text-clinical-accent transition-colors">Compliance</a>
             </nav>
 
-            <!-- Actions -->
             <div class="flex items-center gap-4">
-                <button onclick="toggleCartDrawer()" class="relative p-2.5 bg-brand-slate hover:bg-slate-800 border border-slate-700 rounded-xl text-slate-200 transition-all">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <span id="cart-badge" class="absolute -top-1.5 -right-1.5 bg-brand-cyan text-brand-dark text-[10px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center shadow">0</span>
+                <button onclick="toggleModal('access-modal')" class="text-[11px] font-bold uppercase tracking-wider border-b-2 border-clinical-accent pb-1">Member Login</button>
+                <button onclick="toggleModal('access-modal')" class="relative p-2 bg-clinical-slate rounded-full hover:bg-slate-200 transition-all">
+                    <i class="fa-solid fa-bag-shopping text-clinical-dark"></i>
+                    <span id="cart-count" class="absolute -top-1 -right-1 bg-clinical-accent text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
                 </button>
             </div>
-
         </div>
     </header>
 
-    <!-- HERO SECTION -->
-    <section class="relative hero-gradient pt-12 pb-24 lg:pt-20 lg:pb-32 overflow-hidden border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid lg:grid-cols-12 gap-12 items-center">
-                
-                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 bg-brand-cyan/10 border border-brand-cyan/30 text-brand-cyan px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide">
-                        <span class="w-2 h-2 rounded-full bg-brand-cyan animate-pulse"></span>
-                        ISO 9001:2015 & HPLC Certified Synthesis
-                    </div>
-                    
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-white tracking-tight leading-[1.15]">
-                        Precision Peptides.<br>
-                        <span class="bg-gradient-to-r from-brand-cyan via-brand-blue to-indigo-400 bg-clip-text text-transparent">Uncompromised Purity.</span>
-                    </h1>
-
-                    <p class="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
-                        Supplying accredited institutions and researchers with premium >99% pure laboratory peptides, cellular signaling sequences, and analytical longevity compounds.
-                    </p>
-
-                    <!-- CTAs -->
-                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
-                        <a href="#catalog" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-brand-cyan to-brand-blue text-brand-dark font-heading font-bold rounded-xl glow-cyan hover:scale-[1.02] transition-all text-center">
-                            Shop Discounted Compounds <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
-                        </a>
-                        <a href="#coa-checker" class="w-full sm:w-auto px-8 py-4 bg-slate-900 hover:bg-slate-800 text-slate-200 font-semibold border border-slate-700 rounded-xl transition-all text-center">
-                            <i class="fa-solid fa-file-contract text-brand-cyan mr-2"></i> Batch Verification (COA)
-                        </a>
-                    </div>
-
-                    <!-- Trust Stats Bar -->
-                    <div class="pt-8 grid grid-cols-3 gap-4 border-t border-slate-800/80 mt-8 text-center lg:text-left">
-                        <div>
-                            <div class="font-heading font-bold text-2xl text-white">99.4%+</div>
-                            <div class="text-xs text-slate-400">HPLC Purity Rating</div>
-                        </div>
-                        <div>
-                            <div class="font-heading font-bold text-2xl text-white">24-48 HR</div>
-                            <div class="text-xs text-slate-400">US Direct Dispatch</div>
-                        </div>
-                        <div>
-                            <div class="font-heading font-bold text-2xl text-white">100%</div>
-                            <div class="text-xs text-slate-400">Third-Party Tested</div>
-                        </div>
-                    </div>
+    <section class="relative pt-16 pb-24 bg-clinical-slate overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center relative z-10">
+            <div class="space-y-6">
+                <span class="inline-block bg-clinical-accent/10 text-clinical-accent px-4 py-1 rounded text-[10px] font-extrabold uppercase tracking-widest">Gated Research Access</span>
+                <h1 class="text-5xl sm:text-6xl font-heading font-bold text-clinical-dark leading-tight">
+                    Next-Generation <br><span class="text-clinical-accent">Bio-Peptides</span> & Longevity.
+                </h1>
+                <p class="text-slate-500 text-lg leading-relaxed max-w-xl">
+                    Nuvera Form delivers pharmaceutical-grade analytical compounds for institutional research and private clinical exploration.
+                </p>
+                <div class="flex flex-wrap gap-4 pt-4">
+                    <button onclick="toggleModal('access-modal')" class="px-8 py-4 bg-clinical-dark text-white font-bold text-xs uppercase tracking-widest rounded shadow-xl hover:bg-slate-800 transition-all">Unlock Private Catalog</button>
+                    <a href="#affiliate" class="px-8 py-4 border-2 border-clinical-dark text-clinical-dark font-bold text-xs uppercase tracking-widest rounded hover:bg-clinical-dark hover:text-white transition-all">Become a Rep</a>
                 </div>
-
-                <!-- Showcase Glass Box -->
-                <div class="lg:col-span-5 relative">
-                    <div class="relative mx-auto max-w-md bg-gradient-to-b from-slate-800/60 to-slate-900/90 p-6 rounded-3xl border border-slate-700/60 shadow-2xl backdrop-blur-xl">
-                        
-                        <!-- Top Pill Badge -->
-                        <div class="flex justify-between items-center mb-6 border-b border-slate-700/50 pb-4">
-                            <div class="flex items-center gap-2">
-                                <div class="w-3 h-3 rounded-full bg-brand-emerald"></div>
-                                <span class="text-xs font-mono text-slate-300">BATCH #NV-8849-BPC</span>
-                            </div>
-                            <span class="text-xs font-semibold text-brand-rose bg-brand-rose/10 px-2.5 py-1 rounded-md border border-brand-rose/30">
-                                Save 25% Today
-                            </span>
-                        </div>
-
-                        <!-- Product Display Mock -->
-                        <div class="bg-brand-dark/80 rounded-2xl p-8 border border-slate-800 text-center relative overflow-hidden mb-6 group">
-                            <i class="fa-solid fa-flask-vial text-6xl text-brand-cyan mb-4 group-hover:scale-110 transition-transform duration-300"></i>
-                            <h3 class="font-heading font-bold text-xl text-white">BPC-157 Research Grade</h3>
-                            <p class="text-xs text-slate-400 mt-1">5mg Lyophilized Powder</p>
-                            
-                            <!-- Price Tag Display -->
-                            <div class="mt-4 flex items-center justify-center gap-3">
-                                <span class="text-slate-500 line-through text-sm">$79.99</span>
-                                <span class="text-brand-emerald font-heading font-bold text-2xl">$59.99</span>
-                            </div>
-                        </div>
-
-                        <button onclick="addToCart(1)" class="w-full py-3.5 bg-brand-cyan hover:bg-cyan-400 text-brand-dark font-heading font-bold rounded-xl transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-cart-plus"></i> Add Sample to Quick Order
-                        </button>
-
-                    </div>
-                </div>
-
             </div>
-        </div>
-    </section>
-
-    <!-- COMPLIANCE WARNING BANNER -->
-    <section class="bg-amber-950/30 border-y border-amber-500/20 py-3 px-4">
-        <div class="max-w-7xl mx-auto flex items-center justify-center text-center gap-3 text-xs text-amber-200/90 font-medium">
-            <i class="fa-solid fa-triangle-exclamation text-amber-400 text-base"></i>
-            <span><strong>RESEARCH USE ONLY (RUO) NOTICE:</strong> Products on Nuvera Form are strictly intended for laboratory analytical and research applications. Not for human or animal consumption.</span>
-        </div>
-    </section>
-
-    <!-- MULTI-BUY BULK DISCOUNTS BANNER -->
-    <section id="bulk-discount" class="py-12 bg-gradient-to-r from-brand-slate via-slate-900 to-brand-slate border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-8">
-                <span class="text-brand-emerald text-xs font-extrabold uppercase tracking-widest block mb-1">Automatic Tiered Pricing</span>
-                <h2 class="text-2xl sm:text-3xl font-heading font-bold text-white">Buy More, Save More</h2>
-                <p class="text-slate-400 text-xs mt-1">Discounts apply automatically at cart checkout across all compounds.</p>
-            </div>
-
-            <div class="grid sm:grid-cols-3 gap-6">
-                <div class="bg-slate-900/90 border border-slate-800 p-6 rounded-2xl text-center relative">
-                    <div class="text-brand-cyan font-bold text-xl mb-1">1 - 2 Vials</div>
-                    <div class="text-xs text-slate-400 mb-3">Standard Discounted Price</div>
-                    <span class="bg-slate-800 text-slate-300 text-[10px] px-3 py-1 rounded-full font-mono">List Price</span>
-                </div>
-                <div class="bg-slate-900/90 border border-brand-cyan/40 p-6 rounded-2xl text-center relative shadow-lg shadow-brand-cyan/5">
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-cyan text-brand-dark font-extrabold text-[10px] px-3 py-0.5 rounded-full uppercase">Popular</div>
-                    <div class="text-brand-cyan font-bold text-xl mb-1">3 - 4 Vials</div>
-                    <div class="text-xs text-slate-400 mb-3">Extra 10% OFF Subtotal</div>
-                    <span class="bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/30 text-[10px] px-3 py-1 rounded-full font-mono font-bold">Auto Applied</span>
-                </div>
-                <div class="bg-slate-900/90 border border-brand-emerald/40 p-6 rounded-2xl text-center relative shadow-lg shadow-brand-emerald/5">
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-emerald text-brand-dark font-extrabold text-[10px] px-3 py-0.5 rounded-full uppercase">Best Value</div>
-                    <div class="text-brand-emerald font-bold text-xl mb-1">5+ Vials</div>
-                    <div class="text-xs text-slate-400 mb-3">Extra 15% OFF Subtotal</div>
-                    <span class="bg-brand-emerald/10 text-brand-emerald border border-brand-emerald/30 text-[10px] px-3 py-1 rounded-full font-mono font-bold">Max Savings</span>
+            <div class="relative hidden lg:block">
+                <div class="aspect-square rounded-full bg-clinical-accent/5 absolute inset-0 animate-pulse"></div>
+                <div class="relative z-10 p-12 bg-white rounded-3xl border border-slate-100 shadow-2xl">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center border-b pb-4">
+                            <span class="text-xs font-bold text-slate-400">BATCH VALIDATION</span>
+                            <span class="text-[10px] font-bold text-clinical-accent px-2 py-1 bg-clinical-accent/10 rounded">99.7% PURITY</span>
+                        </div>
+                        <div class="h-4 bg-slate-100 rounded w-full"></div>
+                        <div class="h-4 bg-slate-100 rounded w-5/6"></div>
+                        <div class="h-4 bg-slate-100 rounded w-4/6"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PRODUCT CATALOG SECTION WITH FILTER TABS -->
-    <section id="catalog" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+    <section id="catalog" class="py-24 max-w-7xl mx-auto px-4">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
             <div>
-                <span class="text-brand-cyan text-xs font-extrabold uppercase tracking-widest block mb-2">Purity Verified</span>
-                <h2 class="text-3xl sm:text-4xl font-heading font-bold text-white">Research Compounds Catalog</h2>
+                <h2 class="text-3xl font-heading font-bold text-clinical-dark">Research Compound Catalog</h2>
+                <p class="text-slate-500 text-sm mt-2">Registration required to initiate procurement</p>
             </div>
-            
-            <!-- Category Filter Buttons -->
-            <div class="flex flex-wrap gap-2 bg-slate-900 p-1.5 rounded-xl border border-slate-800">
-                <button onclick="filterCatalog('all')" class="cat-btn active px-4 py-2 rounded-lg text-xs font-semibold transition-all bg-brand-cyan text-brand-dark">All Products</button>
-                <button onclick="filterCatalog('longevity')" class="cat-btn px-4 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all">Longevity & NAD+</button>
-                <button onclick="filterCatalog('tissue')" class="cat-btn px-4 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all">Tissue Repair</button>
-                <button onclick="filterCatalog('cognitive')" class="cat-btn px-4 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all">Cognitive / Nootropic</button>
+            <div class="mt-4 flex gap-2">
+                <span class="px-4 py-2 bg-clinical-slate text-xs font-bold rounded cursor-pointer border border-slate-200">Nuvera Form (Peptides)</span>
+                <span id="fresh" class="px-4 py-2 bg-clinical-slate text-xs font-bold rounded cursor-pointer border border-slate-200">Nuvera Fresh (Skin)</span>
             </div>
         </div>
 
-        <!-- Dynamic Product Grid -->
-        <div id="product-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        <div class="relative">
+            <div class="grid md:grid-cols-3 gap-8 gated-blur">
+                <div class="bg-clinical-slate border border-slate-200 p-8 rounded-xl">
+                    <div class="h-48 bg-slate-200 rounded mb-4"></div>
+                    <div class="h-6 bg-slate-300 rounded w-3/4 mb-2"></div>
+                    <div class="h-4 bg-slate-200 rounded w-1/2 mb-4"></div>
+                    <div class="flex justify-between items-center">
+                        <div class="h-6 bg-slate-300 rounded w-1/4"></div>
+                        <div class="h-8 bg-clinical-accent/20 rounded w-1/3"></div>
+                    </div>
+                </div>
+                <div class="bg-clinical-slate border border-slate-200 p-8 rounded-xl">
+                    <div class="h-48 bg-slate-200 rounded mb-4"></div>
+                    <div class="h-6 bg-slate-300 rounded w-3/4 mb-2"></div>
+                    <div class="h-4 bg-slate-200 rounded w-1/2 mb-4"></div>
+                    <div class="flex justify-between items-center">
+                        <div class="h-6 bg-slate-300 rounded w-1/4"></div>
+                        <div class="h-8 bg-clinical-accent/20 rounded w-1/3"></div>
+                    </div>
+                </div>
+                <div class="bg-clinical-slate border border-slate-200 p-8 rounded-xl">
+                    <div class="h-48 bg-slate-200 rounded mb-4"></div>
+                    <div class="h-6 bg-slate-300 rounded w-3/4 mb-2"></div>
+                    <div class="h-4 bg-slate-200 rounded w-1/2 mb-4"></div>
+                    <div class="flex justify-between items-center">
+                        <div class="h-6 bg-slate-300 rounded w-1/4"></div>
+                        <div class="h-8 bg-clinical-accent/20 rounded w-1/3"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="absolute inset-0 z-10 flex items-center justify-center bg-white/20">
+                <div class="bg-white border border-slate-200 p-10 rounded-2xl clinical-shadow text-center max-w-md mx-auto">
+                    <i class="fa-solid fa-lock text-clinical-accent text-3xl mb-4"></i>
+                    <h3 class="text-xl font-heading font-bold text-clinical-dark mb-2 uppercase">Restricted Access</h3>
+                    <p class="text-slate-500 text-xs mb-6 leading-relaxed">Purity reports, detailed pricing, and clinical specifications are only available to verified members.</p>
+                    <button onclick="toggleModal('access-modal')" class="w-full py-4 bg-clinical-accent text-white font-bold text-[11px] uppercase tracking-widest rounded shadow-lg shadow-clinical-accent/30">Sign Up / Login to Access</button>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- COA BATCH VERIFICATION PORTAL -->
-    <section id="coa-checker" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-gradient-to-r from-slate-900 via-brand-slate to-slate-900 border border-slate-800 rounded-3xl p-8 lg:p-12">
-            <div class="max-w-3xl">
-                <span class="text-brand-emerald text-xs font-extrabold uppercase tracking-widest block mb-2">Transparency & Analytical Standards</span>
-                <h2 class="text-3xl font-heading font-bold text-white mb-4">Verify Third-Party Lab Certificate (COA)</h2>
-                <p class="text-slate-400 text-sm mb-8">Every batch dispatched from Nuvera Form undergoes Mass Spectrometry (MS) and High-Performance Liquid Chromatography (HPLC) validation. Enter your batch number below.</p>
-                
-                <div class="flex flex-col sm:flex-row gap-3">
-                    <input type="text" id="coa-input" placeholder="e.g. NV-8849-BPC" class="bg-brand-dark border border-slate-700 rounded-xl px-5 py-3.5 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-cyan flex-1 font-mono text-sm">
-                    <button onclick="verifyCOA()" class="px-8 py-3.5 bg-brand-cyan hover:bg-cyan-400 text-brand-dark font-heading font-bold rounded-xl transition-all flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-magnifying-glass"></i> Search Batch
-                    </button>
+    <section id="affiliate" class="py-24 bg-clinical-dark text-white">
+        <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-12 gap-16 items-center">
+            <div class="lg:col-span-7 space-y-8">
+                <div>
+                    <span class="text-clinical-accent text-[11px] font-bold uppercase tracking-[0.3em]">Referral Alliance</span>
+                    <h2 class="text-4xl font-heading font-bold mt-2">Become a Nuvera Partner Rep</h2>
+                    <p class="text-slate-400 mt-4 leading-relaxed">
+                        Earn recurring commissions by referring clinical researchers and medical practitioners to the Nuvera Form platform. Access your dedicated Rep Portal to track conversions and manage your affiliate codes.
+                    </p>
                 </div>
 
-                <div id="coa-result" class="mt-6 hidden p-4 rounded-xl bg-slate-900/90 border border-slate-700 font-mono text-xs"></div>
+                <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+                    <table class="w-full text-left text-xs uppercase tracking-wider">
+                        <thead>
+                            <tr class="border-b border-slate-800 bg-slate-800/50">
+                                <th class="p-4 font-bold text-slate-400">Partnership Tier</th>
+                                <th class="p-4 font-bold text-slate-400">Monthly Sales</th>
+                                <th class="p-4 font-bold text-clinical-accent">Commission</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-300">
+                            <tr class="border-b border-slate-800">
+                                <td class="p-4 font-semibold">Associate Rep</td>
+                                <td class="p-4">$0 - $5k</td>
+                                <td class="p-4 text-white font-bold">15%</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="p-4 font-semibold">Senior Affiliate</td>
+                                <td class="p-4">$5k - $25k</td>
+                                <td class="p-4 text-white font-bold">20%</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-semibold">Clinical Director</td>
+                                <td class="p-4">$25k+</td>
+                                <td class="p-4 text-clinical-accent font-bold">25%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 bg-white p-8 rounded-2xl border border-slate-100 shadow-2xl text-clinical-dark">
+                <h3 class="text-xl font-heading font-bold mb-2">Partner Application</h3>
+                <p class="text-[11px] text-slate-400 mb-6 font-medium">Qualified applicants receive a personalized promo code and rep portal access.</p>
+                <form class="space-y-4" onsubmit="event.preventDefault(); alert('Application Received. Our team will contact you within 24 hours.');">
+                    <input type="text" placeholder="Organization / Name" class="w-full bg-slate-50 border border-slate-200 rounded p-3 text-xs outline-none focus:border-clinical-accent">
+                    <input type="email" placeholder="Professional Email" class="w-full bg-slate-50 border border-slate-200 rounded p-3 text-xs outline-none focus:border-clinical-accent">
+                    <select class="w-full bg-slate-50 border border-slate-200 rounded p-3 text-xs outline-none focus:border-clinical-accent">
+                        <option>Practitioner / Clinic</option>
+                        <option>Independent Researcher</option>
+                        <option>Industry Influencer</option>
+                    </select>
+                    <button class="w-full py-4 bg-clinical-accent text-white font-bold text-[11px] uppercase tracking-widest rounded shadow-lg shadow-clinical-accent/30 transition-all">Submit Rep Inquiry</button>
+                </form>
             </div>
         </div>
     </section>
 
-    <!-- FAQ SECTION -->
-    <section id="faq" class="py-20 bg-brand-slate border-t border-slate-800">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-heading font-bold text-white">Frequently Asked Questions</h2>
-                <p class="text-slate-400 text-sm mt-2">Compliance, dispatch times, and quality assurance.</p>
-            </div>
-
+    <footer class="bg-clinical-slate pt-20 pb-12 border-t border-slate-200 text-xs">
+        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-4 gap-12 pb-16 border-b border-slate-200">
+            
             <div class="space-y-4">
-                <details class="group bg-slate-900/80 p-5 rounded-xl border border-slate-800 cursor-pointer">
-                    <summary class="font-semibold text-white text-sm flex justify-between items-center">
-                        How fast do US and International orders ship?
-                        <i class="fa-solid fa-chevron-down text-xs text-slate-400 group-open:rotate-180 transition-transform"></i>
-                    </summary>
-                    <p class="text-xs text-slate-400 mt-3 leading-relaxed">
-                        US orders placed before 2 PM EST ship same-day via Priority Mail (2-3 business days). International orders ship via Express DHL/FedEx with full customs clearance support (4-7 business days depending on region).
-                    </p>
-                </details>
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded bg-clinical-dark flex items-center justify-center font-heading font-bold text-white text-lg">N</div>
+                    <span class="font-heading font-bold text-lg text-clinical-dark uppercase tracking-wider">Nuvera<span class="text-clinical-accent">Form</span></span>
+                </div>
+                <p class="text-slate-400 leading-relaxed max-w-xs">
+                    Leading provider of analytical bio-compounds and skin-regeneration factors for institutional research.
+                </p>
+                <div class="flex gap-3 pt-2">
+                    <a href="#" class="w-8 h-8 rounded bg-white border flex items-center justify-center hover:text-clinical-accent"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="w-8 h-8 rounded bg-white border flex items-center justify-center hover:text-clinical-accent"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="mailto:info@nuveraform.com" class="w-8 h-8 rounded bg-white border flex items-center justify-center hover:text-clinical-accent"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
 
-                <details class="group bg-slate-900/80 p-5 rounded-xl border border-slate-800 cursor-pointer">
-                    <summary class="font-semibold text-white text-sm flex justify-between items-center">
-                        What purity standard do you guarantee?
-                        <i class="fa-solid fa-chevron-down text-xs text-slate-400 group-open:rotate-180 transition-transform"></i>
-                    </summary>
-                    <p class="text-xs text-slate-400 mt-3 leading-relaxed">
-                        We guarantee >99.0% purity for all synthetic peptides. Every lot is tested independently via High-Performance Liquid Chromatography (HPLC) and Mass Spectrometry (MS). Reports are downloadable on our website.
-                    </p>
-                </details>
+            <div>
+                <h5 class="font-heading font-bold text-clinical-dark uppercase tracking-widest mb-6 text-[10px]">Quick Links</h5>
+                <ul class="space-y-3 text-slate-500 font-medium">
+                    <li><a href="#catalog" class="hover:text-clinical-accent">Peptides Collection</a></li>
+                    <li><a href="#fresh" class="hover:text-clinical-accent">Skincare Library</a></li>
+                    <li><a href="#" class="hover:text-clinical-accent">Shipping & Returns</a></li>
+                    <li><a href="#" class="hover:text-clinical-accent">Privacy Policy</a></li>
+                    <li><a href="#affiliate" class="text-clinical-gold font-bold">Become a Partner</a></li>
+                    <li><a href="#affiliate" class="text-clinical-gold font-bold">Rep Portal</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h5 class="font-heading font-bold text-clinical-dark uppercase tracking-widest mb-6 text-[10px]">Legal Compliance</h5>
+                <ul class="space-y-3 text-slate-500 font-medium">
+                    <li><a href="#" class="hover:text-clinical-accent">Terms of Service</a></li>
+                    <li><a href="#" class="hover:text-clinical-accent">Research Disclaimer</a></li>
+                    <li><a href="#" class="hover:text-clinical-accent">Shipping Policy</a></li>
+                    <li><a href="#" class="hover:text-clinical-accent">Liability Limits</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h5 class="font-heading font-bold text-clinical-dark uppercase tracking-widest mb-6 text-[10px]">Contact Lab</h5>
+                <p class="text-slate-400 mb-4 font-semibold"><i class="fa-regular fa-envelope text-clinical-accent mr-2"></i> support@nuveraform.com</p>
+                <div class="space-y-2">
+                    <span class="text-[9px] uppercase font-bold text-slate-400">Subscribe to Research Updates</span>
+                    <div class="flex">
+                        <input type="email" placeholder="Email..." class="bg-white border rounded-l px-3 py-2 text-xs outline-none focus:border-clinical-accent flex-1">
+                        <button class="bg-clinical-dark text-white px-4 py-2 rounded-r hover:bg-slate-800 transition-colors"><i class="fa-solid fa-paper-plane"></i></button>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
 
-    <!-- FOOTER -->
-    <footer class="bg-brand-dark border-t border-slate-800 text-slate-400 text-xs py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-500">
-            <p class="mb-2">&copy; 2026 Nuvera Form (nuveraform.com). All rights reserved.</p>
-            <p class="text-[10px] max-w-4xl mx-auto text-slate-600 leading-normal">
-                Disclaimer: Products sold on Nuvera Form are strictly intended for laboratory research and analytical purposes. Not for human or animal therapeutic or direct clinical use.
-            </p>
+        <div class="max-w-7xl mx-auto px-4 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-400">
+            <div>&copy; 2026 Nuvera Form. Research use only.</div>
+            <div class="flex gap-6">
+                <a href="#" class="hover:text-clinical-dark">Terms & Conditions</a>
+                <a href="#" class="hover:text-clinical-dark">Privacy Policy</a>
+            </div>
         </div>
     </footer>
 
-    <!-- CART DRAWER WITH AUTOMATIC TIER DISCOUNT CALCULATOR -->
-    <div id="cart-drawer" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden">
-        <div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-brand-dark border-l border-slate-800 p-6 flex flex-col justify-between shadow-2xl">
-            <div>
-                <div class="flex justify-between items-center border-b border-slate-800 pb-4 mb-6">
-                    <h3 class="font-heading font-bold text-lg text-white flex items-center gap-2">
-                        <i class="fa-solid fa-cart-shopping text-brand-cyan"></i> Your Research Order
-                    </h3>
-                    <button onclick="toggleCartDrawer()" class="text-slate-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+    <div id="access-modal" class="fixed inset-0 z-[100] bg-clinical-dark/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-8 relative clinical-shadow border border-slate-100">
+            <button onclick="toggleModal('access-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-clinical-dark"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <div class="text-center">
+                <div class="w-16 h-16 rounded-full bg-clinical-slate flex items-center justify-center text-clinical-accent mx-auto mb-4">
+                    <i class="fa-solid fa-user-plus text-2xl"></i>
                 </div>
-
-                <div id="cart-items" class="space-y-4 max-h-[50vh] overflow-y-auto pr-2"></div>
-            </div>
-
-            <div class="border-t border-slate-800 pt-4 space-y-3">
-                <div class="flex gap-2">
-                    <input type="text" id="promo-input" placeholder="Promo code (NUVERA10)" class="bg-slate-900 border border-slate-700 text-slate-200 text-xs px-3 py-2 rounded-lg flex-1 font-mono uppercase">
-                    <button onclick="applyPromoCode()" class="bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 px-3 py-2 rounded-lg font-bold">Apply</button>
-                </div>
-
-                <div class="space-y-1.5 text-xs text-slate-400 font-mono">
-                    <div class="flex justify-between">
-                        <span>Catalog Subtotal:</span>
-                        <span id="cart-subtotal">$0.00</span>
-                    </div>
-                    <div class="flex justify-between text-brand-emerald">
-                        <span>Volume / Promo Savings:</span>
-                        <span id="cart-discount">-$0.00</span>
-                    </div>
-                    <div class="flex justify-between text-white font-bold text-sm pt-2 border-t border-slate-800">
-                        <span>Total:</span>
-                        <span id="cart-total">$0.00</span>
-                    </div>
-                </div>
-
-                <button class="w-full py-3.5 bg-gradient-to-r from-brand-cyan to-brand-blue text-brand-dark font-heading font-bold rounded-xl glow-cyan transition-all">
-                    Proceed to Secure Checkout <i class="fa-solid fa-lock ml-2 text-xs"></i>
-                </button>
+                <h3 class="text-2xl font-heading font-bold text-clinical-dark uppercase tracking-wide">Request Portal Access</h3>
+                <p class="text-xs text-slate-400 mt-2 mb-6">Create your verified researcher account to view prices and order.</p>
+                <form class="space-y-4" onsubmit="event.preventDefault(); alert('Request Submitted. Check your email for verification.'); toggleModal('access-modal');">
+                    <input type="text" placeholder="Full Name" class="w-full bg-slate-50 border border-slate-200 rounded px-4 py-3 text-xs outline-none focus:border-clinical-accent">
+                    <input type="email" placeholder="Researcher Email" class="w-full bg-slate-50 border border-slate-200 rounded px-4 py-3 text-xs outline-none focus:border-clinical-accent">
+                    <button type="submit" class="w-full py-4 bg-clinical-accent text-white font-bold text-[11px] uppercase tracking-widest rounded shadow-xl">Complete Registration</button>
+                </form>
             </div>
         </div>
     </div>
 
-    <!-- JAVASCRIPT STATE LOGIC -->
     <script>
-        // Product Database with Original (Regular) Prices and Discounted (Sale) Prices
-        const products = [
-            { id: 1, name: 'BPC-157 Lyophilized Powder', category: 'tissue', originalPrice: 79.99, salePrice: 59.99, specs: '5mg / 99.7% HPLC', img: 'fa-flask-vial', rating: 4.9, badge: 'BEST SELLER' },
-            { id: 2, name: 'GHK-Cu Copper Peptide', category: 'tissue', originalPrice: 84.99, salePrice: 64.99, specs: '50mg / 99.5% HPLC', img: 'fa-vial', rating: 4.8, badge: 'POPULAR' },
-            { id: 3, name: 'NAD+ Bio-Cellular Factor', category: 'longevity', originalPrice: 119.99, salePrice: 89.99, specs: '500mg Solution', img: 'fa-dna', rating: 5.0, badge: 'HOT' },
-            { id: 4, name: 'CJC-1295 + Ipamorelin Blend', category: 'longevity', originalPrice: 104.99, salePrice: 79.99, specs: '10mg Blend Dual-Vial', img: 'fa-vials', rating: 4.9, badge: 'SALE' },
-            { id: 5, name: 'Semax Nootropic Sequence', category: 'cognitive', originalPrice: 69.99, salePrice: 49.99, specs: '30mg Pure Synthetic', img: 'fa-brain', rating: 4.7, badge: 'NEW' },
-            { id: 6, name: 'Epithalon Telomere Factor', category: 'longevity', originalPrice: 124.99, salePrice: 94.99, specs: '10mg Research Vial', img: 'fa-hourglass-half', rating: 4.9, badge: 'TOP RATED' }
-        ];
-
-        let cart = [];
-        let activeCurrency = 'USD';
-        let currencyRates = { USD: 1, EUR: 0.92, GBP: 0.78, CAD: 1.36 };
-        let currencySymbols = { USD: '$', EUR: '€', GBP: '£', CAD: 'C$' };
-        let promoMultiplier = 1.0;
-
-        // Render Catalog Cards with Slashed Discount Prices
-        function renderProducts(filter = 'all') {
-            const grid = document.getElementById('product-grid');
-            grid.innerHTML = '';
-
-            const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
-
-            filtered.forEach(p => {
-                const rate = currencyRates[activeCurrency];
-                const symbol = currencySymbols[activeCurrency];
-                
-                const originalConverted = (p.originalPrice * rate).toFixed(2);
-                const saleConverted = (p.salePrice * rate).toFixed(2);
-                const discountPercent = Math.round(((p.originalPrice - p.salePrice) / p.originalPrice) * 100);
-
-                grid.innerHTML += `
-                    <div class="bg-gradient-to-b from-slate-900 to-brand-slate border border-slate-800 hover:border-slate-700 rounded-2xl p-6 transition-all hover:-translate-y-1 flex flex-col justify-between group relative overflow-hidden">
-                        
-                        <!-- Discount Ribbon -->
-                        <div class="absolute top-3 right-3 bg-brand-rose text-white font-extrabold text-[10px] px-2.5 py-1 rounded-md shadow">
-                            SAVE ${discountPercent}%
-                        </div>
-
-                        <div>
-                            <div class="flex items-center gap-2 mb-2">
-                                <span class="bg-brand-dark text-brand-cyan text-[10px] font-mono font-bold px-2.5 py-1 rounded-md border border-slate-800">
-                                    ${p.specs}
-                                </span>
-                            </div>
-                            
-                            <div class="bg-brand-dark/50 rounded-xl p-8 text-center my-4 group-hover:bg-brand-dark transition-colors border border-slate-800/60">
-                                <i class="fa-solid ${p.img} text-5xl text-brand-cyan group-hover:scale-110 transition-transform duration-300"></i>
-                            </div>
-
-                            <h3 class="font-heading font-bold text-white text-lg mb-1">${p.name}</h3>
-                            <div class="text-slate-400 text-xs mb-4"><i class="fa-solid fa-circle-check text-brand-emerald mr-1"></i> HPLC Tested Batch</div>
-                        </div>
-
-                        <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
-                            <div>
-                                <span class="text-[10px] text-slate-500 block uppercase font-bold">Special Price</span>
-                                <div class="flex items-center gap-2">
-                                    <span class="strike-price text-xs text-slate-400">${symbol}${originalConverted}</span>
-                                    <span class="font-heading font-bold text-xl text-brand-emerald">${symbol}${saleConverted}</span>
-                                </div>
-                            </div>
-                            <button onclick="addToCart(${p.id})" class="px-4 py-2.5 bg-brand-cyan hover:bg-cyan-400 text-brand-dark font-bold text-xs rounded-xl transition-all flex items-center gap-2">
-                                <i class="fa-solid fa-plus"></i> Add
-                            </button>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-
-        function addToCart(productId) {
-            const product = products.find(p => p.id === productId);
-            const existing = cart.find(item => item.id === productId);
-
-            if (existing) {
-                existing.qty++;
+        function toggleModal(id) {
+            const modal = document.getElementById(id);
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
             } else {
-                cart.push({ ...product, qty: 1 });
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
             }
-
-            updateCartUI();
-            toggleCartDrawer(true);
         }
-
-        function updateCartUI() {
-            const cartItemsContainer = document.getElementById('cart-items');
-            const cartBadge = document.getElementById('cart-badge');
-            const cartSubtotal = document.getElementById('cart-subtotal');
-            const cartDiscount = document.getElementById('cart-discount');
-            const cartTotal = document.getElementById('cart-total');
-
-            const totalCount = cart.reduce((acc, item) => acc + item.qty, 0);
-            cartBadge.innerText = totalCount;
-
-            cartItemsContainer.innerHTML = '';
-            let subtotalUSD = 0;
-
-            if (cart.length === 0) {
-                cartItemsContainer.innerHTML = `<div class="text-center text-slate-500 text-xs py-8 font-mono">Your cart is currently empty.</div>`;
-            } else {
-                cart.forEach(item => {
-                    subtotalUSD += item.salePrice * item.qty;
-                    const symbol = currencySymbols[activeCurrency];
-                    const itemPrice = (item.salePrice * currencyRates[activeCurrency]).toFixed(2);
-
-                    cartItemsContainer.innerHTML += `
-                        <div class="flex items-center justify-between bg-slate-900 p-3 rounded-xl border border-slate-800">
-                            <div>
-                                <div class="font-semibold text-white text-xs">${item.name}</div>
-                                <div class="text-[10px] text-slate-400 font-mono">${symbol}${itemPrice} x ${item.qty}</div>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <button onclick="changeQty(${item.id}, -1)" class="w-6 h-6 bg-slate-800 text-slate-300 rounded hover:bg-slate-700 text-xs">-</button>
-                                <span class="text-xs text-white font-mono">${item.qty}</span>
-                                <button onclick="changeQty(${item.id}, 1)" class="w-6 h-6 bg-slate-800 text-slate-300 rounded hover:bg-slate-700 text-xs">+</button>
-                            </div>
-                        </div>
-                    `;
-                });
-            }
-
-            // Automatic Bulk Discount Logic
-            let volumeDiscountPercent = 0;
-            if (totalCount >= 5) volumeDiscountPercent = 0.15;
-            else if (totalCount >= 3) volumeDiscountPercent = 0.10;
-
-            const promoDiscountPercent = 1 - promoMultiplier;
-            const combinedDiscountPercent = Math.min(volumeDiscountPercent + promoDiscountPercent, 0.30);
-
-            const discountUSD = subtotalUSD * combinedDiscountPercent;
-            const finalTotalUSD = subtotalUSD - discountUSD;
-
-            const rate = currencyRates[activeCurrency];
-            const symbol = currencySymbols[activeCurrency];
-
-            cartSubtotal.innerText = `${symbol}${(subtotalUSD * rate).toFixed(2)}`;
-            cartDiscount.innerText = `-${symbol}${(discountUSD * rate).toFixed(2)}`;
-            cartTotal.innerText = `${symbol}${(finalTotalUSD * rate).toFixed(2)}`;
-        }
-
-        function changeQty(id, delta) {
-            const item = cart.find(i => i.id === id);
-            if (item) {
-                item.qty += delta;
-                if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
-            }
-            updateCartUI();
-        }
-
-        function applyPromoCode() {
-            const code = document.getElementById('promo-input').value.trim().toUpperCase();
-            if (code === 'NUVERA10') {
-                promoMultiplier = 0.90;
-                alert('Code NUVERA10 Applied! Extra 10% discount unlocked.');
-            } else {
-                alert('Invalid code.');
-            }
-            updateCartUI();
-        }
-
-        function changeCurrency(currency) {
-            activeCurrency = currency;
-            renderProducts();
-            updateCartUI();
-        }
-
-        function toggleCartDrawer(forceOpen = false) {
-            const drawer = document.getElementById('cart-drawer');
-            if (forceOpen || drawer.classList.contains('hidden')) drawer.classList.remove('hidden');
-            else drawer.classList.add('hidden');
-        }
-
-        function verifyCOA() {
-            const res = document.getElementById('coa-result');
-            res.classList.remove('hidden');
-            res.innerHTML = `
-                <div class="text-brand-emerald font-bold mb-1"><i class="fa-solid fa-circle-check"></i> BATCH VERIFIED ACTIVE</div>
-                <div class="text-slate-300">HPLC Purity: <strong>99.7%</strong> | Mass Spectrometry: PASS</div>
-            `;
-        }
-
-        function filterCatalog(category) {
-            document.querySelectorAll('.cat-btn').forEach(btn => {
-                btn.classList.remove('bg-brand-cyan', 'text-brand-dark');
-                btn.classList.add('text-slate-400');
-            });
-            event.target.classList.add('bg-brand-cyan', 'text-brand-dark');
-            event.target.classList.remove('text-slate-400');
-            renderProducts(category);
-        }
-
-        // Live Countdown Timer Simulation
-        setInterval(() => {
-            const timerEl = document.getElementById('sale-timer');
-            if (!timerEl) return;
-            let parts = timerEl.innerText.match(/\d+/g);
-            let h = parseInt(parts[0]), m = parseInt(parts[1]), s = parseInt(parts[2]);
-            if (s > 0) s--;
-            else { s = 59; if (m > 0) m--; else { m = 59; if (h > 0) h--; } }
-            timerEl.innerText = `${String(h).padStart(2, '0')}h ${String(m).padStart(2, '0')}m ${String(s).padStart(2, '0')}s`;
-        }, 1000);
-
-        renderProducts();
     </script>
 </body>
 </html>
