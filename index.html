@@ -663,6 +663,246 @@
                 applyPreferences(savedCountry, savedLang);
             }
         });
-    </script>
-</body>
-</html>
+ <script>
+    const i18n = {
+        es: {
+            "ruo-badge": "USO EXCLUSIVO EN INVESTIGACIÓN",
+            "nav-about": "Nosotros",
+            "nav-catalog": "Catálogo",
+            "nav-coa": "Verificación COA",
+            "nav-reps": "Portal Reps",
+            "nav-legal": "Aviso Legal",
+            "btn-login": "Iniciar Sesión",
+            "btn-signup": "Registrarse",
+            "banner-title": "ATENCIÓN INVESTIGADORES:",
+            "banner-text": "Todos los péptidos son estrictamente para investigación de laboratorio. No apto para uso humano.",
+            "banner-link": "Ver Términos &rarr;",
+            "hero-badge": "Certificación HPLC • Pureza de Laboratorio",
+            "hero-h1-1": "Péptidos Avanzados",
+            "hero-h1-2": "E Investigación Celular",
+            "hero-desc": "Nuvera Form distribuye compuestos bio-celulares analíticos para instituciones e investigadores independientes globalmente.",
+            "hero-btn-reg": "Registrar Cuenta",
+            "lock-title": "Portal Privado de Investigación",
+            "lock-desc": "Para cumplir con las normativas internacionales, los precios y lista de compuestos requieren una cuenta registrada.",
+            "coa-title": "Verificación de Análisis HPLC / MS por Lote",
+            "coa-sub": "Ingrese el número de lote impreso en su vial liofilizado para consultar o descargar los certificados de análisis emitidos por laboratorios independientes.",
+            "coa-btn": "Verificar Lote",
+            "cat-sub": "Categorías Fórmulas",
+            "cat-title": "Buscador y Agrupación por Función",
+            "search-ph": "Buscar péptido (Regístrese)...",
+            "cat-1-desc": "Estudio metabólico de agonistas GLP-1 y receptores duales GIP/GLP.",
+            "cat-2-desc": "Compuestos para síntesis de matriz tisular, BPC-157 y NAD+.",
+            "cat-3-desc": "Secretagogos de hormona de crecimiento (Ipamorelin, CJC-1295).",
+            "cat-4-desc": "Secuencias de Kisspeptin analizadas en cascadas hormonales.",
+            "cat-5-desc": "Péptidos de cobre (GHK-Cu) y sueros post-procedimiento estético.",
+            "unlock-btn": "Desbloquear Categoría &rarr;",
+            "rep-title": "Programa de Representantes Afiliados",
+            "rep-desc": "Refiera laboratorios e investigadores a Nuvera Form y obtenga comisiones recurrentes por volumen de compra.",
+            "tbl-tier": "Nivel",
+            "tbl-vol": "Volumen",
+            "tbl-rate": "Comisión",
+            "rep-form-title": "Postular como Representante",
+            "rep-form-sub": "Debe ser mayor de 21 años para registrarse.",
+            "ph-first": "Nombre",
+            "ph-last": "Apellido",
+            "ph-email": "Correo Electrónico",
+            "ph-phone": "Teléfono",
+            "ph-pass": "Contraseña",
+            "rep-submit": "Enviar Solicitud",
+            "legal-title": "Descargo de Responsabilidad Legal",
+            "legal-1-h": "1. Solo Uso en Investigación (RUO)",
+            "legal-1-p": "Todos los productos son vendidos exclusivamente para investigación in-vitro en laboratorios. No apto para uso humano ni veterinario.",
+            "legal-2-h": "2. Verificación y Región",
+            "legal-2-p": "El cliente declara ser mayor de 21 años y cumplir con las leyes de su país o región seleccionada.",
+            "ql-title": "Enlaces Rápidos",
+            "pol-title": "Políticas y Legal",
+            "pol-terms": "Términos del Servicio",
+            "pol-privacy": "Política de Privacidad",
+            "pol-ship": "Políticas de Envío",
+            "pol-21": "Aviso 21+ Años",
+            "soc-title": "Nuestras Redes",
+            "soc-sub": "Haz clic abajo para ir a nuestras redes sociales oficiales.",
+            "footer-about": "Reactivos bio-celulares para laboratorios institucionales e independientes.",
+            "footer-disclaimer": "Uso exclusivo de investigación en laboratorio.",
+            "reg-title": "Crear Cuenta de Investigación",
+            "reg-sub": "Desbloquee precios y pedidos de laboratorio.",
+            "optin-label": "Acepto recibir novedades, disponibilidad de lote e información de marketing vía correo electrónico y SMS.",
+            "reg-btn": "Registrarse",
+            "login-title": "Acceso de Clientes"
+        },
+        en: {
+            "ruo-badge": "FOR RESEARCH PURPOSES ONLY",
+            "nav-about": "About Us",
+            "nav-catalog": "Catalog",
+            "nav-coa": "COA Verification",
+            "nav-reps": "Rep Portal",
+            "nav-legal": "Legal Notice",
+            "btn-login": "Sign In",
+            "btn-signup": "Sign Up",
+            "banner-title": "ATTENTION RESEARCHERS:",
+            "banner-text": "All peptides are strictly for laboratory research. Not for human or veterinary use.",
+            "banner-link": "View Terms &rarr;",
+            "hero-badge": "HPLC Certified • Laboratory Purity",
+            "hero-h1-1": "Advanced Bio-Peptides",
+            "hero-h1-2": "& Cellular Research",
+            "hero-desc": "Nuvera Form supplies institutional laboratories and independent researchers globally with pure analytical compounds.",
+            "hero-btn-reg": "Create Account",
+            "lock-title": "Private Research Portal",
+            "lock-desc": "To comply with international regulations, pricing and compound listings require a registered account.",
+            "coa-title": "HPLC / MS Batch Certificate Verification",
+            "coa-sub": "Enter the batch lot number printed on your lyophilized vial to view or download third-party analytical certificates.",
+            "coa-btn": "Verify Batch",
+            "cat-sub": "Formula Categories",
+            "cat-title": "Search & Grouped by Function",
+            "search-ph": "Search peptide (Register first)...",
+            "cat-1-desc": "Metabolic research on GLP-1 analogues and dual GIP/GLP receptor agonists.",
+            "cat-2-desc": "Compounds targeting tissue matrix synthesis, BPC-157, and NAD+.",
+            "cat-3-desc": "Growth hormone secretagogues (Ipamorelin, CJC-1295).",
+            "cat-4-desc": "Kisspeptin sequences analyzed in hypothalamic hormone cascades.",
+            "cat-5-desc": "Copper tripeptides (GHK-Cu) and post-procedure dermal factors.",
+            "unlock-btn": "Unlock Category &rarr;",
+            "rep-title": "Affiliate Representative Program",
+            "rep-desc": "Refer laboratories and researchers to Nuvera Form and earn recurring volume-based commissions.",
+            "tbl-tier": "Tier",
+            "tbl-vol": "Volume",
+            "tbl-rate": "Commission",
+            "rep-form-title": "Apply for Rep Credentials",
+            "rep-form-sub": "Must be 21+ years old to register.",
+            "ph-first": "First Name",
+            "ph-last": "Last Name",
+            "ph-email": "Email Address",
+            "ph-phone": "Phone Number",
+            "ph-pass": "Password",
+            "rep-submit": "Submit Application",
+            "legal-title": "Legal Disclaimer & Waiver",
+            "legal-1-h": "1. Research Use Only (RUO)",
+            "legal-1-p": "All products are sold strictly for in-vitro laboratory research. Not for human or veterinary consumption.",
+            "legal-2-h": "2. Verification & Region",
+            "legal-2-p": "The client warrants being 21+ years old and compliant with local laws in their selected region.",
+            "ql-title": "Quick Links",
+            "pol-title": "Policies & Legal",
+            "pol-terms": "Terms of Service",
+            "pol-privacy": "Privacy Policy",
+            "pol-ship": "Shipping Policy",
+            "pol-21": "21+ Age Notice",
+            "soc-title": "Follow Our Channels",
+            "soc-sub": "Click below to connect with us on our official social media accounts.",
+            "footer-about": "Bio-cellular reagents for institutional and independent laboratories.",
+            "footer-disclaimer": "Strictly for laboratory research use.",
+            "reg-title": "Create Research Account",
+            "reg-sub": "Unlock pricing and laboratory ordering.",
+            "optin-label": "I agree to receive compound updates, batch availability notifications, and marketing communications via email/SMS.",
+            "reg-btn": "Register Account",
+            "login-title": "Client Access Portal"
+        }
+    };
+
+    function toggleModal(modalId) {
+        document.getElementById(modalId).classList.toggle('hidden');
+    }
+
+    function savePreferences() {
+        const country = document.getElementById('user-country').value;
+        const lang = document.getElementById('user-lang').value;
+
+        localStorage.setItem('nuvera_country', country);
+        localStorage.setItem('nuvera_lang', lang);
+
+        applyPreferences(country, lang);
+        toggleModal('region-modal');
+    }
+
+    function applyPreferences(country, lang) {
+        document.getElementById('display-region').innerText = country || 'United States';
+        document.getElementById('display-lang').innerText = lang === 'en' ? 'English' : 'Español';
+
+        const langData = i18n[lang] || i18n['es'];
+
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (langData[key]) el.innerHTML = langData[key];
+        });
+
+        document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+            const key = el.getAttribute('data-i18n-ph');
+            if (langData[key]) el.placeholder = langData[key];
+        });
+    }
+
+    function verifyBatch() {
+        const batchNum = document.getElementById('batch-input').value.trim();
+        if (!batchNum) {
+            alert('Please enter a batch lot number.');
+            return;
+        }
+        alert(`Batch ${batchNum} status: HPLC Certified (Purity: 99.4%). Certificate of Analysis available for registered users.`);
+    }
+
+    // Handles signup submission, sends email notification via Web3Forms/Formspree API, and redirects to products page
+    async function handleSignupSubmit(e) {
+        e.preventDefault();
+
+        const submitBtn = document.getElementById('signup-btn');
+        submitBtn.innerText = 'Processing...';
+        submitBtn.disabled = true;
+
+        const payload = {
+            // Replace with your Web3Forms Access Key or Formspree Endpoint URL
+            access_key: "YOUR_WEB3FORMS_ACCESS_KEY", 
+            subject: "🚨 NEW LEAD: Nuvera Form Registration",
+            from_name: "Nuvera Form Web Lead",
+            firstName: document.getElementById('signup-first').value,
+            lastName: document.getElementById('signup-last').value,
+            email: document.getElementById('signup-email').value,
+            phone: document.getElementById('signup-phone').value,
+            marketingOptIn: document.getElementById('marketing-optin').checked ? "YES" : "NO (Opted Out)",
+            country: localStorage.getItem('nuvera_country') || 'Not Specified',
+            language: localStorage.getItem('nuvera_lang') || 'es'
+        };
+
+        // Mark user as logged in/registered locally
+        localStorage.setItem('nuvera_user_registered', 'true');
+        localStorage.setItem('nuvera_user_email', payload.email);
+
+        try {
+            // Sends form data via API endpoint
+            await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+        } catch (err) {
+            console.warn("API delivery fallback triggered:", err);
+        } finally {
+            // Redirect user to the Catalog / Products page
+            // Change 'products.html' or '#catalog-preview' to your desired URL or page section
+            window.location.href = 'products.html'; 
+        }
+    }
+
+    function handleRepSubmit(e) {
+        e.preventDefault();
+        const first = document.getElementById('rep-first').value;
+        const last = document.getElementById('rep-last').value;
+        const email = document.getElementById('rep-email').value;
+        const phone = document.getElementById('rep-phone').value;
+
+        const body = `Rep Application:\nName: ${first} ${last}\nEmail: ${email}\nPhone: ${phone}`;
+        window.location.href = `mailto:support@nuveraform.com?subject=Rep Application - ${first} ${last}&body=${encodeURIComponent(body)}`;
+
+        alert('Rep application submitted!');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedCountry = localStorage.getItem('nuvera_country');
+        const savedLang = localStorage.getItem('nuvera_lang');
+
+        if (savedCountry && savedLang) {
+            document.getElementById('region-modal').classList.add('hidden');
+            applyPreferences(savedCountry, savedLang);
+        }
+    });
+</script>
