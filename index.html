@@ -40,8 +40,8 @@
     <style>
         body { background-color: #FAFAFC; color: #090D16; }
         .neon-shadow { box-shadow: 0 0 20px rgba(0, 243, 255, 0.35); }
-        .neon-border { border-color: #00F3FF; }
         .bg-grid { background-image: radial-gradient(#E2E8F0 1px, transparent 1px); background-size: 24px 24px; }
+        .cart-slide { transition: transform 0.3s ease-in-out; }
     </style>
 </head>
 <body class="font-sans antialiased selection:bg-neon-cyan selection:text-black">
@@ -50,11 +50,11 @@
         <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
             <div class="flex items-center gap-2 text-neon-cyan font-bold">
                 <i class="fa-solid fa-truck-fast"></i>
-                <span>FREE SHIPPING ON ORDERS $200+</span>
+                <span>ENVÍO GRATIS EN PEDIDOS DE $200+ USD</span>
             </div>
             <div class="flex items-center gap-3">
                 <span class="bg-neon-pink/20 text-neon-pink px-2.5 py-0.5 rounded border border-neon-pink/40 font-bold">
-                    <i class="fa-solid fa-tag mr-1"></i> CODE: <span class="text-white">NUVERA10</span> (10% OFF FIRST ORDER)
+                    <i class="fa-solid fa-tag mr-1"></i> CÓDIGO: <span class="text-white">NUVERA10</span> (10% OFF REGISTRO)
                 </span>
                 <span class="hidden md:inline text-slate-400">|</span>
                 <span class="hidden md:inline text-slate-300 font-semibold"><i class="fa-solid fa-shield-halved text-neon-cyan mr-1"></i> 21+ VERIFIED RESEARCH ONLY</span>
@@ -78,7 +78,12 @@
                 <a href="#affiliate" class="text-purple-600 hover:text-bio-dark transition-colors"><i class="fa-solid fa-bolt mr-1"></i> Portal Reps</a>
             </nav>
 
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-4">
+                <button onclick="toggleCart()" class="relative p-3 rounded-xl bg-slate-100 border border-slate-300 text-bio-dark hover:border-sky-500 transition-all cursor-pointer">
+                    <i class="fa-solid fa-cart-shopping text-base"></i>
+                    <span id="cart-count" class="absolute -top-1.5 -right-1.5 bg-neon-pink text-white text-[10px] font-tech font-extrabold w-5 h-5 rounded-full flex items-center justify-center border border-white shadow">0</span>
+                </button>
+
                 <div id="guest-nav-controls" class="flex items-center gap-3">
                     <button onclick="toggleModal('login-modal')" class="text-xs font-tech font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl border border-slate-300 text-bio-dark hover:border-sky-500 hover:text-sky-500 transition-all cursor-pointer">Iniciar Sesión</button>
                     <button onclick="toggleModal('signup-modal')" class="text-xs font-tech font-bold uppercase tracking-wider px-5 py-2.5 rounded-xl bg-bio-dark text-neon-cyan font-extrabold hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md border border-neon-cyan">Crear Cuenta (-10%)</button>
@@ -89,7 +94,7 @@
                         <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
                         <span class="text-xs font-tech text-bio-dark font-bold" id="user-display-email">investigador@lab.com</span>
                     </div>
-                    <button onclick="logoutUser()" class="p-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-500 hover:text-red-600 hover:border-red-300 transition-all cursor-pointer" title="Cerrar Sesión">
+                    <button onclick="logoutUser()" class="p-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-500 hover:text-red-600 transition-all cursor-pointer" title="Cerrar Sesión">
                         <i class="fa-solid fa-right-from-bracket text-sm"></i>
                     </button>
                 </div>
@@ -108,7 +113,7 @@
                         Portal Privado de <br><span class="bg-gradient-to-r from-sky-500 via-purple-600 to-neon-pink bg-clip-text text-transparent">Reactivos & Péptidos</span>
                     </h1>
                     <p class="text-bio-muted text-sm sm:text-base leading-relaxed max-w-2xl">
-                        Plataforma restringida para adquisición de lotes analíticos liofilizados. El acceso al catálogo activo, stock en tiempo real y descuentos por volumen requiere credenciales verificadas.
+                        Plataforma restringida para adquisición de lotes analíticos liofilizados. El acceso al catálogo activo, elección de concentraciones y stock en tiempo real requiere iniciar sesión.
                     </p>
 
                     <div class="p-4 bg-white border-2 border-sky-400 rounded-2xl shadow-lg flex items-center justify-between gap-4 max-w-md">
@@ -127,7 +132,7 @@
                     <div class="text-center space-y-2">
                         <h3 class="text-2xl font-tech font-extrabold text-bio-dark">Catálogo Protegido</h3>
                         <p class="text-xs text-bio-muted leading-relaxed">
-                            Por políticas normativas y control de lotes, debe iniciar sesión o crear una cuenta para ingresar a la plataforma de compras.
+                            Para revisar especificaciones de producto, viales de Retatrutide y realizar pedidos, por favor cree una cuenta o inicie sesión.
                         </p>
                     </div>
                     <div class="space-y-3">
@@ -149,7 +154,7 @@
                         </p>
                     </div>
                     <div class="w-full md:w-auto flex flex-col sm:flex-row gap-3 z-10">
-                        <input type="text" id="batch-input" placeholder="Ej: NV-GHK-2026" class="bg-slate-900 border border-slate-700 rounded-xl px-4 py-3.5 text-xs text-white placeholder-slate-500 outline-none focus:border-neon-cyan font-tech">
+                        <input type="text" id="batch-input" placeholder="Ej: NV-RETA-2026" class="bg-slate-900 border border-slate-700 rounded-xl px-4 py-3.5 text-xs text-white placeholder-slate-500 outline-none focus:border-neon-cyan font-tech">
                         <button onclick="verifyBatch()" class="px-6 py-3.5 bg-neon-cyan text-black font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-white transition-all cursor-pointer">Verificar COA</button>
                     </div>
                 </div>
@@ -179,12 +184,48 @@
                         <input type="text" id="catalog-search" oninput="filterProducts()" placeholder="Buscar péptido (Ej: Retatrutide, GHK-Cu)..." class="w-full bg-white border border-slate-300 rounded-xl pl-11 pr-4 py-3 text-xs text-bio-dark outline-none focus:border-sky-500 shadow-sm">
                     </div>
                     <div class="text-xs font-tech text-bio-muted">
-                        Mostrando inventario disponible en tiempo real
+                        Seleccione dosis en productos multidosificación
                     </div>
                 </div>
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="products-grid">
                     
+                    <div class="bg-gradient-to-b from-sky-50 to-white border-2 border-sky-500 rounded-2xl p-6 flex flex-col justify-between transition-all shadow-lg relative product-card" data-name="retatrutide reta triple agonist 5mg 10mg 15mg">
+                        <div class="absolute -top-3 left-6 bg-gradient-to-r from-sky-500 to-purple-600 text-white font-tech font-extrabold text-[10px] uppercase tracking-widest px-3 py-1 rounded-full shadow">
+                            <i class="fa-solid fa-star text-amber-300 mr-1"></i> Producto Estrella #1
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-start mt-2 mb-3">
+                                <span class="text-[10px] font-tech font-bold uppercase bg-purple-100 text-purple-800 border border-purple-200 px-2.5 py-1 rounded-lg">Triple Agonist GIP/GLP-1/Glucagon</span>
+                                <span id="reta-stock-tag" class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-tech font-extrabold px-2.5 py-1 rounded-lg">Stock: 1 Vial</span>
+                            </div>
+
+                            <h3 class="text-2xl font-tech font-extrabold text-bio-dark">Retatrutide <span class="text-xs text-sky-600 font-semibold">(Seleccione Dosis)</span></h3>
+                            <p class="text-bio-muted text-xs mt-2">Agonista peptídico triple para estudios avanzados de metabolismo lipídico y señalización endocrina.</p>
+                            
+                            <div class="mt-4 space-y-1.5">
+                                <label class="text-[11px] font-tech font-bold text-slate-600 block uppercase tracking-wider">Dosis / Concentración:</label>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <button type="button" onclick="selectRetaDosage('5mg', 115, 1)" id="reta-btn-5mg" class="reta-dose-btn active py-2 border-2 border-sky-500 bg-sky-500 text-white font-tech font-bold text-xs rounded-xl transition-all">5 mg</button>
+                                    <button type="button" onclick="selectRetaDosage('10mg', 180, 8)" id="reta-btn-10mg" class="reta-dose-btn py-2 border-2 border-slate-300 bg-white text-bio-dark hover:border-sky-500 font-tech font-bold text-xs rounded-xl transition-all">10 mg</button>
+                                    <button type="button" onclick="selectRetaDosage('15mg', 240, 1)" id="reta-btn-15mg" class="reta-dose-btn py-2 border-2 border-slate-300 bg-white text-bio-dark hover:border-sky-500 font-tech font-bold text-xs rounded-xl transition-all">15 mg</button>
+                                </div>
+                            </div>
+
+                            <div class="mt-5 pt-4 border-t border-slate-200 flex justify-between items-center">
+                                <div>
+                                    <span class="text-3xl font-tech font-extrabold text-bio-dark" id="reta-price-display">$115.00</span>
+                                    <span class="text-xs text-slate-400 font-normal">USD</span>
+                                </div>
+                                <span class="text-[11px] font-tech text-emerald-600 font-bold">&gt;99.3% HPLC</span>
+                            </div>
+                        </div>
+
+                        <button onclick="addSelectedRetaToCart()" class="mt-6 w-full py-4 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md border border-neon-cyan/50">
+                            <i class="fa-solid fa-cart-plus mr-2"></i> Añadir Retatrutide al Pedido
+                        </button>
+                    </div>
+
                     <div class="bg-white border-2 border-slate-200 hover:border-sky-500 rounded-2xl p-6 flex flex-col justify-between transition-all shadow-sm hover:shadow-md product-card" data-name="ghk-cu ghkcu copper 100mg">
                         <div>
                             <div class="flex justify-between items-start mb-3">
@@ -198,7 +239,7 @@
                                 <span class="text-[11px] font-tech text-emerald-600 font-bold">&gt;99.5% HPLC</span>
                             </div>
                         </div>
-                        <button onclick="addToCart('GHK-Cu 100mg')" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
+                        <button onclick="addToCart('GHK-Cu 100mg', 85)" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
                             <i class="fa-solid fa-cart-plus mr-2"></i> Añadir al Pedido
                         </button>
                     </div>
@@ -216,7 +257,7 @@
                                 <span class="text-[11px] font-tech text-emerald-600 font-bold">&gt;99.2% HPLC</span>
                             </div>
                         </div>
-                        <button onclick="addToCart('Thymosin Alpha 1 10mg')" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
+                        <button onclick="addToCart('Thymosin Alpha 1 10mg', 95)" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
                             <i class="fa-solid fa-cart-plus mr-2"></i> Añadir al Pedido
                         </button>
                     </div>
@@ -234,7 +275,7 @@
                                 <span class="text-[11px] font-tech text-emerald-600 font-bold">&gt;99.6% HPLC</span>
                             </div>
                         </div>
-                        <button onclick="addToCart('BPC-157 / TB-500 Blend 10mg')" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
+                        <button onclick="addToCart('BPC-157 / TB-500 Blend 10mg', 110)" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
                             <i class="fa-solid fa-cart-plus mr-2"></i> Añadir al Pedido
                         </button>
                     </div>
@@ -252,7 +293,7 @@
                                 <span class="text-[11px] font-tech text-emerald-600 font-bold">&gt;99.3% HPLC</span>
                             </div>
                         </div>
-                        <button onclick="addToCart('NAD+ 500mg')" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
+                        <button onclick="addToCart('NAD+ 500mg', 90)" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
                             <i class="fa-solid fa-cart-plus mr-2"></i> Añadir al Pedido
                         </button>
                     </div>
@@ -270,61 +311,7 @@
                                 <span class="text-[11px] font-tech text-emerald-600 font-bold">&gt;99.4% HPLC</span>
                             </div>
                         </div>
-                        <button onclick="addToCart('CJC-1295 / Ipamorelin Blend')" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
-                            <i class="fa-solid fa-cart-plus mr-2"></i> Añadir al Pedido
-                        </button>
-                    </div>
-
-                    <div class="bg-white border-2 border-slate-200 hover:border-sky-500 rounded-2xl p-6 flex flex-col justify-between transition-all shadow-sm hover:shadow-md product-card" data-name="retatrutide reta 5mg triple agonist">
-                        <div>
-                            <div class="flex justify-between items-start mb-3">
-                                <span class="text-[10px] font-tech font-bold uppercase bg-purple-50 text-purple-700 border border-purple-200 px-2.5 py-1 rounded-lg">Triple Agonist</span>
-                                <span class="bg-red-50 text-red-600 border border-red-200 text-[10px] font-tech font-extrabold px-2.5 py-1 rounded-lg">Stock: 1 Vial</span>
-                            </div>
-                            <h3 class="text-xl font-tech font-extrabold text-bio-dark">Retatrutide <span class="text-xs text-slate-500 font-normal">5mg</span></h3>
-                            <p class="text-bio-muted text-xs mt-2">Compuesto tri-agonista GIP/GLP-1/Glucagón de última generación.</p>
-                            <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center">
-                                <span class="text-2xl font-tech font-extrabold text-bio-dark">$115.00 <span class="text-xs text-slate-400 font-normal">USD</span></span>
-                                <span class="text-[11px] font-tech text-emerald-600 font-bold">&gt;99.1% HPLC</span>
-                            </div>
-                        </div>
-                        <button onclick="addToCart('Retatrutide 5mg')" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
-                            <i class="fa-solid fa-cart-plus mr-2"></i> Añadir al Pedido
-                        </button>
-                    </div>
-
-                    <div class="bg-white border-2 border-slate-200 hover:border-sky-500 rounded-2xl p-6 flex flex-col justify-between transition-all shadow-sm hover:shadow-md product-card" data-name="retatrutide reta 10mg triple agonist">
-                        <div>
-                            <div class="flex justify-between items-start mb-3">
-                                <span class="text-[10px] font-tech font-bold uppercase bg-purple-50 text-purple-700 border border-purple-200 px-2.5 py-1 rounded-lg">Triple Agonist</span>
-                                <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-tech font-extrabold px-2.5 py-1 rounded-lg">Stock: 8 Viales</span>
-                            </div>
-                            <h3 class="text-xl font-tech font-extrabold text-bio-dark">Retatrutide <span class="text-xs text-slate-500 font-normal">10mg</span></h3>
-                            <p class="text-bio-muted text-xs mt-2">Concentración estándar para series de investigación prolongada.</p>
-                            <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center">
-                                <span class="text-2xl font-tech font-extrabold text-bio-dark">$180.00 <span class="text-xs text-slate-400 font-normal">USD</span></span>
-                                <span class="text-[11px] font-tech text-emerald-600 font-bold">&gt;99.3% HPLC</span>
-                            </div>
-                        </div>
-                        <button onclick="addToCart('Retatrutide 10mg')" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
-                            <i class="fa-solid fa-cart-plus mr-2"></i> Añadir al Pedido
-                        </button>
-                    </div>
-
-                    <div class="bg-white border-2 border-slate-200 hover:border-sky-500 rounded-2xl p-6 flex flex-col justify-between transition-all shadow-sm hover:shadow-md product-card" data-name="retatrutide reta 15mg triple agonist">
-                        <div>
-                            <div class="flex justify-between items-start mb-3">
-                                <span class="text-[10px] font-tech font-bold uppercase bg-purple-50 text-purple-700 border border-purple-200 px-2.5 py-1 rounded-lg">Triple Agonist</span>
-                                <span class="bg-red-50 text-red-600 border border-red-200 text-[10px] font-tech font-extrabold px-2.5 py-1 rounded-lg">Stock: 1 Vial</span>
-                            </div>
-                            <h3 class="text-xl font-tech font-extrabold text-bio-dark">Retatrutide <span class="text-xs text-slate-500 font-normal">15mg</span></h3>
-                            <p class="text-bio-muted text-xs mt-2">Vial de máxima concentración de compuesto tri-agonista.</p>
-                            <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center">
-                                <span class="text-2xl font-tech font-extrabold text-bio-dark">$240.00 <span class="text-xs text-slate-400 font-normal">USD</span></span>
-                                <span class="text-[11px] font-tech text-emerald-600 font-bold">&gt;99.2% HPLC</span>
-                            </div>
-                        </div>
-                        <button onclick="addToCart('Retatrutide 15mg')" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
+                        <button onclick="addToCart('CJC-1295 / Ipamorelin Blend', 105)" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
                             <i class="fa-solid fa-cart-plus mr-2"></i> Añadir al Pedido
                         </button>
                     </div>
@@ -342,7 +329,7 @@
                                 <span class="text-[11px] font-tech text-emerald-600 font-bold">&gt;99.5% HPLC</span>
                             </div>
                         </div>
-                        <button onclick="addToCart('MOTS-c 10mg')" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
+                        <button onclick="addToCart('MOTS-c 10mg', 75)" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
                             <i class="fa-solid fa-cart-plus mr-2"></i> Añadir al Pedido
                         </button>
                     </div>
@@ -360,7 +347,7 @@
                                 <span class="text-[11px] font-tech text-emerald-600 font-bold">&gt;99.1% HPLC</span>
                             </div>
                         </div>
-                        <button onclick="addToCart('KLOW Blend 80mg')" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
+                        <button onclick="addToCart('KLOW Blend 80mg', 160)" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
                             <i class="fa-solid fa-cart-plus mr-2"></i> Añadir al Pedido
                         </button>
                     </div>
@@ -378,7 +365,7 @@
                                 <span class="text-[11px] font-tech text-emerald-600 font-bold">&gt;99.4% HPLC</span>
                             </div>
                         </div>
-                        <button onclick="addToCart('Kisspeptin 10mg')" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
+                        <button onclick="addToCart('Kisspeptin 10mg', 88)" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
                             <i class="fa-solid fa-cart-plus mr-2"></i> Añadir al Pedido
                         </button>
                     </div>
@@ -396,7 +383,7 @@
                                 <span class="text-[11px] font-tech text-sky-600 font-bold">Estéril USP</span>
                             </div>
                         </div>
-                        <button onclick="addToCart('Bacteriostatic Water 10ml')" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
+                        <button onclick="addToCart('Bacteriostatic Water 10ml', 15)" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
                             <i class="fa-solid fa-cart-plus mr-2"></i> Añadir al Pedido
                         </button>
                     </div>
@@ -426,13 +413,89 @@
                         </div>
                         <div class="lg:col-span-4 text-right space-y-2">
                             <div class="text-xs text-bio-muted">Precio Combo: <strong class="text-lg text-bio-dark font-tech font-extrabold">$125.00 USD</strong></div>
-                            <button onclick="addToCart('Combo: BPC Blend + BAC Water')" class="w-full py-3 bg-neon-pink text-white font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-bio-dark transition-all cursor-pointer shadow-md">Comprar Combo Completo</button>
+                            <button onclick="addToCart('Combo: BPC Blend + BAC Water', 125)" class="w-full py-3 bg-neon-pink text-white font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-bio-dark transition-all cursor-pointer shadow-md">Comprar Combo Completo</button>
                         </div>
                     </div>
                 </div>
 
             </div>
         </section>
+    </div>
+
+    <div id="cart-drawer" class="fixed inset-0 z-50 pointer-events-none">
+        <div id="cart-backdrop" onclick="toggleCart()" class="absolute inset-0 bg-black/50 opacity-0 transition-opacity pointer-events-auto hidden"></div>
+        
+        <div id="cart-panel" class="absolute top-0 right-0 w-full max-w-md h-full bg-white shadow-2xl flex flex-col justify-between transform translate-x-full cart-slide pointer-events-auto border-l border-bio-border">
+            <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-bio-dark text-white">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-cart-shopping text-neon-cyan text-lg"></i>
+                    <h3 class="font-tech font-extrabold text-lg tracking-wider">Su Pedido Analítico</h3>
+                </div>
+                <button onclick="toggleCart()" class="text-slate-400 hover:text-white cursor-pointer"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+
+            <div id="cart-items-container" class="p-6 overflow-y-auto flex-1 space-y-4">
+                <div id="empty-cart-msg" class="text-center py-12 text-bio-muted text-xs space-y-3">
+                    <i class="fa-solid fa-box-open text-4xl text-slate-300"></i>
+                    <p>Su carrito está vacío. Añada productos desde el catálogo.</p>
+                </div>
+            </div>
+
+            <div class="p-6 border-t border-slate-100 bg-slate-50 space-y-4">
+                <div class="space-y-1.5 text-xs font-tech">
+                    <div class="flex justify-between text-bio-muted">
+                        <span>Subtotal</span>
+                        <span id="cart-subtotal">$0.00</span>
+                    </div>
+                    <div class="flex justify-between text-neon-pink font-bold" id="discount-row" style="display:none;">
+                        <span>Descuento NUVERA10 (-10%)</span>
+                        <span id="cart-discount">-$0.00</span>
+                    </div>
+                    <div class="flex justify-between text-bio-muted">
+                        <span>Envío</span>
+                        <span id="cart-shipping">$15.00</span>
+                    </div>
+                    <div class="flex justify-between text-base font-extrabold text-bio-dark pt-2 border-t border-slate-200">
+                        <span>Total estimado</span>
+                        <span id="cart-total" class="text-sky-600">$0.00</span>
+                    </div>
+                </div>
+
+                <button onclick="checkoutCart()" class="w-full py-4 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-lg">
+                    Proceder al Pago Seguro
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed bottom-6 right-6 z-40">
+        <button onclick="toggleAiChat()" class="w-14 h-14 rounded-full bg-bio-dark text-neon-cyan border-2 border-neon-cyan flex items-center justify-center text-xl shadow-2xl hover:scale-105 transition-all cursor-pointer relative">
+            <i class="fa-solid fa-robot"></i>
+            <span class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-white"></span>
+        </button>
+
+        <div id="ai-chat-box" class="hidden absolute bottom-18 right-0 w-80 sm:w-96 bg-white border-2 border-bio-dark rounded-3xl shadow-2xl overflow-hidden flex flex-col h-[420px]">
+            <div class="bg-bio-dark text-white p-4 flex justify-between items-center border-b border-neon-cyan/30">
+                <div class="flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full bg-neon-cyan animate-pulse"></div>
+                    <span class="font-tech font-extrabold text-xs uppercase tracking-wider">Nuvera AI Assistant</span>
+                </div>
+                <button onclick="toggleAiChat()" class="text-slate-400 hover:text-white cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div id="ai-messages" class="p-4 flex-1 overflow-y-auto space-y-3 text-xs">
+                <div class="bg-sky-50 border border-sky-200 text-bio-dark p-3 rounded-2xl max-w-[85%] font-sans">
+                    ¡Hola! Soy el asistente técnico de <strong>Nuvera Form</strong>. ¿En qué puedo ayudarte con nuestro catálogo o certificados de pureza?
+                </div>
+            </div>
+
+            <div class="p-3 border-t border-slate-100 bg-slate-50 flex gap-2">
+                <input type="text" id="ai-input" onkeydown="if(event.key==='Enter') sendAiMessage()" placeholder="Pregunta sobre Retatrutide, COA..." class="flex-1 bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs outline-none focus:border-sky-500">
+                <button onclick="sendAiMessage()" class="px-3 py-2 bg-bio-dark text-neon-cyan rounded-xl text-xs hover:bg-sky-500 hover:text-white transition-all cursor-pointer">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
     </div>
 
     <div id="age-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
@@ -525,6 +588,194 @@
     </footer>
 
     <script>
+        // Global State
+        let selectedRetaDose = { dose: '5mg', price: 115, stock: 1 };
+        let cart = [];
+
+        // RETA DOSAGE SELECTION SYSTEM
+        function selectRetaDosage(dose, price, stock) {
+            selectedRetaDose = { dose, price, stock };
+            
+            // Update UI buttons styling
+            document.querySelectorAll('.reta-dose-btn').forEach(btn => {
+                btn.classList.remove('bg-sky-500', 'text-white', 'border-sky-500');
+                btn.classList.add('bg-white', 'text-bio-dark', 'border-slate-300');
+            });
+
+            const activeBtn = document.getElementById(`reta-btn-${dose}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-white', 'text-bio-dark', 'border-slate-300');
+                activeBtn.classList.add('bg-sky-500', 'text-white', 'border-sky-500');
+            }
+
+            // Update price and stock display
+            document.getElementById('reta-price-display').innerText = `$${price}.00`;
+            document.getElementById('reta-stock-tag').innerText = `Stock: ${stock} Vial${stock > 1 ? 'es' : ''}`;
+        }
+
+        function addSelectedRetaToCart() {
+            addToCart(`Retatrutide ${selectedRetaDose.dose}`, selectedRetaDose.price);
+        }
+
+        // SHOPPING CART SYSTEM
+        function addToCart(title, price) {
+            const existing = cart.find(item => item.title === title);
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({ title, price, qty: 1 });
+            }
+            updateCartUI();
+            toggleCart(true); // Open cart sidebar when item added
+        }
+
+        function removeFromCart(title) {
+            cart = cart.filter(item => item.title !== title);
+            updateCartUI();
+        }
+
+        function updateQuantity(title, change) {
+            const item = cart.find(i => i.title === title);
+            if (item) {
+                item.qty += change;
+                if (item.qty <= 0) removeFromCart(title);
+                else updateCartUI();
+            }
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cart-items-container');
+            const emptyMsg = document.getElementById('empty-cart-msg');
+            const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+
+            document.getElementById('cart-count').innerText = totalCount;
+
+            if (cart.length === 0) {
+                container.innerHTML = '';
+                container.appendChild(emptyMsg);
+                emptyMsg.style.display = 'block';
+                document.getElementById('cart-subtotal').innerText = '$0.00';
+                document.getElementById('cart-total').innerText = '$0.00';
+                document.getElementById('discount-row').style.display = 'none';
+                return;
+            }
+
+            emptyMsg.style.display = 'none';
+            container.innerHTML = '';
+
+            let subtotal = 0;
+
+            cart.forEach(item => {
+                const itemSub = item.price * item.qty;
+                subtotal += itemSub;
+
+                const itemEl = document.createElement('div');
+                itemEl.className = 'flex items-center justify-between bg-slate-50 p-3.5 rounded-xl border border-slate-200';
+                itemEl.innerHTML = `
+                    <div>
+                        <h4 class="font-tech font-bold text-xs text-bio-dark">${item.title}</h4>
+                        <span class="text-xs text-sky-600 font-bold">$${item.price}.00</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="flex items-center border border-slate-300 rounded-lg bg-white overflow-hidden">
+                            <button onclick="updateQuantity('${item.title}', -1)" class="px-2 py-1 text-slate-500 hover:bg-slate-100 text-xs font-bold">-</button>
+                            <span class="px-2 text-xs font-bold text-bio-dark">${item.qty}</span>
+                            <button onclick="updateQuantity('${item.title}', 1)" class="px-2 py-1 text-slate-500 hover:bg-slate-100 text-xs font-bold">+</button>
+                        </div>
+                        <button onclick="removeFromCart('${item.title}')" class="text-slate-400 hover:text-red-500 p-1"><i class="fa-solid fa-trash text-xs"></i></button>
+                    </div>
+                `;
+                container.appendChild(itemEl);
+            });
+
+            // Discount calculation (NUVERA10 applied by default for registered users)
+            const isRegistered = localStorage.getItem('nuvera_registered');
+            let discount = isRegistered ? subtotal * 0.10 : 0;
+            let shipping = subtotal >= 200 || subtotal === 0 ? 0 : 15;
+            let finalTotal = subtotal - discount + shipping;
+
+            document.getElementById('cart-subtotal').innerText = `$${subtotal.toFixed(2)}`;
+            document.getElementById('cart-shipping').innerText = shipping === 0 ? 'GRATIS' : `$${shipping.toFixed(2)}`;
+            document.getElementById('cart-total').innerText = `$${finalTotal.toFixed(2)}`;
+
+            if (discount > 0) {
+                document.getElementById('discount-row').style.display = 'flex';
+                document.getElementById('cart-discount').innerText = `-$${discount.toFixed(2)}`;
+            } else {
+                document.getElementById('discount-row').style.display = 'none';
+            }
+        }
+
+        function toggleCart(forceOpen = false) {
+            const drawer = document.getElementById('cart-drawer');
+            const panel = document.getElementById('cart-panel');
+            const backdrop = document.getElementById('cart-backdrop');
+
+            const isClosed = panel.classList.contains('translate-x-full');
+
+            if (isClosed || forceOpen) {
+                backdrop.classList.remove('hidden');
+                setTimeout(() => backdrop.classList.remove('opacity-0'), 10);
+                panel.classList.remove('translate-x-full');
+            } else {
+                backdrop.classList.add('opacity-0');
+                panel.classList.add('translate-x-full');
+                setTimeout(() => backdrop.classList.add('hidden'), 300);
+            }
+        }
+
+        function checkoutCart() {
+            if (cart.length === 0) {
+                alert('Su carrito está vacío.');
+                return;
+            }
+            alert('Procesando orden analítica. Redirigiendo a pasarela segura...');
+        }
+
+        // AI CHAT WIDGET SYSTEM
+        function toggleAiChat() {
+            const chatBox = document.getElementById('ai-chat-box');
+            chatBox.classList.toggle('hidden');
+        }
+
+        function sendAiMessage() {
+            const input = document.getElementById('ai-input');
+            const query = input.value.trim();
+            if (!query) return;
+
+            const messagesDiv = document.getElementById('ai-messages');
+
+            // Add user message
+            const userMsg = document.createElement('div');
+            userMsg.className = 'bg-bio-dark text-neon-cyan p-3 rounded-2xl max-w-[85%] ml-auto font-sans text-right';
+            userMsg.innerText = query;
+            messagesDiv.appendChild(userMsg);
+
+            input.value = '';
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+            // Generate AI Response
+            setTimeout(() => {
+                const aiMsg = document.createElement('div');
+                aiMsg.className = 'bg-sky-50 border border-sky-200 text-bio-dark p-3 rounded-2xl max-w-[85%] font-sans';
+                
+                const lower = query.toLowerCase();
+                if (lower.includes('reta') || lower.includes('retatrutide')) {
+                    aiMsg.innerHTML = '<strong>Retatrutide</strong> está disponible en viales de <strong>5mg ($115)</strong>, <strong>10mg ($180)</strong> y <strong>15mg ($240)</strong> con pureza comprobada &gt;99.3% por HPLC.';
+                } else if (lower.includes('envio') || lower.includes('shipping')) {
+                    aiMsg.innerText = 'El envío es totalmente gratuito en órdenes de $200+ USD. Para compras menores, aplica una tarifa estándar de $15 USD.';
+                } else if (lower.includes('codigo') || lower.includes('descuento')) {
+                    aiMsg.innerText = 'Utilice el código NUVERA10 al registrarse para obtener un 10% de descuento en su primer pedido.';
+                } else {
+                    aiMsg.innerText = 'Todos nuestros péptidos cuentan con certificado COA de laboratorio independiente. ¿Desea consultar disponibilidad de algún compuesto específico?';
+                }
+
+                messagesDiv.appendChild(aiMsg);
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            }, 600);
+        }
+
+        // GENERAL PAGE HELPERS & AUTH
         function acceptAge() {
             localStorage.setItem('nuvera_age_verified', 'true');
             document.getElementById('age-modal').classList.add('hidden');
@@ -564,25 +815,20 @@
             });
         }
 
-        function addToCart(productName) {
-            alert(`Añadido al pedido: ${productName}. Redirigiendo a confirmación...`);
-        }
-
         function unlockCatalogView(userEmail) {
             localStorage.setItem('nuvera_registered', 'true');
             if (userEmail) localStorage.setItem('nuvera_user_email', userEmail);
 
             const activeEmail = localStorage.getItem('nuvera_user_email') || 'investigador@lab.com';
 
-            // Switch from landing view to full catalog page view
             document.getElementById('landing-page-view').classList.add('hidden');
             document.getElementById('catalog-page-view').classList.remove('hidden');
 
-            // Update Navbar User Status
             document.getElementById('guest-nav-controls').classList.add('hidden');
             document.getElementById('logged-nav-controls').classList.remove('hidden');
             document.getElementById('user-display-email').innerText = activeEmail;
 
+            updateCartUI();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -594,7 +840,6 @@
 
         async function handleSignupSubmit(e) {
             e.preventDefault();
-
             const submitBtn = document.getElementById('signup-btn');
             submitBtn.innerText = 'Registrando...';
             submitBtn.disabled = true;
@@ -604,12 +849,9 @@
             const userEmail = document.getElementById('signup-email').value;
 
             try {
-                await fetch('https://api.web3forms.com/submit', {
-                    method: 'POST',
-                    body: formData
-                });
+                await fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData });
             } catch (err) {
-                console.warn("Submit notification handled:", err);
+                console.warn("Submit handled:", err);
             } finally {
                 submitBtn.innerText = 'Registrar y Obtener 10% OFF';
                 submitBtn.disabled = false;
@@ -628,12 +870,10 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            // Check Age Verification
             if (localStorage.getItem('nuvera_age_verified')) {
                 document.getElementById('age-modal').classList.add('hidden');
             }
 
-            // Check Login Status
             if (localStorage.getItem('nuvera_registered')) {
                 unlockCatalogView(localStorage.getItem('nuvera_user_email'));
             }
