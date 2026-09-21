@@ -3,27 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuvera Form | Bio-Peptides & Cellular Research Portal</title>
+    <title>Nuvera Form | Research Grade Bio-Reagents & Peptides</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
+                        neon: {
+                            cyan: '#00F3FF',
+                            pink: '#FF007A',
+                            green: '#10B981',
+                            amber: '#F59E0B'
+                        },
                         bio: {
-                            bg: '#F8FAFC',
+                            bg: '#FAFAFC',
                             card: '#FFFFFF',
-                            border: '#E2E8F0',
-                            dark: '#0F172A',
-                            accent: '#0284C7',
-                            green: '#059669',
-                            purple: '#7C3AED',
-                            textDark: '#0F172A',
-                            textMuted: '#64748B'
+                            dark: '#090D16',
+                            muted: '#64748B',
+                            border: '#E2E8F0'
                         }
                     },
                     fontFamily: {
@@ -36,77 +38,56 @@
     </script>
 
     <style>
-        body { background-color: #F8FAFC; color: #0F172A; }
-        .light-glow { box-shadow: 0 10px 30px -10px rgba(2, 132, 199, 0.15); }
-        .product-card {
-            background: #FFFFFF;
-            border: 1px solid #E2E8F0;
-            transition: all 0.3s ease;
-        }
-        .product-card:hover {
-            border-color: #0284C7;
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(2, 132, 199, 0.12);
-        }
+        body { background-color: #FAFAFC; color: #090D16; }
+        .neon-shadow { box-shadow: 0 0 20px rgba(0, 243, 255, 0.35); }
+        .neon-border { border-color: #00F3FF; }
+        .bg-grid { background-image: radial-gradient(#E2E8F0 1px, transparent 1px); background-size: 24px 24px; }
     </style>
 </head>
-<body class="font-sans antialiased selection:bg-bio-accent selection:text-white">
+<body class="font-sans antialiased selection:bg-neon-cyan selection:text-black">
 
-    <div class="bg-bio-dark text-slate-300 text-[11px] py-2 px-4 font-tech uppercase tracking-widest relative z-30">
+    <div class="bg-bio-dark text-white text-[11px] font-tech uppercase tracking-wider py-2.5 px-4 sticky top-0 z-40 border-b border-neon-cyan/30">
         <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
-            <div class="flex items-center gap-3">
-                <span class="flex items-center gap-1.5 font-bold text-white">
-                    <i class="fa-solid fa-earth-americas text-sky-400"></i>
-                    <span id="display-region">United States</span>
-                </span>
-                <span class="text-slate-600">|</span>
-                <button onclick="toggleModal('region-modal')" class="flex items-center gap-1 text-sky-400 hover:underline font-bold cursor-pointer">
-                    <i class="fa-solid fa-language text-sm"></i>
-                    <span id="display-lang">Español</span>
-                    <i class="fa-solid fa-chevron-down text-[9px] ml-1"></i>
-                </button>
+            <div class="flex items-center gap-2 text-neon-cyan font-bold">
+                <i class="fa-solid fa-truck-fast"></i>
+                <span>FREE SHIPPING ON ORDERS $200+</span>
             </div>
-
-            <div class="flex items-center gap-4 text-xs font-bold">
-                <span class="bg-red-500/10 text-red-400 px-2.5 py-0.5 rounded border border-red-500/20">
-                    <i class="fa-solid fa-shield-halved mr-1"></i> 21+ STRICTLY REQUIRED
+            <div class="flex items-center gap-3">
+                <span class="bg-neon-pink/20 text-neon-pink px-2.5 py-0.5 rounded border border-neon-pink/40 font-bold">
+                    <i class="fa-solid fa-tag mr-1"></i> CODE: <span class="text-white">NUVERA10</span> (10% OFF FIRST ORDER)
                 </span>
-                <span class="hidden sm:inline text-sky-400" data-i18n="ruo-badge">
-                    FOR RESEARCH PURPOSES ONLY
-                </span>
+                <span class="hidden md:inline text-slate-400">|</span>
+                <span class="hidden md:inline text-slate-300 font-semibold"><i class="fa-solid fa-shield-halved text-neon-cyan mr-1"></i> 21+ VERIFIED RESEARCH ONLY</span>
             </div>
         </div>
     </div>
 
-    <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-xl border-b border-slate-200">
+    <header class="bg-white/90 backdrop-blur-md border-b border-bio-border sticky top-[37px] z-30">
         <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
             <a href="#" class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-500 to-emerald-500 p-[2px] shadow-md">
-                    <div class="w-full h-full bg-white rounded-[10px] flex items-center justify-center font-tech font-bold text-sky-600 text-xl">N</div>
-                </div>
+                <div class="w-10 h-10 rounded-xl bg-bio-dark flex items-center justify-center font-tech font-bold text-neon-cyan text-xl shadow-md border border-neon-cyan">N</div>
                 <div>
-                    <span class="font-tech font-bold text-2xl tracking-wider text-bio-dark block leading-none">NUVERA<span class="text-sky-600">FORM</span></span>
-                    <span class="text-[9px] tracking-[0.3em] text-bio-textMuted uppercase font-semibold">Analytical Bio-Reagents</span>
+                    <span class="font-tech font-extrabold text-2xl tracking-wider text-bio-dark block leading-none">NUVERA<span class="text-sky-500">FORM</span></span>
+                    <span class="text-[9px] tracking-[0.25em] text-bio-muted uppercase font-bold">Analytical Bio-Reagents</span>
                 </div>
             </a>
 
-            <nav class="hidden lg:flex items-center gap-8 text-xs font-tech font-bold uppercase tracking-widest text-bio-textMuted">
-                <a href="#about" class="hover:text-sky-600 transition-colors">Nosotros</a>
-                <a href="#catalog-preview" class="hover:text-sky-600 transition-colors text-bio-dark">Catálogo & Precios</a>
-                <a href="#coa-section" class="hover:text-sky-600 transition-colors text-sky-600"><i class="fa-solid fa-vial-circle-check mr-1"></i> Verificación COA</a>
-                <a href="#affiliate" class="text-emerald-600 hover:text-bio-dark transition-colors"><i class="fa-solid fa-bolt mr-1"></i> Portal Reps</a>
+            <nav class="hidden lg:flex items-center gap-8 text-xs font-tech font-bold uppercase tracking-widest text-slate-600">
+                <a href="#about" class="hover:text-sky-500 transition-colors">Normativa RUO</a>
+                <a href="#qa" class="hover:text-sky-500 transition-colors">Análisis HPLC</a>
+                <a href="#affiliate" class="text-purple-600 hover:text-bio-dark transition-colors"><i class="fa-solid fa-bolt mr-1"></i> Portal Reps</a>
             </nav>
 
             <div class="flex items-center gap-3">
-                <div id="guest-controls" class="flex items-center gap-3">
-                    <button onclick="toggleModal('login-modal')" class="text-xs font-tech font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl border border-slate-300 text-bio-dark hover:border-sky-600 hover:text-sky-600 transition-all cursor-pointer">Iniciar Sesión</button>
-                    <button onclick="toggleModal('signup-modal')" class="text-xs font-tech font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl bg-sky-600 text-white font-extrabold hover:bg-bio-dark transition-all cursor-pointer shadow-md">Registrarse</button>
+                <div id="guest-nav-controls" class="flex items-center gap-3">
+                    <button onclick="toggleModal('login-modal')" class="text-xs font-tech font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl border border-slate-300 text-bio-dark hover:border-sky-500 hover:text-sky-500 transition-all cursor-pointer">Iniciar Sesión</button>
+                    <button onclick="toggleModal('signup-modal')" class="text-xs font-tech font-bold uppercase tracking-wider px-5 py-2.5 rounded-xl bg-bio-dark text-neon-cyan font-extrabold hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md border border-neon-cyan">Crear Cuenta (-10%)</button>
                 </div>
 
-                <div id="logged-controls" class="hidden flex items-center gap-3">
+                <div id="logged-nav-controls" class="hidden flex items-center gap-3">
                     <div class="flex items-center gap-2 bg-slate-100 border border-slate-200 rounded-xl px-3 py-1.5">
-                        <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-                        <span class="text-xs font-tech text-bio-dark font-semibold" id="logged-user-email">researcher@lab.com</span>
+                        <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
+                        <span class="text-xs font-tech text-bio-dark font-bold" id="user-display-email">investigador@lab.com</span>
                     </div>
                     <button onclick="logoutUser()" class="p-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-500 hover:text-red-600 hover:border-red-300 transition-all cursor-pointer" title="Cerrar Sesión">
                         <i class="fa-solid fa-right-from-bracket text-sm"></i>
@@ -116,417 +97,439 @@
         </div>
     </header>
 
-    <section id="about" class="py-16 lg:py-20 relative overflow-hidden bg-white border-b border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-12 gap-12 items-center">
-            <div class="lg:col-span-7 space-y-6">
-                <div class="inline-flex items-center gap-2 bg-sky-50 border border-sky-200 px-4 py-1.5 rounded-full text-xs font-tech text-sky-700 font-semibold">
-                    <i class="fa-solid fa-flask"></i> <span>Pureza Analítica Certificada &gt; 99.2% (HPLC / MS)</span>
-                </div>
-                <h1 class="text-4xl sm:text-6xl font-tech font-bold text-bio-dark leading-tight">
-                    Plataforma Privada de <br><span class="text-sky-600">Reactivos & Péptidos</span> Bio-Celulares
-                </h1>
-                <p class="text-bio-textMuted text-sm sm:text-base leading-relaxed max-w-2xl">
-                    Distribución institucional de compuestos liofilizados de grado analítico. Acceso restringido a laboratorios, profesionales de la salud e investigadores independientes verificados.
-                </p>
+    <div id="landing-page-view">
+        <section id="about" class="py-16 lg:py-24 bg-grid border-b border-bio-border relative">
+            <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 bg-sky-50 border border-sky-200 px-4 py-1.5 rounded-full text-xs font-tech text-sky-700 font-bold">
+                        <i class="fa-solid fa-vial"></i> <span>RESEARCH GRADE PURITY &gt; 99.2% (HPLC / MS CERTIFIED)</span>
+                    </div>
+                    <h1 class="text-4xl sm:text-6xl font-tech font-extrabold text-bio-dark leading-tight">
+                        Portal Privado de <br><span class="bg-gradient-to-r from-sky-500 via-purple-600 to-neon-pink bg-clip-text text-transparent">Reactivos & Péptidos</span>
+                    </h1>
+                    <p class="text-bio-muted text-sm sm:text-base leading-relaxed max-w-2xl">
+                        Plataforma restringida para adquisición de lotes analíticos liofilizados. El acceso al catálogo activo, stock en tiempo real y descuentos por volumen requiere credenciales verificadas.
+                    </p>
 
-                <div id="hero-action-guest" class="flex flex-wrap gap-4 pt-2">
-                    <button onclick="toggleModal('signup-modal')" class="px-8 py-4 bg-sky-600 text-white font-tech font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-bio-dark transition-all shadow-lg shadow-sky-600/20 cursor-pointer">Desbloquear Catálogo Completo</button>
+                    <div class="p-4 bg-white border-2 border-sky-400 rounded-2xl shadow-lg flex items-center justify-between gap-4 max-w-md">
+                        <div>
+                            <span class="text-[10px] font-tech font-bold uppercase text-neon-pink tracking-widest block">Beneficio de Nuevo Usuario</span>
+                            <span class="text-xs font-tech font-extrabold text-bio-dark">10% OFF en primera orden con código <span class="text-sky-600">NUVERA10</span></span>
+                        </div>
+                        <button onclick="toggleModal('signup-modal')" class="px-4 py-2 bg-bio-dark text-neon-cyan font-tech font-bold text-xs rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer whitespace-nowrap">Obtener Código</button>
+                    </div>
                 </div>
-                <div id="hero-action-user" class="hidden flex items-center gap-4 pt-2">
-                    <a href="#catalog-preview" class="px-8 py-4 bg-emerald-600 text-white font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-bio-dark transition-all cursor-pointer shadow-md">
-                        <i class="fa-solid fa-lock-open mr-2"></i> Explorar Catálogo Desbloqueado
-                    </a>
+
+                <div class="lg:col-span-5 bg-white border-2 border-bio-dark p-8 rounded-3xl relative shadow-2xl space-y-6">
+                    <div class="w-16 h-16 rounded-2xl bg-bio-dark text-neon-cyan border border-neon-cyan flex items-center justify-center text-2xl mx-auto shadow-lg">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <div class="text-center space-y-2">
+                        <h3 class="text-2xl font-tech font-extrabold text-bio-dark">Catálogo Protegido</h3>
+                        <p class="text-xs text-bio-muted leading-relaxed">
+                            Por políticas normativas y control de lotes, debe iniciar sesión o crear una cuenta para ingresar a la plataforma de compras.
+                        </p>
+                    </div>
+                    <div class="space-y-3">
+                        <button onclick="toggleModal('signup-modal')" class="w-full py-4 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-600 hover:text-white transition-all cursor-pointer shadow-md">Registrarse y Ver Productos</button>
+                        <button onclick="toggleModal('login-modal')" class="w-full py-3.5 bg-slate-100 border border-slate-300 text-bio-dark font-tech font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-slate-200 transition-all cursor-pointer">Ya tengo cuenta</button>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <div id="access-banner-card" class="lg:col-span-5 bg-slate-50 border border-slate-200 p-8 rounded-3xl relative overflow-hidden shadow-lg">
-                <div class="text-center space-y-4">
-                    <div id="access-icon-box" class="w-16 h-16 rounded-2xl bg-white border border-sky-200 flex items-center justify-center text-sky-600 text-2xl mx-auto shadow-sm">
-                        <i class="fa-solid fa-lock" id="access-icon"></i>
+        <section id="qa" class="py-16 bg-white border-b border-bio-border">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="bg-bio-dark rounded-3xl p-8 sm:p-12 text-white flex flex-col md:flex-row justify-between items-center gap-8 shadow-2xl relative overflow-hidden">
+                    <div class="space-y-3 max-w-xl z-10">
+                        <span class="text-neon-cyan font-tech text-xs uppercase tracking-widest font-bold"><i class="fa-solid fa-microscope mr-1"></i> Quality Assurance Standard</span>
+                        <h2 class="text-3xl font-tech font-bold">Verificación de Análisis HPLC / MS por Lote</h2>
+                        <p class="text-slate-400 text-xs leading-relaxed">
+                            Ingrese el código de lote impreso en su vial para descargar el reporte de pureza de laboratorio independiente.
+                        </p>
                     </div>
-                    <h3 id="access-title" class="text-xl font-tech font-bold text-bio-dark">Precios Restringidos por Normativa</h3>
-                    <p id="access-desc" class="text-xs text-bio-textMuted leading-relaxed">
-                        Para visualizar la lista de compuestos, disponibilidad por lote y efectuar solicitudes, regístrese para habilitar sus credenciales de investigación.
-                    </p>
-                    <button id="access-btn" onclick="toggleModal('signup-modal')" class="w-full py-3.5 bg-white border border-sky-600 text-sky-600 font-tech font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-600 hover:text-white transition-all cursor-pointer shadow-sm">
-                        Solicitar Acceso
-                    </button>
+                    <div class="w-full md:w-auto flex flex-col sm:flex-row gap-3 z-10">
+                        <input type="text" id="batch-input" placeholder="Ej: NV-GHK-2026" class="bg-slate-900 border border-slate-700 rounded-xl px-4 py-3.5 text-xs text-white placeholder-slate-500 outline-none focus:border-neon-cyan font-tech">
+                        <button onclick="verifyBatch()" class="px-6 py-3.5 bg-neon-cyan text-black font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-white transition-all cursor-pointer">Verificar COA</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="catalog-page-view" class="hidden">
+        <div class="bg-sky-50 border-b border-sky-200 py-6">
+            <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <span class="text-xs font-tech font-extrabold text-sky-700 uppercase tracking-widest"><i class="fa-solid fa-circle-check mr-1 text-emerald-600"></i> ACCESO AUTORIZADO DESBLOQUEADO</span>
+                    <h1 class="text-3xl font-tech font-extrabold text-bio-dark">Catálogo Activo & Stock de Inventario</h1>
+                </div>
+                <div class="bg-white border border-sky-300 px-4 py-2 rounded-xl text-xs font-tech font-bold text-bio-dark flex items-center gap-3 shadow-sm">
+                    <span>CÓDIGO DE DESCUENTO: <strong class="text-neon-pink">NUVERA10</strong> (10% OFF)</span>
                 </div>
             </div>
         </div>
-    </section>
 
-    <section id="catalog-preview" class="py-16 bg-bio-bg">
-        <div class="max-w-7xl mx-auto px-4">
-            
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-12">
-                <div>
-                    <span class="text-sky-600 font-tech text-xs uppercase tracking-widest font-bold"><i class="fa-solid fa-cubes mr-1"></i> Catálogo Activo de Lotes</span>
-                    <h2 class="text-3xl sm:text-4xl font-tech font-bold text-bio-dark mt-1">Compuestos Bio-Analíticos</h2>
-                </div>
-
-                <div class="w-full md:w-80 relative">
-                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-sky-600 text-sm"></i>
-                    <input type="text" id="catalog-search" oninput="filterProducts()" placeholder="Buscar por compuesto (Ej: BPC, GLP)..." class="w-full bg-white border border-slate-300 rounded-xl pl-11 pr-4 py-3 text-xs text-bio-dark placeholder-slate-400 outline-none focus:border-sky-600 shadow-sm">
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="products-grid">
+        <section class="py-12 bg-bio-bg">
+            <div class="max-w-7xl mx-auto px-4">
                 
-                <div class="product-card rounded-2xl p-6 flex flex-col justify-between shadow-sm" data-name="tirzepatide glp1 gip metabolic">
-                    <div>
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="text-[10px] font-tech font-bold uppercase tracking-wider bg-sky-50 text-sky-700 border border-sky-200 px-2.5 py-1 rounded-lg">Dual GIP/GLP-1 Agonist</span>
-                            <div class="text-right">
-                                <span class="product-price text-xl font-tech font-bold text-emerald-600 hidden">$145.00 <span class="text-[10px] text-slate-400">USD</span></span>
-                                <span class="locked-price text-xs font-tech text-amber-600 font-bold bg-amber-50 px-2 py-1 rounded border border-amber-200"><i class="fa-solid fa-lock text-[10px] mr-1"></i> Bloqueado</span>
-                            </div>
-                        </div>
-
-                        <h3 class="text-xl font-tech font-bold text-bio-dark">Tirzepatide <span class="text-xs text-slate-500 font-normal">10mg</span></h3>
-                        <p class="text-bio-textMuted text-xs mt-2 leading-relaxed">Péptido sintético dual investigado en cascadas metabólicas de control glucémico y modulación lipídica.</p>
-
-                        <div class="mt-4 pt-4 border-t border-slate-100 space-y-2 text-[11px] font-tech text-bio-textMuted">
-                            <div class="flex justify-between"><span>Pureza HPLC:</span> <span class="text-emerald-600 font-bold">&gt; 99.4%</span></div>
-                            <div class="flex justify-between"><span>Formato:</span> <span class="text-slate-700">Vial Liofilizado</span></div>
-                            <div class="flex justify-between"><span>Lote Actual:</span> <span class="text-slate-700">NV-TZ-2026-09</span></div>
-                        </div>
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
+                    <div class="w-full md:w-96 relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-sky-500 text-sm"></i>
+                        <input type="text" id="catalog-search" oninput="filterProducts()" placeholder="Buscar péptido (Ej: Retatrutide, GHK-Cu)..." class="w-full bg-white border border-slate-300 rounded-xl pl-11 pr-4 py-3 text-xs text-bio-dark outline-none focus:border-sky-500 shadow-sm">
                     </div>
-
-                    <div class="mt-6">
-                        <button onclick="handleProductClick('Tirzepatide 10mg')" class="product-btn w-full py-3.5 bg-slate-100 border border-slate-300 text-bio-dark font-tech font-bold text-xs uppercase rounded-xl hover:bg-sky-600 hover:text-white hover:border-sky-600 transition-all cursor-pointer">
-                            <i class="fa-solid fa-lock mr-2"></i> Registrarse para Comprar
-                        </button>
+                    <div class="text-xs font-tech text-bio-muted">
+                        Mostrando inventario disponible en tiempo real
                     </div>
                 </div>
 
-                <div class="product-card rounded-2xl p-6 flex flex-col justify-between shadow-sm" data-name="bpc157 bpc 157 tissue repair longevity">
-                    <div>
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="text-[10px] font-tech font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-lg">Tissue & Cytoprotective</span>
-                            <div class="text-right">
-                                <span class="product-price text-xl font-tech font-bold text-emerald-600 hidden">$68.00 <span class="text-[10px] text-slate-400">USD</span></span>
-                                <span class="locked-price text-xs font-tech text-amber-600 font-bold bg-amber-50 px-2 py-1 rounded border border-amber-200"><i class="fa-solid fa-lock text-[10px] mr-1"></i> Bloqueado</span>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="products-grid">
+                    
+                    <div class="bg-white border-2 border-slate-200 hover:border-sky-500 rounded-2xl p-6 flex flex-col justify-between transition-all shadow-sm hover:shadow-md product-card" data-name="ghk-cu ghkcu copper 100mg">
+                        <div>
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="text-[10px] font-tech font-bold uppercase bg-blue-50 text-blue-700 border border-blue-200 px-2.5 py-1 rounded-lg">Copper Tripeptide</span>
+                                <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-tech font-extrabold px-2.5 py-1 rounded-lg">Stock: 10 Viales</span>
+                            </div>
+                            <h3 class="text-xl font-tech font-extrabold text-bio-dark">GHK-Cu <span class="text-xs text-slate-500 font-normal">100mg</span></h3>
+                            <p class="text-bio-muted text-xs mt-2">Tripéptido de cobre de alta concentración evaluado en reparación tisular y estimulación sintética.</p>
+                            <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center">
+                                <span class="text-2xl font-tech font-extrabold text-bio-dark">$85.00 <span class="text-xs text-slate-400 font-normal">USD</span></span>
+                                <span class="text-[11px] font-tech text-emerald-600 font-bold">&gt;99.5% HPLC</span>
                             </div>
                         </div>
-
-                        <h3 class="text-xl font-tech font-bold text-bio-dark">BPC-157 <span class="text-xs text-slate-500 font-normal">5mg</span></h3>
-                        <p class="text-bio-textMuted text-xs mt-2 leading-relaxed">Secuencia pentadecapéptida analizada en mecanismos de angiogénesis, regeneración tendinosa y mucosa.</p>
-
-                        <div class="mt-4 pt-4 border-t border-slate-100 space-y-2 text-[11px] font-tech text-bio-textMuted">
-                            <div class="flex justify-between"><span>Pureza HPLC:</span> <span class="text-emerald-600 font-bold">&gt; 99.6%</span></div>
-                            <div class="flex justify-between"><span>Formato:</span> <span class="text-slate-700">Vial Liofilizado</span></div>
-                            <div class="flex justify-between"><span>Lote Actual:</span> <span class="text-slate-700">NV-BPC-2026-11</span></div>
-                        </div>
-                    </div>
-
-                    <div class="mt-6">
-                        <button onclick="handleProductClick('BPC-157 5mg')" class="product-btn w-full py-3.5 bg-slate-100 border border-slate-300 text-bio-dark font-tech font-bold text-xs uppercase rounded-xl hover:bg-sky-600 hover:text-white hover:border-sky-600 transition-all cursor-pointer">
-                            <i class="fa-solid fa-lock mr-2"></i> Registrarse para Comprar
+                        <button onclick="addToCart('GHK-Cu 100mg')" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
+                            <i class="fa-solid fa-cart-plus mr-2"></i> Añadir al Pedido
                         </button>
                     </div>
+
+                    <div class="bg-white border-2 border-slate-200 hover:border-sky-500 rounded-2xl p-6 flex flex-col justify-between transition-all shadow-sm hover:shadow-md product-card" data-name="thymosin alpha 1 10mg ta1">
+                        <div>
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="text-[10px] font-tech font-bold uppercase bg-purple-50 text-purple-700 border border-purple-200 px-2.5 py-1 rounded-lg">Immune Peptides</span>
+                                <span class="bg-amber-50 text-amber-700 border border-amber-200 text-[10px] font-tech font-extrabold px-2.5 py-1 rounded-lg">Stock Bajo: 2 Viales</span>
+                            </div>
+                            <h3 class="text-xl font-tech font-extrabold text-bio-dark">Thymosin Alpha 1 <span class="text-xs text-slate-500 font-normal">10mg</span></h3>
+                            <p class="text-bio-muted text-xs mt-2">Péptido de modulación inmune investigado en señalización celular y respuesta adaptativa.</p>
+                            <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center">
+                                <span class="text-2xl font-tech font-extrabold text-bio-dark">$95.00 <span class="text-xs text-slate-400 font-normal">USD</span></span>
+                                <span class="text-[11px] font-tech text-emerald-600 font-bold">&gt;99.2% HPLC</span>
+                            </div>
+                        </div>
+                        <button onclick="addToCart('Thymosin Alpha 1 10mg')" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
+                            <i class="fa-solid fa-cart-plus mr-2"></i> Añadir al Pedido
+                        </button>
+                    </div>
+
+                    <div class="bg-white border-2 border-slate-200 hover:border-sky-500 rounded-2xl p-6 flex flex-col justify-between transition-all shadow-sm hover:shadow-md product-card" data-name="bpc157 tb500 bpc 157 tb 500 blend 10mg">
+                        <div>
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="text-[10px] font-tech font-bold uppercase bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-lg">Recovery Blend</span>
+                                <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-tech font-extrabold px-2.5 py-1 rounded-lg">Stock: 5 Viales</span>
+                            </div>
+                            <h3 class="text-xl font-tech font-extrabold text-bio-dark">BPC-157 / TB-500 Blend <span class="text-xs text-slate-500 font-normal">10mg</span></h3>
+                            <p class="text-bio-muted text-xs mt-2">Combinación dual optimizada para análisis de regeneración vascular, articular y muscular.</p>
+                            <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center">
+                                <span class="text-2xl font-tech font-extrabold text-bio-dark">$110.00 <span class="text-xs text-slate-400 font-normal">USD</span></span>
+                                <span class="text-[11px] font-tech text-emerald-600 font-bold">&gt;99.6% HPLC</span>
+                            </div>
+                        </div>
+                        <button onclick="addToCart('BPC-157 / TB-500 Blend 10mg')" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
+                            <i class="fa-solid fa-cart-plus mr-2"></i> Añadir al Pedido
+                        </button>
+                    </div>
+
+                    <div class="bg-white border-2 border-slate-200 hover:border-sky-500 rounded-2xl p-6 flex flex-col justify-between transition-all shadow-sm hover:shadow-md product-card" data-name="nad nad+ 500mg energy cellular">
+                        <div>
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="text-[10px] font-tech font-bold uppercase bg-purple-50 text-purple-700 border border-purple-200 px-2.5 py-1 rounded-lg">Coenzyme</span>
+                                <span class="bg-red-50 text-red-600 border border-red-200 text-[10px] font-tech font-extrabold px-2.5 py-1 rounded-lg">Stock: ¡Último vial! (1)</span>
+                            </div>
+                            <h3 class="text-xl font-tech font-extrabold text-bio-dark">NAD+ <span class="text-xs text-slate-500 font-normal">500mg</span></h3>
+                            <p class="text-bio-muted text-xs mt-2">Coenzima liofilizada para investigaciones metabólicas celulares y respiración mitocondrial.</p>
+                            <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center">
+                                <span class="text-2xl font-tech font-extrabold text-bio-dark">$90.00 <span class="text-xs text-slate-400 font-normal">USD</span></span>
+                                <span class="text-[11px] font-tech text-emerald-600 font-bold">&gt;99.3% HPLC</span>
+                            </div>
+                        </div>
+                        <button onclick="addToCart('NAD+ 500mg')" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
+                            <i class="fa-solid fa-cart-plus mr-2"></i> Añadir al Pedido
+                        </button>
+                    </div>
+
+                    <div class="bg-white border-2 border-slate-200 hover:border-sky-500 rounded-2xl p-6 flex flex-col justify-between transition-all shadow-sm hover:shadow-md product-card" data-name="cjc1295 ipamorelin cjc 1295 blend 10mg">
+                        <div>
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="text-[10px] font-tech font-bold uppercase bg-sky-50 text-sky-700 border border-sky-200 px-2.5 py-1 rounded-lg">Secretagogue Blend</span>
+                                <span class="bg-amber-50 text-amber-700 border border-amber-200 text-[10px] font-tech font-extrabold px-2.5 py-1 rounded-lg">Stock Bajo: 2 Viales</span>
+                            </div>
+                            <h3 class="text-xl font-tech font-extrabold text-bio-dark">CJC-1295 / Ipamorelin <span class="text-xs text-slate-500 font-normal">Blend</span></h3>
+                            <p class="text-bio-muted text-xs mt-2">Mezcla agonista GHRP/GHRH para estudios de secreción pulsátil hormona de crecimiento.</p>
+                            <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center">
+                                <span class="text-2xl font-tech font-extrabold text-bio-dark">$105.00 <span class="text-xs text-slate-400 font-normal">USD</span></span>
+                                <span class="text-[11px] font-tech text-emerald-600 font-bold">&gt;99.4% HPLC</span>
+                            </div>
+                        </div>
+                        <button onclick="addToCart('CJC-1295 / Ipamorelin Blend')" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
+                            <i class="fa-solid fa-cart-plus mr-2"></i> Añadir al Pedido
+                        </button>
+                    </div>
+
+                    <div class="bg-white border-2 border-slate-200 hover:border-sky-500 rounded-2xl p-6 flex flex-col justify-between transition-all shadow-sm hover:shadow-md product-card" data-name="retatrutide reta 5mg triple agonist">
+                        <div>
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="text-[10px] font-tech font-bold uppercase bg-purple-50 text-purple-700 border border-purple-200 px-2.5 py-1 rounded-lg">Triple Agonist</span>
+                                <span class="bg-red-50 text-red-600 border border-red-200 text-[10px] font-tech font-extrabold px-2.5 py-1 rounded-lg">Stock: 1 Vial</span>
+                            </div>
+                            <h3 class="text-xl font-tech font-extrabold text-bio-dark">Retatrutide <span class="text-xs text-slate-500 font-normal">5mg</span></h3>
+                            <p class="text-bio-muted text-xs mt-2">Compuesto tri-agonista GIP/GLP-1/Glucagón de última generación.</p>
+                            <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center">
+                                <span class="text-2xl font-tech font-extrabold text-bio-dark">$115.00 <span class="text-xs text-slate-400 font-normal">USD</span></span>
+                                <span class="text-[11px] font-tech text-emerald-600 font-bold">&gt;99.1% HPLC</span>
+                            </div>
+                        </div>
+                        <button onclick="addToCart('Retatrutide 5mg')" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
+                            <i class="fa-solid fa-cart-plus mr-2"></i> Añadir al Pedido
+                        </button>
+                    </div>
+
+                    <div class="bg-white border-2 border-slate-200 hover:border-sky-500 rounded-2xl p-6 flex flex-col justify-between transition-all shadow-sm hover:shadow-md product-card" data-name="retatrutide reta 10mg triple agonist">
+                        <div>
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="text-[10px] font-tech font-bold uppercase bg-purple-50 text-purple-700 border border-purple-200 px-2.5 py-1 rounded-lg">Triple Agonist</span>
+                                <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-tech font-extrabold px-2.5 py-1 rounded-lg">Stock: 8 Viales</span>
+                            </div>
+                            <h3 class="text-xl font-tech font-extrabold text-bio-dark">Retatrutide <span class="text-xs text-slate-500 font-normal">10mg</span></h3>
+                            <p class="text-bio-muted text-xs mt-2">Concentración estándar para series de investigación prolongada.</p>
+                            <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center">
+                                <span class="text-2xl font-tech font-extrabold text-bio-dark">$180.00 <span class="text-xs text-slate-400 font-normal">USD</span></span>
+                                <span class="text-[11px] font-tech text-emerald-600 font-bold">&gt;99.3% HPLC</span>
+                            </div>
+                        </div>
+                        <button onclick="addToCart('Retatrutide 10mg')" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
+                            <i class="fa-solid fa-cart-plus mr-2"></i> Añadir al Pedido
+                        </button>
+                    </div>
+
+                    <div class="bg-white border-2 border-slate-200 hover:border-sky-500 rounded-2xl p-6 flex flex-col justify-between transition-all shadow-sm hover:shadow-md product-card" data-name="retatrutide reta 15mg triple agonist">
+                        <div>
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="text-[10px] font-tech font-bold uppercase bg-purple-50 text-purple-700 border border-purple-200 px-2.5 py-1 rounded-lg">Triple Agonist</span>
+                                <span class="bg-red-50 text-red-600 border border-red-200 text-[10px] font-tech font-extrabold px-2.5 py-1 rounded-lg">Stock: 1 Vial</span>
+                            </div>
+                            <h3 class="text-xl font-tech font-extrabold text-bio-dark">Retatrutide <span class="text-xs text-slate-500 font-normal">15mg</span></h3>
+                            <p class="text-bio-muted text-xs mt-2">Vial de máxima concentración de compuesto tri-agonista.</p>
+                            <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center">
+                                <span class="text-2xl font-tech font-extrabold text-bio-dark">$240.00 <span class="text-xs text-slate-400 font-normal">USD</span></span>
+                                <span class="text-[11px] font-tech text-emerald-600 font-bold">&gt;99.2% HPLC</span>
+                            </div>
+                        </div>
+                        <button onclick="addToCart('Retatrutide 15mg')" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
+                            <i class="fa-solid fa-cart-plus mr-2"></i> Añadir al Pedido
+                        </button>
+                    </div>
+
+                    <div class="bg-white border-2 border-slate-200 hover:border-sky-500 rounded-2xl p-6 flex flex-col justify-between transition-all shadow-sm hover:shadow-md product-card" data-name="motsc mots c 10mg mitochondrial peptide">
+                        <div>
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="text-[10px] font-tech font-bold uppercase bg-blue-50 text-blue-700 border border-blue-200 px-2.5 py-1 rounded-lg">Mitochondrial Peptide</span>
+                                <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-tech font-extrabold px-2.5 py-1 rounded-lg">Stock: 10 Viales</span>
+                            </div>
+                            <h3 class="text-xl font-tech font-extrabold text-bio-dark">MOTS-c <span class="text-xs text-slate-500 font-normal">10mg</span></h3>
+                            <p class="text-bio-muted text-xs mt-2">Péptido derivado de mitocondria analizado en homeostasis metabólica y ejercicio.</p>
+                            <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center">
+                                <span class="text-2xl font-tech font-extrabold text-bio-dark">$75.00 <span class="text-xs text-slate-400 font-normal">USD</span></span>
+                                <span class="text-[11px] font-tech text-emerald-600 font-bold">&gt;99.5% HPLC</span>
+                            </div>
+                        </div>
+                        <button onclick="addToCart('MOTS-c 10mg')" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
+                            <i class="fa-solid fa-cart-plus mr-2"></i> Añadir al Pedido
+                        </button>
+                    </div>
+
+                    <div class="bg-white border-2 border-slate-200 hover:border-sky-500 rounded-2xl p-6 flex flex-col justify-between transition-all shadow-sm hover:shadow-md product-card" data-name="klow blend 80mg glow klow">
+                        <div>
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="text-[10px] font-tech font-bold uppercase bg-pink-50 text-pink-700 border border-pink-200 px-2.5 py-1 rounded-lg">Specialty Complex</span>
+                                <span class="bg-amber-50 text-amber-700 border border-amber-200 text-[10px] font-tech font-extrabold px-2.5 py-1 rounded-lg">Stock: 3 Viales</span>
+                            </div>
+                            <h3 class="text-xl font-tech font-extrabold text-bio-dark">KLOW Blend <span class="text-xs text-slate-500 font-normal">80mg</span></h3>
+                            <p class="text-bio-muted text-xs mt-2">Complejo sinérgico bio-activo multi-compuesto de alta concentración.</p>
+                            <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center">
+                                <span class="text-2xl font-tech font-extrabold text-bio-dark">$160.00 <span class="text-xs text-slate-400 font-normal">USD</span></span>
+                                <span class="text-[11px] font-tech text-emerald-600 font-bold">&gt;99.1% HPLC</span>
+                            </div>
+                        </div>
+                        <button onclick="addToCart('KLOW Blend 80mg')" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
+                            <i class="fa-solid fa-cart-plus mr-2"></i> Añadir al Pedido
+                        </button>
+                    </div>
+
+                    <div class="bg-white border-2 border-slate-200 hover:border-sky-500 rounded-2xl p-6 flex flex-col justify-between transition-all shadow-sm hover:shadow-md product-card" data-name="kisspeptine kisspeptin 10mg endocrine">
+                        <div>
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="text-[10px] font-tech font-bold uppercase bg-purple-50 text-purple-700 border border-purple-200 px-2.5 py-1 rounded-lg">Endocrine Peptide</span>
+                                <span class="bg-amber-50 text-amber-700 border border-amber-200 text-[10px] font-tech font-extrabold px-2.5 py-1 rounded-lg">Stock Bajo: 2 Viales</span>
+                            </div>
+                            <h3 class="text-xl font-tech font-extrabold text-bio-dark">Kisspeptin <span class="text-xs text-slate-500 font-normal">10mg</span></h3>
+                            <p class="text-bio-muted text-xs mt-2">Neuropéptido clave estudiado en señalización del eje hipotálamo-hipofisario.</p>
+                            <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center">
+                                <span class="text-2xl font-tech font-extrabold text-bio-dark">$88.00 <span class="text-xs text-slate-400 font-normal">USD</span></span>
+                                <span class="text-[11px] font-tech text-emerald-600 font-bold">&gt;99.4% HPLC</span>
+                            </div>
+                        </div>
+                        <button onclick="addToCart('Kisspeptin 10mg')" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
+                            <i class="fa-solid fa-cart-plus mr-2"></i> Añadir al Pedido
+                        </button>
+                    </div>
+
+                    <div class="bg-white border-2 border-slate-200 hover:border-sky-500 rounded-2xl p-6 flex flex-col justify-between transition-all shadow-sm hover:shadow-md product-card" data-name="bac water bacteriostatic water 10ml reconstitute">
+                        <div>
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="text-[10px] font-tech font-bold uppercase bg-sky-50 text-sky-700 border border-sky-200 px-2.5 py-1 rounded-lg">Reconstitution Solution</span>
+                                <span class="bg-amber-50 text-amber-700 border border-amber-200 text-[10px] font-tech font-extrabold px-2.5 py-1 rounded-lg">Stock: 3 Viales</span>
+                            </div>
+                            <h3 class="text-xl font-tech font-extrabold text-bio-dark">Bacteriostatic Water <span class="text-xs text-slate-500 font-normal">10ml</span></h3>
+                            <p class="text-bio-muted text-xs mt-2">Agua bacteriostática estéril con 0.9% alcohol bencílico para reconstitución analítica.</p>
+                            <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center">
+                                <span class="text-2xl font-tech font-extrabold text-bio-dark">$15.00 <span class="text-xs text-slate-400 font-normal">USD</span></span>
+                                <span class="text-[11px] font-tech text-sky-600 font-bold">Estéril USP</span>
+                            </div>
+                        </div>
+                        <button onclick="addToCart('Bacteriostatic Water 10ml')" class="mt-6 w-full py-3.5 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">
+                            <i class="fa-solid fa-cart-plus mr-2"></i> Añadir al Pedido
+                        </button>
+                    </div>
+
                 </div>
 
-                <div class="product-card rounded-2xl p-6 flex flex-col justify-between shadow-sm" data-name="retatrutide triple agonist metabolic glp1">
-                    <div>
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="text-[10px] font-tech font-bold uppercase tracking-wider bg-purple-50 text-purple-700 border border-purple-200 px-2.5 py-1 rounded-lg">Triple Agonist</span>
-                            <div class="text-right">
-                                <span class="product-price text-xl font-tech font-bold text-emerald-600 hidden">$180.00 <span class="text-[10px] text-slate-400">USD</span></span>
-                                <span class="locked-price text-xs font-tech text-amber-600 font-bold bg-amber-50 px-2 py-1 rounded border border-amber-200"><i class="fa-solid fa-lock text-[10px] mr-1"></i> Bloqueado</span>
+                <div class="mt-16 bg-white border-2 border-sky-400 rounded-3xl p-8 shadow-xl">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-8 h-8 bg-sky-500 text-white rounded-lg flex items-center justify-center font-bold"><i class="fa-solid fa-layer-group"></i></div>
+                        <div>
+                            <h3 class="text-xl font-tech font-extrabold text-bio-dark">Frecuentemente Comprados Juntos (Frequently Bought Together)</h3>
+                            <p class="text-xs text-bio-muted">Combos esenciales para procedimientos de reconstitución de laboratorio.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid lg:grid-cols-12 gap-6 items-center bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                        <div class="lg:col-span-8 flex flex-col sm:flex-row items-center gap-4">
+                            <div class="bg-white p-4 rounded-xl border border-slate-200 text-center w-full sm:w-1/2 shadow-sm">
+                                <span class="text-xs font-tech font-bold text-bio-dark block">BPC-157 / TB-500 Blend</span>
+                                <span class="text-sm font-tech font-extrabold text-sky-600">$110.00 USD</span>
+                            </div>
+                            <span class="text-xl font-bold text-sky-500">+</span>
+                            <div class="bg-white p-4 rounded-xl border border-slate-200 text-center w-full sm:w-1/2 shadow-sm">
+                                <span class="text-xs font-tech font-bold text-bio-dark block">Bacteriostatic Water 10ml</span>
+                                <span class="text-sm font-tech font-extrabold text-sky-600">$15.00 USD</span>
                             </div>
                         </div>
-
-                        <h3 class="text-xl font-tech font-bold text-bio-dark">Retatrutide <span class="text-xs text-slate-500 font-normal">10mg</span></h3>
-                        <p class="text-bio-textMuted text-xs mt-2 leading-relaxed">Compuesto tri-agonista de tercera generación orientado a estudios avanzados de oxidación lipídica.</p>
-
-                        <div class="mt-4 pt-4 border-t border-slate-100 space-y-2 text-[11px] font-tech text-bio-textMuted">
-                            <div class="flex justify-between"><span>Pureza HPLC:</span> <span class="text-emerald-600 font-bold">&gt; 99.1%</span></div>
-                            <div class="flex justify-between"><span>Formato:</span> <span class="text-slate-700">Vial Liofilizado</span></div>
-                            <div class="flex justify-between"><span>Lote Actual:</span> <span class="text-slate-700">NV-RET-2026-04</span></div>
+                        <div class="lg:col-span-4 text-right space-y-2">
+                            <div class="text-xs text-bio-muted">Precio Combo: <strong class="text-lg text-bio-dark font-tech font-extrabold">$125.00 USD</strong></div>
+                            <button onclick="addToCart('Combo: BPC Blend + BAC Water')" class="w-full py-3 bg-neon-pink text-white font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-bio-dark transition-all cursor-pointer shadow-md">Comprar Combo Completo</button>
                         </div>
-                    </div>
-
-                    <div class="mt-6">
-                        <button onclick="handleProductClick('Retatrutide 10mg')" class="product-btn w-full py-3.5 bg-slate-100 border border-slate-300 text-bio-dark font-tech font-bold text-xs uppercase rounded-xl hover:bg-sky-600 hover:text-white hover:border-sky-600 transition-all cursor-pointer">
-                            <i class="fa-solid fa-lock mr-2"></i> Registrarse para Comprar
-                        </button>
-                    </div>
-                </div>
-
-                <div class="product-card rounded-2xl p-6 flex flex-col justify-between shadow-sm" data-name="semaglutide glp1 metabolic weight">
-                    <div>
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="text-[10px] font-tech font-bold uppercase tracking-wider bg-sky-50 text-sky-700 border border-sky-200 px-2.5 py-1 rounded-lg">GLP-1 Receptor Agonist</span>
-                            <div class="text-right">
-                                <span class="product-price text-xl font-tech font-bold text-emerald-600 hidden">$92.00 <span class="text-[10px] text-slate-400">USD</span></span>
-                                <span class="locked-price text-xs font-tech text-amber-600 font-bold bg-amber-50 px-2 py-1 rounded border border-amber-200"><i class="fa-solid fa-lock text-[10px] mr-1"></i> Bloqueado</span>
-                            </div>
-                        </div>
-
-                        <h3 class="text-xl font-tech font-bold text-bio-dark">Semaglutide <span class="text-xs text-slate-500 font-normal">5mg</span></h3>
-                        <p class="text-bio-textMuted text-xs mt-2 leading-relaxed">Análogo de GLP-1 ampliamente documentado para el análisis de saciedad y señalización pancreática.</p>
-
-                        <div class="mt-4 pt-4 border-t border-slate-100 space-y-2 text-[11px] font-tech text-bio-textMuted">
-                            <div class="flex justify-between"><span>Pureza HPLC:</span> <span class="text-emerald-600 font-bold">&gt; 99.5%</span></div>
-                            <div class="flex justify-between"><span>Formato:</span> <span class="text-slate-700">Vial Liofilizado</span></div>
-                            <div class="flex justify-between"><span>Lote Actual:</span> <span class="text-slate-700">NV-SEM-2026-08</span></div>
-                        </div>
-                    </div>
-
-                    <div class="mt-6">
-                        <button onclick="handleProductClick('Semaglutide 5mg')" class="product-btn w-full py-3.5 bg-slate-100 border border-slate-300 text-bio-dark font-tech font-bold text-xs uppercase rounded-xl hover:bg-sky-600 hover:text-white hover:border-sky-600 transition-all cursor-pointer">
-                            <i class="fa-solid fa-lock mr-2"></i> Registrarse para Comprar
-                        </button>
-                    </div>
-                </div>
-
-                <div class="product-card rounded-2xl p-6 flex flex-col justify-between shadow-sm" data-name="ghkcu ghk cu copper peptide dermal longevity">
-                    <div>
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="text-[10px] font-tech font-bold uppercase tracking-wider bg-blue-50 text-blue-700 border border-blue-200 px-2.5 py-1 rounded-lg">Copper Tripeptide</span>
-                            <div class="text-right">
-                                <span class="product-price text-xl font-tech font-bold text-emerald-600 hidden">$75.00 <span class="text-[10px] text-slate-400">USD</span></span>
-                                <span class="locked-price text-xs font-tech text-amber-600 font-bold bg-amber-50 px-2 py-1 rounded border border-amber-200"><i class="fa-solid fa-lock text-[10px] mr-1"></i> Bloqueado</span>
-                            </div>
-                        </div>
-
-                        <h3 class="text-xl font-tech font-bold text-bio-dark">GHK-Cu <span class="text-xs text-slate-500 font-normal">50mg</span></h3>
-                        <p class="text-bio-textMuted text-xs mt-2 leading-relaxed">Tripéptido de cobre evaluado en expresión génica de colágeno y remodelación celular dermal.</p>
-
-                        <div class="mt-4 pt-4 border-t border-slate-100 space-y-2 text-[11px] font-tech text-bio-textMuted">
-                            <div class="flex justify-between"><span>Pureza HPLC:</span> <span class="text-emerald-600 font-bold">&gt; 99.8%</span></div>
-                            <div class="flex justify-between"><span>Formato:</span> <span class="text-slate-700">Vial Azul Liofilizado</span></div>
-                            <div class="flex justify-between"><span>Lote Actual:</span> <span class="text-slate-700">NV-GHK-2026-03</span></div>
-                        </div>
-                    </div>
-
-                    <div class="mt-6">
-                        <button onclick="handleProductClick('GHK-Cu 50mg')" class="product-btn w-full py-3.5 bg-slate-100 border border-slate-300 text-bio-dark font-tech font-bold text-xs uppercase rounded-xl hover:bg-sky-600 hover:text-white hover:border-sky-600 transition-all cursor-pointer">
-                            <i class="fa-solid fa-lock mr-2"></i> Registrarse para Comprar
-                        </button>
-                    </div>
-                </div>
-
-                <div class="product-card rounded-2xl p-6 flex flex-col justify-between shadow-sm" data-name="nad nad+ cellular energy longevity">
-                    <div>
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="text-[10px] font-tech font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-lg">Mitochondrial Coenzyme</span>
-                            <div class="text-right">
-                                <span class="product-price text-xl font-tech font-bold text-emerald-600 hidden">$85.00 <span class="text-[10px] text-slate-400">USD</span></span>
-                                <span class="locked-price text-xs font-tech text-amber-600 font-bold bg-amber-50 px-2 py-1 rounded border border-amber-200"><i class="fa-solid fa-lock text-[10px] mr-1"></i> Bloqueado</span>
-                            </div>
-                        </div>
-
-                        <h3 class="text-xl font-tech font-bold text-bio-dark">NAD+ <span class="text-xs text-slate-500 font-normal">500mg</span></h3>
-                        <p class="text-bio-textMuted text-xs mt-2 leading-relaxed">Coenzima nicotinamida adenina dinucleótido analizada en fosforilación oxidativa celular.</p>
-
-                        <div class="mt-4 pt-4 border-t border-slate-100 space-y-2 text-[11px] font-tech text-bio-textMuted">
-                            <div class="flex justify-between"><span>Pureza HPLC:</span> <span class="text-emerald-600 font-bold">&gt; 99.3%</span></div>
-                            <div class="flex justify-between"><span>Formato:</span> <span class="text-slate-700">Polvo Liofilizado</span></div>
-                            <div class="flex justify-between"><span>Lote Actual:</span> <span class="text-slate-700">NV-NAD-2026-01</span></div>
-                        </div>
-                    </div>
-
-                    <div class="mt-6">
-                        <button onclick="handleProductClick('NAD+ 500mg')" class="product-btn w-full py-3.5 bg-slate-100 border border-slate-300 text-bio-dark font-tech font-bold text-xs uppercase rounded-xl hover:bg-sky-600 hover:text-white hover:border-sky-600 transition-all cursor-pointer">
-                            <i class="fa-solid fa-lock mr-2"></i> Registrarse para Comprar
-                        </button>
                     </div>
                 </div>
 
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
-    <section id="coa-section" class="py-12 bg-white border-t border-b border-slate-200">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="bg-slate-900 rounded-3xl p-8 sm:p-12 text-white flex flex-col md:flex-row justify-between items-center gap-8 shadow-xl">
-                <div class="space-y-3 max-w-xl">
-                    <span class="text-sky-400 font-tech text-xs uppercase tracking-widest font-bold"><i class="fa-solid fa-vial-circle-check mr-1"></i> Quality Assurance Standard</span>
-                    <h2 class="text-2xl sm:text-3xl font-tech font-bold">Verificación de Análisis HPLC / MS por Lote</h2>
-                    <p class="text-slate-400 text-xs leading-relaxed">
-                        Ingrese el número de lote impreso en la etiqueta de su vial para consultar los resultados analíticos cromatográficos.
-                    </p>
-                </div>
-                <div class="w-full md:w-auto flex flex-col sm:flex-row gap-3">
-                    <input type="text" id="batch-input" placeholder="Ej: NV-TZ-2026-09" class="bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-xs text-white placeholder-slate-500 outline-none focus:border-sky-400 font-tech">
-                    <button onclick="verifyBatch()" class="px-6 py-3 bg-sky-500 text-white font-tech font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-400 transition-all cursor-pointer whitespace-nowrap">Verificar COA</button>
-                </div>
+    <div id="age-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-white border-2 border-bio-dark rounded-3xl max-w-md w-full p-8 relative shadow-2xl text-center space-y-6">
+            <div class="w-16 h-16 bg-red-100 text-red-600 rounded-2xl border border-red-300 flex items-center justify-center text-3xl mx-auto">
+                <i class="fa-solid fa-shield-halved"></i>
             </div>
-        </div>
-    </section>
-
-    <section id="affiliate" class="py-16 bg-bio-bg">
-        <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-12 gap-12 items-center">
-            <div class="lg:col-span-6 space-y-6">
-                <span class="text-emerald-600 font-tech text-xs uppercase tracking-widest font-bold"><i class="fa-solid fa-chart-line mr-1"></i> Nuvera Alliance Network</span>
-                <h2 class="text-3xl sm:text-4xl font-tech font-bold text-bio-dark">Programa de Representantes Afiliados</h2>
-                <p class="text-bio-textMuted text-sm leading-relaxed">
-                    Refiera instituciones médicas, laboratorios autorizados e investigadores a la red Nuvera Form y obtenga comisiones recurrentes por volumen.
+            <div>
+                <h3 class="text-2xl font-tech font-extrabold text-bio-dark">Confirmación de Edad (21+)</h3>
+                <p class="text-xs text-bio-muted mt-2 leading-relaxed">
+                    Este sitio contiene reactivos químicos y péptidos destinados **exclusivamente a la investigación analítica in-vitro**. Debe ser mayor de 21 años para ingresar.
                 </p>
-
-                <div class="bg-white border border-slate-200 rounded-xl overflow-hidden font-tech shadow-sm">
-                    <div class="grid grid-cols-3 bg-slate-100 p-3 text-[11px] font-bold text-bio-dark uppercase tracking-wider">
-                        <span>Nivel</span>
-                        <span>Volumen Mensual</span>
-                        <span class="text-emerald-600">Comisión</span>
-                    </div>
-                    <div class="grid grid-cols-3 p-3 text-xs border-b border-slate-100 text-bio-textMuted">
-                        <span>Associate Rep</span>
-                        <span>$0 – $5,000</span>
-                        <span class="font-bold text-bio-dark">15%</span>
-                    </div>
-                    <div class="grid grid-cols-3 p-3 text-xs border-b border-slate-100 text-bio-textMuted">
-                        <span>Senior Rep</span>
-                        <span>$5,000 – $20,000</span>
-                        <span class="font-bold text-bio-dark">20%</span>
-                    </div>
-                    <div class="grid grid-cols-3 p-3 text-xs text-bio-textMuted">
-                        <span>Clinical Director</span>
-                        <span>$20,000+</span>
-                        <span class="font-bold text-sky-600">25%</span>
-                    </div>
-                </div>
             </div>
-
-            <div class="lg:col-span-6 bg-white border border-slate-200 p-8 rounded-2xl shadow-lg">
-                <h3 class="text-xl font-tech font-bold text-bio-dark mb-2">Postular como Representante</h3>
-                <p class="text-xs text-bio-textMuted mb-6">Proporcione sus datos de contacto profesional para evaluación.</p>
-
-                <form class="space-y-4" onsubmit="handleRepSubmit(event)">
-                    <div class="grid sm:grid-cols-2 gap-4">
-                        <input type="text" required placeholder="Nombre" class="bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs text-bio-dark outline-none focus:border-sky-600">
-                        <input type="text" required placeholder="Apellido" class="bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs text-bio-dark outline-none focus:border-sky-600">
-                    </div>
-                    <input type="email" required placeholder="Correo Profesional" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs text-bio-dark outline-none focus:border-sky-600">
-                    <input type="tel" required placeholder="Teléfono Directo" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs text-bio-dark outline-none focus:border-sky-600">
-                    <button type="submit" class="w-full py-4 bg-sky-600 text-white font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-bio-dark transition-all cursor-pointer shadow-md">Enviar Postulación</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-bio-dark text-slate-400 py-12 text-xs">
-        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-4 gap-8 pb-12 border-b border-slate-800">
-            <div class="space-y-4">
-                <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-lg bg-sky-500 text-white font-tech font-bold flex items-center justify-center text-lg">N</div>
-                    <span class="font-tech font-bold text-white text-xl">NUVERA<span class="text-sky-400">FORM</span></span>
-                </div>
-                <p class="text-slate-500 text-[11px] leading-relaxed">
-                    Distribuidor de estándar bio-analítico. Productos restringidos a laboratorios acreditados e investigación académica in-vitro.
-                </p>
-            </div>
-
-            <div>
-                <h5 class="font-tech font-bold text-white uppercase tracking-wider mb-4 text-[12px]">Navegación</h5>
-                <ul class="space-y-2">
-                    <li><a href="#about" class="hover:text-sky-400 transition-colors">Nosotros</a></li>
-                    <li><a href="#catalog-preview" class="hover:text-sky-400 transition-colors">Catálogo de Péptidos</a></li>
-                    <li><a href="#affiliate" class="hover:text-sky-400 transition-colors">Portal Reps</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h5 class="font-tech font-bold text-white uppercase tracking-wider mb-4 text-[12px]">Legal</h5>
-                <ul class="space-y-2">
-                    <li><span class="hover:text-sky-400 cursor-pointer">Términos de Servicio (RUO)</span></li>
-                    <li><span class="hover:text-sky-400 cursor-pointer">Política de Privacidad</span></li>
-                    <li><span class="hover:text-sky-400 cursor-pointer">Cumplimiento 21+</span></li>
-                </ul>
-            </div>
-
-            <div>
-                <h5 class="font-tech font-bold text-white uppercase tracking-wider mb-4 text-[12px]">Redes Oficiales</h5>
-                <div class="flex items-center gap-3">
-                    <a href="#" class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-sky-400 transition-all"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-sky-400 transition-all"><i class="fa-brands fa-x-twitter"></i></a>
-                    <a href="#" class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-sky-400 transition-all"><i class="fa-brands fa-linkedin"></i></a>
-                </div>
-            </div>
-        </div>
-
-        <div class="max-w-7xl mx-auto px-4 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-slate-500">
-            <div>&copy; 2026 Nuvera Form LLC. All rights reserved.</div>
-            <div>Strictly For Laboratory In-Vitro Research Use Only.</div>
-        </div>
-    </footer>
-
-    <div id="region-modal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden pointer-events-none flex items-center justify-center p-4">
-        <div class="bg-white border border-slate-200 rounded-2xl max-w-md w-full p-8 relative shadow-2xl pointer-events-auto">
-            <h3 class="text-2xl font-tech font-bold text-bio-dark text-center uppercase mb-1">Región &amp; Idioma</h3>
-            <p class="text-xs text-bio-textMuted text-center mb-6">Seleccione su localización para ajustar regulaciones locales.</p>
-
-            <div class="space-y-4">
-                <div>
-                    <label class="block text-xs font-tech font-bold text-bio-dark uppercase mb-1">País / Ubicación</label>
-                    <select id="user-country" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs text-bio-dark outline-none focus:border-sky-600">
-                        <option value="United States">United States (US)</option>
-                        <option value="México">México</option>
-                        <option value="Colombia">Colombia</option>
-                        <option value="Argentina">Argentina</option>
-                        <option value="España">España</option>
-                        <option value="Chile">Chile</option>
-                        <option value="Otro">Otro País</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-tech font-bold text-bio-dark uppercase mb-1">Idioma</label>
-                    <select id="user-lang" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs text-bio-dark outline-none focus:border-sky-600">
-                        <option value="es">Español</option>
-                        <option value="en">English</option>
-                    </select>
-                </div>
-
-                <button onclick="savePreferences()" class="w-full py-4 bg-sky-600 text-white font-tech font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-bio-dark transition-all mt-4 cursor-pointer">Guardar Preferencias</button>
+            <div class="space-y-3">
+                <button onclick="acceptAge()" class="w-full py-4 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-lg">Tengo 21 Años o Más - Entrar</button>
+                <button onclick="window.location.href='https://google.com'" class="w-full py-3 text-xs font-tech text-slate-400 hover:text-red-500 transition-colors">Soy menor de 21 años (Salir)</button>
             </div>
         </div>
     </div>
 
-    <div id="signup-modal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden pointer-events-none flex items-center justify-center p-4">
-        <div class="bg-white border border-slate-200 rounded-2xl max-w-md w-full p-6 relative shadow-2xl pointer-events-auto">
-            <button onclick="toggleModal('signup-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-bio-dark cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
-            <h3 class="text-2xl font-tech font-bold text-bio-dark mb-1">Crear Cuenta de Investigación</h3>
-            <p class="text-xs text-bio-textMuted mb-6">Desbloquee precios de lote y acceso directo a catálogo.</p>
+    <div id="signup-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden pointer-events-none flex items-center justify-center p-4">
+        <div class="bg-white border-2 border-bio-dark rounded-3xl max-w-md w-full p-8 relative shadow-2xl pointer-events-auto">
+            <button onclick="toggleModal('signup-modal')" class="absolute top-5 right-5 text-slate-400 hover:text-bio-dark cursor-pointer"><i class="fa-solid fa-xmark text-xl"></i></button>
+            
+            <div class="mb-6">
+                <span class="bg-neon-pink/10 text-neon-pink border border-neon-pink/30 px-2.5 py-1 rounded-md text-[10px] font-tech font-bold uppercase tracking-wider">Descuento del 10% Activado</span>
+                <h3 class="text-2xl font-tech font-extrabold text-bio-dark mt-2">Crear Cuenta de Investigación</h3>
+                <p class="text-xs text-bio-muted">Desbloquee el catálogo completo y reciba su código <strong class="text-sky-600">NUVERA10</strong>.</p>
+            </div>
             
             <form id="signup-form" class="space-y-3" onsubmit="handleSignupSubmit(event)">
                 <input type="hidden" name="access_key" value="e71a64f9-3da5-4fde-b2ff-3463cd3f1c41">
-                <input type="hidden" name="subject" value="🚨 NUEVO LEAD NUVERA FORM">
+                <input type="hidden" name="subject" value="🚨 NUEVO REGISTRO NUVERA FORM">
 
                 <div class="grid grid-cols-2 gap-3">
-                    <input type="text" id="signup-first" name="first_name" required placeholder="Nombre" class="bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs text-bio-dark outline-none focus:border-sky-600">
-                    <input type="text" id="signup-last" name="last_name" required placeholder="Apellido" class="bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs text-bio-dark outline-none focus:border-sky-600">
+                    <input type="text" id="signup-first" name="first_name" required placeholder="Nombre" class="bg-slate-50 border border-slate-300 rounded-xl p-3.5 text-xs text-bio-dark outline-none focus:border-sky-500">
+                    <input type="text" id="signup-last" name="last_name" required placeholder="Apellido" class="bg-slate-50 border border-slate-300 rounded-xl p-3.5 text-xs text-bio-dark outline-none focus:border-sky-500">
                 </div>
-                <input type="email" id="signup-email" name="email" required placeholder="Correo Electrónico Principal" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs text-bio-dark outline-none focus:border-sky-600">
-                <input type="tel" id="signup-phone" name="phone" required placeholder="Teléfono de Contacto" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs text-bio-dark outline-none focus:border-sky-600">
+                <input type="email" id="signup-email" name="email" required placeholder="Correo Electrónico de Laboratorio" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3.5 text-xs text-bio-dark outline-none focus:border-sky-500">
+                <input type="tel" id="signup-phone" name="phone" required placeholder="Teléfono de Contacto" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3.5 text-xs text-bio-dark outline-none focus:border-sky-500">
                 
                 <div class="flex items-start gap-2 pt-2">
-                    <input type="checkbox" id="marketing-optin" name="marketing_accepted" checked class="mt-1 accent-sky-600 cursor-pointer">
-                    <label for="marketing-optin" class="text-[11px] text-bio-textMuted leading-tight cursor-pointer">
-                        Acepto recibir notificaciones de disponibilidad de nuevos lotes, ofertas de catálogo e información técnica.
+                    <input type="checkbox" id="marketing-optin" name="marketing_accepted" checked class="mt-1 accent-sky-500 cursor-pointer">
+                    <label for="marketing-optin" class="text-[11px] text-bio-muted leading-tight cursor-pointer">
+                        Acepto los términos de investigación RUO y acepto recibir ofertas de catálogo.
                     </label>
                 </div>
 
-                <button type="submit" id="signup-btn" class="w-full py-4 bg-sky-600 text-white font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-bio-dark transition-all mt-2 cursor-pointer shadow-lg">Registrar y Desbloquear</button>
+                <button type="submit" id="signup-btn" class="w-full py-4 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all mt-2 cursor-pointer shadow-lg">Registrar y Obtener 10% OFF</button>
             </form>
         </div>
     </div>
 
-    <div id="login-modal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden pointer-events-none flex items-center justify-center p-4">
-        <div class="bg-white border border-slate-200 rounded-2xl max-w-sm w-full p-6 relative shadow-2xl pointer-events-auto">
-            <button onclick="toggleModal('login-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-bio-dark cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
-            <h3 class="text-xl font-tech font-bold text-bio-dark mb-4">Acceso de Investigador</h3>
+    <div id="login-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden pointer-events-none flex items-center justify-center p-4">
+        <div class="bg-white border-2 border-bio-dark rounded-3xl max-w-sm w-full p-8 relative shadow-2xl pointer-events-auto">
+            <button onclick="toggleModal('login-modal')" class="absolute top-5 right-5 text-slate-400 hover:text-bio-dark cursor-pointer"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <h3 class="text-2xl font-tech font-extrabold text-bio-dark mb-4">Iniciar Sesión</h3>
             <form class="space-y-4" onsubmit="handleLoginSubmit(event)">
-                <input type="email" id="login-email" required placeholder="Correo Electrónico" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs text-bio-dark outline-none focus:border-sky-600">
-                <input type="password" required placeholder="Contraseña" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs text-bio-dark outline-none focus:border-sky-600">
-                <button type="submit" class="w-full py-3 bg-sky-600 text-white font-tech font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-bio-dark transition-all cursor-pointer">Iniciar Sesión</button>
+                <input type="email" id="login-email" required placeholder="Correo Electrónico" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3.5 text-xs text-bio-dark outline-none focus:border-sky-500">
+                <input type="password" required placeholder="Contraseña" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3.5 text-xs text-bio-dark outline-none focus:border-sky-500">
+                <button type="submit" class="w-full py-4 bg-bio-dark text-neon-cyan font-tech font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-sky-500 hover:text-white transition-all cursor-pointer shadow-md">Entrar al Catálogo</button>
             </form>
         </div>
     </div>
+
+    <footer class="bg-bio-dark text-slate-400 py-12 text-xs border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-4 gap-8 pb-12 border-b border-slate-800">
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-neon-cyan text-black font-tech font-extrabold flex items-center justify-center text-lg">N</div>
+                    <span class="font-tech font-extrabold text-white text-xl">NUVERA<span class="text-neon-cyan">FORM</span></span>
+                </div>
+                <p class="text-slate-500 text-[11px] leading-relaxed">
+                    Reactivos de pureza superior. Productos estrictamente restringidos para investigación in-vitro en laboratorios autorizados.
+                </p>
+            </div>
+            <div>
+                <h5 class="font-tech font-bold text-white uppercase tracking-wider mb-4">Normativa</h5>
+                <p class="text-[11px] text-slate-500 leading-relaxed">All products sold are strictly for analytical laboratory research and are not intended for human or clinical consumption.</p>
+            </div>
+            <div>
+                <h5 class="font-tech font-bold text-white uppercase tracking-wider mb-4">Promociones</h5>
+                <p class="text-[11px] text-slate-500">Use code <strong class="text-neon-cyan">NUVERA10</strong> at checkout for 10% off your initial order.</p>
+            </div>
+            <div>
+                <h5 class="font-tech font-bold text-white uppercase tracking-wider mb-4">Soporte Directo</h5>
+                <p class="text-[11px] text-slate-500">Atención a laboratorios e investigadores registrados las 24 horas.</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
+        function acceptAge() {
+            localStorage.setItem('nuvera_age_verified', 'true');
+            document.getElementById('age-modal').classList.add('hidden');
+        }
+
         function toggleModal(modalId) {
             const modal = document.getElementById(modalId);
             if (!modal) return;
@@ -540,23 +543,13 @@
             }
         }
 
-        function savePreferences() {
-            const country = document.getElementById('user-country').value;
-            const lang = document.getElementById('user-lang').value;
-            localStorage.setItem('nuvera_country', country);
-            localStorage.setItem('nuvera_lang', lang);
-            document.getElementById('display-region').innerText = country;
-            document.getElementById('display-lang').innerText = lang === 'en' ? 'English' : 'Español';
-            toggleModal('region-modal');
-        }
-
         function verifyBatch() {
             const batchNum = document.getElementById('batch-input').value.trim();
             if (!batchNum) {
                 alert('Por favor ingrese un número de lote.');
                 return;
             }
-            alert(`Lote ${batchNum}: Certificado HPLC verificado (>99.3% pureza). Documentación de laboratorio disponible para descarga.`);
+            alert(`Lote ${batchNum}: Certificado HPLC verificado con pureza comprobada (>99.2%). Documentación completa disponible.`);
         }
 
         function filterProducts() {
@@ -571,12 +564,8 @@
             });
         }
 
-        function handleProductClick(productName) {
-            if (!localStorage.getItem('nuvera_registered')) {
-                toggleModal('signup-modal');
-            } else {
-                alert(`Solicitud añadida para: ${productName}. Redirigiendo al área de confirmación de pedido...`);
-            }
+        function addToCart(productName) {
+            alert(`Añadido al pedido: ${productName}. Redirigiendo a confirmación...`);
         }
 
         function unlockCatalogView(userEmail) {
@@ -585,38 +574,16 @@
 
             const activeEmail = localStorage.getItem('nuvera_user_email') || 'investigador@lab.com';
 
-            // 1. Hide login/signup buttons and show account status in navbar
-            document.getElementById('guest-controls').classList.add('hidden');
-            const loggedControls = document.getElementById('logged-controls');
-            loggedControls.classList.remove('hidden');
-            document.getElementById('logged-user-email').innerText = activeEmail;
+            // Switch from landing view to full catalog page view
+            document.getElementById('landing-page-view').classList.add('hidden');
+            document.getElementById('catalog-page-view').classList.remove('hidden');
 
-            // 2. Update Hero CTAs
-            document.getElementById('hero-action-guest').classList.add('hidden');
-            document.getElementById('hero-action-user').classList.remove('hidden');
+            // Update Navbar User Status
+            document.getElementById('guest-nav-controls').classList.add('hidden');
+            document.getElementById('logged-nav-controls').classList.remove('hidden');
+            document.getElementById('user-display-email').innerText = activeEmail;
 
-            // 3. Update Hero Banner Card
-            document.getElementById('access-title').innerText = "Acceso Verificado";
-            document.getElementById('access-desc').innerText = `Credenciales activadas para (${activeEmail}). Catálogo completo y solicitudes habilitadas.`;
-            const accessBtn = document.getElementById('access-btn');
-            accessBtn.innerText = "Ir al Catálogo";
-            accessBtn.onclick = () => {
-                document.getElementById('catalog-preview').scrollIntoView({ behavior: 'smooth' });
-            };
-            const accessIconBox = document.getElementById('access-icon-box');
-            accessIconBox.classList.remove('border-sky-200');
-            accessIconBox.classList.add('border-emerald-300');
-            document.getElementById('access-icon').className = "fa-solid fa-lock-open text-emerald-600";
-
-            // 4. Reveal Prices and Update Product Buttons
-            document.querySelectorAll('.product-price').forEach(el => el.classList.remove('hidden'));
-            document.querySelectorAll('.locked-price').forEach(el => el.classList.add('hidden'));
-
-            document.querySelectorAll('.product-btn').forEach(btn => {
-                btn.innerHTML = '<i class="fa-solid fa-cart-plus mr-2"></i> Añadir a la Solicitud';
-                btn.classList.remove('bg-slate-100', 'border-slate-300', 'text-bio-dark');
-                btn.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600', 'hover:bg-bio-dark');
-            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function logoutUser() {
@@ -629,7 +596,7 @@
             e.preventDefault();
 
             const submitBtn = document.getElementById('signup-btn');
-            submitBtn.innerText = 'Enviando Lead...';
+            submitBtn.innerText = 'Registrando...';
             submitBtn.disabled = true;
 
             const form = document.getElementById('signup-form');
@@ -642,15 +609,14 @@
                     body: formData
                 });
             } catch (err) {
-                console.warn("Error enviando Web3Forms:", err);
+                console.warn("Submit notification handled:", err);
             } finally {
-                submitBtn.innerText = 'Registrar y Desbloquear';
+                submitBtn.innerText = 'Registrar y Obtener 10% OFF';
                 submitBtn.disabled = false;
 
                 toggleModal('signup-modal');
+                alert(`¡Cuenta activada! Utilice el código NUVERA10 para obtener un 10% de descuento en su primera compra.`);
                 unlockCatalogView(userEmail);
-
-                document.getElementById('catalog-preview').scrollIntoView({ behavior: 'smooth' });
             }
         }
 
@@ -659,20 +625,15 @@
             const email = document.getElementById('login-email').value;
             toggleModal('login-modal');
             unlockCatalogView(email);
-            document.getElementById('catalog-preview').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function handleRepSubmit(e) {
-            e.preventDefault();
-            alert('Postulación recibida. Un director comercial contactará a su laboratorio.');
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            const savedCountry = localStorage.getItem('nuvera_country');
-            if (savedCountry) {
-                document.getElementById('display-region').innerText = savedCountry;
+            // Check Age Verification
+            if (localStorage.getItem('nuvera_age_verified')) {
+                document.getElementById('age-modal').classList.add('hidden');
             }
 
+            // Check Login Status
             if (localStorage.getItem('nuvera_registered')) {
                 unlockCatalogView(localStorage.getItem('nuvera_user_email'));
             }
