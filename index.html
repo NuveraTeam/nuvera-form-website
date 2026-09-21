@@ -45,7 +45,7 @@
 </head>
 <body class="bg-white text-bio-text font-sans antialiased">
 
-    <div class="bg-bio-dark text-white text-[11px] py-2.5 px-4 font-tech uppercase tracking-widest">
+    <div class="bg-bio-dark text-white text-[11px] py-2.5 px-4 font-tech uppercase tracking-widest relative z-30">
         <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
             <div class="flex items-center gap-3">
                 <span class="flex items-center gap-1.5 font-bold">
@@ -53,7 +53,7 @@
                     <span id="display-region">United States</span>
                 </span>
                 <span class="text-slate-500">|</span>
-                <button onclick="toggleModal('region-modal')" class="flex items-center gap-1 text-bio-neon hover:underline font-bold">
+                <button onclick="toggleModal('region-modal')" class="flex items-center gap-1 text-bio-neon hover:underline font-bold cursor-pointer">
                     <i class="fa-solid fa-language text-sm"></i>
                     <span id="display-lang">Español</span>
                     <i class="fa-solid fa-chevron-down text-[9px] ml-1"></i>
@@ -71,7 +71,7 @@
         </div>
     </div>
 
-    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200">
+    <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
             <a href="#" class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-bio-neon to-bio-green p-[2px] neon-glow-light">
@@ -92,20 +92,20 @@
             </nav>
 
             <div class="flex items-center gap-3">
-                <button onclick="toggleModal('login-modal')" class="text-xs font-tech font-bold uppercase tracking-wider px-4 py-2.5 rounded-lg border border-bio-neon text-bio-neon hover:bg-bio-neon hover:text-white transition-all" data-i18n="btn-login">Iniciar Sesión</button>
-                <button onclick="toggleModal('signup-modal')" class="text-xs font-tech font-bold uppercase tracking-wider px-4 py-2.5 rounded-lg bg-bio-dark text-white hover:bg-bio-neon transition-all" data-i18n="btn-signup">Registrarse</button>
+                <button onclick="toggleModal('login-modal')" class="text-xs font-tech font-bold uppercase tracking-wider px-4 py-2.5 rounded-lg border border-bio-neon text-bio-neon hover:bg-bio-neon hover:text-white transition-all cursor-pointer" data-i18n="btn-login">Iniciar Sesión</button>
+                <button onclick="toggleModal('signup-modal')" class="text-xs font-tech font-bold uppercase tracking-wider px-4 py-2.5 rounded-lg bg-bio-dark text-white hover:bg-bio-neon transition-all cursor-pointer" data-i18n="btn-signup">Registrarse</button>
             </div>
         </div>
     </header>
 
     <div class="bg-bio-slate border-b border-slate-200 py-3 px-4 text-xs text-slate-600">
         <div class="max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-2">
-            <p><strong class="text-bio-dark font-tech uppercase" data-i18n="banner-title">ATENCIÓN INVESTIGADORES:</strong> <span data-i18n="banner-text">Todos los péptidos son strictly para investigación de laboratorio. No apto para uso humano.</span></p>
+            <p><strong class="text-bio-dark font-tech uppercase" data-i18n="banner-title">ATENCIÓN INVESTIGADORES:</strong> <span data-i18n="banner-text">Todos los péptidos son estrictamente para investigación de laboratorio. No apto para uso humano.</span></p>
             <a href="#disclaimer" class="text-bio-neon hover:underline font-tech font-bold uppercase text-[11px]" data-i18n="banner-link">Ver Términos &rarr;</a>
         </div>
     </div>
 
-    <section class="py-16 lg:py-24 bg-white relative overflow-hidden">
+    <section id="about" class="py-16 lg:py-24 bg-white relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
             <div class="space-y-6">
                 <div class="inline-flex items-center gap-2 bg-bio-slate border border-slate-300 px-3.5 py-1.5 rounded-full text-xs font-tech text-bio-dark font-semibold">
@@ -118,22 +118,22 @@
                     Nuvera Form distribuye compuestos bio-celulares analíticos para instituciones e investigadores independientes globalmente.
                 </p>
                 <div class="flex flex-wrap gap-4 pt-2">
-                    <button onclick="toggleModal('signup-modal')" class="px-8 py-4 bg-bio-dark text-white font-tech font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-bio-neon transition-all shadow-lg" data-i18n="hero-btn-reg">Registrar Cuenta</button>
-                    <button onclick="toggleModal('login-modal')" class="px-8 py-4 bg-bio-slate border border-slate-300 text-bio-dark font-tech font-bold text-xs uppercase tracking-widest rounded-xl hover:border-bio-neon transition-all" data-i18n="btn-login">Iniciar Sesión</button>
+                    <button onclick="toggleModal('signup-modal')" class="px-8 py-4 bg-bio-dark text-white font-tech font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-bio-neon transition-all shadow-lg cursor-pointer" data-i18n="hero-btn-reg">Registrar Cuenta</button>
+                    <button onclick="toggleModal('login-modal')" class="px-8 py-4 bg-bio-slate border border-slate-300 text-bio-dark font-tech font-bold text-xs uppercase tracking-widest rounded-xl hover:border-bio-neon transition-all cursor-pointer" data-i18n="btn-login">Iniciar Sesión</button>
                 </div>
             </div>
 
-            <div class="bg-bio-card border border-slate-200 p-8 rounded-3xl relative overflow-hidden neon-glow-light">
+            <div class="bg-bio-card border border-slate-200 p-8 rounded-3xl relative overflow-hidden neon-glow-light" id="hero-lock-card">
                 <div class="text-center py-8 space-y-4">
-                    <div class="w-16 h-16 rounded-full bg-bio-slate border border-bio-neon flex items-center justify-center text-bio-neon text-2xl mx-auto">
+                    <div id="lock-icon-box" class="w-16 h-16 rounded-full bg-bio-slate border border-bio-neon flex items-center justify-center text-bio-neon text-2xl mx-auto">
                         <i class="fa-solid fa-lock"></i>
                     </div>
-                    <h3 class="text-2xl font-tech font-bold text-bio-dark" data-i18n="lock-title">Portal Privado de Investigación</h3>
-                    <p class="text-xs text-slate-500 max-w-sm mx-auto leading-relaxed" data-i18n="lock-desc">
+                    <h3 id="lock-card-title" class="text-2xl font-tech font-bold text-bio-dark" data-i18n="lock-title">Portal Privado de Investigación</h3>
+                    <p id="lock-card-desc" class="text-xs text-slate-500 max-w-sm mx-auto leading-relaxed" data-i18n="lock-desc">
                         Para cumplir con las normativas internacionales, los precios y lista de compuestos requieren una cuenta registrada.
                     </p>
                     <div class="pt-4 flex justify-center gap-3">
-                        <button onclick="toggleModal('signup-modal')" class="px-6 py-3 bg-bio-neon text-white font-tech font-bold text-xs uppercase tracking-widest rounded-lg hover:bg-bio-dark transition-all" data-i18n="hero-btn-reg">Crear Cuenta</button>
+                        <button id="lock-card-btn" onclick="toggleModal('signup-modal')" class="px-6 py-3 bg-bio-neon text-white font-tech font-bold text-xs uppercase tracking-widest rounded-lg hover:bg-bio-dark transition-all cursor-pointer" data-i18n="hero-btn-reg">Crear Cuenta</button>
                     </div>
                 </div>
             </div>
@@ -152,7 +152,7 @@
                 </div>
                 <div class="w-full md:w-auto flex flex-col sm:flex-row gap-3">
                     <input type="text" id="batch-input" placeholder="Ej: NV-2026-88X" class="bg-white/10 border border-slate-700 rounded-xl px-4 py-3 text-xs text-white placeholder-slate-400 outline-none focus:border-bio-neon font-tech">
-                    <button onclick="verifyBatch()" class="px-6 py-3 bg-bio-neon text-white font-tech font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-white hover:text-bio-dark transition-all whitespace-nowrap" data-i18n="coa-btn">Verificar Lote</button>
+                    <button onclick="verifyBatch()" class="px-6 py-3 bg-bio-neon text-white font-tech font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-white hover:text-bio-dark transition-all cursor-pointer whitespace-nowrap" data-i18n="coa-btn">Verificar Lote</button>
                 </div>
             </div>
         </div>
@@ -167,9 +167,9 @@
                     <h2 class="text-3xl sm:text-4xl font-tech font-bold text-bio-dark mt-1" data-i18n="cat-title">Buscador y Agrupación por Función</h2>
                 </div>
 
-                <div class="w-full md:w-80 relative" onclick="toggleModal('signup-modal')">
+                <div class="w-full md:w-80 relative" onclick="handleSearchClick()">
                     <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-bio-neon text-sm"></i>
-                    <input type="text" readonly placeholder="Buscar péptido (Regístrese)..." class="w-full bg-white border border-slate-300 rounded-xl pl-11 pr-4 py-3 text-xs text-slate-400 cursor-pointer outline-none shadow-sm" data-i18n-ph="search-ph">
+                    <input type="text" id="catalog-search" placeholder="Buscar péptido..." class="w-full bg-white border border-slate-300 rounded-xl pl-11 pr-4 py-3 text-xs text-slate-700 outline-none shadow-sm focus:border-bio-neon">
                 </div>
             </div>
 
@@ -177,47 +177,62 @@
                 
                 <div class="bg-white border border-slate-200 p-6 rounded-2xl flex flex-col justify-between">
                     <div>
-                        <span class="text-[10px] bg-bio-slate text-bio-neon font-tech px-2.5 py-1 rounded font-bold uppercase">Metabolic</span>
+                        <div class="flex justify-between items-center">
+                            <span class="text-[10px] bg-bio-slate text-bio-neon font-tech px-2.5 py-1 rounded font-bold uppercase">Metabolic</span>
+                            <span class="text-xs font-bold text-bio-green product-price font-tech hidden">$120.00 USD</span>
+                        </div>
                         <h3 class="text-lg font-tech font-bold text-bio-dark mt-3">GLP-1s & Weight Research</h3>
                         <p class="text-slate-500 text-xs mt-2 leading-relaxed" data-i18n="cat-1-desc">Estudio metabólico de agonistas GLP-1 y receptores duales GIP/GLP.</p>
                     </div>
-                    <button onclick="toggleModal('signup-modal')" class="mt-6 w-full py-3 bg-bio-slate text-bio-dark font-tech font-bold text-xs uppercase rounded-lg hover:bg-bio-neon hover:text-white transition-all" data-i18n="unlock-btn">Desbloquear Categoría &rarr;</button>
+                    <button onclick="handleProductAction()" class="product-btn mt-6 w-full py-3 bg-bio-slate text-bio-dark font-tech font-bold text-xs uppercase rounded-lg hover:bg-bio-neon hover:text-white transition-all cursor-pointer" data-i18n="unlock-btn">Desbloquear Categoría &rarr;</button>
                 </div>
 
                 <div class="bg-white border border-slate-200 p-6 rounded-2xl flex flex-col justify-between">
                     <div>
-                        <span class="text-[10px] bg-bio-slate text-bio-green font-tech px-2.5 py-1 rounded font-bold uppercase">Cell Health</span>
+                        <div class="flex justify-between items-center">
+                            <span class="text-[10px] bg-bio-slate text-bio-green font-tech px-2.5 py-1 rounded font-bold uppercase">Cell Health</span>
+                            <span class="text-xs font-bold text-bio-green product-price font-tech hidden">$95.00 USD</span>
+                        </div>
                         <h3 class="text-lg font-tech font-bold text-bio-dark mt-3">Longevity & Tissue Repair</h3>
                         <p class="text-slate-500 text-xs mt-2 leading-relaxed" data-i18n="cat-2-desc">Compuestos para síntesis de matriz tisular, BPC-157 y NAD+.</p>
                     </div>
-                    <button onclick="toggleModal('signup-modal')" class="mt-6 w-full py-3 bg-bio-slate text-bio-dark font-tech font-bold text-xs uppercase rounded-lg hover:bg-bio-neon hover:text-white transition-all" data-i18n="unlock-btn">Desbloquear Categoría &rarr;</button>
+                    <button onclick="handleProductAction()" class="product-btn mt-6 w-full py-3 bg-bio-slate text-bio-dark font-tech font-bold text-xs uppercase rounded-lg hover:bg-bio-neon hover:text-white transition-all cursor-pointer" data-i18n="unlock-btn">Desbloquear Categoría &rarr;</button>
                 </div>
 
                 <div class="bg-white border border-slate-200 p-6 rounded-2xl flex flex-col justify-between">
                     <div>
-                        <span class="text-[10px] bg-bio-slate text-bio-purple font-tech px-2.5 py-1 rounded font-bold uppercase">Pituitary</span>
+                        <div class="flex justify-between items-center">
+                            <span class="text-[10px] bg-bio-slate text-bio-purple font-tech px-2.5 py-1 rounded font-bold uppercase">Pituitary</span>
+                            <span class="text-xs font-bold text-bio-green product-price font-tech hidden">$110.00 USD</span>
+                        </div>
                         <h3 class="text-lg font-tech font-bold text-bio-dark mt-3">GH Axis & Secretagogues</h3>
                         <p class="text-slate-500 text-xs mt-2 leading-relaxed" data-i18n="cat-3-desc">Secretagogos de hormona de crecimiento (Ipamorelin, CJC-1295).</p>
                     </div>
-                    <button onclick="toggleModal('signup-modal')" class="mt-6 w-full py-3 bg-bio-slate text-bio-dark font-tech font-bold text-xs uppercase rounded-lg hover:bg-bio-neon hover:text-white transition-all" data-i18n="unlock-btn">Desbloquear Categoría &rarr;</button>
+                    <button onclick="handleProductAction()" class="product-btn mt-6 w-full py-3 bg-bio-slate text-bio-dark font-tech font-bold text-xs uppercase rounded-lg hover:bg-bio-neon hover:text-white transition-all cursor-pointer" data-i18n="unlock-btn">Desbloquear Categoría &rarr;</button>
                 </div>
 
                 <div class="bg-white border border-slate-200 p-6 rounded-2xl flex flex-col justify-between">
                     <div>
-                        <span class="text-[10px] bg-bio-slate text-bio-neon font-tech px-2.5 py-1 rounded font-bold uppercase">Endocrinology</span>
+                        <div class="flex justify-between items-center">
+                            <span class="text-[10px] bg-bio-slate text-bio-neon font-tech px-2.5 py-1 rounded font-bold uppercase">Endocrinology</span>
+                            <span class="text-xs font-bold text-bio-green product-price font-tech hidden">$85.00 USD</span>
+                        </div>
                         <h3 class="text-lg font-tech font-bold text-bio-dark mt-3">Fertility & Reproductive</h3>
                         <p class="text-slate-500 text-xs mt-2 leading-relaxed" data-i18n="cat-4-desc">Secuencias de Kisspeptin analizadas en cascadas hormonales.</p>
                     </div>
-                    <button onclick="toggleModal('signup-modal')" class="mt-6 w-full py-3 bg-bio-slate text-bio-dark font-tech font-bold text-xs uppercase rounded-lg hover:bg-bio-neon hover:text-white transition-all" data-i18n="unlock-btn">Desbloquear Categoría &rarr;</button>
+                    <button onclick="handleProductAction()" class="product-btn mt-6 w-full py-3 bg-bio-slate text-bio-dark font-tech font-bold text-xs uppercase rounded-lg hover:bg-bio-neon hover:text-white transition-all cursor-pointer" data-i18n="unlock-btn">Desbloquear Categoría &rarr;</button>
                 </div>
 
                 <div class="bg-white border border-slate-200 p-6 rounded-2xl flex flex-col justify-between md:col-span-2">
                     <div>
-                        <span class="text-[10px] bg-bio-slate text-bio-purple font-tech px-2.5 py-1 rounded font-bold uppercase">Dermal</span>
+                        <div class="flex justify-between items-center">
+                            <span class="text-[10px] bg-bio-slate text-bio-purple font-tech px-2.5 py-1 rounded font-bold uppercase">Dermal</span>
+                            <span class="text-xs font-bold text-bio-green product-price font-tech hidden">$140.00 USD</span>
+                        </div>
                         <h3 class="text-lg font-tech font-bold text-bio-dark mt-3">Nuvera Fresh (Skin Factors)</h3>
                         <p class="text-slate-500 text-xs mt-2 leading-relaxed" data-i18n="cat-5-desc">Péptidos de cobre (GHK-Cu) y sueros post-procedimiento estético.</p>
                     </div>
-                    <button onclick="toggleModal('signup-modal')" class="mt-6 w-full py-3 bg-bio-slate text-bio-dark font-tech font-bold text-xs uppercase rounded-lg hover:bg-bio-purple hover:text-white transition-all" data-i18n="unlock-btn">Desbloquear Categoría &rarr;</button>
+                    <button onclick="handleProductAction()" class="product-btn mt-6 w-full py-3 bg-bio-slate text-bio-dark font-tech font-bold text-xs uppercase rounded-lg hover:bg-bio-purple hover:text-white transition-all cursor-pointer" data-i18n="unlock-btn">Desbloquear Categoría &rarr;</button>
                 </div>
 
             </div>
@@ -226,7 +241,6 @@
 
     <section id="affiliate" class="py-20 bg-white border-t border-slate-200">
         <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-12 gap-12 items-center">
-            
             <div class="lg:col-span-6 space-y-6">
                 <span class="text-bio-green font-tech text-xs uppercase tracking-widest font-bold"><i class="fa-solid fa-chart-line mr-1"></i> Nuvera Alliance Program</span>
                 <h2 class="text-4xl font-tech font-bold text-bio-dark" data-i18n="rep-title">Programa de Representantes Afiliados</h2>
@@ -269,10 +283,9 @@
                     </div>
                     <input type="email" id="rep-email" required placeholder="Correo Profesional" class="w-full bg-white border border-slate-300 rounded-lg p-3 text-xs text-bio-dark outline-none focus:border-bio-neon" data-i18n-ph="ph-email">
                     <input type="tel" id="rep-phone" required placeholder="Teléfono" class="w-full bg-white border border-slate-300 rounded-lg p-3 text-xs text-bio-dark outline-none focus:border-bio-neon" data-i18n-ph="ph-phone">
-                    <button type="submit" class="w-full py-4 bg-bio-dark text-white font-tech font-bold text-xs uppercase tracking-widest rounded-lg hover:bg-bio-neon transition-all" data-i18n="rep-submit">Enviar Solicitud</button>
+                    <button type="submit" class="w-full py-4 bg-bio-dark text-white font-tech font-bold text-xs uppercase tracking-widest rounded-lg hover:bg-bio-neon transition-all cursor-pointer" data-i18n="rep-submit">Enviar Solicitud</button>
                 </form>
             </div>
-
         </div>
     </section>
 
@@ -299,7 +312,6 @@
 
     <footer id="contact" class="bg-bio-dark text-white py-12 text-xs">
         <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-4 gap-8 pb-12 border-b border-slate-800">
-            
             <div class="space-y-4">
                 <div class="flex items-center gap-3">
                     <div class="w-8 h-8 rounded bg-bio-neon text-white font-tech font-bold flex items-center justify-center text-lg">N</div>
@@ -317,7 +329,7 @@
                     <li><a href="#about" class="hover:text-white transition-colors" data-i18n="nav-about">Nosotros</a></li>
                     <li><a href="#affiliate" class="hover:text-white transition-colors" data-i18n="nav-reps">Portal Reps</a></li>
                     <li><a href="#catalog-preview" class="hover:text-white transition-colors" data-i18n="nav-catalog">Categorías de Péptidos</a></li>
-                    <li><a href="#contact" class="hover:text-white transition-colors" data-i18n="nav-contact">Contacto</a></li>
+                    <li><a href="#contact" class="hover:text-white transition-colors">Contacto</a></li>
                 </ul>
             </div>
 
@@ -341,7 +353,6 @@
                     <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center text-slate-300 hover:bg-bio-neon hover:text-white transition-all text-base"><i class="fa-brands fa-x-twitter"></i></a>
                 </div>
             </div>
-
         </div>
 
         <div class="max-w-7xl mx-auto px-4 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-slate-500">
@@ -350,8 +361,8 @@
         </div>
     </footer>
 
-    <div id="region-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-        <div class="bg-white border border-slate-200 rounded-2xl max-w-md w-full p-8 relative shadow-2xl">
+    <div id="region-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden pointer-events-none flex items-center justify-center p-4 transition-all">
+        <div class="bg-white border border-slate-200 rounded-2xl max-w-md w-full p-8 relative shadow-2xl pointer-events-auto">
             <div class="w-14 h-14 rounded-full bg-bio-slate border border-bio-neon flex items-center justify-center text-bio-neon text-2xl mx-auto mb-4">
                 <i class="fa-solid fa-earth-americas"></i>
             </div>
@@ -381,14 +392,14 @@
                     </select>
                 </div>
 
-                <button onclick="savePreferences()" class="w-full py-4 bg-bio-dark text-white font-tech font-bold text-xs uppercase tracking-widest rounded-lg hover:bg-bio-neon transition-all mt-4">Guardar y Continuar / Save & Continue</button>
+                <button onclick="savePreferences()" class="w-full py-4 bg-bio-dark text-white font-tech font-bold text-xs uppercase tracking-widest rounded-lg hover:bg-bio-neon transition-all mt-4 cursor-pointer">Guardar y Continuar / Save & Continue</button>
             </div>
         </div>
     </div>
 
-    <div id="signup-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-white border border-slate-200 rounded-2xl max-w-md w-full p-6 relative shadow-2xl">
-            <button onclick="toggleModal('signup-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-bio-dark"><i class="fa-solid fa-xmark"></i></button>
+    <div id="signup-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden pointer-events-none flex items-center justify-center p-4 transition-all">
+        <div class="bg-white border border-slate-200 rounded-2xl max-w-md w-full p-6 relative shadow-2xl pointer-events-auto">
+            <button onclick="toggleModal('signup-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-bio-dark cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
             <h3 class="text-2xl font-tech font-bold text-bio-dark mb-1" data-i18n="reg-title">Crear Cuenta de Investigación</h3>
             <p class="text-xs text-slate-500 mb-6" data-i18n="reg-sub">Desbloquee precios y pedidos de laboratorio.</p>
             
@@ -407,19 +418,19 @@
                     </label>
                 </div>
 
-                <button type="submit" id="signup-btn" class="w-full py-4 bg-bio-dark text-white font-tech font-bold text-xs uppercase tracking-widest rounded-lg hover:bg-bio-neon transition-all mt-2" data-i18n="reg-btn">Registrarse</button>
+                <button type="submit" id="signup-btn" class="w-full py-4 bg-bio-dark text-white font-tech font-bold text-xs uppercase tracking-widest rounded-lg hover:bg-bio-neon transition-all mt-2 cursor-pointer" data-i18n="reg-btn">Registrarse</button>
             </form>
         </div>
     </div>
 
-    <div id="login-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-white border border-slate-200 rounded-2xl max-w-sm w-full p-6 relative shadow-2xl">
-            <button onclick="toggleModal('login-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-bio-dark"><i class="fa-solid fa-xmark"></i></button>
+    <div id="login-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden pointer-events-none flex items-center justify-center p-4 transition-all">
+        <div class="bg-white border border-slate-200 rounded-2xl max-w-sm w-full p-6 relative shadow-2xl pointer-events-auto">
+            <button onclick="toggleModal('login-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-bio-dark cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
             <h3 class="text-xl font-tech font-bold text-bio-dark mb-4" data-i18n="login-title">Acceso de Clientes</h3>
-            <form class="space-y-4" onsubmit="event.preventDefault(); alert('Login enviado.'); toggleModal('login-modal');">
+            <form class="space-y-4" onsubmit="handleLoginSubmit(event)">
                 <input type="email" required placeholder="Correo Electrónico" class="w-full bg-bio-slate border border-slate-200 rounded-lg p-3 text-xs text-bio-dark outline-none focus:border-bio-neon" data-i18n-ph="ph-email">
                 <input type="password" required placeholder="Contraseña" class="w-full bg-bio-slate border border-slate-200 rounded-lg p-3 text-xs text-bio-dark outline-none focus:border-bio-neon" data-i18n-ph="ph-pass">
-                <button type="submit" class="w-full py-3 bg-bio-dark text-white font-tech font-bold text-xs uppercase tracking-widest rounded-lg hover:bg-bio-neon transition-all" data-i18n="btn-login">Iniciar Sesión</button>
+                <button type="submit" class="w-full py-3 bg-bio-dark text-white font-tech font-bold text-xs uppercase tracking-widest rounded-lg hover:bg-bio-neon transition-all cursor-pointer" data-i18n="btn-login">Iniciar Sesión</button>
             </form>
         </div>
     </div>
@@ -436,7 +447,7 @@
                 "btn-login": "Iniciar Sesión",
                 "btn-signup": "Registrarse",
                 "banner-title": "ATENCIÓN INVESTIGADORES:",
-                "banner-text": "Todos los péptidos son estrictamente para investigación de laboratorio. No apto para uso humano.",
+                "banner-text": "Todos los péptidos son strictly para investigación de laboratorio. No apto para uso humano.",
                 "banner-link": "Ver Términos &rarr;",
                 "hero-badge": "Certificación HPLC • Pureza de Laboratorio",
                 "hero-h1-1": "Péptidos Avanzados",
@@ -450,7 +461,7 @@
                 "coa-btn": "Verificar Lote",
                 "cat-sub": "Categorías Fórmulas",
                 "cat-title": "Buscador y Agrupación por Función",
-                "search-ph": "Buscar péptido (Regístrese)...",
+                "search-ph": "Buscar péptido...",
                 "cat-1-desc": "Estudio metabólico de agonistas GLP-1 y receptores duales GIP/GLP.",
                 "cat-2-desc": "Compuestos para síntesis de matriz tisular, BPC-157 y NAD+.",
                 "cat-3-desc": "Secretagogos de hormona de crecimiento (Ipamorelin, CJC-1295).",
@@ -515,7 +526,7 @@
                 "coa-btn": "Verify Batch",
                 "cat-sub": "Formula Categories",
                 "cat-title": "Search & Grouped by Function",
-                "search-ph": "Search peptide (Register first)...",
+                "search-ph": "Search peptide...",
                 "cat-1-desc": "Metabolic research on GLP-1 analogues and dual GIP/GLP receptor agonists.",
                 "cat-2-desc": "Compounds targeting tissue matrix synthesis, BPC-157, and NAD+.",
                 "cat-3-desc": "Growth hormone secretagogues (Ipamorelin, CJC-1295).",
@@ -559,7 +570,16 @@
         };
 
         function toggleModal(modalId) {
-            document.getElementById(modalId).classList.toggle('hidden');
+            const modal = document.getElementById(modalId);
+            if (!modal) return;
+            const isHidden = modal.classList.contains('hidden');
+            if (isHidden) {
+                modal.classList.remove('hidden', 'pointer-events-none');
+                modal.classList.add('pointer-events-auto');
+            } else {
+                modal.classList.add('hidden', 'pointer-events-none');
+                modal.classList.remove('pointer-events-auto');
+            }
         }
 
         function savePreferences() {
@@ -596,15 +616,60 @@
                 alert('Please enter a batch lot number.');
                 return;
             }
-            alert(`Batch ${batchNum} status: HPLC Certified (Purity: 99.4%). Certificate of Analysis available for registered users.`);
+            alert(`Batch ${batchNum} status: HPLC Certified (Purity: 99.4%). Certificate of Analysis available.`);
         }
 
-        // Handle Form Submission Sending Data to Resend Endpoint
+        function handleSearchClick() {
+            if (!localStorage.getItem('nuvera_registered')) {
+                toggleModal('signup-modal');
+            }
+        }
+
+        function handleProductAction() {
+            if (!localStorage.getItem('nuvera_registered')) {
+                toggleModal('signup-modal');
+            } else {
+                alert("Redirigiendo al catálogo completo de laboratorio / Redirecting to full laboratory catalog...");
+            }
+        }
+
+        function unlockCatalogView() {
+            localStorage.setItem('nuvera_registered', 'true');
+
+            // Show hidden prices
+            document.querySelectorAll('.product-price').forEach(el => el.classList.remove('hidden'));
+
+            // Update Hero Lock Card
+            const lockTitle = document.getElementById('lock-card-title');
+            const lockDesc = document.getElementById('lock-card-desc');
+            const lockBtn = document.getElementById('lock-card-btn');
+            const lockIconBox = document.getElementById('lock-icon-box');
+
+            if (lockTitle) lockTitle.innerText = "Acceso Verificado / Access Unlocked";
+            if (lockDesc) lockDesc.innerText = "Su cuenta está activa. Puede explorar compuestos, consultar lotes y realizar solicitudes.";
+            if (lockBtn) {
+                lockBtn.innerText = "Ver Catálogo Completo";
+                lockBtn.onclick = () => {
+                    document.getElementById('catalog-preview').scrollIntoView({ behavior: 'smooth' });
+                };
+            }
+            if (lockIconBox) {
+                lockIconBox.innerHTML = '<i class="fa-solid fa-lock-open text-bio-green"></i>';
+                lockIconBox.classList.remove('border-bio-neon');
+                lockIconBox.classList.add('border-bio-green');
+            }
+
+            // Update category buttons
+            document.querySelectorAll('.product-btn').forEach(btn => {
+                btn.innerText = "Ver Detalles & Lote";
+            });
+        }
+
         async function handleSignupSubmit(e) {
             e.preventDefault();
 
             const submitBtn = document.getElementById('signup-btn');
-            submitBtn.innerText = 'Sending...';
+            submitBtn.innerText = 'Procesando...';
             submitBtn.disabled = true;
 
             const payload = {
@@ -618,27 +683,35 @@
             };
 
             try {
-                // Endpoint URL pointing to your serverless Resend function
-                const response = await fetch('/api/send-lead', {
+                // Endpoint sends email via Web3Forms API
+                await fetch('https://api.web3forms.com/submit', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify({
+                        access_key: 'YOUR_WEB3FORMS_KEY',
+                        subject: `New Nuvera Form Lead: ${payload.firstName} ${payload.lastName}`,
+                        ...payload
+                    })
                 });
-
-                // Fallback mailto trigger if backend serverless is not yet active
-                if (!response.ok) {
-                    const bodyText = `New Lead Registration:\n\nName: ${payload.firstName} ${payload.lastName}\nEmail: ${payload.email}\nPhone: ${payload.phone}\nCountry: ${payload.country}\nMarketing Opt-In: ${payload.marketingOptIn}`;
-                    window.location.href = `mailto:support@nuveraform.com?subject=New Lead Registered - ${payload.firstName}&body=${encodeURIComponent(bodyText)}`;
-                }
             } catch (err) {
-                const bodyText = `New Lead Registration:\n\nName: ${payload.firstName} ${payload.lastName}\nEmail: ${payload.email}\nPhone: ${payload.phone}\nCountry: ${payload.country}\nMarketing Opt-In: ${payload.marketingOptIn}`;
-                window.location.href = `mailto:support@nuveraform.com?subject=New Lead Registered - ${payload.firstName}&body=${encodeURIComponent(bodyText)}`;
+                console.log('Sending lead via client window...');
             } finally {
-                alert('Account registered! The Call Center team has been notified.');
-                submitBtn.innerText = 'Register';
+                submitBtn.innerText = 'Registrarse';
                 submitBtn.disabled = false;
+                
                 toggleModal('signup-modal');
+                unlockCatalogView();
+
+                // Smooth scroll directly to products / catalog section
+                document.getElementById('catalog-preview').scrollIntoView({ behavior: 'smooth' });
             }
+        }
+
+        function handleLoginSubmit(e) {
+            e.preventDefault();
+            toggleModal('login-modal');
+            unlockCatalogView();
+            document.getElementById('catalog-preview').scrollIntoView({ behavior: 'smooth' });
         }
 
         function handleRepSubmit(e) {
@@ -651,7 +724,7 @@
             const body = `Rep Application:\nName: ${first} ${last}\nEmail: ${email}\nPhone: ${phone}`;
             window.location.href = `mailto:support@nuveraform.com?subject=Rep Application - ${first} ${last}&body=${encodeURIComponent(body)}`;
 
-            alert('Rep application submitted!');
+            alert('Solicitud enviada con éxito / Application submitted!');
         }
 
         window.addEventListener('DOMContentLoaded', () => {
@@ -659,250 +732,15 @@
             const savedLang = localStorage.getItem('nuvera_lang');
 
             if (savedCountry && savedLang) {
-                document.getElementById('region-modal').classList.add('hidden');
                 applyPreferences(savedCountry, savedLang);
+            } else {
+                toggleModal('region-modal');
+            }
+
+            if (localStorage.getItem('nuvera_registered')) {
+                unlockCatalogView();
             }
         });
- <script>
-    const i18n = {
-        es: {
-            "ruo-badge": "USO EXCLUSIVO EN INVESTIGACIÓN",
-            "nav-about": "Nosotros",
-            "nav-catalog": "Catálogo",
-            "nav-coa": "Verificación COA",
-            "nav-reps": "Portal Reps",
-            "nav-legal": "Aviso Legal",
-            "btn-login": "Iniciar Sesión",
-            "btn-signup": "Registrarse",
-            "banner-title": "ATENCIÓN INVESTIGADORES:",
-            "banner-text": "Todos los péptidos son estrictamente para investigación de laboratorio. No apto para uso humano.",
-            "banner-link": "Ver Términos &rarr;",
-            "hero-badge": "Certificación HPLC • Pureza de Laboratorio",
-            "hero-h1-1": "Péptidos Avanzados",
-            "hero-h1-2": "E Investigación Celular",
-            "hero-desc": "Nuvera Form distribuye compuestos bio-celulares analíticos para instituciones e investigadores independientes globalmente.",
-            "hero-btn-reg": "Registrar Cuenta",
-            "lock-title": "Portal Privado de Investigación",
-            "lock-desc": "Para cumplir con las normativas internacionales, los precios y lista de compuestos requieren una cuenta registrada.",
-            "coa-title": "Verificación de Análisis HPLC / MS por Lote",
-            "coa-sub": "Ingrese el número de lote impreso en su vial liofilizado para consultar o descargar los certificados de análisis emitidos por laboratorios independientes.",
-            "coa-btn": "Verificar Lote",
-            "cat-sub": "Categorías Fórmulas",
-            "cat-title": "Buscador y Agrupación por Función",
-            "search-ph": "Buscar péptido (Regístrese)...",
-            "cat-1-desc": "Estudio metabólico de agonistas GLP-1 y receptores duales GIP/GLP.",
-            "cat-2-desc": "Compuestos para síntesis de matriz tisular, BPC-157 y NAD+.",
-            "cat-3-desc": "Secretagogos de hormona de crecimiento (Ipamorelin, CJC-1295).",
-            "cat-4-desc": "Secuencias de Kisspeptin analizadas en cascadas hormonales.",
-            "cat-5-desc": "Péptidos de cobre (GHK-Cu) y sueros post-procedimiento estético.",
-            "unlock-btn": "Desbloquear Categoría &rarr;",
-            "rep-title": "Programa de Representantes Afiliados",
-            "rep-desc": "Refiera laboratorios e investigadores a Nuvera Form y obtenga comisiones recurrentes por volumen de compra.",
-            "tbl-tier": "Nivel",
-            "tbl-vol": "Volumen",
-            "tbl-rate": "Comisión",
-            "rep-form-title": "Postular como Representante",
-            "rep-form-sub": "Debe ser mayor de 21 años para registrarse.",
-            "ph-first": "Nombre",
-            "ph-last": "Apellido",
-            "ph-email": "Correo Electrónico",
-            "ph-phone": "Teléfono",
-            "ph-pass": "Contraseña",
-            "rep-submit": "Enviar Solicitud",
-            "legal-title": "Descargo de Responsabilidad Legal",
-            "legal-1-h": "1. Solo Uso en Investigación (RUO)",
-            "legal-1-p": "Todos los productos son vendidos exclusivamente para investigación in-vitro en laboratorios. No apto para uso humano ni veterinario.",
-            "legal-2-h": "2. Verificación y Región",
-            "legal-2-p": "El cliente declara ser mayor de 21 años y cumplir con las leyes de su país o región seleccionada.",
-            "ql-title": "Enlaces Rápidos",
-            "pol-title": "Políticas y Legal",
-            "pol-terms": "Términos del Servicio",
-            "pol-privacy": "Política de Privacidad",
-            "pol-ship": "Políticas de Envío",
-            "pol-21": "Aviso 21+ Años",
-            "soc-title": "Nuestras Redes",
-            "soc-sub": "Haz clic abajo para ir a nuestras redes sociales oficiales.",
-            "footer-about": "Reactivos bio-celulares para laboratorios institucionales e independientes.",
-            "footer-disclaimer": "Uso exclusivo de investigación en laboratorio.",
-            "reg-title": "Crear Cuenta de Investigación",
-            "reg-sub": "Desbloquee precios y pedidos de laboratorio.",
-            "optin-label": "Acepto recibir novedades, disponibilidad de lote e información de marketing vía correo electrónico y SMS.",
-            "reg-btn": "Registrarse",
-            "login-title": "Acceso de Clientes"
-        },
-        en: {
-            "ruo-badge": "FOR RESEARCH PURPOSES ONLY",
-            "nav-about": "About Us",
-            "nav-catalog": "Catalog",
-            "nav-coa": "COA Verification",
-            "nav-reps": "Rep Portal",
-            "nav-legal": "Legal Notice",
-            "btn-login": "Sign In",
-            "btn-signup": "Sign Up",
-            "banner-title": "ATTENTION RESEARCHERS:",
-            "banner-text": "All peptides are strictly for laboratory research. Not for human or veterinary use.",
-            "banner-link": "View Terms &rarr;",
-            "hero-badge": "HPLC Certified • Laboratory Purity",
-            "hero-h1-1": "Advanced Bio-Peptides",
-            "hero-h1-2": "& Cellular Research",
-            "hero-desc": "Nuvera Form supplies institutional laboratories and independent researchers globally with pure analytical compounds.",
-            "hero-btn-reg": "Create Account",
-            "lock-title": "Private Research Portal",
-            "lock-desc": "To comply with international regulations, pricing and compound listings require a registered account.",
-            "coa-title": "HPLC / MS Batch Certificate Verification",
-            "coa-sub": "Enter the batch lot number printed on your lyophilized vial to view or download third-party analytical certificates.",
-            "coa-btn": "Verify Batch",
-            "cat-sub": "Formula Categories",
-            "cat-title": "Search & Grouped by Function",
-            "search-ph": "Search peptide (Register first)...",
-            "cat-1-desc": "Metabolic research on GLP-1 analogues and dual GIP/GLP receptor agonists.",
-            "cat-2-desc": "Compounds targeting tissue matrix synthesis, BPC-157, and NAD+.",
-            "cat-3-desc": "Growth hormone secretagogues (Ipamorelin, CJC-1295).",
-            "cat-4-desc": "Kisspeptin sequences analyzed in hypothalamic hormone cascades.",
-            "cat-5-desc": "Copper tripeptides (GHK-Cu) and post-procedure dermal factors.",
-            "unlock-btn": "Unlock Category &rarr;",
-            "rep-title": "Affiliate Representative Program",
-            "rep-desc": "Refer laboratories and researchers to Nuvera Form and earn recurring volume-based commissions.",
-            "tbl-tier": "Tier",
-            "tbl-vol": "Volume",
-            "tbl-rate": "Commission",
-            "rep-form-title": "Apply for Rep Credentials",
-            "rep-form-sub": "Must be 21+ years old to register.",
-            "ph-first": "First Name",
-            "ph-last": "Last Name",
-            "ph-email": "Email Address",
-            "ph-phone": "Phone Number",
-            "ph-pass": "Password",
-            "rep-submit": "Submit Application",
-            "legal-title": "Legal Disclaimer & Waiver",
-            "legal-1-h": "1. Research Use Only (RUO)",
-            "legal-1-p": "All products are sold strictly for in-vitro laboratory research. Not for human or veterinary consumption.",
-            "legal-2-h": "2. Verification & Region",
-            "legal-2-p": "The client warrants being 21+ years old and compliant with local laws in their selected region.",
-            "ql-title": "Quick Links",
-            "pol-title": "Policies & Legal",
-            "pol-terms": "Terms of Service",
-            "pol-privacy": "Privacy Policy",
-            "pol-ship": "Shipping Policy",
-            "pol-21": "21+ Age Notice",
-            "soc-title": "Follow Our Channels",
-            "soc-sub": "Click below to connect with us on our official social media accounts.",
-            "footer-about": "Bio-cellular reagents for institutional and independent laboratories.",
-            "footer-disclaimer": "Strictly for laboratory research use.",
-            "reg-title": "Create Research Account",
-            "reg-sub": "Unlock pricing and laboratory ordering.",
-            "optin-label": "I agree to receive compound updates, batch availability notifications, and marketing communications via email/SMS.",
-            "reg-btn": "Register Account",
-            "login-title": "Client Access Portal"
-        }
-    };
-
-    function toggleModal(modalId) {
-        document.getElementById(modalId).classList.toggle('hidden');
-    }
-
-    function savePreferences() {
-        const country = document.getElementById('user-country').value;
-        const lang = document.getElementById('user-lang').value;
-
-        localStorage.setItem('nuvera_country', country);
-        localStorage.setItem('nuvera_lang', lang);
-
-        applyPreferences(country, lang);
-        toggleModal('region-modal');
-    }
-
-    function applyPreferences(country, lang) {
-        document.getElementById('display-region').innerText = country || 'United States';
-        document.getElementById('display-lang').innerText = lang === 'en' ? 'English' : 'Español';
-
-        const langData = i18n[lang] || i18n['es'];
-
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            if (langData[key]) el.innerHTML = langData[key];
-        });
-
-        document.querySelectorAll('[data-i18n-ph]').forEach(el => {
-            const key = el.getAttribute('data-i18n-ph');
-            if (langData[key]) el.placeholder = langData[key];
-        });
-    }
-
-    function verifyBatch() {
-        const batchNum = document.getElementById('batch-input').value.trim();
-        if (!batchNum) {
-            alert('Please enter a batch lot number.');
-            return;
-        }
-        alert(`Batch ${batchNum} status: HPLC Certified (Purity: 99.4%). Certificate of Analysis available for registered users.`);
-    }
-
-    // Handles signup submission, sends email notification via Web3Forms/Formspree API, and redirects to products page
-    async function handleSignupSubmit(e) {
-        e.preventDefault();
-
-        const submitBtn = document.getElementById('signup-btn');
-        submitBtn.innerText = 'Processing...';
-        submitBtn.disabled = true;
-
-        const payload = {
-            // Replace with your Web3Forms Access Key or Formspree Endpoint URL
-            access_key: "YOUR_WEB3FORMS_ACCESS_KEY", 
-            subject: "🚨 NEW LEAD: Nuvera Form Registration",
-            from_name: "Nuvera Form Web Lead",
-            firstName: document.getElementById('signup-first').value,
-            lastName: document.getElementById('signup-last').value,
-            email: document.getElementById('signup-email').value,
-            phone: document.getElementById('signup-phone').value,
-            marketingOptIn: document.getElementById('marketing-optin').checked ? "YES" : "NO (Opted Out)",
-            country: localStorage.getItem('nuvera_country') || 'Not Specified',
-            language: localStorage.getItem('nuvera_lang') || 'es'
-        };
-
-        // Mark user as logged in/registered locally
-        localStorage.setItem('nuvera_user_registered', 'true');
-        localStorage.setItem('nuvera_user_email', payload.email);
-
-        try {
-            // Sends form data via API endpoint
-            await fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            });
-        } catch (err) {
-            console.warn("API delivery fallback triggered:", err);
-        } finally {
-            // Redirect user to the Catalog / Products page
-            // Change 'products.html' or '#catalog-preview' to your desired URL or page section
-            window.location.href = 'products.html'; 
-        }
-    }
-
-    function handleRepSubmit(e) {
-        e.preventDefault();
-        const first = document.getElementById('rep-first').value;
-        const last = document.getElementById('rep-last').value;
-        const email = document.getElementById('rep-email').value;
-        const phone = document.getElementById('rep-phone').value;
-
-        const body = `Rep Application:\nName: ${first} ${last}\nEmail: ${email}\nPhone: ${phone}`;
-        window.location.href = `mailto:support@nuveraform.com?subject=Rep Application - ${first} ${last}&body=${encodeURIComponent(body)}`;
-
-        alert('Rep application submitted!');
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-        const savedCountry = localStorage.getItem('nuvera_country');
-        const savedLang = localStorage.getItem('nuvera_lang');
-
-        if (savedCountry && savedLang) {
-            document.getElementById('region-modal').classList.add('hidden');
-            applyPreferences(savedCountry, savedLang);
-        }
-    });
-</script>
+    </script>
+</body>
+</html>
