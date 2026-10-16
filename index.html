@@ -8,10 +8,11 @@
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="theme-color" content="#F7F0E3">
 <link rel="canonical" href="https://nuveraform.com/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23BF943C'/%3E%3Ccircle cx='11' cy='20' r='4' fill='%23F7F0E3'/%3E%3Ccircle cx='21' cy='11' r='3' fill='%23B87A6C'/%3E%3C/svg%3E">
-<meta property="og:type" content="website"><meta property="og:site_name" content="Nuvera Form"><meta property="og:title" content="Nuvera Form | Research Peptides for Qualified Laboratories"><meta property="og:description" content="A focused catalog of research peptides and reconstitution reagents. Research use only, 21+."><meta property="og:url" content="https://nuveraform.com/"><meta name="twitter:card" content="summary">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Nuvera Form","url":"https://nuveraform.com/","email":"info@nuveraform.com","slogan":"Research, wellness and beauty","sameAs":["https://instagram.com/nuveraform","https://tiktok.com/@nuveraform","https://facebook.com/nuveraform"]}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Nuvera Form"><meta property="og:title" content="Nuvera Form | Research Peptides for Qualified Laboratories"><meta property="og:description" content="A focused catalog of research peptides and reconstitution reagents. Research use only, 21+."><meta property="og:url" content="https://nuveraform.com/"><meta property="og:image" content="https://nuveraform.com/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://nuveraform.com/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Nuvera Form","url":"https://nuveraform.com/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","logo":"https://nuveraform.com/apple-touch-icon.png","name":"Nuvera Form","url":"https://nuveraform.com/","email":"info@nuveraform.com","slogan":"Research, wellness and beauty","sameAs":["https://instagram.com/nuveraform","https://tiktok.com/@nuveraform","https://facebook.com/nuveraform"]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.tailwindcss.com"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -19,6 +20,7 @@
 :root{--champ:#F7F0E3;--gold:#BF943C;--rose:#B87A6C;--brown:#3A2816;--sand:#F0E4CE;--lgold:#DEB25A;--line:#E3D3B3}
 html{scroll-behavior:smooth}
 body{font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown)}
+.skip{position:absolute;left:-999px;top:0;background:var(--brown);color:#fff;padding:.6rem 1rem;z-index:200}.skip:focus{left:0}
 .glass{background:rgba(247,240,227,.8);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
 .card{background:rgba(240,228,206,.5);border:1px solid var(--line);border-radius:20px;backdrop-filter:blur(8px)}
 .btn{background:var(--gold);color:#fff;font-weight:600;border-radius:999px;padding:.65rem 1.4rem;transition:box-shadow .2s,transform .2s;border:0;cursor:pointer}
@@ -47,11 +49,12 @@ body{font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown)
 </style>
 </head>
 <body>
+<a class="skip" href="#top">Skip to content</a>
 
 <!-- Age gate -->
-<div id="age" class="modal" style="z-index:100"><div class="sheet text-center">
+<div id="age" class="modal" style="z-index:100" role="dialog" aria-modal="true" aria-labelledby="ageT"><div class="sheet text-center">
 <div class="mx-auto mb-3 w-14 h-14 rounded-full flex items-center justify-center text-white" style="background:radial-gradient(circle at 30% 30%,var(--lgold),var(--gold) 60%,#8a6520)"><i class="fa-solid fa-flask"></i></div>
-<h2 class="text-2xl font-bold mb-2">Are you 21 or older?</h2>
+<h2 id="ageT" class="text-2xl font-bold mb-2">Are you 21 or older?</h2>
 <p class="text-sm mb-5">Nuvera Form supplies analytical reagents to qualified researchers. You must be at least 21 to enter.</p>
 <div class="flex gap-3 justify-center"><button class="btn" id="ageYes">Yes, I am 21+</button><button class="btn ghost" id="ageNo">No, leave</button></div>
 <p id="ageMsg" class="text-sm mt-4 hidden">Access is restricted to visitors aged 21 and over.</p>
@@ -64,6 +67,8 @@ body{font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown)
 <nav class="hidden md:flex gap-7 text-sm font-medium">
 <a href="#catalog" class="hover:text-[#BF943C]">Catalog</a>
 <a href="#" data-open="coa" class="hover:text-[#BF943C]">Documentation</a>
+<a href="/compounds" class="hover:text-[#BF943C]">Compounds</a>
+<a href="/learn" class="hover:text-[#BF943C]">Learn</a>
 <a href="#research" class="hover:text-[#BF943C]">Research Portal</a>
 <a href="#about" class="hover:text-[#BF943C]">About Us</a>
 </nav>
@@ -72,11 +77,11 @@ body{font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown)
 <button id="acctBtn" aria-label="Account"><i class="fa-regular fa-user"></i></button>
 <button id="cartBtn" aria-label="Cart" class="relative"><i class="fa-solid fa-bag-shopping"></i><span id="cartN" class="absolute -top-2 -right-3 text-[10px] font-bold text-white rounded-full w-5 h-5 flex items-center justify-center" style="background:var(--rose)">0</span></button>
 </div></div>
-<nav id="mobNav" class="hidden md:hidden px-4 pb-3 flex flex-col gap-2 text-sm font-medium"><a href="#catalog">Catalog</a><a href="#" data-open="coa">Documentation</a><a href="#research">Research Portal</a><a href="#about">About Us</a><a href="#faq">FAQ</a></nav>
+<nav id="mobNav" class="hidden md:hidden px-4 pb-3 flex flex-col gap-2 text-sm font-medium"><a href="#catalog">Catalog</a><a href="#" data-open="coa">Documentation</a><a href="/compounds">Compounds</a><a href="/learn">Learn</a><a href="#research">Research Portal</a><a href="#about">About Us</a><a href="#faq">FAQ</a></nav>
 <div id="searchBar" class="hidden max-w-7xl mx-auto px-4 pb-3"><input id="q" class="inp" placeholder="Search compounds, e.g. BPC-157" aria-label="Search catalog"></div>
 </header>
 
-<main id="top" class="pt-16">
+<main id="top" class="pt-16" tabindex="-1">
 <div class="border-b text-xs font-medium" style="background:var(--sand);border-color:var(--line)"><div id="stripIn" class="max-w-7xl mx-auto px-4 py-2 flex flex-wrap justify-center gap-x-6 gap-y-1"></div></div>
 <!-- Hero -->
 <section class="max-w-7xl mx-auto px-4 py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
@@ -118,6 +123,17 @@ body{font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown)
 
 <section class="max-w-7xl mx-auto px-4 pb-20"><div class="max-w-2xl mb-6"><h2 class="text-3xl font-bold">Why order from Nuvera Form</h2><p class="mt-2 text-sm">A small, carefully presented range with the information you need up front.</p></div><div id="tests" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4"></div></section>
 <section class="max-w-7xl mx-auto px-4 pb-20"><div id="promises" class="grid md:grid-cols-3 gap-5"></div></section>
+<section class="max-w-7xl mx-auto px-4 pb-20"><h2 class="text-3xl font-bold mb-6">How ordering works</h2><ol class="grid md:grid-cols-4 gap-4">
+<li class="card p-5"><span class="badge">Step 1</span><h3 class="font-bold mt-2">Create a free account</h3><p class="text-sm mt-1">Confirm you are 21+ and buying for research. Pricing unlocks and NUVERA10 is applied.</p></li>
+<li class="card p-5"><span class="badge">Step 2</span><h3 class="font-bold mt-2">Choose your compounds</h3><p class="text-sm mt-1">Pick a size, check stock and add to cart. Orders over $200 ship free.</p></li>
+<li class="card p-5"><span class="badge">Step 3</span><h3 class="font-bold mt-2">We pack discreetly</h3><p class="text-sm mt-1">Plain outer box and a neutral billing descriptor, dispatched in 1–2 business days.</p></li>
+<li class="card p-5"><span class="badge">Step 4</span><h3 class="font-bold mt-2">Track and store</h3><p class="text-sm mt-1">A tracking link is emailed. Read the storage guide before opening a vial.</p></li></ol></section>
+<section class="max-w-7xl mx-auto px-4 pb-20"><div class="flex items-end justify-between flex-wrap gap-3 mb-6"><h2 class="text-3xl font-bold">Compound specifications</h2><a href="/compounds" class="underline text-sm font-semibold">All compounds</a></div>
+<div class="flex flex-wrap gap-2"><a class="pill" href="/compounds/retatrutide">Retatrutide</a><a class="pill" href="/compounds/bpc-157">BPC-157</a><a class="pill" href="/compounds/tb-500">TB-500</a><a class="pill" href="/compounds/ghk-cu">GHK-Cu</a><a class="pill" href="/compounds/thymosin-alpha-1">Thymosin Alpha 1</a><a class="pill" href="/compounds/nad-plus">NAD+</a><a class="pill" href="/compounds/cjc-1295-ipamorelin">CJC-1295 / Ipamorelin</a><a class="pill" href="/compounds/mots-c">MOTS-c</a><a class="pill" href="/compounds/klow-blend">KLOW Blend</a><a class="pill" href="/compounds/kisspeptin">Kisspeptin</a><a class="pill" href="/compounds/bacteriostatic-water">Bacteriostatic Water</a></div></section>
+<section class="max-w-7xl mx-auto px-4 pb-20"><div class="flex items-end justify-between flex-wrap gap-3 mb-6"><h2 class="text-3xl font-bold">Learn</h2><a href="/learn" class="underline text-sm font-semibold">All guides</a></div><div class="grid md:grid-cols-3 gap-5">
+<a class="card p-6 block" href="/learn/what-research-use-only-means"><h3 class="font-bold">What “research use only” means</h3><p class="text-sm mt-1">What the RUO label covers and rules out.</p></a>
+<a class="card p-6 block" href="/learn/storing-lyophilized-peptides"><h3 class="font-bold">Storing lyophilized peptides</h3><p class="text-sm mt-1">General lab handling principles.</p></a>
+<a class="card p-6 block" href="/learn/how-to-read-a-certificate-of-analysis"><h3 class="font-bold">How to read a certificate of analysis</h3><p class="text-sm mt-1">HPLC and mass spec, explained.</p></a></div></section>
 <!-- Research portal -->
 <section id="research" class="max-w-7xl mx-auto px-4 pb-20 scroll-mt-20">
 <h2 class="text-3xl font-bold mb-6">Research Portal</h2>
@@ -164,12 +180,12 @@ body{font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown)
 <li><a href="#" data-open="coa">Request Batch Documentation</a></li>
 <li><a href="#" data-info="purity">Quality &amp; Documentation</a></li>
 <li><a href="#" data-info="storage">Storage &amp; Handling Protocols</a></li>
-<li><a href="#" data-info="ruo">RUO Legal Compliance Terms</a></li></ul></div>
+<li><a href="/research-use-policy">Research Use Policy</a></li><li><a href="/compounds">All compounds</a></li><li><a href="/learn">Learn</a></li></ul></div>
 <div><h4 class="font-bold mb-3">Contact &amp; Support</h4><ul class="space-y-2">
 <li><a href="mailto:info@nuveraform.com">info@nuveraform.com</a></li>
-<li><a href="#" data-info="ship">Shipping &amp; Returns Policy</a></li>
+<li><a href="/shipping-returns">Shipping &amp; Returns Policy</a></li>
 <li><a href="#" data-info="track">Track your order</a></li>
-<li><a href="#" data-info="privacy">Privacy Policy</a></li><li><a href="#" data-info="terms">Terms of Sale</a></li>
+<li><a href="/privacy">Privacy Policy</a></li><li><a href="/terms">Terms of Sale</a></li>
 <li><a href="#" data-open="aff">Affiliate Application Portal</a></li>
 <li><a href="#" data-info="faq">Frequently Asked Questions</a></li></ul></div>
 </div>
@@ -183,7 +199,7 @@ body{font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown)
 
 <!-- Cart drawer -->
 <div id="shade" class="fixed inset-0 z-[60] hidden" style="background:rgba(58,40,22,.45)"></div>
-<aside id="drawer" class="fixed top-0 right-0 h-full w-full max-w-md z-[70] flex flex-col" style="background:var(--champ);border-left:1px solid var(--line)" aria-label="Cart">
+<aside id="drawer" role="dialog" aria-modal="true" class="fixed top-0 right-0 h-full w-full max-w-md z-[70] flex flex-col" style="background:var(--champ);border-left:1px solid var(--line)" aria-label="Cart">
 <div class="p-5 flex justify-between items-center border-b" style="border-color:var(--line)"><h3 class="text-xl font-bold">Your cart</h3><button id="cartX" aria-label="Close cart" class="text-xl"><i class="fa-solid fa-xmark"></i></button></div>
 <div class="px-5 pt-4"><p id="shipTxt" class="text-xs font-medium mb-1"></p><div class="h-2 rounded-full" style="background:var(--sand)"><div id="shipBar" class="h-2 rounded-full" style="background:var(--gold);width:0;transition:width .3s"></div></div></div>
 <div id="items" class="flex-1 overflow-auto p-5 space-y-3"></div>
@@ -197,7 +213,7 @@ body{font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown)
 </aside>
 
 <!-- Auth modal -->
-<div id="auth" class="modal"><div class="sheet">
+<div id="auth" class="modal" role="dialog" aria-modal="true" aria-label="Create your account"><div class="sheet">
 <div class="flex justify-between items-start mb-3"><h3 class="text-2xl font-bold">Create your account</h3><button data-close aria-label="Close"><i class="fa-solid fa-xmark text-xl"></i></button></div>
 <p class="text-sm mb-4">Sign up to unlock pricing and get 10% off your first order.</p>
 <form id="signup" class="space-y-3">
@@ -214,7 +230,7 @@ body{font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown)
 </div></div>
 
 <!-- Discount modal -->
-<div id="disc" class="modal"><div class="sheet text-center">
+<div id="disc" class="modal" role="dialog" aria-modal="true" aria-label="Welcome. 10% off"><div class="sheet text-center">
 <h3 class="text-2xl font-bold">Welcome. 10% off is yours.</h3>
 <p class="text-sm mt-2">The catalog is unlocked. Your code is applied automatically at checkout.</p>
 <div class="my-5 py-4 rounded-2xl text-3xl font-bold tracking-wider" style="background:var(--sand);border:2px dashed var(--gold);color:var(--gold)">NUVERA10</div>
@@ -222,7 +238,7 @@ body{font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown)
 </div></div>
 
 <!-- COA modal -->
-<div id="coa" class="modal"><div class="sheet">
+<div id="coa" class="modal" role="dialog" aria-modal="true" aria-label="Batch documentation"><div class="sheet">
 <div class="flex justify-between items-start mb-3"><h3 class="text-2xl font-bold">Batch documentation</h3><button data-close aria-label="Close"><i class="fa-solid fa-xmark text-xl"></i></button></div>
 <p class="text-sm mb-4">Analytical documentation is being published batch by batch. Tell us the product or batch number and we will reply with what is available.</p>
 <form id="coaForm" class="space-y-3"><input id="coaIn" class="inp" placeholder="Product or batch number (optional)"><input class="inp" type="email" name="email" placeholder="Your email" required><button class="btn w-full">Request documentation</button></form>
@@ -230,7 +246,7 @@ body{font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown)
 </div></div>
 
 <!-- Affiliate modal -->
-<div id="aff" class="modal"><div class="sheet">
+<div id="aff" class="modal" role="dialog" aria-modal="true" aria-label="Affiliate application"><div class="sheet">
 <div class="flex justify-between items-start mb-3"><h3 class="text-2xl font-bold">Affiliate application</h3><button data-close aria-label="Close"><i class="fa-solid fa-xmark text-xl"></i></button></div>
 <form id="affForm" class="space-y-3">
 <input class="inp" name="name" placeholder="Full name" required><input class="inp" type="email" name="email" placeholder="Email" required>
@@ -240,7 +256,7 @@ body{font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown)
 </form></div></div>
 
 <!-- Info modal -->
-<div id="info" class="modal"><div class="sheet"><div class="flex justify-between items-start mb-3"><h3 id="infoT" class="text-2xl font-bold"></h3><button data-close aria-label="Close"><i class="fa-solid fa-xmark text-xl"></i></button></div><div id="infoB" class="text-sm leading-relaxed space-y-3"></div></div></div>
+<div id="info" class="modal" role="dialog" aria-modal="true" aria-labelledby="infoT"><div class="sheet"><div class="flex justify-between items-start mb-3"><h3 id="infoT" class="text-2xl font-bold"></h3><button data-close aria-label="Close"><i class="fa-solid fa-xmark text-xl"></i></button></div><div id="infoB" class="text-sm leading-relaxed space-y-3"></div></div></div>
 
 <!-- Chat -->
 <button id="chatFab" class="fixed bottom-5 right-5 z-[55] w-14 h-14 rounded-full text-white text-xl shadow-lg" style="background:var(--rose)" aria-label="Open research assistant"><i class="fa-solid fa-comment-dots"></i></button>
@@ -251,7 +267,7 @@ body{font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown)
 <form id="chatForm" class="p-3 flex gap-2 border-t" style="border-color:var(--line)"><input id="chatIn" class="inp" placeholder="Ask a question" aria-label="Message"><button class="btn" aria-label="Send"><i class="fa-solid fa-paper-plane"></i></button></form>
 </div>
 
-<div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[120] px-5 py-2 rounded-full text-sm font-semibold text-white hidden" style="background:var(--brown)"></div>
+<div id="toast" role="status" aria-live="polite" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[120] px-5 py-2 rounded-full text-sm font-semibold text-white hidden" style="background:var(--brown)"></div>
 
 <script>
 const KEY='e71a64f9-3da5-4fde-b2ff-3463cd3f1c41',W3='https://api.web3forms.com/submit';
@@ -283,7 +299,9 @@ let st={f:'all',q:'',sel:{},cart:JSON.parse(ls.get('nv_cart')||'[]'),promo:ls.ge
 P.forEach(p=>st.sel[p.id]=Object.keys(p.v)[0]);
 const unlocked=()=>ls.get('nv_unlocked')==='1';
 const stockTxt=s=>s===null?'In stock':s<=1?'Last vial!':s<=3?'Low: '+s+' vials':s+' vials in stock';
-const open=id=>{$('#'+id).classList.add('open')},close=id=>{$('#'+id).classList.remove('open')};
+let lastF=null;
+const open=id=>{lastF=document.activeElement;const m=$('#'+id);m.classList.add('open');const f=m.querySelector('input,select,button:not([data-close])');if(f&&id!=='age')setTimeout(()=>f.focus(),30)},close=id=>{$('#'+id).classList.remove('open');if(lastF&&lastF.focus)try{lastF.focus()}catch(e){}};
+document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;const m=$$('.modal.open').filter(x=>x.id!=='age').pop();if(m){close(m.id);return}if($('#drawer').classList.contains('open'))closeCart()});
 function toast(t){const e=$('#toast');e.textContent=t;e.classList.remove('hidden');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.add('hidden'),2200)}
 
 /* age gate */
@@ -337,8 +355,8 @@ $('#checkout').onclick=()=>{if(!st.cart.length)return toast('Your cart is empty'
 
 /* modals */
 $$('[data-open]').forEach(a=>a.onclick=e=>{e.preventDefault();open(a.dataset.open)});
-$$('[data-close]').forEach(b=>b.onclick=()=>b.closest('.modal').classList.remove('open'));
-$$('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m&&m.id!=='age')m.classList.remove('open')}));
+$$('[data-close]').forEach(b=>b.onclick=()=>close(b.closest('.modal').id));
+$$('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m&&m.id!=='age')close(m.id)}));
 $('#acctBtn').onclick=()=>unlocked()?toast('You are signed in'):open('auth');
 $('#toLogin').onclick=e=>{e.preventDefault();$('#login').classList.toggle('hidden')};
 async function post(data){const r=await fetch(W3,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({access_key:KEY,...data})});const j=await r.json();if(!j.success)throw 0;return j}
@@ -398,7 +416,7 @@ $('#nl').onsubmit=async e=>{e.preventDefault();const m=$('#nlMsg');m.textContent
 const FAQS=[['Who can buy from Nuvera Form?','Qualified researchers aged 21 or older, purchasing solely for laboratory research.'],['What does Research Use Only mean?','Products are supplied for laboratory and analytical research only. They are not for human or veterinary use, are not drugs, foods, supplements or cosmetics, and are not FDA approved for those uses.'],['How fast do orders ship?','Orders typically dispatch within 1–2 business days and arrive in 3–5. Orders over $200 ship free after discounts.'],['Can I get analytical documentation?','Documentation is being published batch by batch. Request what is available for your order from the Documentation page or at info@nuveraform.com.'],['How should vials be stored?','Keep lyophilized vials sealed, cold, dry and away from light. The storage protocol is linked in the footer.'],['How do I get the 10% welcome discount?','Create a free account and the code NUVERA10 is applied to your cart automatically.']];
 $('#faqList').innerHTML=FAQS.map(f=>`<details class="card p-4"><summary class="font-semibold cursor-pointer">${f[0]}</summary><p class="text-sm mt-2">${f[1]}</p></details>`).join('');
 const ld=document.createElement('script');ld.type='application/ld+json';ld.textContent=JSON.stringify({'@context':'https://schema.org','@type':'FAQPage',mainEntity:FAQS.map(f=>({'@type':'Question',name:f[0],acceptedAnswer:{'@type':'Answer',text:f[1]}}))});document.head.appendChild(ld);
-$('#menuBtn').onclick=()=>$('#mobNav').classList.toggle('hidden');$$('#mobNav a').forEach(a=>a.addEventListener('click',()=>$('#mobNav').classList.add('hidden')));
+$('#menuBtn').setAttribute('aria-expanded','false');$('#menuBtn').onclick=()=>{const h=$('#mobNav').classList.toggle('hidden');$('#menuBtn').setAttribute('aria-expanded',String(!h))};$$('#mobNav a').forEach(a=>a.addEventListener('click',()=>$('#mobNav').classList.add('hidden')));
 filters();grid();lock();cart();
 </script>
 </body>
