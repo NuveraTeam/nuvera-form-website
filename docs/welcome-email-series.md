@@ -8,7 +8,7 @@ Contains NUVERA10 and a link to the catalog.
 
 ## Email 2 (day 2): Start with the paperwork
 Subject: How to read a certificate of analysis
-Body: Short intro; links to /learn/how-to-read-a-certificate-of-analysis and /learn/peptide-research-glossary; a line that documentation is published batch by batch and can be requested at info@nuveraform.com.
+Body: Short intro; links to /learn/how-to-read-a-certificate-of-analysis and /learn/peptide-research-glossary; a line that documentation availability varies by batch and can be requested at info@nuveraform.com.
 
 ## Email 3 (day 5): Handling and storage
 Subject: Storing and reconstituting research material
@@ -16,7 +16,7 @@ Body: Links to /learn/storing-lyophilized-peptides, /learn/reconstitution-for-la
 
 ## Email 4 (day 10, only if no order): Your code is still waiting
 Subject: Your 10% code is still active
-Body: Link to categories; free shipping over $200; reply-to info@nuveraform.com.
+Body: Link to categories; free shipping on orders of $200 or more; reply-to info@nuveraform.com.
 
 ## To activate
 1. Decide whether contacts live in Resend (Audience) or stay in Web3Forms; add a contact-create call to `api/welcome.js` if Resend.

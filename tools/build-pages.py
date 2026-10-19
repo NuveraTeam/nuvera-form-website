@@ -6,35 +6,35 @@ SITE="https://nuveraform.com"; TODAY=date.today().isoformat()
 RUO="For laboratory research use only. Not for human or veterinary use. Not a drug, food, supplement or cosmetic."
 
 COMPOUNDS=[
-("retatrutide","Retatrutide","Research peptide","A long-chain synthetic peptide that appears in the scientific literature as a multi-receptor agonist studied in metabolic research models.",
- [("Class","Synthetic peptide"),("Format","Lyophilized powder, sterile vial"),("Sizes listed","5 mg, 10 mg, 15 mg"),("Typical lab use","Receptor-binding and in-vitro metabolic assays")],
- "Retatrutide is a synthetic peptide that researchers describe as acting on more than one incretin-family receptor. It is used in laboratory work to study receptor signalling in cell-based assays. This page covers the physical product only."),
+("retatrutide","Retatrutide","Research peptide","A long-chain synthetic peptide described in the scientific literature as acting on more than one receptor.",
+ [("Class","Synthetic peptide"),("Format","Lyophilized powder, sealed vial"),("Sizes listed","5 mg, 10 mg, 15 mg"),("Typical lab use","Receptor-binding and in-vitro signalling assays")],
+ "Retatrutide is a synthetic peptide that the literature describes as acting on more than one receptor. In laboratory work it is a reference material for receptor-signalling assays. This page covers the physical product only."),
 ("bpc-157","BPC-157","Research peptide","A synthetic pentadecapeptide (15 amino acids) whose sequence is derived from a protein fragment found in gastric juice.",
- [("Class","Synthetic peptide, 15 residues"),("Format","Lyophilized powder, sterile vial"),("Offered as","BPC-157 / TB-500 blend, 10 mg and Recovery Duo bundle"),("Typical lab use","Cell-culture and tissue-model research")],
+ [("Class","Synthetic peptide, 15 residues"),("Format","Lyophilized powder, sealed vial"),("Offered as","BPC-157 / TB-500 blend (10 mg) and the Research Duo bundle"),("Typical lab use","Cell-culture research")],
  "BPC-157 is a short synthetic peptide frequently referenced in preclinical literature. Nuvera Form lists it combined with TB-500 as a research blend. Product pages here describe the material, not any effect on people or animals."),
 ("tb-500","TB-500","Research peptide","A synthetic peptide related to a fragment of thymosin beta-4, supplied for laboratory investigation.",
- [("Class","Synthetic peptide"),("Format","Lyophilized powder, sterile vial"),("Offered as","BPC-157 / TB-500 blend, 10 mg"),("Typical lab use","Cell migration and cytoskeleton assays")],
+ [("Class","Synthetic peptide"),("Format","Lyophilized powder, sealed vial"),("Offered as","BPC-157 / TB-500 blend, 10 mg"),("Typical lab use","Cell-biology assays")],
  "TB-500 is named in the literature as a synthetic fragment connected to thymosin beta-4, a protein studied in cell biology. It is sold here in blend form for in-vitro research."),
 ("ghk-cu","GHK-Cu","Research peptide","A naturally occurring tripeptide (glycine-histidine-lysine) that binds copper(II), supplied as a lyophilized copper complex.",
- [("Class","Tripeptide–copper complex"),("Format","Lyophilized powder, sterile vial"),("Size listed","100 mg"),("Typical lab use","Cell-culture and extracellular-matrix research")],
- "GHK is a three-residue peptide with a strong affinity for copper ions. The copper complex is used in laboratory studies of cell and matrix biology."),
+ [("Class","Tripeptide–copper complex"),("Format","Lyophilized powder, sealed vial"),("Size listed","100 mg"),("Typical lab use","Cell-culture research")],
+ "GHK is a three-residue peptide with a strong affinity for copper ions. The copper complex is used as a reference material in laboratory studies of cell biology."),
 ("thymosin-alpha-1","Thymosin Alpha 1","Research peptide","A 28-amino-acid peptide originally characterized from thymus tissue extracts, produced synthetically for research.",
- [("Class","Synthetic peptide, 28 residues"),("Format","Lyophilized powder, sterile vial"),("Size listed","10 mg"),("Typical lab use","Immunology cell-assay research")],
- "Thymosin alpha 1 is studied in immunology laboratories as a model peptide in cell-signalling work. Nuvera Form supplies it only as a research reagent."),
+ [("Class","Synthetic peptide, 28 residues"),("Format","Lyophilized powder, sealed vial"),("Size listed","10 mg"),("Typical lab use","Cell-assay research")],
+ "Thymosin alpha 1 is used in laboratories as a reference peptide in cell-signalling work. Nuvera Form supplies it only as a research reagent."),
 ("nad-plus","NAD+","Research reagent","Nicotinamide adenine dinucleotide, a coenzyme found in all living cells and widely used in biochemical assays.",
- [("Class","Dinucleotide coenzyme"),("Format","Lyophilized powder, sterile vial"),("Size listed","500 mg"),("Typical lab use","Enzyme kinetics and cell-metabolism assays")],
+ [("Class","Dinucleotide coenzyme"),("Format","Lyophilized powder, sealed vial"),("Size listed","500 mg"),("Typical lab use","Enzyme kinetics and cell-metabolism assays")],
  "NAD+ participates in redox reactions and is a common substrate in enzyme assays. As a research reagent it is used in biochemistry and cell-biology workflows."),
-("cjc-1295-ipamorelin","CJC-1295 / Ipamorelin","Research blend","A combination of two synthetic peptides: a GHRH-analog sequence and a five-residue growth hormone secretagogue peptide.",
- [("Class","Two-peptide research blend"),("Format","Lyophilized powder, sterile vial"),("Size listed","10 mg"),("Typical lab use","Receptor-signalling assays")],
+("cjc-1295-ipamorelin","CJC-1295 / Ipamorelin","Research blend","A combination of two synthetic peptides: a GHRH-analog sequence and a five-residue growth hormone secretagogue peptide (ipamorelin).",
+ [("Class","Two-peptide research blend"),("Format","Lyophilized powder, sealed vial"),("Size listed","10 mg"),("Typical lab use","Receptor-signalling assays")],
  "This blend pairs two synthetic sequences commonly discussed in endocrine-receptor research. It is supplied as a lyophilized blend for in-vitro work."),
 ("mots-c","MOTS-c","Research peptide","A 16-amino-acid peptide encoded in mitochondrial DNA, studied as a mitochondria-derived signalling peptide.",
- [("Class","Synthetic peptide, 16 residues"),("Format","Lyophilized powder, sterile vial"),("Size listed","10 mg"),("Typical lab use","Mitochondrial and cell-metabolism research")],
+ [("Class","Synthetic peptide, 16 residues"),("Format","Lyophilized powder, sealed vial"),("Size listed","10 mg"),("Typical lab use","Mitochondrial and cell-metabolism research")],
  "MOTS-c is notable because it is encoded by mitochondrial rather than nuclear DNA. Laboratories use the synthetic form in cell-based metabolic studies."),
-("klow-blend","KLOW Blend","Research blend","A multi-component research blend supplied as a lyophilized powder; see the label for composition.",
- [("Class","Research blend"),("Format","Lyophilized powder, sterile vial"),("Size listed","Blend"),("Composition","Listed on the vial label; ask for documentation")],
- "KLOW is a blended research product. Request batch documentation for the exact composition of the lot you are ordering."),
+("klow-blend","KLOW Blend","Research blend","A multi-component research blend supplied as a lyophilized powder.",
+ [("Class","Research blend"),("Format","Lyophilized powder, sealed vial"),("Size listed","Blend"),("Composition","Shown on the vial label; email us to confirm before ordering")],
+ "KLOW is a blended research product. Email info@nuveraform.com to confirm the exact composition of the lot you are ordering."),
 ("kisspeptin","Kisspeptin","Research peptide","A peptide product of the KISS1 gene, studied in neuroendocrine research; the short active fragment is kisspeptin-10.",
- [("Class","Synthetic peptide"),("Format","Lyophilized powder, sterile vial"),("Size listed","10 mg"),("Typical lab use","Receptor-binding and signalling assays")],
+ [("Class","Synthetic peptide"),("Format","Lyophilized powder, sealed vial"),("Size listed","10 mg"),("Typical lab use","Receptor-binding and signalling assays")],
  "Kisspeptins signal through the KISS1 receptor and appear in neuroendocrine literature. Nuvera Form supplies kisspeptin strictly for in-vitro research."),
 ("bacteriostatic-water","Bacteriostatic Water","Reconstitution reagent","Sterile water containing 0.9% benzyl alcohol as a bacteriostatic preservative, used as a laboratory diluent.",
  [("Class","Sterile diluent"),("Format","Multi-dose vial"),("Size listed","10 ml"),("Typical lab use","Reconstituting lyophilized research material")],
@@ -63,11 +63,11 @@ LEARN=[
 ("reconstitution-for-lab-work","Reconstitution for lab work","How laboratories reconstitute lyophilized material: choosing a diluent, aseptic technique and working out concentration.",
  [("Start with the written protocol","Reconstitution should follow your institution’s written protocol and the documentation for the lot. This guide describes general laboratory practice for in-vitro work only. It does not describe use in people or animals."),
   ("Choosing a diluent","Common laboratory diluents include sterile water and bacteriostatic water. The right choice depends on the assay: a preservative such as benzyl alcohol can interfere with some cell-based work. See the comparison guide on bacteriostatic and sterile water."),
-  ("Aseptic technique","Let the vial reach room temperature, wipe the stopper with alcohol, use a sterile syringe and needle, and add diluent slowly down the vial wall so the powder dissolves without foaming. Swirl gently rather than shaking."),
+  ("Aseptic technique","Let the vial reach room temperature, wipe the stopper with alcohol, use sterile transfer equipment, and add diluent slowly down the vial wall so the powder dissolves without foaming. Swirl gently rather than shaking."),
   ("Working out concentration","Concentration is mass divided by volume. A vial containing 10 mg reconstituted in 2 mL gives 5 mg/mL. Record the date, diluent and final concentration on the label."),
   ("After reconstitution","Reconstituted material is generally less stable than powder. Store it as your protocol directs and discard it by the date you set.")]),
 ("bacteriostatic-vs-sterile-water","Bacteriostatic water vs sterile water","What the two diluents contain, how they differ and how to choose between them for laboratory work.",
- [("What they are","Sterile water for injection is water with no preservative. Bacteriostatic water is sterile water with 0.9% benzyl alcohol added to inhibit bacterial growth."),
+ [("What they are","Sterile water is water with no preservative. Bacteriostatic water is sterile water with 0.9% benzyl alcohol added to inhibit bacterial growth."),
   ("Single use vs multi-use","Sterile water has no preservative, so a vial is generally treated as single use once opened. The benzyl alcohol in bacteriostatic water is what makes a multi-dose vial practical for repeated laboratory access."),
   ("Assay compatibility","Benzyl alcohol can affect some sensitive cell-based assays and certain analytical methods. If your assay is sensitive to preservatives, confirm the diluent in your protocol before use."),
   ("Our listing","Nuvera Form lists Bacteriostatic Water in a 10 ml vial. See the compound page for specifications.")]),
@@ -85,12 +85,12 @@ LEARN=[
  [("HPLC purity","High-performance liquid chromatography separates a sample into components. The main peak’s share of the total area is reported as purity. A figure on its own says nothing without the method and the batch it came from."),
   ("Mass spectrometry","Mass spectrometry confirms the molecular mass of the main component, which helps verify identity. The measured mass should match the expected mass within the instrument’s tolerance."),
   ("What to check","Batch or lot number, date, the laboratory that ran the test, and whether the document matches the batch on your vial."),
-  ("Our approach","Nuvera Form is publishing analytical documentation batch by batch. We do not claim test results we cannot show. Ask what is available for your order through the documentation request form.")]),
+  ("Our approach","Documentation availability varies by batch. We do not claim test results we cannot show. Email info@nuveraform.com to ask what is available for your order.")]),
 ]
 
 LEGAL=[
 ("privacy","Privacy Policy","How Nuvera Form collects, uses and protects the information you give us.",
- [("What we collect","Name, email address, phone number and field of research when you create an account; the email you give for newsletters or documentation requests; and order details when checkout opens."),
+ [("What we collect","Name, email address, phone number and field of research when you create an account; the email you give for newsletters or documentation requests; and order details once online checkout is available."),
   ("How we use it","To create your account, apply your welcome discount, reply to requests, send order updates and, if you opt in, product announcements."),
   ("Who processes it","Form submissions are handled by Web3Forms; transactional email is sent through Resend; the site is hosted on Vercel. These providers process data only to deliver their service."),
   ("Your choices","Email info@nuveraform.com to access, correct or delete your data, or to unsubscribe. We do not sell personal information."),
@@ -104,7 +104,7 @@ LEGAL=[
 ("shipping-returns","Shipping & Returns","Dispatch times, delivery, costs and what to do if something is wrong.",
  [("Dispatch","Orders typically dispatch within 1–2 business days of payment."),
   ("Delivery","Domestic delivery is typically 3–5 business days after dispatch. A tracking link is emailed when your order leaves."),
-  ("Cost","Orders over $200 after discounts ship free. Smaller orders ship at a flat $15."),
+  ("Cost","Orders of $200 or more after discounts ship free. Smaller orders ship at a flat $15."),
   ("Damaged or incorrect items","Email info@nuveraform.com within 72 hours of delivery with your order number and a photo. We will replace the item."),
   ("Returns","Because of the nature of the products, opened or used vials cannot be returned.")]),
 ("research-use-policy","Research Use Policy","The conditions under which Nuvera Form supplies its products.",
@@ -136,11 +136,11 @@ NEWS='''<section class="nl" aria-label="Newsletter"><div class="wrap"><h2>Lot dr
 <script>document.getElementById('nl').addEventListener('submit',async function(e){e.preventDefault();var m=document.getElementById('nlm');m.textContent='Subscribing…';try{var f=new FormData(e.target);var r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({access_key:'e71a64f9-3da5-4fde-b2ff-3463cd3f1c41',subject:'Nuvera Form list sign-up',from_name:'Nuvera Form Store',email:f.get('email'),botcheck:f.get('botcheck')?'1':'',page:location.pathname})});var j=await r.json();if(!j.success)throw 0;m.textContent='You are on the list.';e.target.reset()}catch(x){m.textContent='Could not subscribe. Please try again or email info@nuveraform.com.'}});</script>'''
 def foot():
     return NEWS+f'''<footer class="f"><div class="wrap"><div class="fg">
-<div><h4>Nuvera Form</h4><p>Research peptides and reconstitution reagents for qualified laboratories.</p></div>
-<div><h4>Compounds</h4><ul>{"".join(f'<li><a href="/compounds/{s}">{e(n)}</a></li>' for s,n,*_ in COMPOUNDS[:6])}<li><a href="/compounds">All compounds</a></li></ul></div>
-<div><h4>Categories</h4><ul>{"".join(f'<li><a href="/categories/{s}">{e(n)}</a></li>' for s,n,*_ in CATS)}</ul></div>
-<div><h4>Learn</h4><ul>{"".join(f'<li><a href="/learn/{s}">{e(t)}</a></li>' for s,t,*_ in LEARN)}</ul></div>
-<div><h4>Company</h4><ul><li><a href="/shipping-returns">Shipping &amp; Returns</a></li><li><a href="/privacy">Privacy Policy</a></li><li><a href="/terms">Terms of Sale</a></li><li><a href="/research-use-policy">Research Use Policy</a></li><li><a href="mailto:info@nuveraform.com">info@nuveraform.com</a></li></ul></div>
+<div><p class="fh">Nuvera Form</p><p>Research peptides and reconstitution reagents for qualified laboratories.</p></div>
+<div><p class="fh">Compounds</p><ul>{"".join(f'<li><a href="/compounds/{s}">{e(n)}</a></li>' for s,n,*_ in COMPOUNDS[:6])}<li><a href="/compounds">All compounds</a></li></ul></div>
+<div><p class="fh">Categories</p><ul>{"".join(f'<li><a href="/categories/{s}">{e(n)}</a></li>' for s,n,*_ in CATS)}</ul></div>
+<div><p class="fh">Learn</p><ul>{"".join(f'<li><a href="/learn/{s}">{e(t)}</a></li>' for s,t,*_ in LEARN)}</ul></div>
+<div><p class="fh">Company</p><ul><li><a href="/shipping-returns">Shipping &amp; Returns</a></li><li><a href="/privacy">Privacy Policy</a></li><li><a href="/terms">Terms of Sale</a></li><li><a href="/research-use-policy">Research Use Policy</a></li><li><a href="mailto:info@nuveraform.com">info@nuveraform.com</a></li></ul></div>
 </div><div class="legal"><p><strong>{RUO}</strong></p><p>Copyright © 2026 Nuvera Form. All rights reserved.</p></div></div></footer></body></html>'''
 def write(path,content):
     fp=path.lstrip("/")+".html"
@@ -158,8 +158,7 @@ urls=[("/",1.0),("/compounds",0.9),("/learn",0.7)]
 for s,n,kind,tag,specs,body in COMPOUNDS:
     path=f"/compounds/{s}"
     title=f"{n} | Research Peptide Specifications | Nuvera Form"
-    desc=f"{n} for laboratory research: format, sizes and handling notes. {RUO.split('.')[0]}. Ships from the U.S. in 1–2 business days."
-    related="".join(f'<div class="card"><h3>{e(m[1])}</h3><p>{e(m[3])}</p><a class="more" href="/compounds/{m[0]}">View specifications →</a></div>' for m in COMPOUNDS if m[0]!=s)[:0]
+    desc=f"{n} specifications: format, sizes and handling notes. {RUO.split('.')[0]}. Dispatch from the U.S. in 1–2 business days."
     others=[m for m in COMPOUNDS if m[0]!=s][:3]
     rel="".join(f'<div class="card"><h3>{e(m[1])}</h3><p>{e(m[3])}</p><a class="more" href="{"/compounds/"+m[0]}">View specifications →</a></div>' for m in others)
     lo,hi,cnt=PRICES[s]
@@ -168,20 +167,20 @@ for s,n,kind,tag,specs,body in COMPOUNDS:
     pricerow=f"<p class='price'>From {fromp(s)}</p>" if s not in ("bpc-157","tb-500") else "<p class='price'>From $110 <span style='font-size:.85rem;font-weight:500;color:var(--brown)'>(sold in the BPC-157 / TB-500 blend, 10 mg)</span></p>"
     catslug=CAT_OF[s]; catname=CATS[[c[0] for c in CATS].index(catslug)][1]
     gl=["storing-lyophilized-peptides","how-to-read-a-certificate-of-analysis"]+(["reconstitution-for-lab-work","bacteriostatic-vs-sterile-water"] if s=="bacteriostatic-water" else ["reconstitution-for-lab-work"])
-    relhtml='<div class="rel">'+f'<a href="/categories/{catslug}">{e(catname)}</a>'+"".join(f'<a href="/learn/{g}">{e(GUIDE_LINKS[g])}</a>' for g in gl)+'<a href="/peptide-research-glossary-link"></a></div>'.replace('<a href="/peptide-research-glossary-link"></a>','<a href="/learn/peptide-research-glossary">Glossary</a>')
+    relhtml='<div class="rel">'+f'<a href="/categories/{catslug}">{e(catname)}</a>'+"".join(f'<a href="/learn/{g}">{e(GUIDE_LINKS[g])}</a>' for g in gl)+'<a href="/learn/peptide-research-glossary">Glossary</a></div>'
     page=head(title,desc,path,ld)+top()+f'''<main id="main"><div class="wrap prose">
 <p class="crumbs"><a href="/">Home</a> / <a href="/compounds">Compounds</a> / {e(n)}</p>
 {vial(n)}<span class="badge">{e(kind)} · Research use only · 21+</span><h1>{e(n)}</h1><p class="lede">{e(tag)}</p>{pricerow}
 <h2>Specifications</h2><table>{"".join(f"<tr><th>{e(a)}</th><td>{e(b)}</td></tr>" for a,b in specs)}</table>
 <h2>About this material</h2><p>{e(body)}</p>
 <h2>Handling</h2><p>Store lyophilized vials sealed, dry, cold and away from light, and follow your institution’s written protocol. See <a href="/learn/storing-lyophilized-peptides">storing lyophilized peptides</a>.</p><h2>Related</h2>{relhtml}
-<h2>Documentation</h2><p>Analytical documentation is being published batch by batch. <a href="mailto:info@nuveraform.com?subject=Documentation%20request%3A%20{e(n)}">Email us</a> to ask what is available for your order.</p>
-<div class="note"><strong>Research use only.</strong> {RUO} Nothing on this page is a statement about effects, dosing or use in people or animals.</div><p style="margin-top:1.5rem;font-size:.9rem">Checkout requires a free account with a 21+ and research-use confirmation. Your first order includes 10% off with code NUVERA10.</p>{cta()}
+<h2>Documentation</h2><p>Documentation availability varies by batch. <a href="mailto:info@nuveraform.com?subject=Documentation%20request%3A%20{e(n)}">Email us</a> to ask what is available for your order.</p>
+<div class="note"><strong>Research use only.</strong> {RUO} Nothing on this page is a statement about effects, dosing or use in people or animals.</div><p style="margin-top:1.5rem;font-size:.9rem">Checkout requires a free account with a 21+ and research-use confirmation. New accounts get 10% off a first order with code NUVERA10.</p>{cta()}
 <h2>Other compounds</h2><div class="grid">{rel}</div></div></main>'''+foot()
     write(path,page); urls.append((path,0.8))
 
-cards="".join(f'<div class="card"><span class="badge">{e(k)}</span><h3 style="margin-top:.6rem">{e(n)}</h3><p class="price" style="font-size:1.1rem">From {fromp(s) if s not in ("bpc-157","tb-500") else "$110"}</p><p>{e(t)}</p><a class="more" href="/compounds/{s}">View specifications →</a></div>' for s,n,k,t,*_ in COMPOUNDS)
-write("/compounds",head("Research Compounds | Nuvera Form","Browse Nuvera Form’s research peptides and reconstitution reagents with format, size and handling notes. Research use only, 21+.","/compounds",crumbs_ld([("Home","/"),("Compounds","/compounds")]))+top()+f'''<main id="main"><div class="wrap"><p class="crumbs"><a href="/">Home</a> / Compounds</p><h1>Research compounds</h1><p class="lede">Specifications and handling notes for every compound in the catalog. Pricing is shown to registered researchers in the <a href="/#catalog">catalog</a>.</p><div class="grid" style="margin-top:1.5rem">{cards}</div>{cta()}</div></main>'''+foot())
+cards="".join(f'<div class="card"><span class="badge">{e(k)}</span><h2 style="margin-top:.6rem">{e(n)}</h2><p class="price" style="font-size:1.1rem">From {fromp(s) if s not in ("bpc-157","tb-500") else "$110"}</p><p>{e(t)}</p><a class="more" href="/compounds/{s}">View specifications →</a></div>' for s,n,k,t,*_ in COMPOUNDS)
+write("/compounds",head("Research Compounds | Nuvera Form","Browse Nuvera Form’s research peptides and reconstitution reagents with format, size and handling notes. Research use only, 21+.","/compounds",crumbs_ld([("Home","/"),("Compounds","/compounds")]))+top()+f'''<main id="main"><div class="wrap"><p class="crumbs"><a href="/">Home</a> / Compounds</p><h1>Research compounds</h1><p class="lede">Specifications and handling notes for every compound in the catalog. Prices are listed in the <a href="/#catalog">catalog</a>.</p><div class="grid" style="margin-top:1.5rem">{cards}</div>{cta()}</div></main>'''+foot())
 
 def article(s,t,d,secs,section,dirp,rel=""):
     path=f"/{dirp}/{s}" if dirp else f"/{s}"
@@ -193,22 +192,21 @@ for s,t,d,secs in LEARN:
     others=[g for g in GUIDE_LINKS if g!=s and g!="what-research-use-only-means"][:3]
     rel='<h2>Related</h2><div class="rel">'+"".join(f'<a href="/learn/{g}">{e(GUIDE_LINKS[g])}</a>' for g in others)+'<a href="/compounds">All compounds</a><a href="/categories">Categories</a></div>'
     write(f"/learn/{s}",article(s,t,d,secs,"Learn","learn",rel)); urls.append((f"/learn/{s}",0.7))
-lc="".join(f'<div class="card"><h3>{e(t)}</h3><p>{e(d)}</p><a class="more" href="/learn/{s}">Read the guide →</a></div>' for s,t,d,_ in LEARN)
+lc="".join(f'<div class="card"><h2>{e(t)}</h2><p>{e(d)}</p><a class="more" href="/learn/{s}">Read the guide →</a></div>' for s,t,d,_ in LEARN)
 write("/learn",head("Learn | Research Peptide Guides | Nuvera Form","Plain-English guides on research-use-only labelling, storing lyophilized peptides and reading a certificate of analysis.","/learn",crumbs_ld([("Home","/"),("Learn","/learn")]))+top()+f'<main id="main"><div class="wrap"><p class="crumbs"><a href="/">Home</a> / Learn</p><h1>Learn</h1><p class="lede">Practical, non-clinical guides for laboratory buyers.</p><div class="grid" style="margin-top:1.5rem">{lc}</div></div></main>'+foot())
 for s,t,d,secs in LEGAL:
     write(f"/{s}",article(s,t,d,secs,"",""));urls.append((f"/{s}",0.3))
 
 for slug,cn,cd,cs in CATS:
     path=f"/categories/{slug}"
-    items="".join(f'<div class="card"><h3>{e(CNAME[c])}</h3><p class="price" style="font-size:1.1rem">From {fromp(c) if c not in ("bpc-157","tb-500") else "$110"}</p><p>{e([m[3] for m in COMPOUNDS if m[0]==c][0])}</p><a class="more" href="/compounds/{c}">View specifications →</a></div>' for c in cs)
+    items="".join(f'<div class="card"><h2>{e(CNAME[c])}</h2><p class="price" style="font-size:1.1rem">From {fromp(c) if c not in ("bpc-157","tb-500") else "$110"}</p><p>{e([m[3] for m in COMPOUNDS if m[0]==c][0])}</p><a class="more" href="/compounds/{c}">View specifications →</a></div>' for c in cs)
     ld=crumbs_ld([("Home","/"),("Categories","/categories"),(cn,path)])+'<script type="application/ld+json">'+json.dumps({"@context":"https://schema.org","@type":"ItemList","name":cn,"itemListElement":[{"@type":"ListItem","position":i+1,"url":f"{SITE}/compounds/{c}","name":CNAME[c]} for i,c in enumerate(cs)]})+'</script>'
     write(path,head(f"{cn} for Research | Nuvera Form",f"{cd} Prices, formats and handling notes. Research use only, 21+.",path,ld)+top()+f'<main id="main"><div class="wrap"><p class="crumbs"><a href="/">Home</a> / <a href="/categories">Categories</a> / {e(cn)}</p><h1>{e(cn)}</h1><p class="lede">{e(cd)}</p><div class="grid" style="margin-top:1.5rem">{items}</div><h2>Related guides</h2><div class="rel"><a href="/learn/reconstitution-for-lab-work">Reconstitution for lab work</a><a href="/learn/storing-lyophilized-peptides">Storing lyophilized peptides</a><a href="/learn/how-to-read-a-certificate-of-analysis">Reading a certificate of analysis</a></div>{cta()}</div></main>'+foot())
     urls.append((path,0.8))
-cc="".join(f'<div class="card"><h3>{e(cn)}</h3><p>{e(cd)}</p><a class="more" href="/categories/{slug}">View category →</a></div>' for slug,cn,cd,_ in CATS)
+cc="".join(f'<div class="card"><h2>{e(cn)}</h2><p>{e(cd)}</p><a class="more" href="/categories/{slug}">View category →</a></div>' for slug,cn,cd,_ in CATS)
 write("/categories",head("Research Peptide Categories | Nuvera Form","Browse Nuvera Form by category: incretin-family peptides, blends, single peptides and reconstitution reagents. Research use only, 21+.","/categories",crumbs_ld([("Home","/"),("Categories","/categories")]))+top()+f'<main id="main"><div class="wrap"><p class="crumbs"><a href="/">Home</a> / Categories</p><h1>Categories</h1><div class="grid" style="margin-top:1.5rem">{cc}</div></div></main>'+foot())
 urls.append(("/categories",0.9))
-write("/404",head("Page not found | Nuvera Form","The page you are looking for could not be found.","/404").replace('index,follow','noindex')+top()+'<main id="main"><div class="wrap prose"><h1>Page not found</h1><p class="lede">That page does not exist or has moved.</p><p><a class="btn" href="/">Back to the home page</a> <a class="btn ghost" href="/compounds">Browse compounds</a></p></div></main>'+foot())
-os.rename("404.html","404.html") if os.path.exists("404.html") else None
+write("/404",head("Page not found | Nuvera Form","The page you are looking for could not be found.","/404").replace('index,follow','noindex').replace('<link rel="canonical" href="https://nuveraform.com/404">','')+top()+'<main id="main"><div class="wrap prose"><h1>Page not found</h1><p class="lede">That page does not exist or has moved.</p><p><a class="btn" href="/">Back to the home page</a> <a class="btn ghost" href="/compounds">Browse compounds</a></p></div></main>'+foot())
 
 sm='<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+"".join(f'<url><loc>{SITE}{p if p!="/" else "/"}</loc><lastmod>{TODAY}</lastmod><priority>{pr}</priority></url>\n' for p,pr in urls)+'</urlset>\n'
 open("sitemap.xml","w").write(sm)
