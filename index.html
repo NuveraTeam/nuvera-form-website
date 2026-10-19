@@ -176,7 +176,7 @@ body{font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown)
 <li><a href="#" data-info="storage">Storage &amp; Handling Protocols</a></li>
 <li><a href="/research-use-policy">Research Use Policy</a></li><li><a href="/compounds">All compounds</a></li><li><a href="/learn">Learn</a></li></ul></div>
 <div><p class="font-bold mb-3">Contact &amp; Support</p><ul class="space-y-2">
-<li><a href="mailto:info@nuveraform.com">info@nuveraform.com</a></li><li><a href="tel:+13054573814">(305) 457-3814</a><br><span class="text-xs">Mon–Fri, 9 AM–5 PM ET</span></li><li><a href="/contact">Contact us</a></li>
+<li><a href="mailto:info@nuveraform.com">info@nuveraform.com</a></li><li><a href="tel:+13054573814">(305) 457-3814</a><br><span class="text-xs">Mon–Fri, 9 AM–5 PM ET</span></li><li><a href="/reviews">Customer reviews</a></li><li><a href="/contact">Contact us</a></li>
 <li><a href="/shipping-returns">Shipping &amp; Returns Policy</a></li>
 <li><a href="#" data-info="track">Track your order</a></li>
 <li><a href="/privacy">Privacy Policy</a></li><li><a href="/terms">Terms of Sale</a></li>
@@ -279,6 +279,7 @@ body{font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown)
 
 <div id="toast" role="status" aria-live="polite" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[120] px-5 py-2 rounded-full text-sm font-semibold text-white hidden" style="background:var(--brown)"></div>
 
+<script src="/assets/site-config.js"></script>
 <script>
 const KEY='e71a64f9-3da5-4fde-b2ff-3463cd3f1c41',W3='https://api.web3forms.com/submit';
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
@@ -311,13 +312,22 @@ let st={f:'all',q:'',sel:{},cart:loadCart(),promo:ls.get('nv_promo')==='1'};
 P.forEach(p=>st.sel[p.id]=Object.keys(p.v)[0]);
 st.cart=st.cart.filter(i=>{const p=P.find(x=>x.id===i.id);return p&&p.v[i.v]&&i.k===i.id+'|'+i.v}).map(i=>{const s=P.find(x=>x.id===i.id).v[i.v].s;i.q=Math.floor(i.q);if(s!==null&&i.q>s)i.q=s;return i}).filter(i=>i.q>0);
 const unlocked=()=>ls.get('nv_unlocked')==='1';
-const stockTxt=s=>s===null?'In stock':s<=1?'Last vial!':s<=3?'Low: '+s+' vials':s+' vials in stock';
+const stockTxt=s=>s===null?'In stock':s===0?'Sold out':s<=1?'Last vial!':s<=3?'Low: '+s+' vials':s+' vials in stock';
 let lastF=null;
 const FOC='a[href],button:not([disabled]),input:not([disabled]):not([type=hidden]),select,textarea,summary,[tabindex]:not([tabindex="-1"])';
 const focusables=r=>[...r.querySelectorAll(FOC)].filter(x=>x.offsetParent!==null||x===document.activeElement);
 const open=id=>{const a=document.activeElement;if(!$('.modal.open'))lastF=a;const m=$('#'+id);m.classList.add('open');setTimeout(()=>{const f=m.querySelector('input,select,textarea,#ageYes')||focusables(m)[0];if(f)f.focus()},30)},close=id=>{$('#'+id).classList.remove('open');if(!$('.modal.open')&&lastF&&lastF.focus)try{lastF.focus()}catch(e){}};
 document.addEventListener('keydown',e=>{if(e.key==='Tab'){const r=$$('.modal.open').pop()||($('#drawer').classList.contains('open')?$('#drawer'):null);if(!r)return;const f=focusables(r);if(!f.length)return;const a=document.activeElement;if(!r.contains(a)){e.preventDefault();f[0].focus()}else if(e.shiftKey&&a===f[0]){e.preventDefault();f[f.length-1].focus()}else if(!e.shiftKey&&a===f[f.length-1]){e.preventDefault();f[0].focus()}return}if(e.key!=='Escape')return;const m=$$('.modal.open').filter(x=>x.id!=='age').pop();if(m){close(m.id);return}if($('#drawer').classList.contains('open'))closeCart()});
 function toast(t){const e=$('#toast');e.textContent=t;e.classList.remove('hidden');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.add('hidden'),2200)}
+
+/* live stock: the server tracks real inventory; the numbers above are only a fallback if it is unreachable */
+function clampCart(){st.cart=st.cart.map(i=>{const s=prod(i.id).v[i.v].s;if(s!==null&&i.q>s)i.q=s;return i}).filter(i=>i.q>0);ls.set('nv_cart',JSON.stringify(st.cart))}
+async function loadStock(){try{const r=await fetch('/api/stock',{cache:'no-store',signal:AbortSignal.timeout(6000)}),j=await r.json();if(!j.tracked)return false;P.forEach(p=>Object.keys(p.v).forEach(v=>{const k=p.id+'|'+v;if(typeof j.stock[k]==='number')p.v[v].s=j.stock[k]}));clampCart();grid();cart();return true}catch(e){return false}}
+/* spam protection (Cloudflare Turnstile), active once a site key is set in assets/site-config.js */
+const TS_KEY=(window.NV||{}).TS_KEY||'';
+function tsInit(){if(!TS_KEY)return;['#signup','#nl','#orderForm'].forEach(sel=>{const f=$(sel);if(!f)return;const d=document.createElement('div');d.className='cf-turnstile';d.dataset.sitekey=TS_KEY;f.insertBefore(d,f.querySelector('button:last-of-type'))});const t=document.createElement('script');t.src='https://challenges.cloudflare.com/turnstile/v0/api.js';t.async=true;t.defer=true;document.head.appendChild(t)}
+const tsTok=f=>{const i=f&&f.querySelector('[name=cf-turnstile-response]');return i?i.value:''};
+const tsReset=()=>{try{window.turnstile&&turnstile.reset()}catch(e){}};
 
 /* age gate */
 if(ls.get('nv_age')!=='1')open('age');
@@ -336,7 +346,7 @@ return `<article class="card p-5 flex flex-col ${p.star?'ring-2 ring-[#BF943C]':
 <h3 class="font-bold leading-snug">${SLUG[p.id]?`<a href="/compounds/${SLUG[p.id]}" class="hover:underline">${p.n}</a>`:p.n}</h3>
 <p class="text-xs mt-1">Lyophilized powder · Research use only</p><button class="text-xs underline mt-1 text-left" data-coa="${p.n}">Request documentation</button>
 ${vs.length>1?`<div class="flex gap-2 mt-3 flex-wrap">${vs.map(v=>`<button class="pill ${st.sel[p.id]===v?'on':''}" aria-pressed="${st.sel[p.id]===v}" data-p="${p.id}" data-v="${v}">${v}</button>`).join('')}</div>`:''}
-<div class="mt-auto pt-4 flex items-center justify-between"><span class="text-2xl font-bold" style="color:var(--gold)" id="pr-${p.id}">${money(cur.p)}</span><button class="btn text-sm" data-add="${p.id}">Add to cart</button></div></article>`}).join(''):'<p class="col-span-full text-center py-10">No compounds match your search.</p>';
+<div class="mt-auto pt-4 flex items-center justify-between"><span class="text-2xl font-bold" style="color:var(--gold)" id="pr-${p.id}">${money(cur.p)}</span><button class="btn text-sm ${out?'opacity-50 cursor-not-allowed':''}" data-add="${p.id}" ${out?'disabled aria-disabled="true"':''}>${out?'Sold out':'Add to cart'}</button></div></article>`}).join(''):'<p class="col-span-full text-center py-10">No compounds match your search.</p>';
 $$('[data-p]').forEach(b=>b.onclick=()=>{const id=b.dataset.p,v=b.dataset.v;st.sel[id]=v;grid();const n=$$('[data-p]').find(x=>x.dataset.p===id&&x.dataset.v===v);if(n)n.focus()});
 $$('[data-add]').forEach(b=>b.onclick=()=>add(b.dataset.add));
 $$('[data-coa]').forEach(b=>b.onclick=()=>{$('#coaIn').value=b.dataset.coa;$('#coaOut').textContent='';open('coa')})}
@@ -371,16 +381,21 @@ $('#checkout').onclick=()=>{if(!st.cart.length)return toast('Your cart is empty'
 const t=totals();$('#paySum').innerHTML=st.cart.map(i=>`<div class="flex justify-between"><span>${prod(i.id).n}${Object.keys(prod(i.id).v).length>1?' '+i.v:''} × ${i.q}</span><span>${money(prod(i.id).v[i.v].p*i.q)}</span></div>`).join('')+(t.disc?`<div class="flex justify-between"><span>NUVERA20</span><span>−${money(t.disc)}</span></div>`:'')+`<div class="flex justify-between"><span>Shipping</span><span>${t.ship?money(t.ship):'Free'}</span></div><div class="flex justify-between font-bold border-t pt-1" style="border-color:var(--line)"><span>Total due</span><span>${money(t.total)}</span></div>`;
 $('#payForm').classList.remove('hidden');$('#payDone').classList.add('hidden');$('#orderErr').classList.add('hidden');const em=ls.get('nv_email');if(em&&!$('#orderForm [name=email]').value)$('#orderForm [name=email]').value=em;closeCart();open('pay')};
 let ordBusy=false;
-$('#orderForm').onsubmit=async e=>{e.preventDefault();if(ordBusy||!st.cart.length)return;ordBusy=true;const b=$('#orderBtn');b.disabled=true;b.textContent='Submitting…';$('#orderErr').classList.add('hidden');
-const f=Object.fromEntries(new FormData(e.target)),t=totals(),d=new Date(),A='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',no='NF-'+String(d.getFullYear()).slice(2)+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+'-'+[...crypto.getRandomValues(new Uint8Array(4))].map(x=>A[x%32]).join('');
+function orderDone(no,total,mailed,disc){$('#ordMail').textContent=mailed?'A copy of these instructions has been emailed to you.':'We could not email you a copy just now, so please keep the details above.';
+$('#ordNo').textContent=no;$('#ordAmt').textContent=money(total);$('#ordMemo').textContent=no;$('#payForm').classList.add('hidden');$('#payDone').classList.remove('hidden');
+if(disc){st.promo=false;ls.set('nv_promo','0');ls.set('nv_promo_used','1')}
+st.cart=[];save();$('#orderForm').reset();const h=$('#payDone p');h.tabIndex=-1;h.focus()}
+$('#orderForm').onsubmit=async e=>{e.preventDefault();if(ordBusy||!st.cart.length)return;ordBusy=true;const b=$('#orderBtn');b.disabled=true;b.textContent='Submitting…';const er=$('#orderErr');er.classList.add('hidden');
+const f=Object.fromEntries(new FormData(e.target)),t=totals();let server=null,status=0;
+try{const r=await fetch('/api/order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:f.name,email:f.email,phone:f.phone,street:f.street,city:f.city,state:f.state,zip:f.zip,notes:f.notes||'',items:st.cart.map(i=>({id:i.id,v:i.v,q:i.q})),promo:!!t.disc,cf_token:tsTok(e.target)}),signal:AbortSignal.timeout(20000)});status=r.status;if(r.ok)server=await r.json();else if(status===409||status===400||status===429){const j=await r.json().catch(()=>({}));er.textContent=status===409?'Some items just sold out or are low. Your cart has been updated, please review it.':j.error==='captcha'?'Please complete the verification and try again.':status===429?'Too many attempts. Please try again later or call (305) 457-3814.':'Please check your details and try again.';er.classList.remove('hidden');if(status===409){await loadStock();closeCartModal()}tsReset();ordBusy=false;b.disabled=false;b.textContent='Submit order';return}}catch(x){status=0}
+if(server){orderDone(server.order_number,server.total,server.emailed,t.disc);ordBusy=false;b.disabled=false;b.textContent='Submit order';return}
+/* fallback if the order service is unreachable: send the order to the store by form so it is never lost (stock is then checked by hand) */
+const d=new Date(),A='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',no='NF-'+String(d.getFullYear()).slice(2)+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+'-'+[...crypto.getRandomValues(new Uint8Array(4))].map(x=>A[x%32]).join('');
 const lines=st.cart.map(i=>`${prod(i.id).n}${Object.keys(prod(i.id).v).length>1?' '+i.v:''} x${i.q} @ ${money(prod(i.id).v[i.v].p)}`);
-try{await post({subject:'New order '+no+' ('+money(t.total)+')',from_name:'Nuvera Form Store',order_number:no,customer:f.name,email:f.email,phone:f.phone,ship_to:`${f.street}, ${f.city}, ${f.state.toUpperCase()} ${f.zip}`,items:lines.join(' | '),discount:t.disc?'NUVERA20 -'+money(t.disc)+' (first-order code: check this email has no earlier order)':'none',shipping:t.ship?money(t.ship):'Free',total_due:money(t.total),payment:'Zelle (pending)',notes:f.notes||'',ruo_confirmed:'Yes'});
-let mailed=false;try{const r=await fetch('/api/order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:f.email,name:f.name,order_number:no,total:t.total.toFixed(2),items:lines}),signal:AbortSignal.timeout(8000)});mailed=r.ok}catch(x){}
-$('#ordMail').textContent=mailed?'A copy of these instructions has been emailed to you.':'We could not email you a copy just now, so please keep the details above.';
-$('#ordNo').textContent=no;$('#ordAmt').textContent=money(t.total);$('#ordMemo').textContent=no;$('#payForm').classList.add('hidden');$('#payDone').classList.remove('hidden');
-if(t.disc){st.promo=false;ls.set('nv_promo','0');ls.set('nv_promo_used','1')}
-st.cart=[];save();e.target.reset();const h=$('#payDone p');h.tabIndex=-1;h.focus()}
-catch(x){$('#orderErr').classList.remove('hidden')}ordBusy=false;b.disabled=false;b.textContent='Submit order'};
+try{await post({subject:'New order '+no+' ('+money(t.total)+') - FALLBACK, check stock',from_name:'Nuvera Form Store',order_number:no,customer:f.name,email:f.email,phone:f.phone,ship_to:`${f.street}, ${f.city}, ${f.state.toUpperCase()} ${f.zip}`,items:lines.join(' | '),discount:t.disc?'NUVERA20 -'+money(t.disc)+' (first-order code: check this email has no earlier order)':'none',shipping:t.ship?money(t.ship):'Free',total_due:money(t.total),payment:'Zelle (pending)',notes:f.notes||'',ruo_confirmed:'Yes'});
+orderDone(no,t.total,false,t.disc)}
+catch(x){er.textContent='We could not send your order. Check your connection or call (305) 457-3814.';er.classList.remove('hidden')}ordBusy=false;b.disabled=false;b.textContent='Submit order'};
+function closeCartModal(){close('pay');openCart()}
 
 /* modals */
 $$('[data-open]').forEach(a=>a.onclick=e=>{e.preventDefault();open(a.dataset.open)});
@@ -391,7 +406,7 @@ $('#toLogin').onclick=e=>{e.preventDefault();$('#login').classList.toggle('hidde
 async function post(data){const r=await fetch(W3,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({access_key:KEY,...data})});const j=await r.json();if(!j.success)throw 0;return j}
 $('#signup').onsubmit=async e=>{e.preventDefault();const f=Object.fromEntries(new FormData(e.target)),b=$('#signupBtn');b.disabled=true;b.textContent='Creating account…';$('#authErr').classList.add('hidden');
 try{await post({subject:'New Nuvera Form sign-up',from_name:'Nuvera Form Store',...f,ruo:'Accepted'});
-fetch('/api/welcome',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:f.email,first_name:f.first_name})}).catch(()=>{});
+fetch('/api/welcome',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:f.email,first_name:f.first_name,cf_token:tsTok(e.target)})}).catch(()=>{});tsReset();
 ls.set('nv_unlocked','1');ls.set('nv_email',f.email.toLowerCase());if(ls.get('nv_promo_used')!=='1'){ls.set('nv_promo','1');st.promo=true}close('auth');lock();cart();if(st.promo)open('disc')}
 catch(x){$('#authErr').classList.remove('hidden')}b.disabled=false;b.textContent='Create account'};
 $('#login').onsubmit=e=>{e.preventDefault();if($('#lemail').value.trim().toLowerCase()===ls.get('nv_email')){ls.set('nv_unlocked','1');close('auth');lock();toast('Welcome back')}else $('#logErr').classList.remove('hidden')};
@@ -442,12 +457,12 @@ $('#openChat').onclick=chatOpen;
 $('#chatX').onclick=()=>{$('#chat').classList.add('hidden');$('#chat').classList.remove('flex')};
 $('#chatForm').onsubmit=e=>{e.preventDefault();const v=$('#chatIn').value.trim();if(v){$('#chatIn').value='';ask(v)}};
 
-$('#nl').onsubmit=async e=>{e.preventDefault();const m=$('#nlMsg');m.textContent='Subscribing…';try{const em=new FormData(e.target).get('email');await post({subject:'Nuvera Form list sign-up',from_name:'Nuvera Form Store',email:em});fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em})}).catch(()=>{});m.textContent='You are on the list.';e.target.reset()}catch(x){m.textContent='Could not subscribe. Please try again.'}};
+$('#nl').onsubmit=async e=>{e.preventDefault();const m=$('#nlMsg');m.textContent='Subscribing…';try{const em=new FormData(e.target).get('email');await post({subject:'Nuvera Form list sign-up',from_name:'Nuvera Form Store',email:em});fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,cf_token:tsTok(e.target)})}).catch(()=>{});tsReset();m.textContent='You are on the list.';e.target.reset()}catch(x){m.textContent='Could not subscribe. Please try again.'}};
 const FAQS=[['Who can buy from Nuvera Form?','Qualified researchers aged 21 or older, purchasing solely for laboratory research.'],['What does Research Use Only mean?','Products are supplied for laboratory and analytical research only. They are not for human or veterinary use, are not drugs, foods, supplements or cosmetics, and have not been evaluated or approved by the FDA.'],['How fast do orders ship?','Orders typically dispatch within 1–2 business days and arrive in 3–5. Orders of $200 or more ship free after discounts.'],['Can I get analytical documentation?','Documentation availability varies by batch. Request what is available for your order from the Documentation page or at info@nuveraform.com.'],['How should vials be stored?','Keep lyophilized vials sealed, cold, dry and away from light. The storage protocol is linked in the footer.'],['Do I need an account to see prices?','No. Prices are public. A free account is required at checkout, where NUVERA20 takes 20% off your first order.'],['How do I get the 20% welcome discount?','Create a free account and the code NUVERA20 is applied to your cart automatically.']];
 $('#faqList').innerHTML=FAQS.map(f=>`<details class="card p-4"><summary class="font-semibold cursor-pointer">${f[0]}</summary><p class="text-sm mt-2">${f[1]}</p></details>`).join('');
 const ld=document.createElement('script');ld.type='application/ld+json';ld.textContent=JSON.stringify({'@context':'https://schema.org','@type':'FAQPage',mainEntity:FAQS.map(f=>({'@type':'Question',name:f[0],acceptedAnswer:{'@type':'Answer',text:f[1]}}))});document.head.appendChild(ld);
 $('#menuBtn').setAttribute('aria-expanded','false');$('#menuBtn').onclick=()=>{const h=$('#mobNav').classList.toggle('hidden');$('#menuBtn').setAttribute('aria-expanded',String(!h))};$$('#mobNav a').forEach(a=>a.addEventListener('click',()=>$('#mobNav').classList.add('hidden')));
-filters();grid();lock();cart();
+filters();grid();lock();cart();tsInit();loadStock();
 </script>
 </body>
 </html>

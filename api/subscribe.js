@@ -1,7 +1,8 @@
 // Adds a newsletter subscriber to the Resend segment.
-import { guard, mailLimited, validEmail, addContact } from './_lib.js';
+import { human, guard, mailLimited, validEmail, addContact } from './_lib.js';
 export default async function handler(req, res) {
   if (guard(req, res, { limit: 10, bucket: 'sub' })) return;
+  if (!(await human(req, res))) return;
   const { email, first_name } = req.body || {};
   if (!validEmail(email)) return res.status(400).json({ error: 'Invalid email' });
   if (mailLimited(res, 'sub', email, 3)) return;

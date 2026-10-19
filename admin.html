@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin | Nuvera Form</title><meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/site.css">
+<style>input.n{width:5rem;padding:.35rem .5rem;border:1.5px solid var(--line);border-radius:8px;background:var(--champ);font:inherit;color:var(--brown)}input.t{width:100%;max-width:22rem;padding:.55rem .8rem;border:1.5px solid var(--line);border-radius:10px;background:var(--champ);font:inherit;color:var(--brown)}button{font:inherit;cursor:pointer}.sm{padding:.3rem .9rem;font-size:.8rem;border:0}.st{font-size:.75rem;font-weight:600;border-radius:999px;padding:.1rem .6rem;background:var(--sand);border:1px solid var(--line)}</style></head>
+<body><header class="top"><div class="wrap bar"><a class="logo" href="/"><span class="dot"></span>Nuvera Form admin</a></div></header>
+<main><div class="wrap">
+<div id="login" class="card" style="max-width:28rem"><h2 style="margin-top:0">Sign in</h2><p>Enter your admin token (set as ADMIN_TOKEN in Vercel).</p><input id="tok" class="t" type="password" placeholder="Admin token" autocomplete="current-password"> <button id="go" class="btn">Open</button><p id="lmsg" role="status"></p></div>
+<div id="app" hidden>
+<h1>Inventory</h1><p>Orders reduce these numbers automatically. Bundles follow their parts. After a restock, enter the new total on hand and save.</p>
+<table id="stk"></table><p><button id="save" class="btn">Save stock</button> <span id="smsg" role="status"></span></p>
+<h1>Recent orders</h1><p>Unpaid orders hold their stock. Cancel an order to put its items back.</p><table id="ord"></table>
+</div></div></main>
+<script>
+const $=s=>document.querySelector(s);let TOKEN='';
+async function api(body){const r=await fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json','x-admin-token':TOKEN},body:JSON.stringify(body)});const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||('Error '+r.status));return j}
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function draw(j){$('#login').hidden=true;$('#app').hidden=false;
+$('#stk').innerHTML='<tr><th>Product (size)</th><td>On hand</td></tr>'+j.skus.map(k=>`<tr><th>${esc(k.replace('|',' · '))}</th><td><input class="n" type="number" min="0" step="1" data-k="${esc(k)}" value="${j.stock[k]}"></td></tr>`).join('')+Object.keys(j.stock).filter(k=>k.endsWith('|Bundle')).map(k=>`<tr><th>${esc(k.replace('|',' · '))} (automatic)</th><td>${j.stock[k]}</td></tr>`).join('');
+$('#ord').innerHTML=j.orders.length?'<tr><th>Order</th><td>Details</td></tr>'+j.orders.map(o=>`<tr><th>${esc(o.no)}<br><span class="st">${esc(o.status)}</span><br><small>${new Date(o.ts).toLocaleString()}</small></th><td><b>${esc(o.customer.name)}</b> · ${esc(o.customer.email)} · ${esc(o.customer.phone)}<br>${esc(o.customer.street)}, ${esc(o.customer.city)}, ${esc(o.customer.state)} ${esc(o.customer.zip)}<br>${o.items.map(esc).join('<br>')}<br><b>Total $${(o.total/100).toFixed(2)}</b>${o.disc?' (code NUVERA20 used)':''}<br>${o.status==='pending'?`<button class="btn sm" data-o="${esc(o.no)}" data-s="paid">Mark paid</button> <button class="btn sm ghost" data-o="${esc(o.no)}" data-s="cancelled">Cancel and release stock</button>`:''}</td></tr>`).join(''):'<tr><td>No orders yet.</td></tr>'}
+$('#go').onclick=async()=>{TOKEN=$('#tok').value.trim();$('#lmsg').textContent='Checking…';try{draw(await api({action:'list'}))}catch(e){$('#lmsg').textContent=e.message}};
+$('#tok').addEventListener('keydown',e=>{if(e.key==='Enter')$('#go').click()});
+$('#save').onclick=async()=>{const stock={};document.querySelectorAll('input.n').forEach(i=>stock[i.dataset.k]=parseInt(i.value,10));$('#smsg').textContent='Saving…';try{draw(await api({action:'setStock',stock}));$('#smsg').textContent='Saved.'}catch(e){$('#smsg').textContent=e.message}};
+$('#ord').addEventListener('click',async e=>{const b=e.target.closest('button[data-o]');if(!b)return;if(b.dataset.s==='cancelled'&&!confirm('Cancel this order and return its items to stock?'))return;try{draw(await api({action:'orderStatus',no:b.dataset.o,status:b.dataset.s}))}catch(x){alert(x.message)}});
+</script></body></html>

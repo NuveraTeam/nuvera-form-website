@@ -62,3 +62,21 @@ export async function sendEvent(event, email) {
     return r.ok;
   } catch { return false; }
 }
+
+/** Cloudflare Turnstile check. Active only when TURNSTILE_SECRET is set; returns true if the request may proceed (and sends the error itself otherwise). */
+export async function human(req, res) {
+  const secret = process.env.TURNSTILE_SECRET;
+  if (!secret) return true;
+  const token = req.body && req.body.cf_token;
+  if (typeof token !== 'string' || !token || token.length > 2048) { res.status(400).json({ error: 'captcha' }); return false; }
+  try {
+    const body = new URLSearchParams({ secret, response: token });
+    const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim();
+    if (ip) body.set('remoteip', ip);
+    const r = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', { method: 'POST', body });
+    const j = await r.json();
+    if (j.success) return true;
+  } catch { /* fall through */ }
+  res.status(400).json({ error: 'captcha' });
+  return false;
+}

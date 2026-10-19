@@ -135,14 +135,14 @@ def top():
 <nav class="m" aria-label="Main"><a href="/#catalog">Catalog</a><a href="/compounds">Compounds</a><a href="/categories">Categories</a><a href="/learn">Learn</a><a href="/#faq">FAQ</a></nav></div></header>'''
 NEWS='''<section class="nl" aria-label="Newsletter"><div class="wrap"><h2>Lot drops and restock alerts</h2><p>Occasional emails when new compounds or documentation are published. By subscribing you agree to receive them; unsubscribe any time.</p>
 <form id="nl" class="nlf"><input type="email" name="email" placeholder="Email address" required aria-label="Email address"><input type="checkbox" name="botcheck" style="display:none" tabindex="-1" aria-hidden="true"><button class="btn">Subscribe</button></form><p id="nlm" role="status"></p></div></section>
-<script>document.getElementById('nl').addEventListener('submit',async function(e){e.preventDefault();var m=document.getElementById('nlm');m.textContent='Subscribing…';try{var f=new FormData(e.target);var r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({access_key:'e71a64f9-3da5-4fde-b2ff-3463cd3f1c41',subject:'Nuvera Form list sign-up',from_name:'Nuvera Form Store',email:f.get('email'),botcheck:f.get('botcheck')?'1':'',page:location.pathname})});var j=await r.json();if(!j.success)throw 0;fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:f.get('email')})}).catch(function(){});m.textContent='You are on the list.';e.target.reset()}catch(x){m.textContent='Could not subscribe. Please try again or email info@nuveraform.com.'}});</script>'''
+<script src="/assets/site-config.js"></script><script src="/assets/forms.js"></script>'''
 def foot():
     return NEWS+f'''<footer class="f"><div class="wrap"><div class="fg">
 <div><p class="fh">Nuvera Form</p><p>Research peptides and reconstitution reagents for qualified laboratories.</p></div>
 <div><p class="fh">Compounds</p><ul>{"".join(f'<li><a href="/compounds/{s}">{e(n)}</a></li>' for s,n,*_ in COMPOUNDS[:6])}<li><a href="/compounds">All compounds</a></li></ul></div>
 <div><p class="fh">Categories</p><ul>{"".join(f'<li><a href="/categories/{s}">{e(n)}</a></li>' for s,n,*_ in CATS)}</ul></div>
 <div><p class="fh">Learn</p><ul>{"".join(f'<li><a href="/learn/{s}">{e(t)}</a></li>' for s,t,*_ in LEARN)}</ul></div>
-<div><p class="fh">Company</p><ul><li><a href="/shipping-returns">Shipping &amp; Returns</a></li><li><a href="/privacy">Privacy Policy</a></li><li><a href="/terms">Terms of Sale</a></li><li><a href="/research-use-policy">Research Use Policy</a></li><li><a href="/contact">Contact us</a></li><li><a href="mailto:info@nuveraform.com">info@nuveraform.com</a></li><li><a href="tel:+13054573814">(305) 457-3814</a></li></ul></div>
+<div><p class="fh">Company</p><ul><li><a href="/shipping-returns">Shipping &amp; Returns</a></li><li><a href="/privacy">Privacy Policy</a></li><li><a href="/terms">Terms of Sale</a></li><li><a href="/research-use-policy">Research Use Policy</a></li><li><a href="/reviews">Customer reviews</a></li><li><a href="/contact">Contact us</a></li><li><a href="mailto:info@nuveraform.com">info@nuveraform.com</a></li><li><a href="tel:+13054573814">(305) 457-3814</a></li></ul></div>
 </div><div class="legal"><p><strong>{RUO}</strong></p><p>Copyright © 2026 Nuvera Form. All rights reserved.</p></div></div></footer></body></html>'''
 def write(path,content):
     fp=path.lstrip("/")+".html"
@@ -213,6 +213,22 @@ write("/contact",head("Contact Nuvera Form | Phone, Email and Hours","Reach Nuve
 <h2>Paying for an order</h2><p>We currently accept Zelle. After you place an order, send the total to (305) 457-3814 and put your order number in the memo. See <a href="/shipping-returns">Shipping &amp; Returns</a>.</p>
 <div class="note"><strong>Research use only.</strong> {RUO} We cannot answer questions about dosing, injection or use in people or animals.</div></div></main>'''+foot())
 urls.append(("/contact",0.6))
+REVIEWS=[r for r in json.load(open("data/reviews.json")) if r.get("approved")]
+def stars(n): return "★"*n+"☆"*(5-n)
+rlist="".join(f'<div class="card"><p class="price" style="font-size:1.1rem;letter-spacing:2px" aria-label="{r["rating"]} out of 5">{stars(r["rating"])}</p><p>{e(r["text"])}</p><p style="font-size:.85rem"><strong>{e(r["name"])}</strong> · {e(r["aspect"])} · {e(r["date"])}'+(' · <span class="badge">Verified purchase</span>' if r.get("verified") else '')+'</p></div>' for r in REVIEWS) or '<div class="card"><p>No reviews yet. Be the first to tell us how your order went.</p></div>'
+OPTS="".join(f"<option>{o}</option>" for o in ["Shipping speed","Packaging","Communication","Order accuracy","Website experience"])
+write("/reviews",head("Customer Reviews | Nuvera Form","Service reviews from verified Nuvera Form customers: shipping speed, packaging, communication, order accuracy and website experience.","/reviews",crumbs_ld([("Home","/"),("Reviews","/reviews")]))+top()+f'''<main id="main"><div class="wrap prose"><p class="crumbs"><a href="/">Home</a> / Reviews</p><h1>Customer reviews</h1><p class="lede">Feedback on our service. Every review is checked against a real order before it is published.</p>
+<div class="grid" style="margin-top:1.5rem">{rlist}</div>
+<h2>Leave a service review</h2>
+<p>Tell us about shipping speed, packaging, communication, order accuracy or the website. Please do not describe any effect of a product: these are research materials and we cannot publish reviews about results, use or outcomes. We publish only reviews we can match to an order and may edit or decline others.</p>
+<form id="rv" class="card" style="display:grid;gap:.8rem"><input class="nlf-in" name="name" placeholder="First name and last initial" required maxlength="60" aria-label="Name"><input class="nlf-in" type="email" name="email" placeholder="Email used on your order" required aria-label="Email"><input class="nlf-in" name="order_number" placeholder="Order number (NF-...)" required pattern="NF-[0-9]{{6}}-[A-Za-z0-9]{{4}}" aria-label="Order number">
+<select class="nlf-in" name="aspect" required aria-label="What is your review about"><option value="">What is your review about?</option>{OPTS}</select>
+<select class="nlf-in" name="rating" required aria-label="Rating"><option value="">Rating</option><option value="5">5 – Excellent</option><option value="4">4 – Good</option><option value="3">3 – Okay</option><option value="2">2 – Poor</option><option value="1">1 – Very poor</option></select>
+<textarea class="nlf-in" name="text" rows="4" maxlength="600" required placeholder="Your review (service only, max 600 characters)" aria-label="Review"></textarea>
+<label style="font-size:.85rem"><input type="checkbox" name="agree" value="yes" required> My review is about the service, not any effect of a product, and I agree it may be published with my name.</label>
+<button class="btn" style="border:0;cursor:pointer;font:inherit;font-weight:600">Submit review</button><p id="rvm" role="status"></p></form>
+</div></main>'''+foot())
+urls.append(("/reviews",0.5))
 write("/404",head("Page not found | Nuvera Form","The page you are looking for could not be found.","/404").replace('index,follow','noindex').replace('<link rel="canonical" href="https://nuveraform.com/404">','')+top()+'<main id="main"><div class="wrap prose"><h1>Page not found</h1><p class="lede">That page does not exist or has moved.</p><p><a class="btn" href="/">Back to the home page</a> <a class="btn ghost" href="/compounds">Browse compounds</a></p></div></main>'+foot())
 
 sm='<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+"".join(f'<url><loc>{SITE}{p if p!="/" else "/"}</loc><lastmod>{TODAY}</lastmod><priority>{pr}</priority></url>\n' for p,pr in urls)+'</urlset>\n'

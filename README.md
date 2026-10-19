@@ -37,3 +37,19 @@ The access key in `index.html` is a public key by design. In the Web3Forms dashb
 
 ## 6. Before taking payments
 Checkout is currently manual (Zelle to (305) 457-3814, confirmed by hand). Before adding card payments, have the Privacy and Terms text reviewed, and confirm every claim on the site is supportable. The `api/` rate limits are per server instance; add Vercel Firewall rate limiting or a CAPTCHA if abuse appears.
+
+## Live inventory, orders and admin
+- Stock lives in Upstash Redis (Vercel → Storage → Marketplace → Upstash Redis → connect to this project; it adds `KV_REST_API_URL` and `KV_REST_API_TOKEN`).
+- `api/order.js` prices orders from `api/_catalog.js`, reserves stock atomically, saves the order and emails the owner and customer.
+- Bundles take their stock from their parts (`parts` in `_catalog.js`).
+- `/admin` (set `ADMIN_TOKEN` in Vercel): set stock after a restock, mark orders paid, cancel an order to put its items back.
+- Changing a price or product: edit BOTH `index.html` (P array) and `api/_catalog.js`, then run `node tools/check-catalog.mjs`.
+- Tests: `node tools/test-api.mjs` (fake Redis, mocked Resend).
+- If Redis is not connected the site still works with the built-in stock numbers (no live tracking) and orders arrive by email.
+
+## Reviews
+Submissions arrive by email (Web3Forms). After matching the order number, add the review to `data/reviews.json` with `"approved": true` (and `"verified": true`), then run `python3 tools/build-pages.py`.
+Fields: name, date, rating (1-5), aspect, text, approved, verified.
+
+## Spam protection (Turnstile)
+Create a Turnstile widget in Cloudflare, put the site key in `assets/site-config.js` (`TS_KEY`) and the secret in `TURNSTILE_SECRET` in Vercel. Until both are set the forms work without it. Set both together.
