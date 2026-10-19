@@ -7,7 +7,7 @@ header.top{position:sticky;top:0;background:rgba(247,240,227,.92);backdrop-filte
 .wrap{max-width:72rem;margin:0 auto;padding:0 1rem}
 .bar{display:flex;align-items:center;justify-content:space-between;height:4rem;gap:1rem}
 .logo{font-weight:700;font-size:1.1rem;text-decoration:none;display:flex;align-items:center;gap:.5rem}
-.dot{width:.6rem;height:.6rem;border-radius:50%;background:var(--gold);box-shadow:0 0 10px 2px rgba(222,178,90,.8)}
+
 nav.m{display:flex;gap:1.4rem;font-size:.875rem;font-weight:500;flex-wrap:wrap}nav.m a{text-decoration:none}nav.m a:hover{color:var(--gold)}
 main{padding:2.5rem 0 4rem}
 .crumbs{font-size:.8rem;margin-bottom:1rem}.crumbs a{color:var(--rose)}
@@ -27,3 +27,4 @@ footer.f{background:var(--sand);border-top:1px solid var(--line);font-size:.875r
 .fg{display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr))}.fg ul{list-style:none;margin:0;padding:0}.fg li{margin:.4rem 0}.fg h4{margin:0 0 .6rem}
 .legal{border-top:1px solid var(--line);margin-top:2rem;padding-top:1.2rem;text-align:center;font-size:.78rem}
 @media(max-width:640px){nav.m{gap:.9rem;font-size:.8rem}.logo span.t{display:none}}
+.brandmark{width:44px;height:44px;border-radius:50%;display:block;flex:none;filter:drop-shadow(0 2px 6px rgba(150,105,40,.35))}

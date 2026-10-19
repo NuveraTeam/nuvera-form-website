@@ -92,7 +92,7 @@ def head(title,desc,path,extra="",og=True):
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{e(title)}</title><meta name="description" content="{e(desc)}">
 <meta name="robots" content="index,follow,max-image-preview:large"><meta name="theme-color" content="#F7F0E3">
-<link rel="canonical" href="{url}"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="canonical" href="{url}"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32"><link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Nuvera Form"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}"><meta property="og:url" content="{url}"><meta property="og:image" content="{SITE}/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="{SITE}/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">{extra}</head>'''
@@ -100,7 +100,7 @@ def crumbs_ld(items):
     return '<script type="application/ld+json">'+json.dumps({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":i+1,"name":n,"item":SITE+p} for i,(n,p) in enumerate(items)]})+'</script>'
 def top():
     return '''<body><a class="skip" href="#main">Skip to content</a>
-<header class="top"><div class="wrap bar"><a class="logo" href="/"><span class="dot"></span><span class="t">Nuvera Form</span></a>
+<header class="top"><div class="wrap bar"><a class="logo" href="/"><img src="/assets/logo-128.png" alt="" width="44" height="44" class="brandmark"><span class="t">Nuvera Form</span></a>
 <nav class="m" aria-label="Main"><a href="/#catalog">Catalog</a><a href="/compounds">Compounds</a><a href="/learn">Learn</a><a href="/#faq">FAQ</a></nav></div></header>'''
 def foot():
     return f'''<footer class="f"><div class="wrap"><div class="fg">

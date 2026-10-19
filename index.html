@@ -8,10 +8,10 @@
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="theme-color" content="#F7F0E3">
 <link rel="canonical" href="https://nuveraform.com/">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32"><link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Nuvera Form"><meta property="og:title" content="Nuvera Form | Research Peptides for Qualified Laboratories"><meta property="og:description" content="A focused catalog of research peptides and reconstitution reagents. Research use only, 21+."><meta property="og:url" content="https://nuveraform.com/"><meta property="og:image" content="https://nuveraform.com/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://nuveraform.com/og.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Nuvera Form","url":"https://nuveraform.com/"}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","logo":"https://nuveraform.com/apple-touch-icon.png","name":"Nuvera Form","url":"https://nuveraform.com/","email":"info@nuveraform.com","slogan":"Research, wellness and beauty","sameAs":["https://instagram.com/nuveraform","https://tiktok.com/@nuveraform","https://facebook.com/nuveraform"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","logo":"https://nuveraform.com/assets/logo-512.png","name":"Nuvera Form","url":"https://nuveraform.com/","email":"info@nuveraform.com","slogan":"Research, wellness and beauty","sameAs":["https://instagram.com/nuveraform","https://tiktok.com/@nuveraform","https://facebook.com/nuveraform"]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.tailwindcss.com"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
@@ -41,7 +41,7 @@ body{font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown)
 .badge.warn{background:var(--rose);color:#fff;border-color:var(--rose)}
 #drawer{transform:translateX(100%);transition:transform .3s}
 #drawer.open{transform:none}
-.dot{display:inline-block;width:.6rem;height:.6rem;border-radius:50%;background:var(--gold);box-shadow:0 0 10px 2px rgba(222,178,90,.8)}
+.brandmark{width:44px;height:44px;border-radius:50%;display:block;flex:none;filter:drop-shadow(0 2px 6px rgba(150,105,40,.35))}.hero-logo{border-radius:50%;filter:drop-shadow(0 18px 40px rgba(150,105,40,.35))}
 .msg{max-width:85%;padding:.5rem .8rem;border-radius:14px;font-size:.85rem;margin-bottom:.5rem}
 .msg.bot{background:var(--sand);border:1px solid var(--line)}
 .msg.me{background:var(--gold);color:#fff;margin-left:auto}
@@ -53,7 +53,7 @@ body{font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown)
 
 <!-- Age gate -->
 <div id="age" class="modal" style="z-index:100" role="dialog" aria-modal="true" aria-labelledby="ageT"><div class="sheet text-center">
-<div class="mx-auto mb-3 w-14 h-14 rounded-full flex items-center justify-center text-white" style="background:radial-gradient(circle at 30% 30%,var(--lgold),var(--gold) 60%,#8a6520)"><i class="fa-solid fa-flask"></i></div>
+<img src="/assets/logo-128.png" alt="Nuvera Form" width="72" height="72" class="mx-auto mb-3 brandmark" style="width:72px;height:72px">
 <h2 id="ageT" class="text-2xl font-bold mb-2">Are you 21 or older?</h2>
 <p class="text-sm mb-5">Nuvera Form supplies analytical reagents to qualified researchers. You must be at least 21 to enter.</p>
 <div class="flex gap-3 justify-center"><button class="btn" id="ageYes">Yes, I am 21+</button><button class="btn ghost" id="ageNo">No, leave</button></div>
@@ -63,7 +63,7 @@ body{font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown)
 <!-- Header -->
 <header class="glass fixed top-0 inset-x-0 z-50 border-b" style="border-color:var(--line)">
 <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
-<a href="#top" class="flex items-center gap-2 font-bold text-lg"><span class="dot"></span>Nuvera Form</a>
+<a href="#top" class="flex items-center gap-2 font-bold text-lg"><img src="/assets/logo-128.png" alt="" width="44" height="44" class="brandmark">Nuvera Form</a>
 <nav class="hidden md:flex gap-7 text-sm font-medium">
 <a href="#catalog" class="hover:text-[#BF943C]">Catalog</a>
 <a href="#" data-open="coa" class="hover:text-[#BF943C]">Documentation</a>
@@ -92,15 +92,7 @@ body{font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown)
 <div class="flex flex-wrap gap-3 mt-7"><a href="#catalog" class="btn">Browse the catalog</a><button class="btn ghost" data-open="coa">Request documentation</button></div>
 <dl class="flex gap-8 mt-9 text-sm"><div><dt class="text-2xl font-bold" style="color:var(--gold)">10</dt><dd>compounds</dd></div><div><dt class="text-2xl font-bold" style="color:var(--gold)">1–2 days</dt><dd>to dispatch</dd></div><div><dt class="text-2xl font-bold" style="color:var(--gold)">21+</dt><dd>researchers only</dd></div></dl>
 </div>
-<svg viewBox="0 0 400 340" class="w-full max-w-md mx-auto" role="img" aria-label="Molecular chain of gold and rose-gold spheres">
-<defs>
-<radialGradient id="g1" cx=".35" cy=".3"><stop offset="0" stop-color="#fff6d6"/><stop offset=".35" stop-color="#DEB25A"/><stop offset="1" stop-color="#6e4c14"/></radialGradient>
-<radialGradient id="g2" cx=".35" cy=".3"><stop offset="0" stop-color="#ffe9e1"/><stop offset=".35" stop-color="#B87A6C"/><stop offset="1" stop-color="#4a2018"/></radialGradient>
-</defs>
-<g stroke="#BF943C" stroke-width="5" stroke-linecap="round"><path d="M70 60L150 110L250 80L320 170L260 250L330 300"/></g>
-<circle cx="70" cy="60" r="34" fill="url(#g1)"/><circle cx="150" cy="110" r="42" fill="url(#g1)"/><circle cx="250" cy="80" r="40" fill="url(#g2)"/>
-<circle cx="320" cy="170" r="48" fill="url(#g1)"/><circle cx="260" cy="250" r="38" fill="url(#g1)"/><circle cx="330" cy="300" r="34" fill="url(#g2)"/>
-</svg>
+<picture class="block w-full max-w-md mx-auto"><source srcset="/assets/logo.webp" type="image/webp"><img src="/assets/logo-512.png" alt="Nuvera Form logo: gold molecular chain on a rose-gold ringed circle" width="512" height="512" class="hero-logo w-full h-auto" fetchpriority="high"></picture>
 </section>
 
 <!-- Catalog -->
@@ -161,7 +153,7 @@ body{font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown)
 <footer class="border-t" style="background:var(--sand);border-color:var(--line)">
 <div class="max-w-7xl mx-auto px-4 py-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-10 text-sm">
 <div>
-<a href="#top" class="flex items-center gap-2 font-bold text-lg mb-3"><span class="dot"></span>Nuvera Form</a>
+<a href="#top" class="flex items-center gap-2 font-bold text-lg mb-3"><img src="/assets/logo-128.png" alt="" width="44" height="44" class="brandmark">Nuvera Form</a>
 <p class="mb-4">Analytical reagent quality for researchers: tested, documented and shipped with care.</p>
 <div class="flex gap-4 text-xl">
 <a href="https://instagram.com/nuveraform" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
