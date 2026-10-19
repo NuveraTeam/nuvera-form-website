@@ -90,7 +90,7 @@ LEARN=[
 
 LEGAL=[
 ("privacy","Privacy Policy","How Nuvera Form collects, uses and protects the information you give us.",
- [("What we collect","Name, email address, phone number and field of research when you create an account; the email you give for newsletters or documentation requests; and order details once online checkout is available."),
+ [("What we collect","Name, email address, phone number and field of research when you create an account; the email you give for newsletters or documentation requests; and the order details you submit (name, shipping address, phone and items). Zelle payments are made through your own bank; we never collect or store bank or card details on this site."),
   ("How we use it","To create your account, apply your welcome discount, reply to requests, send order updates and, if you opt in, product announcements."),
   ("Who processes it","Form submissions are handled by Web3Forms; email, including your subscriber record, is handled through Resend; the site is hosted on Vercel. These providers process data only to deliver their service."),
   ("Your choices","Email info@nuveraform.com to access, correct or delete your data, or to unsubscribe. We do not sell personal information."),
@@ -99,6 +99,7 @@ LEGAL=[
  [("Eligibility","Buyers must be 21 or older and purchase solely for laboratory research."),
   ("Research use only",RUO+" You are responsible for lawful handling, storage and disposal."),
   ("Pricing and stock","Prices and availability may change without notice. We may cancel an order if an item is unavailable or a price is shown in error, and will refund any payment taken."),
+  ("Payment and discount code","Orders are currently paid by Zelle after you place them, and ship once payment is confirmed. The NUVERA20 code takes 20% off the first order placed with a new account and can be used once."),
   ("Replacements","Report a damaged or incorrect item within 72 hours of delivery at info@nuveraform.com and we will replace it."),
   ("Liability","To the extent permitted by law, Nuvera Form is not liable for misuse of products or for losses arising from use outside these terms.")]),
 ("shipping-returns","Shipping & Returns","Dispatch times, delivery, costs and what to do if something is wrong.",

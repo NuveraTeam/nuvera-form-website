@@ -1,12 +1,13 @@
 // Sends the welcome email with the NUVERA20 code and saves the contact in Resend.
 // The API key lives in Vercel environment variables, never in the browser.
-import { guard, validEmail, esc, addContact, sendMail, sendEvent } from './_lib.js';
+import { guard, mailLimited, validEmail, esc, addContact, sendMail, sendEvent } from './_lib.js';
 
 export default async function handler(req, res) {
   if (guard(req, res, { limit: 5, bucket: 'welcome' })) return;
   const { email, first_name } = req.body || {};
   if (!validEmail(email)) return res.status(400).json({ error: 'Invalid email' });
-  const name = typeof first_name === 'string' ? first_name.slice(0, 80) : '';
+  if (mailLimited(res, 'welcome', email)) return;
+  const name = typeof first_name === 'string' ? first_name.trim().slice(0, 80) : '';
   if (await addContact(email, name)) await sendEvent('account.created', email); // starts the welcome automation once enabled
   const r = await sendMail({
     to: email,

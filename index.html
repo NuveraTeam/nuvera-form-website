@@ -244,15 +244,15 @@ body{font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown)
 <div id="payForm"><p class="text-sm mb-3">We currently accept payment by Zelle. Submit your details, then send the total to <b>(305) 457-3814</b> with your order number in the memo. We ship within 1–2 business days of payment confirmation.</p>
 <div id="paySum" class="card p-3 text-sm mb-3 space-y-1"></div>
 <form id="orderForm" class="space-y-3">
-<input class="inp" name="name" placeholder="Full name" required autocomplete="name"><input class="inp" type="email" name="email" placeholder="Email" required autocomplete="email"><input class="inp" type="tel" name="phone" placeholder="Phone" required autocomplete="tel">
-<input class="inp" name="street" placeholder="Street address, apt/suite" required autocomplete="street-address">
-<div class="grid grid-cols-3 gap-3"><input class="inp col-span-1" name="city" placeholder="City" required autocomplete="address-level2"><input class="inp" name="state" placeholder="State" required maxlength="2" autocomplete="address-level1"><input class="inp" name="zip" placeholder="ZIP" required inputmode="numeric" autocomplete="postal-code"></div>
-<textarea class="inp" name="notes" rows="2" placeholder="Notes (optional)"></textarea>
+<input class="inp" name="name" placeholder="Full name" required maxlength="80" autocomplete="name"><input class="inp" type="email" name="email" placeholder="Email" required maxlength="254" autocomplete="email"><input class="inp" type="tel" name="phone" placeholder="Phone" required minlength="7" maxlength="20" autocomplete="tel">
+<input class="inp" name="street" placeholder="Street address, apt/suite" required maxlength="120" autocomplete="street-address">
+<div class="grid grid-cols-3 gap-3"><input class="inp col-span-1" name="city" placeholder="City" required maxlength="60" autocomplete="address-level2"><input class="inp" name="state" placeholder="State" required maxlength="2" pattern="[A-Za-z]{2}" title="Two-letter state code" autocomplete="address-level1"><input class="inp" name="zip" placeholder="ZIP" required inputmode="numeric" pattern="\d{5}(-\d{4})?" title="5-digit ZIP code" autocomplete="postal-code"></div>
+<textarea class="inp" name="notes" rows="2" maxlength="500" placeholder="Notes (optional)"></textarea>
 <p id="orderErr" class="text-xs font-semibold hidden" style="color:#C42424">We could not send your order. Check your connection or email info@nuveraform.com.</p>
 <button class="btn w-full" id="orderBtn">Submit order</button></form></div>
 <div id="payDone" class="hidden text-sm space-y-3"><p class="font-semibold text-lg">Order received.</p><p>Order number: <b id="ordNo"></b></p>
 <div class="card p-4"><p class="font-semibold mb-1">Pay by Zelle</p><p>Send <b id="ordAmt"></b> to <b>(305) 457-3814</b> and put <b id="ordMemo"></b> in the memo. Please check the recipient name before sending.</p></div>
-<p>We will confirm by email once payment arrives, then ship. A copy of these instructions has been emailed to you. Questions: info@nuveraform.com or (305) 457-3814.</p><button class="btn" data-close>Done</button></div>
+<p>We will confirm by email once payment arrives, then ship. <span id="ordMail"></span> Questions: info@nuveraform.com or (305) 457-3814.</p><button class="btn" data-close>Done</button></div>
 </div></div>
 
 <!-- Affiliate modal -->
@@ -309,7 +309,7 @@ const CATS={all:'All',star:'Star product',blend:'Blends',single:'Single peptides
 function loadCart(){try{const c=JSON.parse(ls.get('nv_cart')||'[]');return Array.isArray(c)?c.filter(i=>i&&typeof i.q==='number'&&i.q>0):[]}catch(e){return[]}}
 let st={f:'all',q:'',sel:{},cart:loadCart(),promo:ls.get('nv_promo')==='1'};
 P.forEach(p=>st.sel[p.id]=Object.keys(p.v)[0]);
-st.cart=st.cart.filter(i=>{const p=P.find(x=>x.id===i.id);return p&&p.v[i.v]&&i.k===i.id+'|'+i.v});
+st.cart=st.cart.filter(i=>{const p=P.find(x=>x.id===i.id);return p&&p.v[i.v]&&i.k===i.id+'|'+i.v}).map(i=>{const s=P.find(x=>x.id===i.id).v[i.v].s;i.q=Math.floor(i.q);if(s!==null&&i.q>s)i.q=s;return i}).filter(i=>i.q>0);
 const unlocked=()=>ls.get('nv_unlocked')==='1';
 const stockTxt=s=>s===null?'In stock':s<=1?'Last vial!':s<=3?'Low: '+s+' vials':s+' vials in stock';
 let lastF=null;
@@ -357,7 +357,7 @@ $('#items').innerHTML=st.cart.length?st.cart.map(i=>{const p=prod(i.id),c=p.v[i.
 $$('[data-q]').forEach(b=>b.onclick=()=>{const it=st.cart.find(i=>i.k===b.dataset.q),d=+b.dataset.d,c=prod(it.id).v[it.v];
 if(d>0&&c.s!==null&&it.q>=c.s){toast('Only '+c.s+' in stock');return}it.q+=d;if(it.q<1)st.cart=st.cart.filter(x=>x!==it);save()});
 $$('[data-rm]').forEach(b=>b.onclick=()=>{st.cart=st.cart.filter(i=>i.k!==b.dataset.rm);save()});
-const sub=st.cart.reduce((a,i)=>a+prod(i.id).v[i.v].p*i.q,0),disc=st.promo&&sub?sub*.2:0,net=sub-disc,ship=!sub||net>=200?0:15;
+const T=totals(),sub=T.sub,disc=T.disc,net=T.net,ship=T.ship;
 $('#totals').innerHTML=`<div class="flex justify-between"><span>Subtotal</span><span>${money(sub)}</span></div>`+(st.promo&&sub?`<div class="flex justify-between font-semibold" style="color:var(--gold)"><span>NUVERA20 (20%)</span><span>−${money(disc)}</span></div>`:'')+`<div class="flex justify-between"><span>Shipping</span><span>${sub?(ship?money(ship):'Free'):'-'}</span></div><div class="flex justify-between text-lg font-bold pt-1"><span>Total</span><span>${money(net+ship)}</span></div>`;
 const left=200-net;$('#shipTxt').textContent=!sub?'Free shipping on orders of $200 or more':left>0?'Add '+money(left)+' more for free shipping':'You have unlocked free shipping';
 $('#shipBar').style.width=Math.min(100,net/2)+'%';
@@ -365,18 +365,22 @@ $('#promoMsg').textContent=st.promo&&sub?'NUVERA20 applied: 20% off your subtota
 let cartF=null;function openCart(){if(!$('#drawer').classList.contains('open'))cartF=document.activeElement;$('#drawer').classList.add('open');$('#shade').classList.remove('hidden');setTimeout(()=>$('#cartX').focus(),30)}
 function closeCart(){$('#drawer').classList.remove('open');$('#shade').classList.add('hidden');if(cartF&&cartF.focus)try{cartF.focus()}catch(e){}}
 $('#cartBtn').onclick=openCart;$('#cartX').onclick=closeCart;$('#shade').onclick=closeCart;
-$('#promoBtn').onclick=()=>{const c=$('#promo').value.trim().toUpperCase();if(c==='NUVERA20'&&!unlocked()){$('#promoMsg').textContent='Create a free account to use NUVERA20.'}else if(c==='NUVERA20'){st.promo=true;ls.set('nv_promo','1');cart()}else $('#promoMsg').textContent='That code is not valid.'};
-function totals(){const sub=st.cart.reduce((a,i)=>a+prod(i.id).v[i.v].p*i.q,0),disc=st.promo&&sub?sub*.2:0,net=sub-disc,ship=!sub||net>=200?0:15;return{sub,disc,net,ship,total:net+ship}}
+$('#promoBtn').onclick=()=>{const c=$('#promo').value.trim().toUpperCase();if(c==='NUVERA20'&&!unlocked()){$('#promoMsg').textContent='Create a free account to use NUVERA20.'}else if(c==='NUVERA20'&&ls.get('nv_promo_used')==='1'){$('#promoMsg').textContent='NUVERA20 is for a first order and has already been used.'}else if(c==='NUVERA20'){st.promo=true;ls.set('nv_promo','1');cart()}else $('#promoMsg').textContent='That code is not valid.'};
+function totals(){const c=st.cart.reduce((a,i)=>a+Math.round(prod(i.id).v[i.v].p*100)*i.q,0),d=st.promo&&c?Math.round(c*.2):0,n=c-d,sh=!c||n>=20000?0:1500;return{sub:c/100,disc:d/100,net:n/100,ship:sh/100,total:(n+sh)/100}}
 $('#checkout').onclick=()=>{if(!st.cart.length)return toast('Your cart is empty');if(!unlocked()){closeCart();toast('Create a free account to check out');open('auth');return}if(!$('#att').checked)return toast('Please confirm the research-use statement');
 const t=totals();$('#paySum').innerHTML=st.cart.map(i=>`<div class="flex justify-between"><span>${prod(i.id).n}${Object.keys(prod(i.id).v).length>1?' '+i.v:''} × ${i.q}</span><span>${money(prod(i.id).v[i.v].p*i.q)}</span></div>`).join('')+(t.disc?`<div class="flex justify-between"><span>NUVERA20</span><span>−${money(t.disc)}</span></div>`:'')+`<div class="flex justify-between"><span>Shipping</span><span>${t.ship?money(t.ship):'Free'}</span></div><div class="flex justify-between font-bold border-t pt-1" style="border-color:var(--line)"><span>Total due</span><span>${money(t.total)}</span></div>`;
 $('#payForm').classList.remove('hidden');$('#payDone').classList.add('hidden');$('#orderErr').classList.add('hidden');const em=ls.get('nv_email');if(em&&!$('#orderForm [name=email]').value)$('#orderForm [name=email]').value=em;closeCart();open('pay')};
-$('#orderForm').onsubmit=async e=>{e.preventDefault();const b=$('#orderBtn');b.disabled=true;b.textContent='Submitting…';$('#orderErr').classList.add('hidden');
-const f=Object.fromEntries(new FormData(e.target)),t=totals(),d=new Date(),no='NF-'+String(d.getFullYear()).slice(2)+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+'-'+Math.random().toString(36).slice(2,6).toUpperCase();
+let ordBusy=false;
+$('#orderForm').onsubmit=async e=>{e.preventDefault();if(ordBusy||!st.cart.length)return;ordBusy=true;const b=$('#orderBtn');b.disabled=true;b.textContent='Submitting…';$('#orderErr').classList.add('hidden');
+const f=Object.fromEntries(new FormData(e.target)),t=totals(),d=new Date(),A='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',no='NF-'+String(d.getFullYear()).slice(2)+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+'-'+[...crypto.getRandomValues(new Uint8Array(4))].map(x=>A[x%32]).join('');
 const lines=st.cart.map(i=>`${prod(i.id).n}${Object.keys(prod(i.id).v).length>1?' '+i.v:''} x${i.q} @ ${money(prod(i.id).v[i.v].p)}`);
-try{await post({subject:'New order '+no+' ('+money(t.total)+')',from_name:'Nuvera Form Store',order_number:no,customer:f.name,email:f.email,phone:f.phone,ship_to:`${f.street}, ${f.city}, ${f.state} ${f.zip}`,items:lines.join(' | '),discount:t.disc?'NUVERA20 -'+money(t.disc):'none',shipping:t.ship?money(t.ship):'Free',total_due:money(t.total),payment:'Zelle (pending)',notes:f.notes||'',ruo_confirmed:'Yes'});
-fetch('/api/order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:f.email,name:f.name,order_number:no,total:t.total.toFixed(2),items:lines})}).catch(()=>{});
-$('#ordNo').textContent=no;$('#ordAmt').textContent=money(t.total);$('#ordMemo').textContent=no;$('#payForm').classList.add('hidden');$('#payDone').classList.remove('hidden');st.cart=[];save();e.target.reset()}
-catch(x){$('#orderErr').classList.remove('hidden')}b.disabled=false;b.textContent='Submit order'};
+try{await post({subject:'New order '+no+' ('+money(t.total)+')',from_name:'Nuvera Form Store',order_number:no,customer:f.name,email:f.email,phone:f.phone,ship_to:`${f.street}, ${f.city}, ${f.state.toUpperCase()} ${f.zip}`,items:lines.join(' | '),discount:t.disc?'NUVERA20 -'+money(t.disc)+' (first-order code: check this email has no earlier order)':'none',shipping:t.ship?money(t.ship):'Free',total_due:money(t.total),payment:'Zelle (pending)',notes:f.notes||'',ruo_confirmed:'Yes'});
+let mailed=false;try{const r=await fetch('/api/order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:f.email,name:f.name,order_number:no,total:t.total.toFixed(2),items:lines}),signal:AbortSignal.timeout(8000)});mailed=r.ok}catch(x){}
+$('#ordMail').textContent=mailed?'A copy of these instructions has been emailed to you.':'We could not email you a copy just now, so please keep the details above.';
+$('#ordNo').textContent=no;$('#ordAmt').textContent=money(t.total);$('#ordMemo').textContent=no;$('#payForm').classList.add('hidden');$('#payDone').classList.remove('hidden');
+if(t.disc){st.promo=false;ls.set('nv_promo','0');ls.set('nv_promo_used','1')}
+st.cart=[];save();e.target.reset();const h=$('#payDone p');h.tabIndex=-1;h.focus()}
+catch(x){$('#orderErr').classList.remove('hidden')}ordBusy=false;b.disabled=false;b.textContent='Submit order'};
 
 /* modals */
 $$('[data-open]').forEach(a=>a.onclick=e=>{e.preventDefault();open(a.dataset.open)});
@@ -388,7 +392,7 @@ async function post(data){const r=await fetch(W3,{method:'POST',headers:{'Conten
 $('#signup').onsubmit=async e=>{e.preventDefault();const f=Object.fromEntries(new FormData(e.target)),b=$('#signupBtn');b.disabled=true;b.textContent='Creating account…';$('#authErr').classList.add('hidden');
 try{await post({subject:'New Nuvera Form sign-up',from_name:'Nuvera Form Store',...f,ruo:'Accepted'});
 fetch('/api/welcome',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:f.email,first_name:f.first_name})}).catch(()=>{});
-ls.set('nv_unlocked','1');ls.set('nv_email',f.email.toLowerCase());ls.set('nv_promo','1');st.promo=true;close('auth');lock();cart();open('disc')}
+ls.set('nv_unlocked','1');ls.set('nv_email',f.email.toLowerCase());if(ls.get('nv_promo_used')!=='1'){ls.set('nv_promo','1');st.promo=true}close('auth');lock();cart();if(st.promo)open('disc')}
 catch(x){$('#authErr').classList.remove('hidden')}b.disabled=false;b.textContent='Create account'};
 $('#login').onsubmit=e=>{e.preventDefault();if($('#lemail').value.trim().toLowerCase()===ls.get('nv_email')){ls.set('nv_unlocked','1');close('auth');lock();toast('Welcome back')}else $('#logErr').classList.remove('hidden')};
 $('#shopNow').onclick=()=>{close('disc');location.hash='catalog'};
@@ -417,12 +421,12 @@ const KB=[[/steril|endotox|metal|assay|which tests|what.*test/,'Documentation av
 [/hplc|purity|99/,'Documentation availability varies by batch. Email info@nuveraform.com and we will tell you what is available for your order.'],
 [/coa|certificate|batch|document/,'Open Documentation in the header to request paperwork for your order, or email info@nuveraform.com.'],
 [/ruo|research use|legal|complian/,'All products are sold strictly for Research Use Only, to buyers aged 21+. They are not for human consumption, or for diagnostic or therapeutic use.'],
-[/reconstitut|bac|bacteriostatic|dilut|mix/,'For laboratory work, lyophilized material is typically reconstituted with a sterile diluent such as our Bacteriostatic Water, following your lab’s written protocol and any documentation for the lot. I cannot give amounts for any use on people or animals.'],
+[/reconstitut|\bbac\b|bacteriostatic|dilut|mix/,'For laboratory work, lyophilized material is typically reconstituted with a sterile diluent such as our Bacteriostatic Water, following your lab’s written protocol and any documentation for the lot. I cannot give amounts for any use on people or animals.'],
 [/storage|store|fridge|freez|temperature/,'Keep lyophilized vials sealed, dry, cold and away from light. The full guidance is under Storage & Handling Protocols in the footer.'],
 [/ship|deliver|free/,'Orders of $200 or more ship free after discounts. Smaller orders ship at a flat $15 rate.'],
 [/code|discount|promo|20%/,'Sign up for a free account to unlock NUVERA20, which takes 20% off your cart subtotal.'],
 [/return|refund|damage/,'Email info@nuveraform.com within 72 hours of delivery if an order arrives damaged or incorrect.'],
-[/phone|call|hours|open|contact|address|zelle|pay(ment)?|how.*pay/,'You can reach us at info@nuveraform.com or (305) 457-3814, Monday to Friday, 9 AM to 5 PM ET. Orders are paid by Zelle for now: place your order, then send the total to (305) 457-3814 with your order number in the memo.'],
+[/\bphone\b|\bcall\b|\bhours\b|\bopen(ing)?\b|contact|address|zelle|\bpay(ment|ments)?\b|how.*pay/,'You can reach us at info@nuveraform.com or (305) 457-3814, Monday to Friday, 9 AM to 5 PM ET. Orders are paid by Zelle for now: place your order, then send the total to (305) 457-3814 with your order number in the memo.'],
 [/bulk|institution|wholesale/,'For bulk or institutional pricing, email info@nuveraform.com with your organization and quantities.']];
 const BLOCK=/dos(e|age|ing)|inject|how (much|many).*(take|use)|\b(should i|can i|do i|to) (take|use)\b|\btaking\b|human|myself|weight loss|lose weight|side effect|safe to|cycle|stack/;
 function say(t,c){const d=document.createElement('div');d.className='msg '+c;d.textContent=t;$('#log').appendChild(d);$('#log').scrollTop=1e5}
