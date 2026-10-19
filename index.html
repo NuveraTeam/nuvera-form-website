@@ -106,34 +106,30 @@ body{font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown)
 <!-- Catalog -->
 <section id="catalog" class="max-w-7xl mx-auto px-4 pb-20 scroll-mt-20">
 <div class="flex items-end justify-between mb-6 flex-wrap gap-3">
-<h2 class="text-3xl font-bold">Catalog</h2>
+<div><h2 class="text-3xl font-bold">Catalog</h2><p id="promoBar" class="text-sm mt-1">Prices are open to everyone. <button class="underline font-semibold" data-open="auth">Create a free account</button> to check out and get 10% off your first order.</p></div>
 <div id="filters" class="flex gap-2 flex-wrap"></div>
 </div>
-<div id="catWrap" class="relative locked">
+<div id="catWrap" class="relative">
 <div id="grid" class="grid-in grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"></div>
-<div id="lock" class="absolute inset-0 flex items-start justify-center pt-24">
-<div class="card p-7 text-center max-w-sm" style="background:var(--champ)">
-<i class="fa-solid fa-lock text-2xl" style="color:var(--gold)"></i>
-<h3 class="text-xl font-bold mt-2">Create a free account to view pricing</h3>
-<p class="text-sm mt-2 mb-4">Sign up to unlock the full catalog and receive 10% off your first order.</p>
-<button class="btn" data-open="auth">Sign up or log in</button>
-</div></div>
 </div>
 </section>
 
 <section class="max-w-7xl mx-auto px-4 pb-20"><div class="max-w-2xl mb-6"><h2 class="text-3xl font-bold">Why order from Nuvera Form</h2><p class="mt-2 text-sm">A small, carefully presented range with the information you need up front.</p></div><div id="tests" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4"></div></section>
 <section class="max-w-7xl mx-auto px-4 pb-20"><div id="promises" class="grid md:grid-cols-3 gap-5"></div></section>
 <section class="max-w-7xl mx-auto px-4 pb-20"><h2 class="text-3xl font-bold mb-6">How ordering works</h2><ol class="grid md:grid-cols-4 gap-4">
-<li class="card p-5"><span class="badge">Step 1</span><h3 class="font-bold mt-2">Create a free account</h3><p class="text-sm mt-1">Confirm you are 21+ and buying for research. Pricing unlocks and NUVERA10 is applied.</p></li>
-<li class="card p-5"><span class="badge">Step 2</span><h3 class="font-bold mt-2">Choose your compounds</h3><p class="text-sm mt-1">Pick a size, check stock and add to cart. Orders over $200 ship free.</p></li>
+<li class="card p-5"><span class="badge">Step 1</span><h3 class="font-bold mt-2">Create a free account</h3><p class="text-sm mt-1">Needed at checkout. Confirm you are 21+ and buying for research, and NUVERA10 is applied.</p></li>
+<li class="card p-5"><span class="badge">Step 2</span><h3 class="font-bold mt-2">Browse and add to cart</h3><p class="text-sm mt-1">Pick a size, check stock and add to cart. Orders over $200 ship free.</p></li>
 <li class="card p-5"><span class="badge">Step 3</span><h3 class="font-bold mt-2">We pack discreetly</h3><p class="text-sm mt-1">Plain outer box and a neutral billing descriptor, dispatched in 1–2 business days.</p></li>
 <li class="card p-5"><span class="badge">Step 4</span><h3 class="font-bold mt-2">Track and store</h3><p class="text-sm mt-1">A tracking link is emailed. Read the storage guide before opening a vial.</p></li></ol></section>
-<section class="max-w-7xl mx-auto px-4 pb-20"><div class="flex items-end justify-between flex-wrap gap-3 mb-6"><h2 class="text-3xl font-bold">Compound specifications</h2><a href="/compounds" class="underline text-sm font-semibold">All compounds</a></div>
+<section class="max-w-7xl mx-auto px-4 pb-20"><div class="flex items-end justify-between flex-wrap gap-3 mb-6"><h2 class="text-3xl font-bold">Compound specifications</h2><a href="/categories" class="underline text-sm font-semibold">Browse by category</a></div>
 <div class="flex flex-wrap gap-2"><a class="pill" href="/compounds/retatrutide">Retatrutide</a><a class="pill" href="/compounds/bpc-157">BPC-157</a><a class="pill" href="/compounds/tb-500">TB-500</a><a class="pill" href="/compounds/ghk-cu">GHK-Cu</a><a class="pill" href="/compounds/thymosin-alpha-1">Thymosin Alpha 1</a><a class="pill" href="/compounds/nad-plus">NAD+</a><a class="pill" href="/compounds/cjc-1295-ipamorelin">CJC-1295 / Ipamorelin</a><a class="pill" href="/compounds/mots-c">MOTS-c</a><a class="pill" href="/compounds/klow-blend">KLOW Blend</a><a class="pill" href="/compounds/kisspeptin">Kisspeptin</a><a class="pill" href="/compounds/bacteriostatic-water">Bacteriostatic Water</a></div></section>
 <section class="max-w-7xl mx-auto px-4 pb-20"><div class="flex items-end justify-between flex-wrap gap-3 mb-6"><h2 class="text-3xl font-bold">Learn</h2><a href="/learn" class="underline text-sm font-semibold">All guides</a></div><div class="grid md:grid-cols-3 gap-5">
 <a class="card p-6 block" href="/learn/what-research-use-only-means"><h3 class="font-bold">What “research use only” means</h3><p class="text-sm mt-1">What the RUO label covers and rules out.</p></a>
 <a class="card p-6 block" href="/learn/storing-lyophilized-peptides"><h3 class="font-bold">Storing lyophilized peptides</h3><p class="text-sm mt-1">General lab handling principles.</p></a>
-<a class="card p-6 block" href="/learn/how-to-read-a-certificate-of-analysis"><h3 class="font-bold">How to read a certificate of analysis</h3><p class="text-sm mt-1">HPLC and mass spec, explained.</p></a></div></section>
+<a class="card p-6 block" href="/learn/how-to-read-a-certificate-of-analysis"><h3 class="font-bold">How to read a certificate of analysis</h3><p class="text-sm mt-1">HPLC and mass spec, explained.</p></a>
+<a class="card p-6 block" href="/learn/reconstitution-for-lab-work"><h3 class="font-bold">Reconstitution for lab work</h3><p class="text-sm mt-1">Diluents, aseptic technique, concentration.</p></a>
+<a class="card p-6 block" href="/learn/bacteriostatic-vs-sterile-water"><h3 class="font-bold">Bacteriostatic vs sterile water</h3><p class="text-sm mt-1">How the two diluents differ.</p></a>
+<a class="card p-6 block" href="/learn/peptide-research-glossary"><h3 class="font-bold">Peptide research glossary</h3><p class="text-sm mt-1">Terms on peptide documentation.</p></a></div></section>
 <!-- Research portal -->
 <section id="research" class="max-w-7xl mx-auto px-4 pb-20 scroll-mt-20">
 <h2 class="text-3xl font-bold mb-6">Research Portal</h2>
@@ -173,7 +169,7 @@ body{font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown)
 <div><h4 class="font-bold mb-3">Products</h4><ul class="space-y-2">
 <li><a href="#catalog" data-f="star">Retatrutide</a></li>
 <li><a href="#catalog" data-f="blend">Peptide Blends (BPC/TB-500)</a></li>
-<li><a href="#catalog" data-f="recovery">Recovery &amp; Repair Series</a></li>
+<li><a href="#catalog" data-f="recovery">Single Peptides</a></li><li><a href="/categories">All categories</a></li>
 <li><a href="#catalog" data-f="water">Reconstitution Solutions (BAC Water)</a></li>
 <li><a href="#" data-info="bulk">Bulk / Institutional Orders</a></li></ul></div>
 <div><h4 class="font-bold mb-3">Research &amp; Purity</h4><ul class="space-y-2">
@@ -215,7 +211,7 @@ body{font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown)
 <!-- Auth modal -->
 <div id="auth" class="modal" role="dialog" aria-modal="true" aria-label="Create your account"><div class="sheet">
 <div class="flex justify-between items-start mb-3"><h3 class="text-2xl font-bold">Create your account</h3><button data-close aria-label="Close"><i class="fa-solid fa-xmark text-xl"></i></button></div>
-<p class="text-sm mb-4">Sign up to unlock pricing and get 10% off your first order.</p>
+<p class="text-sm mb-4">A free account is needed to check out. You also get 10% off your first order.</p>
 <form id="signup" class="space-y-3">
 <div class="grid grid-cols-2 gap-3"><input class="inp" name="first_name" placeholder="First name" required autocomplete="given-name"><input class="inp" name="last_name" placeholder="Last name" required autocomplete="family-name"></div>
 <input class="inp" type="email" name="email" placeholder="Email" required autocomplete="email">
@@ -232,7 +228,7 @@ body{font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown)
 <!-- Discount modal -->
 <div id="disc" class="modal" role="dialog" aria-modal="true" aria-label="Welcome. 10% off"><div class="sheet text-center">
 <h3 class="text-2xl font-bold">Welcome. 10% off is yours.</h3>
-<p class="text-sm mt-2">The catalog is unlocked. Your code is applied automatically at checkout.</p>
+<p class="text-sm mt-2">Your code is applied automatically at checkout.</p>
 <div class="my-5 py-4 rounded-2xl text-3xl font-bold tracking-wider" style="background:var(--sand);border:2px dashed var(--gold);color:var(--gold)">NUVERA10</div>
 <button class="btn" id="shopNow">Start shopping</button>
 </div></div>
@@ -292,9 +288,10 @@ const P=[
 {id:'klo',n:'KLOW Blend',cat:'blend',v:{'Blend':{p:120,s:null}}},
 {id:'kis',n:'Kisspeptin 10mg',cat:'recovery',v:{'10mg':{p:85,s:null}}},
 {id:'bac',n:'Bacteriostatic Water 10ml',cat:'water',v:{'10ml':{p:15,s:3}}},
-{id:'bn1',n:'Recovery Duo: BPC-157/TB-500 Blend + GHK-Cu 100mg',cat:'bundle',v:{'Bundle':{p:175.5,s:5}}},
+{id:'bn1',n:'Research Duo: BPC-157/TB-500 Blend + GHK-Cu 100mg',cat:'bundle',v:{'Bundle':{p:175.5,s:5}}},
 {id:'bn2',n:'Retatrutide 10mg + Bacteriostatic Water 10ml',cat:'bundle',v:{'Bundle':{p:175.5,s:3}}}];
-const CATS={all:'All',star:'Star product',blend:'Blends',recovery:'Recovery & repair',water:'Reconstitution',bundle:'Bundles (save 10%)'};
+const SLUG={ret:'retatrutide',ghk:'ghk-cu',ta1:'thymosin-alpha-1',bpc:'bpc-157',nad:'nad-plus',cjc:'cjc-1295-ipamorelin',mot:'mots-c',klo:'klow-blend',kis:'kisspeptin',bac:'bacteriostatic-water'};
+const CATS={all:'All',star:'Star product',blend:'Blends',recovery:'Single peptides',water:'Reconstitution',bundle:'Bundles (save 10%)'};
 let st={f:'all',q:'',sel:{},cart:JSON.parse(ls.get('nv_cart')||'[]'),promo:ls.get('nv_promo')==='1'};
 P.forEach(p=>st.sel[p.id]=Object.keys(p.v)[0]);
 const unlocked=()=>ls.get('nv_unlocked')==='1';
@@ -318,18 +315,18 @@ $('#grid').innerHTML=list.length?list.map(p=>{const vs=Object.keys(p.v),cur=p.v[
 return `<article class="card p-5 flex flex-col ${p.star?'ring-2 ring-[#BF943C]':''}">
 <div class="flex justify-between items-start mb-3"><span class="badge ${cur.s!==null&&cur.s<=3?'warn':''}" id="b-${p.id}">${stockTxt(cur.s)}</span>${p.star?'<span class="badge" style="background:var(--gold);color:#fff;border-color:var(--gold)">Star product</span>':''}</div>
 <div class="h-36 flex items-center justify-center mb-3 rounded-2xl" style="background:linear-gradient(160deg,var(--sand),var(--champ))">${vial(st.sel[p.id])}</div>
-<h3 class="font-bold leading-snug">${p.n}</h3>
+<h3 class="font-bold leading-snug">${SLUG[p.id]?`<a href="/compounds/${SLUG[p.id]}" class="hover:underline">${p.n}</a>`:p.n}</h3>
 <p class="text-xs mt-1">Lyophilized powder · Research use only</p><button class="text-xs underline mt-1 text-left" data-coa="${p.n}">Request documentation</button>
 ${vs.length>1?`<div class="flex gap-2 mt-3 flex-wrap">${vs.map(v=>`<button class="pill ${st.sel[p.id]===v?'on':''}" data-p="${p.id}" data-v="${v}">${v}</button>`).join('')}</div>`:''}
 <div class="mt-auto pt-4 flex items-center justify-between"><span class="text-2xl font-bold" style="color:var(--gold)" id="pr-${p.id}">${money(cur.p)}</span><button class="btn text-sm" data-add="${p.id}">Add to cart</button></div></article>`}).join(''):'<p class="col-span-full text-center py-10">No compounds match your search.</p>';
 $$('[data-p]').forEach(b=>b.onclick=()=>{st.sel[b.dataset.p]=b.dataset.v;grid()});
 $$('[data-add]').forEach(b=>b.onclick=()=>add(b.dataset.add));
 $$('[data-coa]').forEach(b=>b.onclick=()=>{$('#coaIn').value=b.dataset.coa;$('#coaOut').textContent='';open('coa')})}
-function lock(){const u=unlocked();$('#catWrap').classList.toggle('locked',!u);$('#lock').style.display=u?'none':'flex'}
+function lock(){$('#promoBar').style.display=unlocked()?'none':''}
 
 /* cart */
 const prod=id=>P.find(p=>p.id===id);
-function add(id){if(!unlocked()){open('auth');return}
+function add(id){
 const v=st.sel[id],cur=prod(id).v[v],k=id+'|'+v;let it=st.cart.find(i=>i.k===k);
 if(cur.s!==null&&(it?it.q:0)>=cur.s){toast('Only '+cur.s+' in stock');return}
 it?it.q++:st.cart.push({k,id,v,q:1});save();openCart();toast('Added to cart')}
@@ -351,7 +348,7 @@ function openCart(){$('#drawer').classList.add('open');$('#shade').classList.rem
 function closeCart(){$('#drawer').classList.remove('open');$('#shade').classList.add('hidden')}
 $('#cartBtn').onclick=openCart;$('#cartX').onclick=closeCart;$('#shade').onclick=closeCart;
 $('#promoBtn').onclick=()=>{const c=$('#promo').value.trim().toUpperCase();if(c==='NUVERA10'){st.promo=true;ls.set('nv_promo','1');cart()}else $('#promoMsg').textContent='That code is not valid.'};
-$('#checkout').onclick=()=>{if(!st.cart.length)return toast('Your cart is empty');if(!$('#att').checked)return toast('Please confirm the research-use statement');toast('Connect your payment processor to enable checkout')};
+$('#checkout').onclick=()=>{if(!st.cart.length)return toast('Your cart is empty');if(!unlocked()){closeCart();toast('Create a free account to check out');open('auth');return}if(!$('#att').checked)return toast('Please confirm the research-use statement');toast('Connect your payment processor to enable checkout')};
 
 /* modals */
 $$('[data-open]').forEach(a=>a.onclick=e=>{e.preventDefault();open(a.dataset.open)});
@@ -413,7 +410,7 @@ $('#chatX').onclick=()=>{$('#chat').classList.add('hidden');$('#chat').classList
 $('#chatForm').onsubmit=e=>{e.preventDefault();const v=$('#chatIn').value.trim();if(v){$('#chatIn').value='';ask(v)}};
 
 $('#nl').onsubmit=async e=>{e.preventDefault();const m=$('#nlMsg');m.textContent='Subscribing…';try{await post({subject:'Nuvera Form list sign-up',from_name:'Nuvera Form Store',email:new FormData(e.target).get('email')});m.textContent='You are on the list.';e.target.reset()}catch(x){m.textContent='Could not subscribe. Please try again.'}};
-const FAQS=[['Who can buy from Nuvera Form?','Qualified researchers aged 21 or older, purchasing solely for laboratory research.'],['What does Research Use Only mean?','Products are supplied for laboratory and analytical research only. They are not for human or veterinary use, are not drugs, foods, supplements or cosmetics, and are not FDA approved for those uses.'],['How fast do orders ship?','Orders typically dispatch within 1–2 business days and arrive in 3–5. Orders over $200 ship free after discounts.'],['Can I get analytical documentation?','Documentation is being published batch by batch. Request what is available for your order from the Documentation page or at info@nuveraform.com.'],['How should vials be stored?','Keep lyophilized vials sealed, cold, dry and away from light. The storage protocol is linked in the footer.'],['How do I get the 10% welcome discount?','Create a free account and the code NUVERA10 is applied to your cart automatically.']];
+const FAQS=[['Who can buy from Nuvera Form?','Qualified researchers aged 21 or older, purchasing solely for laboratory research.'],['What does Research Use Only mean?','Products are supplied for laboratory and analytical research only. They are not for human or veterinary use, are not drugs, foods, supplements or cosmetics, and are not FDA approved for those uses.'],['How fast do orders ship?','Orders typically dispatch within 1–2 business days and arrive in 3–5. Orders over $200 ship free after discounts.'],['Can I get analytical documentation?','Documentation is being published batch by batch. Request what is available for your order from the Documentation page or at info@nuveraform.com.'],['How should vials be stored?','Keep lyophilized vials sealed, cold, dry and away from light. The storage protocol is linked in the footer.'],['Do I need an account to see prices?','No. Prices are public. A free account is required at checkout, where NUVERA10 takes 10% off your first order.'],['How do I get the 10% welcome discount?','Create a free account and the code NUVERA10 is applied to your cart automatically.']];
 $('#faqList').innerHTML=FAQS.map(f=>`<details class="card p-4"><summary class="font-semibold cursor-pointer">${f[0]}</summary><p class="text-sm mt-2">${f[1]}</p></details>`).join('');
 const ld=document.createElement('script');ld.type='application/ld+json';ld.textContent=JSON.stringify({'@context':'https://schema.org','@type':'FAQPage',mainEntity:FAQS.map(f=>({'@type':'Question',name:f[0],acceptedAnswer:{'@type':'Answer',text:f[1]}}))});document.head.appendChild(ld);
 $('#menuBtn').setAttribute('aria-expanded','false');$('#menuBtn').onclick=()=>{const h=$('#mobNav').classList.toggle('hidden');$('#menuBtn').setAttribute('aria-expanded',String(!h))};$$('#mobNav a').forEach(a=>a.addEventListener('click',()=>$('#mobNav').classList.add('hidden')));

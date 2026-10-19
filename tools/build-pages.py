@@ -41,6 +41,14 @@ COMPOUNDS=[
  "Bacteriostatic water is sterile water with a small amount of benzyl alcohol that inhibits bacterial growth in a multi-use vial. Laboratories use it as a diluent according to their written protocols."),
 ]
 
+PRICES={"retatrutide":(115,240,3),"bpc-157":(110,110,1),"tb-500":(110,110,1),"ghk-cu":(85,85,1),"thymosin-alpha-1":(95,95,1),"nad-plus":(90,90,1),"cjc-1295-ipamorelin":(105,105,1),"mots-c":(95,95,1),"klow-blend":(120,120,1),"kisspeptin":(85,85,1),"bacteriostatic-water":(15,15,1)}
+CATS=[("incretin-peptides","Incretin-family peptides","Research peptides studied for incretin-family receptor signalling.",["retatrutide"]),
+("peptide-blends","Peptide blends","Pre-combined lyophilized research blends supplied in a single vial.",["bpc-157","tb-500","cjc-1295-ipamorelin","klow-blend"]),
+("single-peptides","Single peptides and reagents","Individual peptides and coenzymes supplied as lyophilized powder.",["ghk-cu","thymosin-alpha-1","nad-plus","mots-c","kisspeptin"]),
+("reconstitution","Reconstitution reagents","Sterile diluents used to reconstitute lyophilized research material.",["bacteriostatic-water"])]
+CAT_OF={c:slug for slug,_,_,cs in CATS for c in cs}
+CNAME={m[0]:m[1] for m in COMPOUNDS}
+GUIDE_LINKS={"storing-lyophilized-peptides":"Storing lyophilized peptides","how-to-read-a-certificate-of-analysis":"How to read a certificate of analysis","reconstitution-for-lab-work":"Reconstitution for lab work","bacteriostatic-vs-sterile-water":"Bacteriostatic vs sterile water","peptide-research-glossary":"Peptide research glossary","what-research-use-only-means":"What research use only means"}
 LEARN=[
 ("what-research-use-only-means","What “research use only” means","A plain-English guide to the RUO label: what it covers, who it is for and what it rules out.",
  [("What the label says","Research use only (RUO) products are made and sold for laboratory investigation. They are not intended for use in diagnostic procedures, as drugs, or for any use in people or animals."),
@@ -52,6 +60,27 @@ LEARN=[
   ("The usual principles","Keep vials sealed, dry, cold and away from light. Avoid repeated temperature swings, and let a cold vial reach room temperature before opening so condensation does not form."),
   ("After reconstitution","Reconstituted material is generally less stable than powder. Follow your institution’s written protocol for storage, labelling and discard dates."),
   ("Inspect on arrival","Do not use a vial with a damaged seal or visible contamination. If an order arrives damaged, email info@nuveraform.com within 72 hours.")]),
+("reconstitution-for-lab-work","Reconstitution for lab work","How laboratories reconstitute lyophilized material: choosing a diluent, aseptic technique and working out concentration.",
+ [("Start with the written protocol","Reconstitution should follow your institution’s written protocol and the documentation for the lot. This guide describes general laboratory practice for in-vitro work only. It does not describe use in people or animals."),
+  ("Choosing a diluent","Common laboratory diluents include sterile water and bacteriostatic water. The right choice depends on the assay: a preservative such as benzyl alcohol can interfere with some cell-based work. See the comparison guide on bacteriostatic and sterile water."),
+  ("Aseptic technique","Let the vial reach room temperature, wipe the stopper with alcohol, use a sterile syringe and needle, and add diluent slowly down the vial wall so the powder dissolves without foaming. Swirl gently rather than shaking."),
+  ("Working out concentration","Concentration is mass divided by volume. A vial containing 10 mg reconstituted in 2 mL gives 5 mg/mL. Record the date, diluent and final concentration on the label."),
+  ("After reconstitution","Reconstituted material is generally less stable than powder. Store it as your protocol directs and discard it by the date you set.")]),
+("bacteriostatic-vs-sterile-water","Bacteriostatic water vs sterile water","What the two diluents contain, how they differ and how to choose between them for laboratory work.",
+ [("What they are","Sterile water for injection is water with no preservative. Bacteriostatic water is sterile water with 0.9% benzyl alcohol added to inhibit bacterial growth."),
+  ("Single use vs multi-use","Sterile water has no preservative, so a vial is generally treated as single use once opened. The benzyl alcohol in bacteriostatic water is what makes a multi-dose vial practical for repeated laboratory access."),
+  ("Assay compatibility","Benzyl alcohol can affect some sensitive cell-based assays and certain analytical methods. If your assay is sensitive to preservatives, confirm the diluent in your protocol before use."),
+  ("Our listing","Nuvera Form lists Bacteriostatic Water in a 10 ml vial. See the compound page for specifications.")]),
+("peptide-research-glossary","Peptide research glossary","Plain-English definitions of terms used on peptide documentation and product pages.",
+ [("Lyophilized","Freeze-dried. Water is removed under vacuum at low temperature, leaving a stable powder."),
+  ("Reconstitution","Dissolving lyophilized powder in a liquid diluent to make a solution."),
+  ("HPLC","High-performance liquid chromatography. A method that separates the components of a sample so purity can be measured."),
+  ("Mass spectrometry (MS)","A method that measures molecular mass, used to confirm that the main component is the expected molecule."),
+  ("Certificate of analysis (COA)","A document reporting the tests run on a specific batch and their results."),
+  ("Lot or batch number","The identifier for a single production run. Documentation should match the lot on your vial."),
+  ("Residue","One amino acid unit within a peptide chain. A 15-residue peptide has 15 amino acids."),
+  ("Bacteriostatic","Inhibits bacterial growth without necessarily killing bacteria. Bacteriostatic water contains benzyl alcohol for this purpose."),
+  ("Research use only (RUO)","A label meaning the product is for laboratory investigation and not for diagnostic, therapeutic or any use in people or animals.")]),
 ("how-to-read-a-certificate-of-analysis","How to read a certificate of analysis","What HPLC purity and mass spectrometry results mean, and what to check on any supplier’s paperwork.",
  [("HPLC purity","High-performance liquid chromatography separates a sample into components. The main peak’s share of the total area is reported as purity. A figure on its own says nothing without the method and the batch it came from."),
   ("Mass spectrometry","Mass spectrometry confirms the molecular mass of the main component, which helps verify identity. The measured mass should match the expected mass within the instrument’s tolerance."),
@@ -101,11 +130,15 @@ def crumbs_ld(items):
 def top():
     return '''<body><a class="skip" href="#main">Skip to content</a>
 <header class="top"><div class="wrap bar"><a class="logo" href="/"><span class="dot"></span><span class="t">Nuvera Form</span></a>
-<nav class="m" aria-label="Main"><a href="/#catalog">Catalog</a><a href="/compounds">Compounds</a><a href="/learn">Learn</a><a href="/#faq">FAQ</a></nav></div></header>'''
+<nav class="m" aria-label="Main"><a href="/#catalog">Catalog</a><a href="/compounds">Compounds</a><a href="/categories">Categories</a><a href="/learn">Learn</a><a href="/#faq">FAQ</a></nav></div></header>'''
+NEWS='''<section class="nl" aria-label="Newsletter"><div class="wrap"><h2>Lot drops and restock alerts</h2><p>Occasional emails when new compounds or documentation are published. No spam.</p>
+<form id="nl" class="nlf"><input type="email" name="email" placeholder="Email address" required aria-label="Email address"><input type="checkbox" name="botcheck" style="display:none" tabindex="-1" aria-hidden="true"><button class="btn">Subscribe</button></form><p id="nlm" role="status"></p></div></section>
+<script>document.getElementById('nl').addEventListener('submit',async function(e){e.preventDefault();var m=document.getElementById('nlm');m.textContent='Subscribing…';try{var f=new FormData(e.target);var r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({access_key:'e71a64f9-3da5-4fde-b2ff-3463cd3f1c41',subject:'Nuvera Form list sign-up',from_name:'Nuvera Form Store',email:f.get('email'),botcheck:f.get('botcheck')?'1':'',page:location.pathname})});var j=await r.json();if(!j.success)throw 0;m.textContent='You are on the list.';e.target.reset()}catch(x){m.textContent='Could not subscribe. Please try again or email info@nuveraform.com.'}});</script>'''
 def foot():
-    return f'''<footer class="f"><div class="wrap"><div class="fg">
+    return NEWS+f'''<footer class="f"><div class="wrap"><div class="fg">
 <div><h4>Nuvera Form</h4><p>Research peptides and reconstitution reagents for qualified laboratories.</p></div>
 <div><h4>Compounds</h4><ul>{"".join(f'<li><a href="/compounds/{s}">{e(n)}</a></li>' for s,n,*_ in COMPOUNDS[:6])}<li><a href="/compounds">All compounds</a></li></ul></div>
+<div><h4>Categories</h4><ul>{"".join(f'<li><a href="/categories/{s}">{e(n)}</a></li>' for s,n,*_ in CATS)}</ul></div>
 <div><h4>Learn</h4><ul>{"".join(f'<li><a href="/learn/{s}">{e(t)}</a></li>' for s,t,*_ in LEARN)}</ul></div>
 <div><h4>Company</h4><ul><li><a href="/shipping-returns">Shipping &amp; Returns</a></li><li><a href="/privacy">Privacy Policy</a></li><li><a href="/terms">Terms of Sale</a></li><li><a href="/research-use-policy">Research Use Policy</a></li><li><a href="mailto:info@nuveraform.com">info@nuveraform.com</a></li></ul></div>
 </div><div class="legal"><p><strong>{RUO}</strong></p><p>Copyright © 2026 Nuvera Form. All rights reserved.</p></div></div></footer></body></html>'''
@@ -113,8 +146,13 @@ def write(path,content):
     fp=path.lstrip("/")+".html"
     os.makedirs(os.path.dirname(fp) or ".",exist_ok=True)
     open(fp,"w").write(content)
+def vial(n):
+    return f'<svg class="vial" width="96" height="144" viewBox="0 0 80 120" role="img" aria-label="Vial of {e(n)}, lyophilized research material"><rect x="26" y="6" width="28" height="16" rx="3" fill="#BF943C"/><rect x="30" y="22" width="20" height="8" fill="#e9dcc0"/><rect x="18" y="30" width="44" height="82" rx="10" fill="#fbf6ea" stroke="#BF943C" stroke-width="2"/><rect x="18" y="52" width="44" height="42" fill="#F0E4CE"/><text x="40" y="68" text-anchor="middle" font-size="6.5" font-weight="700" fill="#3A2816" font-family="Poppins,sans-serif">NUVERA FORM</text><text x="40" y="83" text-anchor="middle" font-size="7" font-weight="700" fill="#B87A6C" font-family="Poppins,sans-serif">{e(n[:14])}</text></svg>'
+def fromp(s_):
+    lo,hi,n=PRICES[s_]
+    return f"${lo}" if lo==hi else f"${lo} – ${hi}"
 def cta():
-    return '<p style="margin-top:2rem"><a class="btn" href="/#catalog">View catalog and pricing</a> <a class="btn ghost" href="/#catalog">Create a free account</a></p>'
+    return '<p style="margin-top:2rem"><a class="btn" href="/#catalog">Buy in the catalog</a> <a class="btn ghost" href="/categories">Browse categories</a></p>'
 urls=[("/",1.0),("/compounds",0.9),("/learn",0.7)]
 
 for s,n,kind,tag,specs,body in COMPOUNDS:
@@ -124,34 +162,51 @@ for s,n,kind,tag,specs,body in COMPOUNDS:
     related="".join(f'<div class="card"><h3>{e(m[1])}</h3><p>{e(m[3])}</p><a class="more" href="/compounds/{m[0]}">View specifications →</a></div>' for m in COMPOUNDS if m[0]!=s)[:0]
     others=[m for m in COMPOUNDS if m[0]!=s][:3]
     rel="".join(f'<div class="card"><h3>{e(m[1])}</h3><p>{e(m[3])}</p><a class="more" href="{"/compounds/"+m[0]}">View specifications →</a></div>' for m in others)
-    ld='<script type="application/ld+json">'+json.dumps({"@context":"https://schema.org","@type":"WebPage","name":title,"description":desc,"url":SITE+path,"isPartOf":{"@type":"WebSite","name":"Nuvera Form","url":SITE}})+'</script>'+crumbs_ld([("Home","/"),("Compounds","/compounds"),(n,path)])
+    lo,hi,cnt=PRICES[s]
+    offer={"@type":"Offer","price":str(lo),"priceCurrency":"USD","availability":"https://schema.org/InStock","url":SITE+path,"seller":{"@type":"Organization","name":"Nuvera Form"}} if cnt==1 else {"@type":"AggregateOffer","lowPrice":str(lo),"highPrice":str(hi),"offerCount":cnt,"priceCurrency":"USD","availability":"https://schema.org/InStock","url":SITE+path}
+    ld='<script type="application/ld+json">'+json.dumps({"@context":"https://schema.org","@type":"Product","name":n,"description":tag,"image":SITE+"/og.png","brand":{"@type":"Brand","name":"Nuvera Form"},"category":CATS[[c[0] for c in CATS].index(CAT_OF[s])][1],"url":SITE+path,"offers":offer})+'</script>'+crumbs_ld([("Home","/"),("Compounds","/compounds"),(n,path)])
+    pricerow=f"<p class='price'>From {fromp(s)}</p>" if s not in ("bpc-157","tb-500") else "<p class='price'>From $110 <span style='font-size:.85rem;font-weight:500;color:var(--brown)'>(sold in the BPC-157 / TB-500 blend, 10 mg)</span></p>"
+    catslug=CAT_OF[s]; catname=CATS[[c[0] for c in CATS].index(catslug)][1]
+    gl=["storing-lyophilized-peptides","how-to-read-a-certificate-of-analysis"]+(["reconstitution-for-lab-work","bacteriostatic-vs-sterile-water"] if s=="bacteriostatic-water" else ["reconstitution-for-lab-work"])
+    relhtml='<div class="rel">'+f'<a href="/categories/{catslug}">{e(catname)}</a>'+"".join(f'<a href="/learn/{g}">{e(GUIDE_LINKS[g])}</a>' for g in gl)+'<a href="/peptide-research-glossary-link"></a></div>'.replace('<a href="/peptide-research-glossary-link"></a>','<a href="/learn/peptide-research-glossary">Glossary</a>')
     page=head(title,desc,path,ld)+top()+f'''<main id="main"><div class="wrap prose">
 <p class="crumbs"><a href="/">Home</a> / <a href="/compounds">Compounds</a> / {e(n)}</p>
-<span class="badge">{e(kind)} · Research use only · 21+</span><h1>{e(n)}</h1><p class="lede">{e(tag)}</p>
+{vial(n)}<span class="badge">{e(kind)} · Research use only · 21+</span><h1>{e(n)}</h1><p class="lede">{e(tag)}</p>{pricerow}
 <h2>Specifications</h2><table>{"".join(f"<tr><th>{e(a)}</th><td>{e(b)}</td></tr>" for a,b in specs)}</table>
 <h2>About this material</h2><p>{e(body)}</p>
-<h2>Handling</h2><p>Store lyophilized vials sealed, dry, cold and away from light, and follow your institution’s written protocol. See <a href="/learn/storing-lyophilized-peptides">storing lyophilized peptides</a>.</p>
+<h2>Handling</h2><p>Store lyophilized vials sealed, dry, cold and away from light, and follow your institution’s written protocol. See <a href="/learn/storing-lyophilized-peptides">storing lyophilized peptides</a>.</p><h2>Related</h2>{relhtml}
 <h2>Documentation</h2><p>Analytical documentation is being published batch by batch. <a href="mailto:info@nuveraform.com?subject=Documentation%20request%3A%20{e(n)}">Email us</a> to ask what is available for your order.</p>
-<div class="note"><strong>Research use only.</strong> {RUO} Nothing on this page is a statement about effects, dosing or use in people or animals.</div>{cta()}
+<div class="note"><strong>Research use only.</strong> {RUO} Nothing on this page is a statement about effects, dosing or use in people or animals.</div><p style="margin-top:1.5rem;font-size:.9rem">Checkout requires a free account with a 21+ and research-use confirmation. Your first order includes 10% off with code NUVERA10.</p>{cta()}
 <h2>Other compounds</h2><div class="grid">{rel}</div></div></main>'''+foot()
     write(path,page); urls.append((path,0.8))
 
-cards="".join(f'<div class="card"><span class="badge">{e(k)}</span><h3 style="margin-top:.6rem">{e(n)}</h3><p>{e(t)}</p><a class="more" href="/compounds/{s}">View specifications →</a></div>' for s,n,k,t,*_ in COMPOUNDS)
+cards="".join(f'<div class="card"><span class="badge">{e(k)}</span><h3 style="margin-top:.6rem">{e(n)}</h3><p class="price" style="font-size:1.1rem">From {fromp(s) if s not in ("bpc-157","tb-500") else "$110"}</p><p>{e(t)}</p><a class="more" href="/compounds/{s}">View specifications →</a></div>' for s,n,k,t,*_ in COMPOUNDS)
 write("/compounds",head("Research Compounds | Nuvera Form","Browse Nuvera Form’s research peptides and reconstitution reagents with format, size and handling notes. Research use only, 21+.","/compounds",crumbs_ld([("Home","/"),("Compounds","/compounds")]))+top()+f'''<main id="main"><div class="wrap"><p class="crumbs"><a href="/">Home</a> / Compounds</p><h1>Research compounds</h1><p class="lede">Specifications and handling notes for every compound in the catalog. Pricing is shown to registered researchers in the <a href="/#catalog">catalog</a>.</p><div class="grid" style="margin-top:1.5rem">{cards}</div>{cta()}</div></main>'''+foot())
 
-def article(s,t,d,secs,section,dirp):
+def article(s,t,d,secs,section,dirp,rel=""):
     path=f"/{dirp}/{s}" if dirp else f"/{s}"
     ld=crumbs_ld([("Home","/")]+([(section,f"/{dirp}")] if dirp else [])+[(t,path)])
     if dirp=="learn": ld+='<script type="application/ld+json">'+json.dumps({"@context":"https://schema.org","@type":"Article","headline":t,"description":d,"dateModified":TODAY,"mainEntityOfPage":SITE+path,"author":{"@type":"Organization","name":"Nuvera Form"},"publisher":{"@type":"Organization","name":"Nuvera Form"}})+'</script>'
     crumb=f'<a href="/">Home</a> / '+(f'<a href="/{dirp}">{section}</a> / ' if dirp else '')+e(t)
-    return head(f"{t} | Nuvera Form",d,path,ld)+top()+f'''<main id="main"><div class="wrap prose"><p class="crumbs">{crumb}</p><h1>{e(t)}</h1><p class="lede">{e(d)}</p>{"".join(f"<h2>{e(a)}</h2><p>{e(b)}</p>" for a,b in secs)}<div class="note"><strong>Research use only.</strong> {RUO}</div></div></main>'''+foot()
+    return head(f"{t} | Nuvera Form",d,path,ld)+top()+f'''<main id="main"><div class="wrap prose"><p class="crumbs">{crumb}</p><h1>{e(t)}</h1><p class="lede">{e(d)}</p>{"".join(f"<h2>{e(a)}</h2><p>{e(b)}</p>" for a,b in secs)}{rel}<div class="note"><strong>Research use only.</strong> {RUO}</div></div></main>'''+foot()
 for s,t,d,secs in LEARN:
-    write(f"/learn/{s}",article(s,t,d,secs,"Learn","learn")); urls.append((f"/learn/{s}",0.7))
+    others=[g for g in GUIDE_LINKS if g!=s and g!="what-research-use-only-means"][:3]
+    rel='<h2>Related</h2><div class="rel">'+"".join(f'<a href="/learn/{g}">{e(GUIDE_LINKS[g])}</a>' for g in others)+'<a href="/compounds">All compounds</a><a href="/categories">Categories</a></div>'
+    write(f"/learn/{s}",article(s,t,d,secs,"Learn","learn",rel)); urls.append((f"/learn/{s}",0.7))
 lc="".join(f'<div class="card"><h3>{e(t)}</h3><p>{e(d)}</p><a class="more" href="/learn/{s}">Read the guide →</a></div>' for s,t,d,_ in LEARN)
 write("/learn",head("Learn | Research Peptide Guides | Nuvera Form","Plain-English guides on research-use-only labelling, storing lyophilized peptides and reading a certificate of analysis.","/learn",crumbs_ld([("Home","/"),("Learn","/learn")]))+top()+f'<main id="main"><div class="wrap"><p class="crumbs"><a href="/">Home</a> / Learn</p><h1>Learn</h1><p class="lede">Practical, non-clinical guides for laboratory buyers.</p><div class="grid" style="margin-top:1.5rem">{lc}</div></div></main>'+foot())
 for s,t,d,secs in LEGAL:
     write(f"/{s}",article(s,t,d,secs,"",""));urls.append((f"/{s}",0.3))
 
+for slug,cn,cd,cs in CATS:
+    path=f"/categories/{slug}"
+    items="".join(f'<div class="card"><h3>{e(CNAME[c])}</h3><p class="price" style="font-size:1.1rem">From {fromp(c) if c not in ("bpc-157","tb-500") else "$110"}</p><p>{e([m[3] for m in COMPOUNDS if m[0]==c][0])}</p><a class="more" href="/compounds/{c}">View specifications →</a></div>' for c in cs)
+    ld=crumbs_ld([("Home","/"),("Categories","/categories"),(cn,path)])+'<script type="application/ld+json">'+json.dumps({"@context":"https://schema.org","@type":"ItemList","name":cn,"itemListElement":[{"@type":"ListItem","position":i+1,"url":f"{SITE}/compounds/{c}","name":CNAME[c]} for i,c in enumerate(cs)]})+'</script>'
+    write(path,head(f"{cn} for Research | Nuvera Form",f"{cd} Prices, formats and handling notes. Research use only, 21+.",path,ld)+top()+f'<main id="main"><div class="wrap"><p class="crumbs"><a href="/">Home</a> / <a href="/categories">Categories</a> / {e(cn)}</p><h1>{e(cn)}</h1><p class="lede">{e(cd)}</p><div class="grid" style="margin-top:1.5rem">{items}</div><h2>Related guides</h2><div class="rel"><a href="/learn/reconstitution-for-lab-work">Reconstitution for lab work</a><a href="/learn/storing-lyophilized-peptides">Storing lyophilized peptides</a><a href="/learn/how-to-read-a-certificate-of-analysis">Reading a certificate of analysis</a></div>{cta()}</div></main>'+foot())
+    urls.append((path,0.8))
+cc="".join(f'<div class="card"><h3>{e(cn)}</h3><p>{e(cd)}</p><a class="more" href="/categories/{slug}">View category →</a></div>' for slug,cn,cd,_ in CATS)
+write("/categories",head("Research Peptide Categories | Nuvera Form","Browse Nuvera Form by category: incretin-family peptides, blends, single peptides and reconstitution reagents. Research use only, 21+.","/categories",crumbs_ld([("Home","/"),("Categories","/categories")]))+top()+f'<main id="main"><div class="wrap"><p class="crumbs"><a href="/">Home</a> / Categories</p><h1>Categories</h1><div class="grid" style="margin-top:1.5rem">{cc}</div></div></main>'+foot())
+urls.append(("/categories",0.9))
 write("/404",head("Page not found | Nuvera Form","The page you are looking for could not be found.","/404").replace('index,follow','noindex')+top()+'<main id="main"><div class="wrap prose"><h1>Page not found</h1><p class="lede">That page does not exist or has moved.</p><p><a class="btn" href="/">Back to the home page</a> <a class="btn ghost" href="/compounds">Browse compounds</a></p></div></main>'+foot())
 os.rename("404.html","404.html") if os.path.exists("404.html") else None
 
