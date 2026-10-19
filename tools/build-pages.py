@@ -31,7 +31,7 @@ COMPOUNDS=[
  [("Class","Synthetic peptide, 16 residues"),("Format","Lyophilized powder, sealed vial"),("Size listed","10 mg"),("Typical lab use","Mitochondrial and cell-metabolism research")],
  "MOTS-c is notable because it is encoded by mitochondrial rather than nuclear DNA. Laboratories use the synthetic form in cell-based metabolic studies."),
 ("klow-blend","KLOW Blend","Research blend","A multi-component research blend supplied as a lyophilized powder.",
- [("Class","Research blend"),("Format","Lyophilized powder, sealed vial"),("Size listed","Blend"),("Composition","Shown on the vial label; email us to confirm before ordering")],
+ [("Class","Research blend"),("Format","Lyophilized powder, sealed vial"),("Size listed","80 mg"),("Composition","Shown on the vial label; email us to confirm before ordering")],
  "KLOW is a blended research product. Email info@nuveraform.com to confirm the exact composition of the lot you are ordering."),
 ("kisspeptin","Kisspeptin","Research peptide","A peptide product of the KISS1 gene, studied in neuroendocrine research; the short active fragment is kisspeptin-10.",
  [("Class","Synthetic peptide"),("Format","Lyophilized powder, sealed vial"),("Size listed","10 mg"),("Typical lab use","Receptor-binding and signalling assays")],
@@ -92,7 +92,7 @@ LEGAL=[
 ("privacy","Privacy Policy","How Nuvera Form collects, uses and protects the information you give us.",
  [("What we collect","Name, email address, phone number and field of research when you create an account; the email you give for newsletters or documentation requests; and order details once online checkout is available."),
   ("How we use it","To create your account, apply your welcome discount, reply to requests, send order updates and, if you opt in, product announcements."),
-  ("Who processes it","Form submissions are handled by Web3Forms; transactional email is sent through Resend; the site is hosted on Vercel. These providers process data only to deliver their service."),
+  ("Who processes it","Form submissions are handled by Web3Forms; email, including your subscriber record, is handled through Resend; the site is hosted on Vercel. These providers process data only to deliver their service."),
   ("Your choices","Email info@nuveraform.com to access, correct or delete your data, or to unsubscribe. We do not sell personal information."),
   ("Cookies and storage","The site stores your age confirmation, cart and sign-in state in your browser’s local storage. It does not use advertising cookies.")]),
 ("terms","Terms of Sale","The conditions that apply when you buy from Nuvera Form.",
@@ -104,6 +104,7 @@ LEGAL=[
 ("shipping-returns","Shipping & Returns","Dispatch times, delivery, costs and what to do if something is wrong.",
  [("Dispatch","Orders typically dispatch within 1–2 business days of payment."),
   ("Delivery","Domestic delivery is typically 3–5 business days after dispatch. A tracking link is emailed when your order leaves."),
+  ("Payment","We currently accept payment by Zelle to (305) 457-3814. Place your order on the site, then send the total with your order number in the memo. Orders ship after payment is confirmed. Card payments may be added later."),
   ("Cost","Orders of $200 or more after discounts ship free. Smaller orders ship at a flat $15."),
   ("Damaged or incorrect items","Email info@nuveraform.com within 72 hours of delivery with your order number and a photo. We will replace the item."),
   ("Returns","Because of the nature of the products, opened or used vials cannot be returned.")]),
@@ -131,16 +132,16 @@ def top():
     return '''<body><a class="skip" href="#main">Skip to content</a>
 <header class="top"><div class="wrap bar"><a class="logo" href="/"><span class="dot"></span><span class="t">Nuvera Form</span></a>
 <nav class="m" aria-label="Main"><a href="/#catalog">Catalog</a><a href="/compounds">Compounds</a><a href="/categories">Categories</a><a href="/learn">Learn</a><a href="/#faq">FAQ</a></nav></div></header>'''
-NEWS='''<section class="nl" aria-label="Newsletter"><div class="wrap"><h2>Lot drops and restock alerts</h2><p>Occasional emails when new compounds or documentation are published. No spam.</p>
+NEWS='''<section class="nl" aria-label="Newsletter"><div class="wrap"><h2>Lot drops and restock alerts</h2><p>Occasional emails when new compounds or documentation are published. By subscribing you agree to receive them; unsubscribe any time.</p>
 <form id="nl" class="nlf"><input type="email" name="email" placeholder="Email address" required aria-label="Email address"><input type="checkbox" name="botcheck" style="display:none" tabindex="-1" aria-hidden="true"><button class="btn">Subscribe</button></form><p id="nlm" role="status"></p></div></section>
-<script>document.getElementById('nl').addEventListener('submit',async function(e){e.preventDefault();var m=document.getElementById('nlm');m.textContent='Subscribing…';try{var f=new FormData(e.target);var r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({access_key:'e71a64f9-3da5-4fde-b2ff-3463cd3f1c41',subject:'Nuvera Form list sign-up',from_name:'Nuvera Form Store',email:f.get('email'),botcheck:f.get('botcheck')?'1':'',page:location.pathname})});var j=await r.json();if(!j.success)throw 0;m.textContent='You are on the list.';e.target.reset()}catch(x){m.textContent='Could not subscribe. Please try again or email info@nuveraform.com.'}});</script>'''
+<script>document.getElementById('nl').addEventListener('submit',async function(e){e.preventDefault();var m=document.getElementById('nlm');m.textContent='Subscribing…';try{var f=new FormData(e.target);var r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({access_key:'e71a64f9-3da5-4fde-b2ff-3463cd3f1c41',subject:'Nuvera Form list sign-up',from_name:'Nuvera Form Store',email:f.get('email'),botcheck:f.get('botcheck')?'1':'',page:location.pathname})});var j=await r.json();if(!j.success)throw 0;fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:f.get('email')})}).catch(function(){});m.textContent='You are on the list.';e.target.reset()}catch(x){m.textContent='Could not subscribe. Please try again or email info@nuveraform.com.'}});</script>'''
 def foot():
     return NEWS+f'''<footer class="f"><div class="wrap"><div class="fg">
 <div><p class="fh">Nuvera Form</p><p>Research peptides and reconstitution reagents for qualified laboratories.</p></div>
 <div><p class="fh">Compounds</p><ul>{"".join(f'<li><a href="/compounds/{s}">{e(n)}</a></li>' for s,n,*_ in COMPOUNDS[:6])}<li><a href="/compounds">All compounds</a></li></ul></div>
 <div><p class="fh">Categories</p><ul>{"".join(f'<li><a href="/categories/{s}">{e(n)}</a></li>' for s,n,*_ in CATS)}</ul></div>
 <div><p class="fh">Learn</p><ul>{"".join(f'<li><a href="/learn/{s}">{e(t)}</a></li>' for s,t,*_ in LEARN)}</ul></div>
-<div><p class="fh">Company</p><ul><li><a href="/shipping-returns">Shipping &amp; Returns</a></li><li><a href="/privacy">Privacy Policy</a></li><li><a href="/terms">Terms of Sale</a></li><li><a href="/research-use-policy">Research Use Policy</a></li><li><a href="mailto:info@nuveraform.com">info@nuveraform.com</a></li></ul></div>
+<div><p class="fh">Company</p><ul><li><a href="/shipping-returns">Shipping &amp; Returns</a></li><li><a href="/privacy">Privacy Policy</a></li><li><a href="/terms">Terms of Sale</a></li><li><a href="/research-use-policy">Research Use Policy</a></li><li><a href="/contact">Contact us</a></li><li><a href="mailto:info@nuveraform.com">info@nuveraform.com</a></li><li><a href="tel:+13054573814">(305) 457-3814</a></li></ul></div>
 </div><div class="legal"><p><strong>{RUO}</strong></p><p>Copyright © 2026 Nuvera Form. All rights reserved.</p></div></div></footer></body></html>'''
 def write(path,content):
     fp=path.lstrip("/")+".html"
@@ -175,7 +176,7 @@ for s,n,kind,tag,specs,body in COMPOUNDS:
 <h2>About this material</h2><p>{e(body)}</p>
 <h2>Handling</h2><p>Store lyophilized vials sealed, dry, cold and away from light, and follow your institution’s written protocol. See <a href="/learn/storing-lyophilized-peptides">storing lyophilized peptides</a>.</p><h2>Related</h2>{relhtml}
 <h2>Documentation</h2><p>Documentation availability varies by batch. <a href="mailto:info@nuveraform.com?subject=Documentation%20request%3A%20{e(n)}">Email us</a> to ask what is available for your order.</p>
-<div class="note"><strong>Research use only.</strong> {RUO} Nothing on this page is a statement about effects, dosing or use in people or animals.</div><p style="margin-top:1.5rem;font-size:.9rem">Checkout requires a free account with a 21+ and research-use confirmation. New accounts get 10% off a first order with code NUVERA10.</p>{cta()}
+<div class="note"><strong>Research use only.</strong> {RUO} Nothing on this page is a statement about effects, dosing or use in people or animals.</div><p style="margin-top:1.5rem;font-size:.9rem">Checkout requires a free account with a 21+ and research-use confirmation. New accounts get 20% off a first order with code NUVERA20.</p>{cta()}
 <h2>Other compounds</h2><div class="grid">{rel}</div></div></main>'''+foot()
     write(path,page); urls.append((path,0.8))
 
@@ -206,6 +207,11 @@ for slug,cn,cd,cs in CATS:
 cc="".join(f'<div class="card"><h2>{e(cn)}</h2><p>{e(cd)}</p><a class="more" href="/categories/{slug}">View category →</a></div>' for slug,cn,cd,_ in CATS)
 write("/categories",head("Research Peptide Categories | Nuvera Form","Browse Nuvera Form by category: incretin-family peptides, blends, single peptides and reconstitution reagents. Research use only, 21+.","/categories",crumbs_ld([("Home","/"),("Categories","/categories")]))+top()+f'<main id="main"><div class="wrap"><p class="crumbs"><a href="/">Home</a> / Categories</p><h1>Categories</h1><div class="grid" style="margin-top:1.5rem">{cc}</div></div></main>'+foot())
 urls.append(("/categories",0.9))
+write("/contact",head("Contact Nuvera Form | Phone, Email and Hours","Reach Nuvera Form by phone at (305) 457-3814 or email info@nuveraform.com, Monday to Friday, 9 AM to 5 PM ET.","/contact",crumbs_ld([("Home","/"),("Contact","/contact")])+'<script type="application/ld+json">'+json.dumps({"@context":"https://schema.org","@type":"ContactPage","name":"Contact Nuvera Form","url":SITE+"/contact","mainEntity":{"@type":"Organization","name":"Nuvera Form","telephone":"+1-305-457-3814","email":"info@nuveraform.com"}})+'</script>')+top()+f'''<main id="main"><div class="wrap prose"><p class="crumbs"><a href="/">Home</a> / Contact</p><h1>Contact us</h1><p class="lede">Questions about an order, documentation or bulk pricing? We answer during regular office hours.</p>
+<table><tr><th>Phone</th><td><a href="tel:+13054573814">(305) 457-3814</a></td></tr><tr><th>Email</th><td><a href="mailto:info@nuveraform.com">info@nuveraform.com</a></td></tr><tr><th>Hours</th><td>Monday to Friday, 9 AM to 5 PM ET</td></tr><tr><th>Social</th><td><a href="https://instagram.com/nuveraform" rel="noopener">Instagram</a> · <a href="https://tiktok.com/@nuveraform" rel="noopener">TikTok</a> · <a href="https://facebook.com/nuveraform" rel="noopener">Facebook</a></td></tr></table>
+<h2>Paying for an order</h2><p>We currently accept Zelle. After you place an order, send the total to (305) 457-3814 and put your order number in the memo. See <a href="/shipping-returns">Shipping &amp; Returns</a>.</p>
+<div class="note"><strong>Research use only.</strong> {RUO} We cannot answer questions about dosing, injection or use in people or animals.</div></div></main>'''+foot())
+urls.append(("/contact",0.6))
 write("/404",head("Page not found | Nuvera Form","The page you are looking for could not be found.","/404").replace('index,follow','noindex').replace('<link rel="canonical" href="https://nuveraform.com/404">','')+top()+'<main id="main"><div class="wrap prose"><h1>Page not found</h1><p class="lede">That page does not exist or has moved.</p><p><a class="btn" href="/">Back to the home page</a> <a class="btn ghost" href="/compounds">Browse compounds</a></p></div></main>'+foot())
 
 sm='<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+"".join(f'<url><loc>{SITE}{p if p!="/" else "/"}</loc><lastmod>{TODAY}</lastmod><priority>{pr}</priority></url>\n' for p,pr in urls)+'</urlset>\n'

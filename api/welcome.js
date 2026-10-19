@@ -1,39 +1,22 @@
-// Vercel serverless function: sends the welcome email with the NUVERA10 code via Resend.
+// Sends the welcome email with the NUVERA20 code and saves the contact in Resend.
 // The API key lives in Vercel environment variables, never in the browser.
-const hits = new Map();
-const esc = (v = '') => String(v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+import { guard, validEmail, esc, addContact, sendMail, sendEvent } from './_lib.js';
 
 export default async function handler(req, res) {
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
-
-  const allowed = (process.env.ALLOWED_ORIGINS || 'https://nuveraform.com,https://www.nuveraform.com').split(',').map(s => s.trim()).filter(Boolean);
-  const origin = req.headers.origin || '';
-  if (allowed.length && !allowed.includes(origin)) return res.status(403).json({ error: 'Forbidden' });
-
-  const ip = (req.headers['x-forwarded-for'] || '').split(',')[0] || 'unknown';
-  const now = Date.now();
-  const recent = (hits.get(ip) || []).filter(t => now - t < 3600e3);
-  if (recent.length >= 5) return res.status(429).json({ error: 'Too many requests' });
-  hits.set(ip, [...recent, now]);
-
+  if (guard(req, res, { limit: 5, bucket: 'welcome' })) return;
   const { email, first_name } = req.body || {};
-  if (typeof email !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254)
-    return res.status(400).json({ error: 'Invalid email' });
-
-  const r = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      from: process.env.MAIL_FROM || 'Nuvera Form <hello@nuveraform.com>',
-      to: [email],
-      reply_to: 'info@nuveraform.com',
-      subject: 'Your Nuvera Form account and 10% welcome code',
-      html: `<div style="font-family:Arial,sans-serif;background:#F7F0E3;color:#3A2816;padding:32px">
-<h2 style="margin:0 0 12px">Welcome${first_name ? ', ' + esc(first_name) : ''}.</h2>
-<p>Your account is active and prices are open to everyone. Use this code for 10% off your first order:</p>
-<p style="font-size:26px;font-weight:700;letter-spacing:2px;color:#BF943C;border:2px dashed #BF943C;display:inline-block;padding:10px 18px">NUVERA10</p>
-<p style="font-size:12px">All products are for Research Use Only and are not for human or veterinary use. Questions? Reply to this email.</p></div>`
-    })
+  if (!validEmail(email)) return res.status(400).json({ error: 'Invalid email' });
+  const name = typeof first_name === 'string' ? first_name.slice(0, 80) : '';
+  if (await addContact(email, name)) await sendEvent('account.created', email); // starts the welcome automation once enabled
+  const r = await sendMail({
+    to: email,
+    subject: 'Your Nuvera Form account and 20% welcome code',
+    html: `<div style="font-family:Arial,sans-serif;background:#F7F0E3;color:#3A2816;padding:32px">
+<h2 style="margin:0 0 12px">Welcome${name ? ', ' + esc(name) : ''}.</h2>
+<p>Your account is active and prices are open to everyone. Use this code for 20% off your first order:</p>
+<p style="font-size:26px;font-weight:700;letter-spacing:2px;color:#BF943C;border:2px dashed #BF943C;display:inline-block;padding:10px 18px">NUVERA20</p>
+<p>Questions? Reply to this email or call (305) 457-3814, Monday to Friday, 9 AM to 5 PM ET.</p>
+<p style="font-size:12px">All products are for Research Use Only and are not for human or veterinary use. You can unsubscribe from promotional emails at any time by replying "unsubscribe".</p></div>`
   });
   if (!r.ok) return res.status(502).json({ error: 'Email provider error' });
   return res.status(200).json({ ok: true });
