@@ -2,7 +2,7 @@
 // emails the owner and sends the customer their Zelle payment instructions.
 import { randomInt } from 'node:crypto';
 import { guard, human, mailLimited, validEmail, esc, sendMail } from './_lib.js';
-import { PRODUCTS, priceCents, lineName, TOTALS } from './_catalog.js';
+import { valid, priceCents, lineName, TOTALS } from './_catalog.js';
 import { configured, reserve, release, redis } from './_stock.js';
 
 const OWNER = () => process.env.OWNER_EMAIL || 'info@nuveraform.com';
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
   const merged = new Map();
   for (const i of b.items) {
     const q = Number(i && i.q);
-    if (!i || !PRODUCTS[i.id] || !PRODUCTS[i.id].v[i.v] || !Number.isInteger(q) || q < 1 || q > 50) return res.status(400).json({ error: 'Invalid items' });
+    if (!i || !valid(i.id, i.v) || !Number.isInteger(q) || q < 1 || q > 50) return res.status(400).json({ error: 'Invalid items' });
     const k = i.id + '|' + i.v; merged.set(k, { id: i.id, v: i.v, q: (merged.get(k)?.q || 0) + q });
   }
   const lines = [...merged.values()];
@@ -40,9 +40,17 @@ export default async function handler(req, res) {
   const no = orderNo();
   const rows = lines.map(l => `${lineName(l.id, l.v)} x${l.q} @ ${money(priceCents(l.id, l.v))}`);
   const rec = { no, ts: Date.now(), status: 'pending', customer: c, items: rows, promo: b.promo === true, ...t, need };
+  // Save the order BEFORE emailing so reserved stock can always be released from /admin; if it cannot be saved, give the stock back.
+  if (tracked) { try { await redis([['SET', 'order:' + no, JSON.stringify(rec), 'EX', 60 * 86400], ['LPUSH', 'orders', no], ['LTRIM', 'orders', 0, 199]]); } catch { await release(need).catch(() => {}); return res.status(503).json({ error: 'Inventory unavailable' }); } }
   const owner = await sendMail({ to: OWNER(), subject: `New order ${no} (${money(t.total)})`, html: `<div style="font-family:Arial,sans-serif"><h3>New order ${esc(no)}</h3><p><b>${esc(c.name)}</b><br>${esc(c.email)} · ${esc(c.phone)}<br>${esc(c.street)}, ${esc(c.city)}, ${esc(c.state)} ${esc(c.zip)}</p><ul>${rows.map(r => `<li>${esc(r)}</li>`).join('')}</ul><p>Discount: ${t.disc ? 'NUVERA20 −' + money(t.disc) + ' (first-order code: check this email has no earlier order)' : 'none'}<br>Shipping: ${t.ship ? money(t.ship) : 'Free'}<br><b>Total due: ${money(t.total)}</b> · Payment: Zelle (pending)</p>${c.notes ? `<p>Notes: ${esc(c.notes)}</p>` : ''}<p>Stock ${tracked ? 'was reserved automatically' : 'is NOT tracked (inventory store not connected)'}. Mark paid or cancel in /admin.</p></div>` });
-  if (!owner || !owner.ok) { if (need) await release(need).catch(() => {}); return res.status(502).json({ error: 'Email provider error' }); }
-  if (tracked) { try { await redis([['SET', 'order:' + no, JSON.stringify(rec), 'EX', 60 * 86400], ['LPUSH', 'orders', no], ['LTRIM', 'orders', 0, 199]]); } catch { /* order is already emailed to the owner */ } }
+  if (!owner || !owner.ok) {
+    if (need) { // mark the record cancelled FIRST (so /admin can never release it a second time), then give the stock back
+      let marked = false;
+      try { await redis([['SET', 'order:' + no, JSON.stringify({ ...rec, need: undefined, status: 'cancelled', failed: 'owner email failed', updated: Date.now() }), 'EX', 60 * 86400]]); marked = true; } catch { /* record stays pending: /admin can cancel it */ }
+      if (marked) await release(need).catch(() => {});
+    }
+    return res.status(502).json({ error: 'Email provider error' });
+  }
 
   const who = /^[\p{L}\p{M} .'’-]{1,80}$/u.test(c.name) ? c.name : '';
   const cust = await sendMail({ to: c.email, subject: `Nuvera Form order ${no}: payment instructions`, html: `<div style="font-family:Arial,sans-serif;background:#F7F0E3;color:#3A2816;padding:32px">

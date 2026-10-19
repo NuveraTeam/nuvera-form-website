@@ -21,11 +21,15 @@ export async function seed() {
   await redis(Object.entries(DEFAULT_STOCK).map(([k, v]) => ['HSETNX', 'stock', k, v]));
 }
 
+const parse = flat => { const s = {}; for (let i = 0; i < flat.length; i += 2) s[flat[i]] = Number(flat[i + 1]); return s; };
+
 export async function readStock() {
-  await seed();
-  const [flat] = await redis([['HGETALL', 'stock']]);
-  const s = {};
-  for (let i = 0; i < flat.length; i += 2) s[flat[i]] = Number(flat[i + 1]);
+  let [flat] = await redis([['HGETALL', 'stock']]);
+  let s = parse(flat);
+  // Only seed when a field is missing (keeps the public stock endpoint to one Redis command per page view).
+  if (Object.keys(DEFAULT_STOCK).some(k => !(k in s))) { await seed(); [flat] = await redis([['HGETALL', 'stock']]); s = parse(flat); }
+  // A failed reservation briefly dips below zero before it is rolled back: never show that.
+  for (const k of Object.keys(s)) if (!(s[k] > 0)) s[k] = 0;
   // Bundles are limited by their scarcest component.
   for (const [id, p] of Object.entries(PRODUCTS)) if (p.parts) s[sku(id, 'Bundle')] = Math.max(0, Math.min(...p.parts.map(([i, v]) => s[sku(i, v)] ?? 0)));
   return s;
@@ -40,14 +44,15 @@ export async function reserve(lines) {
   const res = await redis(keys.map(k => ['HINCRBY', 'stock', k, -need[k]]));
   const bad = keys.findIndex((k, i) => res[i] < 0);
   if (bad >= 0) {
-    await redis(keys.map(k => ['HINCRBY', 'stock', k, need[k]]));
+    await release(need);
     return { ok: false, sku: keys[bad], available: Math.max(0, res[bad] + need[keys[bad]]) };
   }
   return { ok: true, need };
 }
 
-/** Gives reserved units back (order cancelled or failed after reserving). */
+/** Gives reserved units back (order cancelled or failed after reserving). Deliberately NOT retried: if the first call timed out after being applied, a retry would release twice and oversell. */
 export async function release(need) {
   const keys = Object.keys(need);
-  if (keys.length) await redis(keys.map(k => ['HINCRBY', 'stock', k, need[k]]));
+  if (!keys.length) return;
+  await redis(keys.map(k => ['HINCRBY', 'stock', k, need[k]]));
 }

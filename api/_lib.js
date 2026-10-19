@@ -25,6 +25,12 @@ export function throttle(key, limit, windowMs = 3600e3) {
   return false;
 }
 
+/** True if the key already has `limit` hits in the window, without recording a new one. */
+export function over(key, limit, windowMs = 3600e3) {
+  const now = Date.now();
+  return (hits.get(key) || []).filter(t => now - t < windowMs).length >= limit;
+}
+
 /** Limits how many mails one recipient can be sent per hour, so the API cannot be used to spam a third party. */
 export function mailLimited(res, bucket, email, limit = 2) {
   if (throttle(bucket + ':to:' + email.toLowerCase(), limit)) { res.status(429).json({ error: 'Too many requests' }); return true; }

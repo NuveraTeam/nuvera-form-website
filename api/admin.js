@@ -1,10 +1,11 @@
 // Owner-only inventory and order management. Protected by the ADMIN_TOKEN environment variable.
-import { timingSafeEqual } from 'node:crypto';
-import { guard, throttle } from './_lib.js';
+import { timingSafeEqual, createHash } from 'node:crypto';
+import { guard, throttle, over } from './_lib.js';
 import { DEFAULT_STOCK } from './_catalog.js';
 import { configured, redis, readStock, release } from './_stock.js';
 
-const same = (a, b) => { const x = Buffer.from(String(a)), y = Buffer.from(String(b)); return x.length === y.length && timingSafeEqual(x, y); };
+const h = v => createHash('sha256').update(String(v)).digest();
+const same = (a, b) => timingSafeEqual(h(a), h(b));
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
@@ -12,14 +13,16 @@ export default async function handler(req, res) {
   const expected = process.env.ADMIN_TOKEN;
   if (!expected || expected.length < 12) return res.status(503).json({ error: 'Admin is not configured' });
   const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'unknown';
-  if (!same(req.headers['x-admin-token'] || '', expected)) { if (throttle('adminfail:' + ip, 10)) return res.status(429).json({ error: 'Too many attempts' }); return res.status(401).json({ error: 'Unauthorized' }); }
+  // Lock out BEFORE comparing, otherwise a correct guess after the limit would still succeed and the limit would not slow guessing at all.
+  if (over('adminfail:' + ip, 10)) return res.status(429).json({ error: 'Too many attempts' });
+  if (!same(req.headers['x-admin-token'] || '', expected)) { throttle('adminfail:' + ip, 10); return res.status(401).json({ error: 'Unauthorized' }); }
   if (!configured()) return res.status(503).json({ error: 'Inventory store is not connected' });
   const b = req.body || {};
   try {
     if (b.action === 'setStock') {
       const cmds = [];
       for (const [k, v] of Object.entries(b.stock || {})) {
-        if (!(k in DEFAULT_STOCK) || !Number.isInteger(v) || v < 0 || v > 99999) return res.status(400).json({ error: 'Invalid stock value for ' + k });
+        if (!Object.hasOwn(DEFAULT_STOCK, k) || !Number.isInteger(v) || v < 0 || v > 99999) return res.status(400).json({ error: 'Invalid stock value for ' + k });
         cmds.push(['HSET', 'stock', k, v]);
       }
       if (cmds.length) await redis(cmds);
@@ -29,7 +32,12 @@ export default async function handler(req, res) {
       if (!raw) return res.status(404).json({ error: 'Order not found' });
       const rec = JSON.parse(raw);
       if (rec.status === 'cancelled') return res.status(409).json({ error: 'Already cancelled' });
-      if (b.status === 'cancelled' && rec.need) await release(rec.need);
+      if (b.status === 'cancelled' && rec.need) {
+        // Atomic one-time claim: two concurrent cancels (double click, two tabs) must not both give the stock back.
+        const [got] = await redis([['SET', 'released:' + b.no, '1', 'NX', 'EX', 90 * 86400]]);
+        if (got !== 'OK') return res.status(409).json({ error: 'Already cancelled' });
+        await release(rec.need);
+      }
       rec.status = b.status; rec.updated = Date.now();
       await redis([['SET', 'order:' + b.no, JSON.stringify(rec), 'EX', 60 * 86400]]);
     } else if (b.action !== 'list') return res.status(400).json({ error: 'Unknown action' });

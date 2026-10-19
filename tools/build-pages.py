@@ -217,7 +217,7 @@ REVIEWS=[r for r in json.load(open("data/reviews.json")) if r.get("approved")]
 def stars(n): return "★"*n+"☆"*(5-n)
 rlist="".join(f'<div class="card"><p class="price" style="font-size:1.1rem;letter-spacing:2px" aria-label="{r["rating"]} out of 5">{stars(r["rating"])}</p><p>{e(r["text"])}</p><p style="font-size:.85rem"><strong>{e(r["name"])}</strong> · {e(r["aspect"])} · {e(r["date"])}'+(' · <span class="badge">Verified purchase</span>' if r.get("verified") else '')+'</p></div>' for r in REVIEWS) or '<div class="card"><p>No reviews yet. Be the first to tell us how your order went.</p></div>'
 OPTS="".join(f"<option>{o}</option>" for o in ["Shipping speed","Packaging","Communication","Order accuracy","Website experience"])
-write("/reviews",head("Customer Reviews | Nuvera Form","Service reviews from verified Nuvera Form customers: shipping speed, packaging, communication, order accuracy and website experience.","/reviews",crumbs_ld([("Home","/"),("Reviews","/reviews")]))+top()+f'''<main id="main"><div class="wrap prose"><p class="crumbs"><a href="/">Home</a> / Reviews</p><h1>Customer reviews</h1><p class="lede">Feedback on our service. Every review is checked against a real order before it is published.</p>
+write("/reviews",head("Customer Reviews | Nuvera Form","Service feedback from Nuvera Form customers: shipping speed, packaging, communication, order accuracy and website experience.","/reviews",crumbs_ld([("Home","/"),("Reviews","/reviews")]))+top()+f'''<main id="main"><div class="wrap prose"><p class="crumbs"><a href="/">Home</a> / Reviews</p><h1>Customer reviews</h1><p class="lede">Feedback on our service. Every review is checked against a real order before it is published.</p>
 <div class="grid" style="margin-top:1.5rem">{rlist}</div>
 <h2>Leave a service review</h2>
 <p>Tell us about shipping speed, packaging, communication, order accuracy or the website. Please do not describe any effect of a product: these are research materials and we cannot publish reviews about results, use or outcomes. We publish only reviews we can match to an order and may edit or decline others.</p>
@@ -225,7 +225,7 @@ write("/reviews",head("Customer Reviews | Nuvera Form","Service reviews from ver
 <select class="nlf-in" name="aspect" required aria-label="What is your review about"><option value="">What is your review about?</option>{OPTS}</select>
 <select class="nlf-in" name="rating" required aria-label="Rating"><option value="">Rating</option><option value="5">5 – Excellent</option><option value="4">4 – Good</option><option value="3">3 – Okay</option><option value="2">2 – Poor</option><option value="1">1 – Very poor</option></select>
 <textarea class="nlf-in" name="text" rows="4" maxlength="600" required placeholder="Your review (service only, max 600 characters)" aria-label="Review"></textarea>
-<label style="font-size:.85rem"><input type="checkbox" name="agree" value="yes" required> My review is about the service, not any effect of a product, and I agree it may be published with my name.</label>
+<input type="checkbox" name="botcheck" style="display:none" tabindex="-1" aria-hidden="true"><label style="font-size:.85rem"><input type="checkbox" name="agree" value="yes" required> My review is about the service, not any effect of a product, and I agree it may be published with my name.</label>
 <button class="btn" style="border:0;cursor:pointer;font:inherit;font-weight:600">Submit review</button><p id="rvm" role="status"></p></form>
 </div></main>'''+foot())
 urls.append(("/reviews",0.5))

@@ -15,6 +15,8 @@ export const PRODUCTS = {
   bn1: { n: 'Research Duo: BPC-157/TB-500 Blend + GHK-Cu 100mg', v: { Bundle: { p: 175.5 } }, parts: [['bpc', '10mg'], ['ghk', '100mg']] },
   bn2: { n: 'Retatrutide 10mg + Bacteriostatic Water 10ml', v: { Bundle: { p: 175.5 } }, parts: [['ret', '10mg'], ['bac', '10ml']] }
 };
+/** True only for real catalog entries (own properties: rejects "constructor", "__proto__" and non-strings). */
+export const valid = (id, v) => typeof id === 'string' && typeof v === 'string' && Object.hasOwn(PRODUCTS, id) && Object.hasOwn(PRODUCTS[id].v, v);
 export const sku = (id, v) => `${id}|${v}`;
 /** Default stock for every non-bundle SKU. */
 export const DEFAULT_STOCK = Object.fromEntries(
