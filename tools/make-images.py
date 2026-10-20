@@ -1,7 +1,7 @@
-# Regenerates og.png (social share image) from assets/logo-512.png. Run from the repo root.
+# Regenerates og.png (social share image) from assets/nuvera-logo-hd-1024.png. Run from the repo root.
 import base64
 from playwright.sync_api import sync_playwright
-logo = base64.b64encode(open('assets/logo-512.png','rb').read()).decode()
+logo = base64.b64encode(open('assets/nuvera-logo-hd-1024.png','rb').read()).decode()
 og=f'''<html><body style="margin:0;width:1200px;height:630px;background:#F7F0E3;font-family:Poppins,sans-serif;color:#3A2816;position:relative;overflow:hidden">
 <img src="data:image/png;base64,{logo}" style="position:absolute;right:70px;top:75px;width:480px;height:480px;filter:drop-shadow(0 18px 40px rgba(150,105,40,.35))">
 <div style="position:absolute;left:80px;top:90px;font-size:28px;font-weight:600;letter-spacing:.5px">Nuvera Form</div>

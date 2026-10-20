@@ -29,7 +29,7 @@ export default async function handler(req, res) {
       reply_to: 'info@nuveraform.com',
       subject: 'Your Nuvera Form account and 10% welcome code',
       html: `<div style="font-family:Arial,sans-serif;background:#F7F0E3;color:#3A2816;padding:32px">
-<img src="https://nuveraform.com/assets/logo-128.png" alt="Nuvera Form" width="72" height="72" style="display:block;width:72px;height:72px;border:0;margin:0 0 20px">
+<img src="https://nuveraform.com/assets/nuvera-logo-hd-192.png" alt="Nuvera Form" width="72" height="72" style="display:block;width:72px;height:72px;border:0;margin:0 0 20px">
 <h2 style="margin:0 0 12px">Welcome${first_name ? ', ' + esc(first_name) : ''}.</h2>
 <p>Your account is active and the catalog is unlocked. Use this code for 10% off your first order:</p>
 <p style="font-size:26px;font-weight:700;letter-spacing:2px;color:#BF943C;border:2px dashed #BF943C;display:inline-block;padding:10px 18px">NUVERA10</p>
