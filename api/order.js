@@ -77,8 +77,8 @@ export default async function handler(req, res) {
   const total = Math.round((subtotal - discount + ship.price) * 100) / 100;
   const order = orderNumber();
 
-  const zelleTo = process.env.ZELLE_TO || '';
-  const zelleName = process.env.ZELLE_NAME || 'Nuvera Form';
+  const zelleTo = process.env.ZELLE_TO || '(305) 457-3814';
+  const zelleName = process.env.ZELLE_NAME || '';
   const storeTo = (process.env.ORDER_NOTIFY_TO || 'info@nuveraform.com').split(',').map(s => s.trim()).filter(Boolean);
 
   const rows = lines.map(l => `<tr><td style="padding:6px 0">${esc(l.name)}${l.name.includes(l.v) || l.v === 'Bundle' || l.v === 'Blend' ? '' : ' · ' + esc(l.v)} × ${l.q}</td><td style="padding:6px 0;text-align:right">${money(l.total)}</td></tr>`).join('');
@@ -106,7 +106,7 @@ ${c.notes ? `<h3 style="margin:20px 0 6px">Order notes</h3><p style="margin:0">$
 
   const payBlock = zelleTo
     ? `<p style="margin:0 0 6px">Send <b>${money(total)}</b> by Zelle to:</p>
-<p style="font-size:18px;font-weight:700;margin:0 0 4px">${esc(zelleTo)}</p><p style="margin:0 0 10px">Name shown in Zelle: ${esc(zelleName)}</p>
+<p style="font-size:18px;font-weight:700;margin:0 0 4px">${esc(zelleTo)}</p>${zelleName ? `<p style="margin:0 0 10px">Name shown in Zelle: ${esc(zelleName)}</p>` : '<div style="height:6px"></div>'}
 <p style="margin:0">Put <b>${order}</b> in the Zelle memo so we can match your payment.</p>`
     : `<p style="margin:0">We will email you our Zelle details shortly. Total due: <b>${money(total)}</b>. Please put <b>${order}</b> in the Zelle memo.</p>`;
 

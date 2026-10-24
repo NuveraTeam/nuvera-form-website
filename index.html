@@ -405,7 +405,7 @@ try{await post({subject:'NEW ORDER (backup) '+num+' '+money(t.total),from_name:'
 catch(x){b.disabled=false;b.textContent='Place order';return coFail('We could not place your order. Check your connection and try again, or email info@nuveraform.com.')}}
 b.disabled=false;b.textContent='Place order';
 $('#doneNum').textContent=res.order;
-$('#donePay').innerHTML=res.zelle?`<p>Send <b>${money(res.total)}</b> by Zelle to:</p><p class="text-lg font-bold mt-1">${res.zelle.to.replace(/[<>&]/g,'')}</p><p class="text-xs">Name in Zelle: ${res.zelle.name.replace(/[<>&]/g,'')}</p><p class="mt-2">Put <b>${res.order}</b> in the Zelle memo. Your order ships once payment arrives.</p>`:`<p>Total due: <b>${money(res.total)}</b>. We will email you our Zelle details shortly. Put <b>${res.order}</b> in the Zelle memo.</p>`;
+$('#donePay').innerHTML=res.zelle?`<p>Send <b>${money(res.total)}</b> by Zelle to:</p><p class="text-lg font-bold mt-1">${res.zelle.to.replace(/[<>&]/g,'')}</p>${res.zelle.name?`<p class="text-xs">Name in Zelle: ${res.zelle.name.replace(/[<>&]/g,'')}</p>`:''}<p class="mt-2">Put <b>${res.order}</b> in the Zelle memo. Your order ships once payment arrives.</p>`:`<p>Total due: <b>${money(res.total)}</b>. We will email you our Zelle details shortly. Put <b>${res.order}</b> in the Zelle memo.</p>`;
 $('#doneMail').textContent=res.emailed?'A copy has been emailed to '+d.email.trim()+'.':'Save your order number. Questions? Email info@nuveraform.com.';
 $('#coT').textContent='Order placed';f.classList.add('hidden');$('#coDone').classList.remove('hidden');
 st.cart=[];save()};
