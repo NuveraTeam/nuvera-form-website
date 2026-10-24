@@ -31,6 +31,7 @@ body{font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown)
 .pill{border:1.5px solid var(--line);border-radius:999px;padding:.25rem .8rem;font-size:.8rem;font-weight:500;cursor:pointer;background:var(--champ);transition:all .15s}
 .pill.on{background:var(--gold);color:#fff;border-color:var(--gold);box-shadow:0 0 0 3px rgba(191,148,60,.22)}
 .inp{width:100%;background:var(--champ);border:1.5px solid var(--line);border-radius:12px;padding:.6rem .85rem;font-size:.9rem;color:var(--brown)}
+#co .inp{font-size:16px}.shipopt{display:flex;gap:.6rem;align-items:center;border:1.5px solid var(--line);border-radius:12px;padding:.55rem .75rem;cursor:pointer;font-size:.85rem}.shipopt:has(input:checked){border-color:var(--gold);background:var(--sand)}
 .inp:focus{outline:2px solid var(--gold);outline-offset:1px}
 :focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .modal{position:fixed;inset:0;z-index:80;background:rgba(58,40,22,.55);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:1rem}
@@ -185,7 +186,7 @@ body{font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown)
 <div class="border-t py-6 px-4 text-center text-xs" style="border-color:var(--line)">
 <p class="font-semibold mb-2">All products are strictly for Research Use Only (RUO). Not for human consumption, diagnostic, or therapeutic use.</p>
 <p>Copyright © 2026 Nuvera Form. All rights reserved.</p>
-<div class="flex justify-center gap-4 text-2xl mt-3"><i class="fa-brands fa-cc-visa" title="Visa"></i><i class="fa-brands fa-cc-mastercard" title="Mastercard"></i><i class="fa-brands fa-cc-amex" title="American Express"></i><i class="fa-brands fa-bitcoin" title="Crypto"></i></div>
+<p class="mt-3 font-semibold"><i class="fa-solid fa-building-columns mr-1" style="color:var(--gold)"></i>Payment by Zelle</p>
 </div>
 </footer>
 
@@ -193,16 +194,45 @@ body{font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown)
 <div id="shade" class="fixed inset-0 z-[60] hidden" style="background:rgba(58,40,22,.45)"></div>
 <aside id="drawer" role="dialog" aria-modal="true" class="fixed top-0 right-0 h-full w-full max-w-md z-[70] flex flex-col" style="background:var(--champ);border-left:1px solid var(--line)" aria-label="Cart">
 <div class="p-5 flex justify-between items-center border-b" style="border-color:var(--line)"><h3 class="text-xl font-bold">Your cart</h3><button id="cartX" aria-label="Close cart" class="text-xl"><i class="fa-solid fa-xmark"></i></button></div>
-<div class="px-5 pt-4"><p id="shipTxt" class="text-xs font-medium mb-1"></p><div class="h-2 rounded-full" style="background:var(--sand)"><div id="shipBar" class="h-2 rounded-full" style="background:var(--gold);width:0;transition:width .3s"></div></div></div>
 <div id="items" class="flex-1 overflow-auto p-5 space-y-3"></div>
 <div class="p-5 border-t space-y-3" style="border-color:var(--line)">
 <div class="flex gap-2"><input id="promo" class="inp" placeholder="Promo code"><button id="promoBtn" class="btn ghost">Apply</button></div>
 <p id="promoMsg" class="text-xs"></p>
+<fieldset class="space-y-2"><legend class="text-xs font-semibold mb-1">Shipping</legend><label class="shipopt"><input type="radio" name="shipm" value="ground"><span class="flex-1">Ground <span class="opacity-70">(3–5 business days)</span></span><b>$25.00</b></label><label class="shipopt"><input type="radio" name="shipm" value="overnight"><span class="flex-1">Overnight <span class="opacity-70">(next business day)</span></span><b>$60.00</b></label></fieldset>
 <div id="totals" class="text-sm space-y-1"></div>
 <label class="flex gap-2 text-xs items-start"><input type="checkbox" id="att" class="mt-1"><span>I am 21+ and purchasing solely for laboratory research. Not for human or veterinary use.</span></label>
-<button id="checkout" class="btn w-full">Checkout</button>
+<button id="checkout" class="btn w-full">Continue to checkout</button>
+<p class="text-xs text-center opacity-80">Payment by Zelle. Details are sent after you place your order.</p>
 </div>
 </aside>
+
+<!-- Checkout modal -->
+<div id="co" class="modal" role="dialog" aria-modal="true" aria-labelledby="coT"><div class="sheet">
+<div class="flex justify-between items-start mb-3"><h3 id="coT" class="text-2xl font-bold">Checkout</h3><button data-close aria-label="Close"><i class="fa-solid fa-xmark text-xl"></i></button></div>
+<form id="coForm" class="space-y-3" novalidate>
+<p class="text-xs font-semibold uppercase tracking-wide opacity-80">Contact</p>
+<div class="grid grid-cols-2 gap-3"><input class="inp" name="first_name" placeholder="First name" required autocomplete="given-name"><input class="inp" name="last_name" placeholder="Last name" required autocomplete="family-name"></div>
+<input class="inp" type="email" name="email" placeholder="Email" required autocomplete="email" inputmode="email">
+<input class="inp" type="tel" name="phone" placeholder="Phone" required autocomplete="tel" inputmode="tel">
+<p class="text-xs font-semibold uppercase tracking-wide opacity-80 pt-2">Shipping address</p>
+<input class="inp" name="address1" placeholder="Street address" required autocomplete="address-line1">
+<input class="inp" name="address2" placeholder="Apt, suite, unit (optional)" autocomplete="address-line2">
+<input class="inp" name="city" placeholder="City" required autocomplete="address-level2">
+<div class="grid grid-cols-2 gap-3"><select class="inp" name="state" required autocomplete="address-level1"><option value="">State</option></select><input class="inp" name="zip" placeholder="ZIP code" required autocomplete="postal-code" inputmode="numeric" maxlength="10"></div>
+<textarea class="inp" name="notes" rows="2" placeholder="Order notes (optional)"></textarea>
+<input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">
+<div class="card p-4 text-sm"><p class="font-semibold mb-2">Order summary</p><div id="coSum" class="space-y-1"></div></div>
+<div class="rounded-2xl p-4 text-sm" style="background:var(--sand);border:1.5px dashed var(--gold)"><p class="font-semibold"><i class="fa-solid fa-building-columns mr-1" style="color:var(--gold)"></i>Pay with Zelle</p><p class="mt-1">Place your order and we will show and email your order number with our Zelle details. Your order ships once payment arrives.</p></div>
+<p id="coErr" class="text-xs font-semibold hidden" style="color:#C42424"></p>
+<button class="btn w-full" id="coBtn">Place order</button>
+</form>
+<div id="coDone" class="hidden text-center">
+<p class="text-sm">Order number</p><p id="doneNum" class="text-2xl font-bold tracking-wide my-1" style="color:var(--gold)"></p>
+<div class="rounded-2xl p-4 my-4 text-sm text-left" style="background:var(--sand);border:2px dashed var(--gold)" id="donePay"></div>
+<p class="text-sm" id="doneMail"></p>
+<button class="btn mt-5" data-close>Done</button>
+</div>
+</div></div>
 
 <!-- Auth modal -->
 <div id="auth" class="modal" role="dialog" aria-modal="true" aria-label="Create your account"><div class="sheet">
@@ -266,7 +296,7 @@ const KEY='e71a64f9-3da5-4fde-b2ff-3463cd3f1c41',W3='https://api.web3forms.com/s
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const ls={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
 const money=n=>'$'+n.toFixed(2);
-const CFG={strip:['Documentation available on request','Ships from the USA','Dispatch in 1–2 business days','Free shipping over $200','Discreet packaging'],
+const CFG={strip:['Documentation available on request','Ships from the USA','Dispatch in 1–2 business days','Ground $25 · Overnight $60','Discreet packaging'],
 tests:[['A focused range','Ten compounds we know well, from Retatrutide to reconstitution water, instead of an endless list.'],['Clear specifications','Each product shows its compound, quantity and format up front, with no outcome claims.'],['Documentation, honestly','Analytical documentation is being published batch by batch. Ask us what is available for your order.'],['People on support','Questions about an order or paperwork go straight to info@nuveraform.com.']],
 promises:[['Dispatch in 1–2 business days','Tracked domestic shipping, with a tracking link emailed when your order leaves.'],['72-hour replacement cover','Damaged vial or wrong item? Tell us within 72 hours and we will replace it.'],['Discreet packaging','Plain outer box and a neutral billing descriptor.']]};
 $('#stripIn').innerHTML=CFG.strip.map(t=>`<span><i class="fa-solid fa-circle-check mr-1" style="color:var(--gold)"></i>${t}</span>`).join('');
@@ -287,7 +317,8 @@ const P=[
 {id:'bn1',n:'Recovery Duo: BPC-157/TB-500 Blend + GHK-Cu 100mg',cat:'bundle',v:{'Bundle':{p:175.5,s:5}}},
 {id:'bn2',n:'Retatrutide 10mg + Bacteriostatic Water 10ml',cat:'bundle',v:{'Bundle':{p:175.5,s:3}}}];
 const CATS={all:'All',star:'Star product',blend:'Blends',recovery:'Recovery & repair',water:'Reconstitution',bundle:'Bundles (save 10%)'};
-let st={f:'all',q:'',sel:{},cart:JSON.parse(ls.get('nv_cart')||'[]'),promo:ls.get('nv_promo')==='1'};
+let st={f:'all',q:'',sel:{},cart:JSON.parse(ls.get('nv_cart')||'[]'),promo:ls.get('nv_promo')==='1',ship:ls.get('nv_ship')==='overnight'?'overnight':'ground'};
+const SHIP={ground:{l:'Ground',p:25},overnight:{l:'Overnight',p:60}};
 P.forEach(p=>st.sel[p.id]=Object.keys(p.v)[0]);
 const unlocked=()=>ls.get('nv_unlocked')==='1';
 const stockTxt=s=>s===null?'In stock':s<=1?'Last vial!':s<=3?'Low: '+s+' vials':s+' vials in stock';
@@ -334,16 +365,50 @@ $('#items').innerHTML=st.cart.length?st.cart.map(i=>{const p=prod(i.id),c=p.v[i.
 $$('[data-q]').forEach(b=>b.onclick=()=>{const it=st.cart.find(i=>i.k===b.dataset.q),d=+b.dataset.d,c=prod(it.id).v[it.v];
 if(d>0&&c.s!==null&&it.q>=c.s){toast('Only '+c.s+' in stock');return}it.q+=d;if(it.q<1)st.cart=st.cart.filter(x=>x!==it);save()});
 $$('[data-rm]').forEach(b=>b.onclick=()=>{st.cart=st.cart.filter(i=>i.k!==b.dataset.rm);save()});
-const sub=st.cart.reduce((a,i)=>a+prod(i.id).v[i.v].p*i.q,0),disc=st.promo?sub*.1:0,net=sub-disc,ship=!sub||net>=200?0:15;
-$('#totals').innerHTML=`<div class="flex justify-between"><span>Subtotal</span><span>${money(sub)}</span></div>`+(st.promo?`<div class="flex justify-between font-semibold" style="color:var(--gold)"><span>NUVERA10 (10%)</span><span>−${money(disc)}</span></div>`:'')+`<div class="flex justify-between"><span>Shipping</span><span>${sub?(ship?money(ship):'Free'):'-'}</span></div><div class="flex justify-between text-lg font-bold pt-1"><span>Total</span><span>${money(net+ship)}</span></div>`;
-const left=200-net;$('#shipTxt').textContent=!sub?'Free shipping on orders over $200':left>0?'Add '+money(left)+' more for free shipping':'You have unlocked free shipping';
-$('#shipBar').style.width=Math.min(100,net/2)+'%';
+const t=totals();$('#totals').innerHTML=sumHtml(t);
+$$('[name=shipm]').forEach(r=>r.checked=r.value===st.ship);
 $('#promoMsg').textContent=st.promo?'NUVERA10 applied: 10% off your subtotal.':''}
+function totals(){const sub=st.cart.reduce((a,i)=>a+prod(i.id).v[i.v].p*i.q,0),disc=st.promo?Math.round(sub*10)/100:0,ship=sub?SHIP[st.ship].p:0;return{sub,disc,ship,total:sub-disc+ship}}
+function sumHtml(t){return `<div class="flex justify-between"><span>Subtotal</span><span>${money(t.sub)}</span></div>`+(st.promo?`<div class="flex justify-between font-semibold" style="color:var(--gold)"><span>NUVERA10 (10%)</span><span>−${money(t.disc)}</span></div>`:'')+`<div class="flex justify-between"><span>Shipping (${SHIP[st.ship].l})</span><span>${t.sub?money(t.ship):'-'}</span></div><div class="flex justify-between text-lg font-bold pt-1"><span>Total</span><span>${money(t.total)}</span></div>`}
+$$('[name=shipm]').forEach(r=>r.onchange=()=>{st.ship=r.value;ls.set('nv_ship',r.value);cart()});
 function openCart(){$('#drawer').classList.add('open');$('#shade').classList.remove('hidden')}
 function closeCart(){$('#drawer').classList.remove('open');$('#shade').classList.add('hidden')}
 $('#cartBtn').onclick=openCart;$('#cartX').onclick=closeCart;$('#shade').onclick=closeCart;
 $('#promoBtn').onclick=()=>{const c=$('#promo').value.trim().toUpperCase();if(c==='NUVERA10'){st.promo=true;ls.set('nv_promo','1');cart()}else $('#promoMsg').textContent='That code is not valid.'};
-$('#checkout').onclick=()=>{if(!st.cart.length)return toast('Your cart is empty');if(!$('#att').checked)return toast('Please confirm the research-use statement');toast('Connect your payment processor to enable checkout')};
+$('#checkout').onclick=()=>{if(!st.cart.length)return toast('Your cart is empty');if(!$('#att').checked)return toast('Please confirm the research-use statement');closeCart();coOpen()};
+
+/* checkout (Zelle) */
+const US_STATES='AL AK AZ AR CA CO CT DE DC FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY PR'.split(' ');
+$('#coForm [name=state]').insertAdjacentHTML('beforeend',US_STATES.map(x=>`<option>${x}</option>`).join(''));
+const coSaved=()=>{try{return JSON.parse(ls.get('nv_ship_info')||'{}')}catch(e){return{}}};
+function coOpen(){const f=$('#coForm'),sv=coSaved();
+['first_name','last_name','email','phone','address1','address2','city','state','zip'].forEach(k=>{if(sv[k]&&!f[k].value)f[k].value=sv[k]});
+if(!f.email.value&&ls.get('nv_email'))f.email.value=ls.get('nv_email');
+const t=totals();$('#coSum').innerHTML=st.cart.map(i=>{const p=prod(i.id);return `<div class="flex justify-between gap-3"><span>${p.n}${Object.keys(p.v).length>1?' · '+i.v:''} × ${i.q}</span><span>${money(p.v[i.v].p*i.q)}</span></div>`}).join('')+'<div class="border-t my-2" style="border-color:var(--line)"></div>'+sumHtml(t);
+$('#coT').textContent='Checkout';$('#coErr').classList.add('hidden');f.classList.remove('hidden');$('#coDone').classList.add('hidden');open('co')}
+$('#coForm').addEventListener('input',()=>$('#coErr').classList.add('hidden'));
+function coFail(m){const e=$('#coErr');e.textContent=m;e.classList.remove('hidden')}
+$('#coForm').onsubmit=async e=>{e.preventDefault();const f=e.target,d=Object.fromEntries(new FormData(f)),b=$('#coBtn');
+const miss=[];if(!d.first_name.trim()||!d.last_name.trim())miss.push('your full name');if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email.trim()))miss.push('a valid email');if(d.phone.replace(/\D/g,'').length<10)miss.push('a phone number');if(!d.address1.trim()||!d.city.trim()||!d.state)miss.push('your full address');if(!/^\d{5}(-\d{4})?$/.test(d.zip.trim()))miss.push('a valid ZIP code');
+if(miss.length)return coFail('Please add '+miss.join(', ')+'.');
+if(!st.cart.length)return coFail('Your cart is empty.');
+const {website,...keep}=d;ls.set('nv_ship_info',JSON.stringify({...keep,notes:undefined}));
+const body={...d,shipping:st.ship,promo:st.promo?'NUVERA10':'',ruo:true,items:st.cart.map(i=>({id:i.id,v:i.v,q:i.q}))},t=totals();
+b.disabled=true;b.textContent='Placing order…';$('#coErr').classList.add('hidden');
+let res=null;
+try{const r=await fetch('/api/order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const j=await r.json().catch(()=>({}));
+if(r.status===400||r.status===429){b.disabled=false;b.textContent='Place order';return coFail(j.error||'Please check your details.')}
+if(r.ok&&j.ok)res=j}catch(x){}
+if(!res){/* backup: still capture the order through Web3Forms if the email service is down */
+const num='NF-'+Date.now().toString(36).toUpperCase();
+try{await post({subject:'NEW ORDER (backup) '+num+' '+money(t.total),from_name:'Nuvera Form Store',order:num,total:money(t.total),shipping:SHIP[st.ship].l+' '+money(t.ship),items:st.cart.map(i=>prod(i.id).n+' '+i.v+' x'+i.q).join('; '),promo:st.promo?'NUVERA10':'none',...keep,ruo:'Accepted'});res={order:num,total:t.total,zelle:null,emailed:false}}
+catch(x){b.disabled=false;b.textContent='Place order';return coFail('We could not place your order. Check your connection and try again, or email info@nuveraform.com.')}}
+b.disabled=false;b.textContent='Place order';
+$('#doneNum').textContent=res.order;
+$('#donePay').innerHTML=res.zelle?`<p>Send <b>${money(res.total)}</b> by Zelle to:</p><p class="text-lg font-bold mt-1">${res.zelle.to.replace(/[<>&]/g,'')}</p><p class="text-xs">Name in Zelle: ${res.zelle.name.replace(/[<>&]/g,'')}</p><p class="mt-2">Put <b>${res.order}</b> in the Zelle memo. Your order ships once payment arrives.</p>`:`<p>Total due: <b>${money(res.total)}</b>. We will email you our Zelle details shortly. Put <b>${res.order}</b> in the Zelle memo.</p>`;
+$('#doneMail').textContent=res.emailed?'A copy has been emailed to '+d.email.trim()+'.':'Save your order number. Questions? Email info@nuveraform.com.';
+$('#coT').textContent='Order placed';f.classList.add('hidden');$('#coDone').classList.remove('hidden');
+st.cart=[];save()};
 
 /* modals */
 $$('[data-open]').forEach(a=>a.onclick=e=>{e.preventDefault();open(a.dataset.open)});
@@ -367,7 +432,7 @@ const INFO={
 purity:['Quality & documentation','<p>We present each product with its compound, quantity and format. Analytical documentation is being published batch by batch.</p><p>To ask for paperwork for your order, use Request Batch Documentation or email info@nuveraform.com.</p>'],
 storage:['Storage & handling protocols','<p>Keep lyophilized vials sealed, dry, cold and out of light. Avoid repeated temperature swings and do not use a vial with a damaged seal.</p><p>Handle all material with standard laboratory practice and protective equipment. Follow your institution’s procedures for any solvent work.</p>'],
 ruo:['RUO legal compliance terms','<p>All products are sold strictly for Research Use Only. They are not for human or animal consumption, and not for diagnostic, therapeutic or any other clinical use.</p><p>By purchasing you confirm you are at least 21, that you are a qualified researcher, and that you will comply with all applicable laws.</p>'],
-ship:['Shipping & returns','<p><b>Processing:</b> orders typically dispatch within 1–2 business days of payment.</p><p><b>Delivery:</b> domestic delivery is typically 3–5 business days after dispatch.</p><p><b>Cost:</b> orders over $200 ship free after discounts; smaller orders ship at a flat $15.</p><p><b>Problems:</b> report a damaged vial, wrong item or COA mismatch within 72 hours at info@nuveraform.com and we will replace it.</p>'],
+ship:['Shipping & returns','<p><b>Payment:</b> Zelle. Your order number and Zelle details are shown and emailed when you place your order.</p><p><b>Processing:</b> orders typically dispatch within 1–2 business days of payment.</p><p><b>Delivery:</b> ground is typically 3–5 business days after dispatch; overnight arrives the next business day.</p><p><b>Cost:</b> ground $25 flat, overnight $60 flat.</p><p><b>Problems:</b> report a damaged vial, wrong item or COA mismatch within 72 hours at info@nuveraform.com and we will replace it.</p>'],
 track:['Track your order','<p>A tracking link is emailed when your order leaves our facility. If you have not received it within 2 business days, email info@nuveraform.com with your order number.</p>'],
 privacy:['Privacy policy','<p>We collect the details you submit (name, email, phone, field of research) to create your account, process orders and send updates you ask for. We do not sell your information.</p><p>Email info@nuveraform.com to access or delete your data.</p>'],
 terms:['Terms of sale','<p>Products are sold to buyers aged 21 or older for laboratory research only, not for human or veterinary use. Buyers are responsible for lawful handling and use.</p><p>Prices and stock can change without notice. Replacement requests for damaged or incorrect items must be made within 72 hours of delivery.</p>'],
@@ -386,7 +451,7 @@ const KB=[[/steril|endotox|metal|assay|which tests|what.*test/,'Analytical docum
 [/ruo|research use|legal|complian/,'All products are sold strictly for Research Use Only, to buyers aged 21+. They are not for human consumption, or for diagnostic or therapeutic use.'],
 [/reconstitut|bac|bacteriostatic|dilut|mix/,'For laboratory work, lyophilized material is typically reconstituted with a sterile diluent such as our Bacteriostatic Water, following your lab’s written protocol and the product COA. I cannot give amounts for any use on people or animals.'],
 [/storage|store|fridge|freez|temperature/,'Keep lyophilized vials sealed, dry, cold and away from light. The full guidance is under Storage & Handling Protocols in the footer.'],
-[/ship|deliver|free/,'Orders over $200 ship free after discounts. Smaller orders ship at a flat $15 rate.'],
+[/ship|deliver|free/,'Ground shipping is a flat $25 (3–5 business days) and overnight is a flat $60 (next business day).'],[/pay|zelle|card|venmo|cash ?app/,'We accept Zelle. Place your order and you will get your order number and Zelle details on screen and by email.'],
 [/code|discount|promo|10%/,'Sign up for a free account to unlock NUVERA10, which takes 10% off your cart subtotal.'],
 [/return|refund|damage/,'Email info@nuveraform.com within 7 days if an order arrives damaged or incorrect.'],
 [/bulk|institution|wholesale/,'For bulk or institutional pricing, email info@nuveraform.com with your organization and quantities.']];
@@ -405,7 +470,7 @@ $('#chatX').onclick=()=>{$('#chat').classList.add('hidden');$('#chat').classList
 $('#chatForm').onsubmit=e=>{e.preventDefault();const v=$('#chatIn').value.trim();if(v){$('#chatIn').value='';ask(v)}};
 
 $('#nl').onsubmit=async e=>{e.preventDefault();const m=$('#nlMsg');m.textContent='Subscribing…';try{await post({subject:'Nuvera Form list sign-up',from_name:'Nuvera Form Store',email:new FormData(e.target).get('email')});m.textContent='You are on the list.';e.target.reset()}catch(x){m.textContent='Could not subscribe. Please try again.'}};
-const FAQS=[['Who can buy from Nuvera Form?','Qualified researchers aged 21 or older, purchasing solely for laboratory research.'],['What does Research Use Only mean?','Products are supplied for laboratory and analytical research only. They are not for human or veterinary use, are not drugs, foods, supplements or cosmetics, and are not FDA approved for those uses.'],['How fast do orders ship?','Orders typically dispatch within 1–2 business days and arrive in 3–5. Orders over $200 ship free after discounts.'],['Can I get analytical documentation?','Documentation is being published batch by batch. Request what is available for your order from the Documentation page or at info@nuveraform.com.'],['How should vials be stored?','Keep lyophilized vials sealed, cold, dry and away from light. The storage protocol is linked in the footer.'],['How do I get the 10% welcome discount?','Create a free account and the code NUVERA10 is applied to your cart automatically.']];
+const FAQS=[['Who can buy from Nuvera Form?','Qualified researchers aged 21 or older, purchasing solely for laboratory research.'],['What does Research Use Only mean?','Products are supplied for laboratory and analytical research only. They are not for human or veterinary use, are not drugs, foods, supplements or cosmetics, and are not FDA approved for those uses.'],['How fast do orders ship?','Orders dispatch within 1–2 business days of payment. Ground is a flat $25 (3–5 business days); overnight is a flat $60.'],['How do I pay?','By Zelle. When you place an order you get an order number and our Zelle details on screen and by email. Put the order number in the Zelle memo.'],['Can I get analytical documentation?','Documentation is being published batch by batch. Request what is available for your order from the Documentation page or at info@nuveraform.com.'],['How should vials be stored?','Keep lyophilized vials sealed, cold, dry and away from light. The storage protocol is linked in the footer.'],['How do I get the 10% welcome discount?','Create a free account and the code NUVERA10 is applied to your cart automatically.']];
 $('#faqList').innerHTML=FAQS.map(f=>`<details class="card p-4"><summary class="font-semibold cursor-pointer">${f[0]}</summary><p class="text-sm mt-2">${f[1]}</p></details>`).join('');
 const ld=document.createElement('script');ld.type='application/ld+json';ld.textContent=JSON.stringify({'@context':'https://schema.org','@type':'FAQPage',mainEntity:FAQS.map(f=>({'@type':'Question',name:f[0],acceptedAnswer:{'@type':'Answer',text:f[1]}}))});document.head.appendChild(ld);
 $('#menuBtn').setAttribute('aria-expanded','false');$('#menuBtn').onclick=()=>{const h=$('#mobNav').classList.toggle('hidden');$('#menuBtn').setAttribute('aria-expanded',String(!h))};$$('#mobNav a').forEach(a=>a.addEventListener('click',()=>$('#mobNav').classList.add('hidden')));

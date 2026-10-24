@@ -36,4 +36,4 @@ git push -u origin main
 The access key in `index.html` is a public key by design. In the Web3Forms dashboard, add `nuveraform.com` as an allowed domain and set the notification email for leads and affiliate applications.
 
 ## 6. Before taking payments
-Replace the placeholder Privacy and Terms text, connect a real checkout and payment processor, and confirm every claim on the site is supportable.
+Checkout takes orders for Zelle payment through `api/order.js`. Set `ZELLE_TO` (your Zelle email or phone) and `ZELLE_NAME` in Vercel so customers see payment details instantly; without them they are told details will follow by email. Orders are emailed to `ORDER_NOTIFY_TO` (default info@nuveraform.com). Prices are checked against `api/_catalog.js`; update it whenever prices in `index.html` change.
