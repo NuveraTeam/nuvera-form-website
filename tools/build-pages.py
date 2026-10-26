@@ -57,6 +57,12 @@ LEARN=[
   ("Mass spectrometry","Mass spectrometry confirms the molecular mass of the main component, which helps verify identity. The measured mass should match the expected mass within the instrument’s tolerance."),
   ("What to check","Batch or lot number, date, the laboratory that ran the test, and whether the document matches the batch on your vial."),
   ("Our approach","Nuvera Form is publishing analytical documentation batch by batch. We do not claim test results we cannot show. Ask what is available for your order through the documentation request form.")]),
+("hplc-vs-mass-spectrometry","HPLC vs mass spectrometry: what each one tells you","A side-by-side look at two analytical methods that appear on peptide paperwork, and the different question each one answers.",
+ [("Two different questions","HPLC asks how many separable components a sample contains and how much of the signal belongs to the main one. Mass spectrometry asks what the mass of each component is. Because the questions differ, the two methods complement each other rather than compete."),
+  ("What HPLC measures","In high-performance liquid chromatography, a dissolved sample is pushed through a column and its components leave at different times. A detector, commonly UV absorbance, records a trace of peaks. The area of the main peak relative to all peaks is often reported as purity. That figure depends on the column, solvents, gradient and detection wavelength, so it is only meaningful alongside the method."),
+  ("What mass spectrometry measures","A mass spectrometer measures the mass-to-charge ratio of ions. For a peptide, the measured mass can be compared with the mass calculated from its sequence to help confirm identity. Peptides often appear with several charges, so the instrument reports a series of signals that are converted back to a single molecular mass."),
+  ("What neither one shows alone","An HPLC trace does not say what its main peak is, and a mass spectrum on its own does not say how much of the sample the main component makes up. Some impurities can sit under the main peak or be invisible to the detector used, and the two methods are often run together, sometimes coupled as LC-MS."),
+  ("Reading paperwork with both","When a document lists both, check that the stated method, lot number, date and testing laboratory are present, and that the lot matches the one on your vial. A purity percentage with no method, or a mass with no expected value to compare it to, is incomplete.")]),
 ]
 
 LEGAL=[
@@ -149,7 +155,7 @@ def article(s,t,d,secs,section,dirp):
 for s,t,d,secs in LEARN:
     write(f"/learn/{s}",article(s,t,d,secs,"Learn","learn")); urls.append((f"/learn/{s}",0.7))
 lc="".join(f'<div class="card"><h3>{e(t)}</h3><p>{e(d)}</p><a class="more" href="/learn/{s}">Read the guide →</a></div>' for s,t,d,_ in LEARN)
-write("/learn",head("Learn | Research Peptide Guides | Nuvera Form","Plain-English guides on research-use-only labelling, storing lyophilized peptides and reading a certificate of analysis.","/learn",crumbs_ld([("Home","/"),("Learn","/learn")]))+top()+f'<main id="main"><div class="wrap"><p class="crumbs"><a href="/">Home</a> / Learn</p><h1>Learn</h1><p class="lede">Practical, non-clinical guides for laboratory buyers.</p><div class="grid" style="margin-top:1.5rem">{lc}</div></div></main>'+foot())
+write("/learn",head("Learn | Research Peptide Guides | Nuvera Form","Plain-English guides on research-use-only labelling, storing lyophilized peptides, reading a certificate of analysis and comparing HPLC with mass spectrometry.","/learn",crumbs_ld([("Home","/"),("Learn","/learn")]))+top()+f'<main id="main"><div class="wrap"><p class="crumbs"><a href="/">Home</a> / Learn</p><h1>Learn</h1><p class="lede">Practical, non-clinical guides for laboratory buyers.</p><div class="grid" style="margin-top:1.5rem">{lc}</div></div></main>'+foot())
 for s,t,d,secs in LEGAL:
     write(f"/{s}",article(s,t,d,secs,"",""));urls.append((f"/{s}",0.3))
 
