@@ -57,6 +57,12 @@ LEARN=[
   ("Mass spectrometry","Mass spectrometry confirms the molecular mass of the main component, which helps verify identity. The measured mass should match the expected mass within the instrument’s tolerance."),
   ("What to check","Batch or lot number, date, the laboratory that ran the test, and whether the document matches the batch on your vial."),
   ("Our approach","Nuvera Form is publishing analytical documentation batch by batch. We do not claim test results we cannot show. Ask what is available for your order through the documentation request form.")]),
+("hplc-vs-mass-spectrometry","HPLC vs mass spectrometry: what each one tells you","A side-by-side look at two analytical methods that often appear together on a certificate of analysis.",
+ [("What HPLC measures","High-performance liquid chromatography pushes a dissolved sample through a column. Different components travel at different speeds, so they reach a detector at different times. The result is a chromatogram: a series of peaks, each representing a component. HPLC is mainly used to see how many components are present and how large the main peak is relative to the others."),
+  ("What mass spectrometry measures","Mass spectrometry measures the mass-to-charge ratio of ions made from the sample. For a peptide, the measured mass can be compared with the mass calculated from its amino acid sequence. A match supports the identity of the main component."),
+  ("Why the two are different questions","HPLC speaks to how much of the signal belongs to the main peak. Mass spectrometry speaks to what the main component is. A sample can show one clean peak by HPLC and still be the wrong molecule, and a correct mass does not by itself say how much other material is present. This is why documents often report both."),
+  ("Reading them together","Some laboratories link the two instruments so that each HPLC peak is also checked by mass. Whether or not that is done, a useful report names the method, the batch or lot, and the date, so the numbers can be traced to the material in your hands."),
+  ("Questions to ask a supplier","Which method produced each figure, which batch it was run on, and which laboratory ran it. Nuvera Form is publishing analytical documentation batch by batch; ask what is available for your order through the documentation request form.")]),
 ]
 
 LEGAL=[
