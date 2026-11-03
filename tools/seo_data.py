@@ -1,0 +1,111 @@
+"""SEO content for product pages and new Learn articles. Used by build-pages.py.
+Prices and stock are read from the P list in index.html, so they stay in sync automatically.
+Keep every line compliant: describe the material only. No effects, dosing or use in people or animals."""
+
+# slug -> page title, meta description, catalog ids (from index.html P list), related slugs, FAQs
+PRODUCTS = {
+"glp-3": dict(
+  title="GLP-3 Peptide 5mg, 10mg, 15mg | Research Use Only | Nuvera Form",
+  desc="GLP-3 research peptide in 5 mg, 10 mg and 15 mg lyophilized vials. U.S. shipping in 1–2 business days, discreet packaging. Research use only, 21+.",
+  ids=["ret"], bundles=["bn2"], related=["bacteriostatic-water","mots-c","nad-plus"],
+  faqs=[("What sizes of GLP-3 do you carry?","GLP-3 is listed in 5 mg, 10 mg and 15 mg lyophilized vials. Current stock for each size is shown in the catalog."),
+        ("Is there a GLP-3 bundle?","Yes. GLP-3 10 mg is paired with a 10 ml vial of bacteriostatic water as a bundle at a 10% saving versus buying both separately."),
+        ("How is GLP-3 shipped?","Vials ship sealed in a plain outer box from the U.S., typically within 1–2 business days of payment, with ground or overnight options.")]),
+"bpc-157": dict(
+  title="BPC-157 / TB-500 Blend 10mg | Research Peptide | Nuvera Form",
+  desc="BPC-157 / TB-500 blend, 10 mg lyophilized vial, plus the Recovery Duo bundle with GHK-Cu. Fast U.S. shipping. Research use only, 21+.",
+  ids=["bpc"], bundles=["bn1"], related=["tb-500","ghk-cu","bacteriostatic-water"],
+  faqs=[("Do you sell BPC-157 on its own?","BPC-157 is currently offered as a BPC-157 / TB-500 blend in a 10 mg vial, and in the Recovery Duo bundle with GHK-Cu 100 mg."),
+        ("What is in the Recovery Duo bundle?","The Recovery Duo combines one BPC-157 / TB-500 blend 10 mg vial and one GHK-Cu 100 mg vial at a 10% saving."),
+        ("What format does the blend come in?","A lyophilized (freeze-dried) powder in a sealed sterile vial. See our guide to storing lyophilized peptides for handling.")]),
+"tb-500": dict(
+  title="TB-500 Research Peptide | BPC-157 / TB-500 Blend 10mg | Nuvera Form",
+  desc="TB-500 supplied in a BPC-157 / TB-500 blend, 10 mg lyophilized vial. Specifications, handling and U.S. shipping. Research use only, 21+.",
+  ids=["bpc"], bundles=["bn1"], related=["bpc-157","ghk-cu","thymosin-alpha-1"],
+  faqs=[("Is TB-500 sold as a single peptide?","TB-500 is currently offered combined with BPC-157 as a 10 mg research blend."),
+        ("How is TB-500 related to thymosin beta-4?","TB-500 is described in the literature as a synthetic peptide connected to a fragment of thymosin beta-4, a protein studied in cell biology."),
+        ("How should the blend be stored?","Keep vials sealed, dry, cold and away from light, and follow your institution’s written protocol.")]),
+"ghk-cu": dict(
+  title="GHK-Cu 100mg Copper Peptide | Research Use Only | Nuvera Form",
+  desc="GHK-Cu copper peptide, 100 mg lyophilized vial. Specifications, handling notes and fast U.S. shipping. Research use only, 21+.",
+  ids=["ghk"], bundles=["bn1"], related=["bpc-157","nad-plus","bacteriostatic-water"],
+  faqs=[("What is GHK-Cu?","GHK-Cu is the copper(II) complex of GHK, a three-amino-acid peptide (glycine-histidine-lysine) with a strong affinity for copper ions."),
+        ("What size is the GHK-Cu vial?","GHK-Cu is listed as a 100 mg lyophilized vial, and is also part of the Recovery Duo bundle."),
+        ("Why is GHK-Cu blue?","Copper(II) complexes are typically blue, so a blue tint in the powder or solution is expected for this material.")]),
+"thymosin-alpha-1": dict(
+  title="Thymosin Alpha 1 10mg | Research Peptide | Nuvera Form",
+  desc="Thymosin Alpha 1, 10 mg lyophilized vial, a 28-amino-acid research peptide. U.S. shipping in 1–2 business days. Research use only, 21+.",
+  ids=["ta1"], related=["tb-500","mots-c","kisspeptin"],
+  faqs=[("How long is Thymosin Alpha 1?","Thymosin alpha 1 is a 28-amino-acid peptide, produced synthetically for laboratory research."),
+        ("What size do you carry?","Thymosin Alpha 1 is listed as a 10 mg lyophilized vial."),
+        ("Do you ship Thymosin Alpha 1 overnight?","Yes. Every order can ship ground (3–5 business days) or overnight (next business day after dispatch).")]),
+"nad-plus": dict(
+  title="NAD+ 500mg Vial | Research Reagent | Nuvera Form",
+  desc="NAD+ (nicotinamide adenine dinucleotide), 500 mg lyophilized vial for biochemical research. Fast U.S. shipping. Research use only, 21+.",
+  ids=["nad"], related=["mots-c","ghk-cu","bacteriostatic-water"],
+  faqs=[("What is NAD+?","NAD+ is nicotinamide adenine dinucleotide, a coenzyme found in all living cells and a common substrate in enzyme assays."),
+        ("What size is the NAD+ vial?","NAD+ is listed as a 500 mg lyophilized vial."),
+        ("Is NAD+ a peptide?","No. NAD+ is a dinucleotide coenzyme rather than a peptide, which is why it is listed as a research reagent.")]),
+"cjc-1295-ipamorelin": dict(
+  title="CJC-1295 / Ipamorelin Blend 10mg | Research Peptide | Nuvera Form",
+  desc="CJC-1295 / Ipamorelin research blend, 10 mg lyophilized vial. Specifications and handling notes. U.S. shipping. Research use only, 21+.",
+  ids=["cjc"], related=["kisspeptin","mots-c","bacteriostatic-water"],
+  faqs=[("What is in the CJC-1295 / Ipamorelin blend?","Two synthetic peptides in one vial: a GHRH-analog sequence (CJC-1295) and a five-residue peptide (ipamorelin)."),
+        ("What size is the blend?","The blend is listed as a 10 mg lyophilized vial."),
+        ("Are blends handled differently from single peptides?","Storage principles are the same. Check the label for every component and its quantity; our research peptide glossary explains the terms.")]),
+"mots-c": dict(
+  title="MOTS-c 10mg | Mitochondrial Research Peptide | Nuvera Form",
+  desc="MOTS-c, 10 mg lyophilized vial, a 16-amino-acid mitochondria-derived research peptide. U.S. shipping. Research use only, 21+.",
+  ids=["mot"], related=["nad-plus","glp-3","thymosin-alpha-1"],
+  faqs=[("What makes MOTS-c unusual?","MOTS-c is encoded by mitochondrial DNA rather than nuclear DNA, which is why it is studied as a mitochondria-derived peptide."),
+        ("How long is MOTS-c?","MOTS-c is a 16-amino-acid peptide."),
+        ("What size do you carry?","MOTS-c is listed as a 10 mg lyophilized vial.")]),
+"klow-blend": dict(
+  title="KLOW Blend | Research Peptide Blend | Nuvera Form",
+  desc="KLOW multi-component research peptide blend in a lyophilized vial. Composition on the label; documentation on request. Research use only, 21+.",
+  ids=["klo"], related=["bpc-157","ghk-cu","cjc-1295-ipamorelin"],
+  faqs=[("What is in the KLOW blend?","KLOW is a multi-component research blend. The composition is printed on the vial label; email us for documentation on your lot."),
+        ("How is KLOW supplied?","As a lyophilized powder in a sealed sterile vial."),
+        ("Can I get batch information?","Yes. Use the documentation request link on this page and include your order number.")]),
+"kisspeptin": dict(
+  title="Kisspeptin 10mg | Research Peptide | Nuvera Form",
+  desc="Kisspeptin, 10 mg lyophilized vial, a KISS1-derived peptide used in neuroendocrine research. U.S. shipping. Research use only, 21+.",
+  ids=["kis"], related=["cjc-1295-ipamorelin","thymosin-alpha-1","bacteriostatic-water"],
+  faqs=[("What is kisspeptin?","Kisspeptins are peptide products of the KISS1 gene that signal through the KISS1 receptor; kisspeptin-10 is the short active fragment."),
+        ("What size do you carry?","Kisspeptin is listed as a 10 mg lyophilized vial."),
+        ("How fast does it ship?","Orders typically dispatch within 1–2 business days of payment.")]),
+"bacteriostatic-water": dict(
+  title="Bacteriostatic Water 10ml | Reconstitution Reagent | Nuvera Form",
+  desc="Bacteriostatic water, 10 ml multi-dose vial with 0.9% benzyl alcohol, for reconstituting lyophilized research material. Research use only, 21+.",
+  ids=["bac"], bundles=["bn2"], related=["glp-3","bpc-157","ghk-cu"],
+  faqs=[("What is bacteriostatic water?","Sterile water containing 0.9% benzyl alcohol, which inhibits bacterial growth in a multi-use vial."),
+        ("How is it different from sterile water?","Plain sterile water has no preservative and is meant for single use; bacteriostatic water is designed for a multi-dose vial."),
+        ("Is it included in any bundle?","Yes. A 10 ml vial is paired with GLP-3 10 mg in a bundle at a 10% saving.")]),
+}
+
+NEW_LEARN = [
+("reconstituting-lyophilized-peptides","Reconstituting lyophilized peptides: a lab overview","How laboratories bring freeze-dried research material back into solution, what diluents are used and how to avoid common handling mistakes.",
+ [("What reconstitution means","Lyophilized material is a dry powder. Reconstitution is adding a measured volume of a suitable diluent so the material can be used in an assay. The volume and diluent are set by the laboratory’s written protocol for the experiment, not by the supplier."),
+  ("Common diluents","Bacteriostatic water (sterile water with 0.9% benzyl alcohol) is used where a vial will be accessed more than once. Sterile water or a buffer may be specified for single-use work or for material that is sensitive to preservatives."),
+  ("Good technique","Let the vial reach room temperature, wipe the stopper, add the diluent slowly down the inside wall of the vial and swirl gently rather than shaking. Shaking can cause foaming and may damage some peptides."),
+  ("Label everything","Record the compound, lot, diluent, volume, date and initials on the vial. Reconstituted material is generally less stable than powder, so follow your protocol for cold storage and discard dates."),
+  ("Related products","Nuvera Form supplies <a href=\"/compounds/bacteriostatic-water\">bacteriostatic water 10 ml</a>, and a <a href=\"/compounds/glp-3\">GLP-3 10 mg</a> bundle that includes a vial.")],
+ ["bacteriostatic-water","glp-3","bpc-157"]),
+("choosing-a-research-peptide-supplier","How to choose a research peptide supplier","A checklist for comparing peptide vendors: documentation, labelling, shipping, payment and how they handle problems.",
+ [("Clear labelling","Each vial should show the compound, quantity, lot number and a research-use-only statement. Vague names or missing lot numbers make traceability impossible."),
+  ("Honest documentation","Ask what analytical documentation exists for the lot you will receive. A trustworthy supplier tells you what it has and what it does not, instead of posting generic certificates."),
+  ("Responsible selling","Reputable research suppliers confirm buyer age and research intent and decline questions about dosing or human use. Health claims on a research supplier’s site are a red flag."),
+  ("Shipping and replacements","Look for stated dispatch times, tracking, sensible packaging and a clear policy for damaged or incorrect items."),
+  ("How Nuvera Form compares","We ship from the U.S. in 1–2 business days, email tracking, replace damaged or incorrect items reported within 72 hours and publish documentation batch by batch. See <a href=\"/shipping-returns\">shipping and returns</a>.")],
+ ["glp-3","ghk-cu","bpc-157"]),
+("research-peptide-glossary","Research peptide glossary","Plain-English definitions of the terms you will see on research peptide labels and paperwork, from lyophilized to HPLC.",
+ [("Lyophilized","Freeze-dried. Water is removed under low pressure and temperature, leaving a stable powder that is easier to ship and store."),
+  ("RUO (research use only)","A label meaning the product is sold for laboratory investigation only, not as a drug, food, supplement or cosmetic, and not for use in people or animals. See <a href=\"/learn/what-research-use-only-means\">what research use only means</a>."),
+  ("Bacteriostatic water","Sterile water with 0.9% benzyl alcohol, used as a multi-use laboratory diluent. See <a href=\"/compounds/bacteriostatic-water\">bacteriostatic water</a>."),
+  ("HPLC","High-performance liquid chromatography, the method most often used to report a peptide’s purity. See <a href=\"/learn/how-to-read-a-certificate-of-analysis\">how to read a certificate of analysis</a>."),
+  ("Mass spectrometry (MS)","A technique that measures molecular mass, used to confirm that the main component is the expected compound."),
+  ("Blend","A single vial containing more than one peptide, such as the <a href=\"/compounds/bpc-157\">BPC-157 / TB-500 blend</a> or <a href=\"/compounds/cjc-1295-ipamorelin\">CJC-1295 / Ipamorelin</a>."),
+  ("Lot or batch number","The identifier that ties a vial to the production run and any analytical documentation for it."),
+  ("Copper peptide","A peptide bound to a copper ion, such as <a href=\"/compounds/ghk-cu\">GHK-Cu</a>.")],
+ ["ghk-cu","bpc-157","bacteriostatic-water"]),
+]

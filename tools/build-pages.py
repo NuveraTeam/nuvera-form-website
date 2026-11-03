@@ -107,7 +107,7 @@ def foot():
     return f'''<footer class="f"><div class="wrap"><div class="fg">
 <div><h4>Nuvera Form</h4><p>Research peptides and reconstitution reagents for qualified laboratories.</p></div>
 <div><h4>Compounds</h4><ul>{"".join(f'<li><a href="/compounds/{s}">{e(n)}</a></li>' for s,n,*_ in COMPOUNDS[:6])}<li><a href="/compounds">All compounds</a></li></ul></div>
-<div><h4>Learn</h4><ul>{"".join(f'<li><a href="/learn/{s}">{e(t)}</a></li>' for s,t,*_ in LEARN)}</ul></div>
+<div><h4>Learn</h4><ul>{"".join(f'<li><a href="/learn/{s}">{e(t)}</a></li>' for s,t,*_ in LEARN+[(x[0],x[1]) for x in NEW_LEARN])}</ul></div>
 <div><h4>Company</h4><ul><li><a href="/shipping-returns">Shipping &amp; Returns</a></li><li><a href="/privacy">Privacy Policy</a></li><li><a href="/terms">Terms of Sale</a></li><li><a href="/research-use-policy">Research Use Policy</a></li><li><a href="mailto:info@nuveraform.com">info@nuveraform.com</a></li></ul></div>
 </div><div class="legal"><p><strong>{RUO}</strong></p><p>Copyright © 2026 Nuvera Form. All rights reserved.</p></div></div></footer></body></html>'''
 def write(path,content):
@@ -118,23 +118,62 @@ def cta():
     return '<p style="margin-top:2rem"><a class="btn" href="/#catalog">View catalog and pricing</a> <a class="btn ghost" href="/#catalog">Create a free account</a></p>'
 urls=[("/",1.0),("/compounds",0.9),("/learn",0.7)]
 
+import re, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from seo_data import PRODUCTS, NEW_LEARN
+# Read prices and stock from the storefront so product data always matches the catalog.
+_src=open("index.html").read()
+CAT={}
+for m in re.finditer(r"\{id:'(\w+)',n:'([^']+)'[^\n]*?v:\{(.*)\}\}", _src):
+    vs=re.findall(r"'([^']+)':\{p:([\d.]+),s:(null|\d+)\}", m.group(3))
+    CAT[m.group(1)]=dict(n=m.group(2),v=[(a,float(b),None if c=="null" else int(c)) for a,b,c in vs])
+NAMES={s:n for s,n,*_ in COMPOUNDS}
+def money(x): return f"${x:,.2f}".replace(".00","")
+def offers_for(info):
+    rows=[]
+    for cid in info["ids"]:
+        for size,price,stock in CAT[cid]["v"]:
+            rows.append((CAT[cid]["n"],size,price,stock))
+    return rows
+
+SHIP_LD={"@type":"OfferShippingDetails","shippingRate":{"@type":"MonetaryAmount","value":25,"currency":"USD"},"shippingDestination":{"@type":"DefinedRegion","addressCountry":"US"},
+ "deliveryTime":{"@type":"ShippingDeliveryTime","handlingTime":{"@type":"QuantitativeValue","minValue":1,"maxValue":2,"unitCode":"DAY"},"transitTime":{"@type":"QuantitativeValue","minValue":1,"maxValue":5,"unitCode":"DAY"}}}
+RET_LD={"@type":"MerchantReturnPolicy","applicableCountry":"US","returnPolicyCategory":"https://schema.org/MerchantReturnNotPermitted"}
+
 for s,n,kind,tag,specs,body in COMPOUNDS:
-    path=f"/compounds/{s}"
-    title=f"{n} | Research Peptide Specifications | Nuvera Form"
-    desc=f"{n} for laboratory research: format, sizes and handling notes. {RUO.split('.')[0]}. Ships from the U.S. in 1–2 business days."
-    related="".join(f'<div class="card"><h3>{e(m[1])}</h3><p>{e(m[3])}</p><a class="more" href="/compounds/{m[0]}">View specifications →</a></div>' for m in COMPOUNDS if m[0]!=s)[:0]
-    others=[m for m in COMPOUNDS if m[0]!=s][:3]
-    rel="".join(f'<div class="card"><h3>{e(m[1])}</h3><p>{e(m[3])}</p><a class="more" href="{"/compounds/"+m[0]}">View specifications →</a></div>' for m in others)
-    ld='<script type="application/ld+json">'+json.dumps({"@context":"https://schema.org","@type":"WebPage","name":title,"description":desc,"url":SITE+path,"isPartOf":{"@type":"WebSite","name":"Nuvera Form","url":SITE}})+'</script>'+crumbs_ld([("Home","/"),("Compounds","/compounds"),(n,path)])
+    info=PRODUCTS[s]; path=f"/compounds/{s}"
+    title=info["title"]; desc=info["desc"]
+    rows=offers_for(info); low=min(r[2] for r in rows); high=max(r[2] for r in rows)
+    avail=any(r[3] is None or r[3]>0 for r in rows)
+    product={"@context":"https://schema.org","@type":"Product","name":n,"description":tag,"sku":"NF-"+info["ids"][0].upper(),
+        "brand":{"@type":"Brand","name":"Nuvera Form"},"category":kind,"image":[SITE+"/og.png"],"url":SITE+path,
+        "offers":{"@type":"AggregateOffer","priceCurrency":"USD","lowPrice":low,"highPrice":high,"offerCount":len(rows),
+          "availability":"https://schema.org/"+("InStock" if avail else "OutOfStock"),"url":SITE+path,
+          "seller":{"@type":"Organization","name":"Nuvera Form"},"shippingDetails":SHIP_LD,"hasMerchantReturnPolicy":RET_LD}}
+    faq={"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in info["faqs"]]}
+    ld="".join('<script type="application/ld+json">'+json.dumps(x)+'</script>' for x in (product,faq))+crumbs_ld([("Home","/"),("Compounds","/compounds"),(n,path)])
+    price_rows="".join(f"<tr><th>{e(nm if len(info['ids'])==1 and len(rows)==1 else (size if nm==n else nm+' · '+size))}</th><td>{money(p)}</td></tr>" for nm,size,p,_ in rows)
+    bundle_rows=""
+    for b in info.get("bundles",[]):
+        bn=CAT[b]["n"]; bp=CAT[b]["v"][0][1]
+        bundle_rows+=f"<tr><th>Bundle: {e(bn)}</th><td>{money(bp)}</td></tr>"
+    rel="".join(f'<div class="card"><h3>{e(NAMES[r])}</h3><p>{e(next(m[3] for m in COMPOUNDS if m[0]==r))}</p><a class="more" href="/compounds/{r}">View {e(NAMES[r])} →</a></div>' for r in info["related"])
+    guides=[x for x in NEW_LEARN if s in x[4]][:2]
+    guide_links="".join(f'<li><a href="/learn/{g[0]}">{e(g[1])}</a></li>' for g in guides)+'<li><a href="/learn/storing-lyophilized-peptides">Storing lyophilized peptides in the lab</a></li>'
+    faq_html="".join(f"<h3>{e(q)}</h3><p>{e(a)}</p>" for q,a in info["faqs"])
     page=head(title,desc,path,ld)+top()+f'''<main id="main"><div class="wrap prose">
 <p class="crumbs"><a href="/">Home</a> / <a href="/compounds">Compounds</a> / {e(n)}</p>
 <span class="badge">{e(kind)} · Research use only · 21+</span><h1>{e(n)}</h1><p class="lede">{e(tag)}</p>
+<p><strong>From {money(low)}</strong> · {"In stock" if avail else "Out of stock"} · Ships from the U.S. in 1–2 business days</p>
 <h2>Specifications</h2><table>{"".join(f"<tr><th>{e(a)}</th><td>{e(b)}</td></tr>" for a,b in specs)}</table>
+<h2>Sizes and pricing</h2><table>{price_rows}{bundle_rows}</table>
+<p style="font-size:.85rem">Create a free account to order. First order: 10% off with NUVERA10. Flat shipping: $25 ground, $60 overnight.</p>
 <h2>About this material</h2><p>{e(body)}</p>
-<h2>Handling</h2><p>Store lyophilized vials sealed, dry, cold and away from light, and follow your institution’s written protocol. See <a href="/learn/storing-lyophilized-peptides">storing lyophilized peptides</a>.</p>
+<h2>Handling</h2><p>Store lyophilized vials sealed, dry, cold and away from light, and follow your institution’s written protocol.</p><ul>{guide_links}</ul>
 <h2>Documentation</h2><p>Analytical documentation is being published batch by batch. <a href="mailto:info@nuveraform.com?subject=Documentation%20request%3A%20{e(n)}">Email us</a> to ask what is available for your order.</p>
+<h2>{e(n)} FAQ</h2>{faq_html}
 <div class="note"><strong>Research use only.</strong> {RUO} Nothing on this page is a statement about effects, dosing or use in people or animals.</div>{cta()}
-<h2>Other compounds</h2><div class="grid">{rel}</div></div></main>'''+foot()
+<h2>Related compounds</h2><div class="grid">{rel}</div></div></main>'''+foot()
     write(path,page); urls.append((path,0.8))
 
 cards="".join(f'<div class="card"><span class="badge">{e(k)}</span><h3 style="margin-top:.6rem">{e(n)}</h3><p>{e(t)}</p><a class="more" href="/compounds/{s}">View specifications →</a></div>' for s,n,k,t,*_ in COMPOUNDS)
@@ -146,9 +185,17 @@ def article(s,t,d,secs,section,dirp):
     if dirp=="learn": ld+='<script type="application/ld+json">'+json.dumps({"@context":"https://schema.org","@type":"Article","headline":t,"description":d,"dateModified":TODAY,"mainEntityOfPage":SITE+path,"author":{"@type":"Organization","name":"Nuvera Form"},"publisher":{"@type":"Organization","name":"Nuvera Form"}})+'</script>'
     crumb=f'<a href="/">Home</a> / '+(f'<a href="/{dirp}">{section}</a> / ' if dirp else '')+e(t)
     return head(f"{t} | Nuvera Form",d,path,ld)+top()+f'''<main id="main"><div class="wrap prose"><p class="crumbs">{crumb}</p><h1>{e(t)}</h1><p class="lede">{e(d)}</p>{"".join(f"<h2>{e(a)}</h2><p>{e(b)}</p>" for a,b in secs)}<div class="note"><strong>Research use only.</strong> {RUO}</div></div></main>'''+foot()
+def article_html(s,t,d,secs,rel):
+    path=f"/learn/{s}"
+    ld=crumbs_ld([("Home","/"),("Learn","/learn"),(t,path)])+'<script type="application/ld+json">'+json.dumps({"@context":"https://schema.org","@type":"Article","headline":t,"description":d,"dateModified":TODAY,"mainEntityOfPage":SITE+path,"author":{"@type":"Organization","name":"Nuvera Form"},"publisher":{"@type":"Organization","name":"Nuvera Form"}})+'</script>'
+    rc="".join(f'<div class="card"><h3>{e(NAMES[r])}</h3><a class="more" href="/compounds/{r}">View {e(NAMES[r])} →</a></div>' for r in rel)
+    return head(f"{t} | Nuvera Form",d,path,ld)+top()+f'''<main id="main"><div class="wrap prose"><p class="crumbs"><a href="/">Home</a> / <a href="/learn">Learn</a> / {e(t)}</p><h1>{e(t)}</h1><p class="lede">{e(d)}</p>{"".join(f"<h2>{e(a)}</h2><p>{b}</p>" for a,b in secs)}<div class="note"><strong>Research use only.</strong> {RUO}</div><h2>Compounds mentioned</h2><div class="grid">{rc}</div></div></main>'''+foot()
+for s,t,d,secs,rel in NEW_LEARN:
+    write(f"/learn/{s}",article_html(s,t,d,secs,rel)); urls.append((f"/learn/{s}",0.7))
+LEARN_ALL=LEARN+[(s,t,d,secs) for s,t,d,secs,_ in NEW_LEARN]
 for s,t,d,secs in LEARN:
     write(f"/learn/{s}",article(s,t,d,secs,"Learn","learn")); urls.append((f"/learn/{s}",0.7))
-lc="".join(f'<div class="card"><h3>{e(t)}</h3><p>{e(d)}</p><a class="more" href="/learn/{s}">Read the guide →</a></div>' for s,t,d,_ in LEARN)
+lc="".join(f'<div class="card"><h3>{e(t)}</h3><p>{e(d)}</p><a class="more" href="/learn/{s}">Read the guide →</a></div>' for s,t,d,_ in LEARN_ALL)
 write("/learn",head("Learn | Research Peptide Guides | Nuvera Form","Plain-English guides on research-use-only labelling, storing lyophilized peptides and reading a certificate of analysis.","/learn",crumbs_ld([("Home","/"),("Learn","/learn")]))+top()+f'<main id="main"><div class="wrap"><p class="crumbs"><a href="/">Home</a> / Learn</p><h1>Learn</h1><p class="lede">Practical, non-clinical guides for laboratory buyers.</p><div class="grid" style="margin-top:1.5rem">{lc}</div></div></main>'+foot())
 for s,t,d,secs in LEGAL:
     write(f"/{s}",article(s,t,d,secs,"",""));urls.append((f"/{s}",0.3))
