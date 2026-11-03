@@ -319,8 +319,8 @@ const P=[
 {id:'kis',n:'Kisspeptin 10mg',cat:'recovery',v:{'10mg':{p:85,s:null}}},
 {id:'bac',n:'Bacteriostatic Water 10ml',cat:'water',v:{'10ml':{p:10,s:3}}},
 {id:'bn1',n:'Recovery Duo: BPC-157/TB-500 Blend + GHK-Cu 100mg',cat:'bundle',v:{'Bundle':{p:175,s:5}}},
-{id:'bn2',n:'GLP-3 10mg + Bacteriostatic Water 10ml',cat:'bundle',v:{'Bundle':{p:135,s:3}}}];
-const CATS={all:'All',star:'Star product',blend:'Blends',recovery:'Recovery & repair',water:'Reconstitution',bundle:'Bundles (save 10%)'};
+{id:'bn2',n:'GLP-3 10mg + Bacteriostatic Water 10ml',cat:'bundle',v:{'Bundle':{p:145,s:3}}}];
+const CATS={all:'All',star:'Star product',blend:'Blends',recovery:'Recovery & repair',water:'Reconstitution',bundle:'Bundles'};
 let st={f:'all',q:'',sel:{},cart:JSON.parse(ls.get('nv_cart')||'[]'),promo:ls.get('nv_promo')==='1'&&ls.get('nv_first_done')!=='1',ship:ls.get('nv_ship')==='overnight'?'overnight':'ground'};
 const SHIP={ground:{l:'Ground',p:25},overnight:{l:'Overnight',p:60}};
 P.forEach(p=>st.sel[p.id]=Object.keys(p.v)[0]);

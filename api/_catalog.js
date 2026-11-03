@@ -13,7 +13,7 @@ export const PRICES = {
   kis: { name: 'Kisspeptin 10mg', v: { '10mg': 85 } },
   bac: { name: 'Bacteriostatic Water 10ml', v: { '10ml': 10 } },
   bn1: { name: 'Recovery Duo: BPC-157/TB-500 Blend + GHK-Cu 100mg', v: { 'Bundle': 175 } },
-  bn2: { name: 'GLP-3 10mg + Bacteriostatic Water 10ml', v: { 'Bundle': 135 } }
+  bn2: { name: 'GLP-3 10mg + Bacteriostatic Water 10ml', v: { 'Bundle': 145 } }
 };
 
 export const SHIPPING = {

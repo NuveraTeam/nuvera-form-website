@@ -9,7 +9,7 @@ PRODUCTS = {
   desc="GLP-3 research peptide in 5 mg, 10 mg and 15 mg lyophilized vials. U.S. shipping in 1–2 business days, discreet packaging. Research use only, 21+.",
   ids=["ret"], bundles=["bn2"], related=["bacteriostatic-water","mots-c","nad-plus"],
   faqs=[("What sizes of GLP-3 do you carry?","GLP-3 is listed in 5 mg, 10 mg and 15 mg lyophilized vials. Current stock for each size is shown in the catalog."),
-        ("Is there a GLP-3 bundle?","Yes. GLP-3 10 mg is paired with a 10 ml vial of bacteriostatic water as a bundle at a 10% saving versus buying both separately."),
+        ("Is there a GLP-3 bundle?","Yes. GLP-3 10 mg is paired with a 10 ml vial of bacteriostatic water as a bundle for $145, a $5 saving versus buying both separately."),
         ("How is GLP-3 shipped?","Vials ship sealed in a plain outer box from the U.S., typically within 1–2 business days of payment, with ground or overnight options.")]),
 "bpc-157": dict(
   title="BPC-157 / TB-500 Blend 10mg | Research Peptide | Nuvera Form",
@@ -80,7 +80,7 @@ PRODUCTS = {
   ids=["bac"], bundles=["bn2"], related=["glp-3","bpc-157","ghk-cu"],
   faqs=[("What is bacteriostatic water?","Sterile water containing 0.9% benzyl alcohol, which inhibits bacterial growth in a multi-use vial."),
         ("How is it different from sterile water?","Plain sterile water has no preservative and is meant for single use; bacteriostatic water is designed for a multi-dose vial."),
-        ("Is it included in any bundle?","Yes. A 10 ml vial is paired with GLP-3 10 mg in a bundle at a 10% saving.")]),
+        ("Is it included in any bundle?","Yes. A 10 ml vial is paired with GLP-3 10 mg in a bundle for $145, a $5 saving versus buying both separately.")]),
 }
 
 NEW_LEARN = [
