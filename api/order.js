@@ -120,7 +120,7 @@ ${c.notes ? `<h3 style="margin:20px 0 6px">Order notes</h3><p style="margin:0">$
     reply_to: 'info@nuveraform.com',
     subject: `Order ${order} received: pay ${money(total)} by Zelle`,
     html: `<div style="font-family:Arial,sans-serif;background:#F7F0E3;color:#3A2816;padding:32px">
-<img src="https://nuveraform.com/assets/nuvera-logo-hd-192.png" alt="Nuvera Form" width="64" height="64" style="display:block;width:64px;height:64px;border:0;margin:0 0 16px">
+<img src="https://www.nuveraform.com/assets/nuvera-logo-hd-192.png" alt="Nuvera Form" width="64" height="64" style="display:block;width:64px;height:64px;border:0;margin:0 0 16px">
 <h2 style="margin:0 0 8px">Thanks${c.first ? ', ' + esc(c.first) : ''}. Your order is reserved.</h2>
 <p style="margin:0 0 18px">Order number <b>${order}</b>. It ships once your payment arrives.</p>
 <div style="background:#fff;border:2px dashed #BF943C;border-radius:14px;padding:16px;margin:0 0 20px">${payBlock}</div>

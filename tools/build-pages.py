@@ -2,7 +2,7 @@
 """Generates static SEO pages (compounds, learn, legal, 404) and sitemap.xml. Run: python3 tools/build-pages.py"""
 import os, json, html
 from datetime import date
-SITE="https://nuveraform.com"; TODAY=date.today().isoformat()
+SITE="https://www.nuveraform.com"; TODAY=date.today().isoformat()
 RUO="For laboratory research use only. Not for human or veterinary use. Not a drug, food, supplement or cosmetic."
 
 COMPOUNDS=[
