@@ -31,5 +31,12 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/compounds/retatrutide",
+      "destination": "/compounds/glp-3",
+      "permanent": true
+    }
   ]
 }

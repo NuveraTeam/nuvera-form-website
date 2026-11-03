@@ -6,9 +6,9 @@ SITE="https://nuveraform.com"; TODAY=date.today().isoformat()
 RUO="For laboratory research use only. Not for human or veterinary use. Not a drug, food, supplement or cosmetic."
 
 COMPOUNDS=[
-("retatrutide","Retatrutide","Research peptide","A long-chain synthetic peptide that appears in the scientific literature as a multi-receptor agonist studied in metabolic research models.",
+("glp-3","GLP-3","Research peptide","A long-chain synthetic peptide that appears in the scientific literature as a multi-receptor agonist studied in metabolic research models.",
  [("Class","Synthetic peptide"),("Format","Lyophilized powder, sterile vial"),("Sizes listed","5 mg, 10 mg, 15 mg"),("Typical lab use","Receptor-binding and in-vitro metabolic assays")],
- "Retatrutide is a synthetic peptide that researchers describe as acting on more than one incretin-family receptor. It is used in laboratory work to study receptor signalling in cell-based assays. This page covers the physical product only."),
+ "GLP-3 is a synthetic peptide that researchers describe as acting on more than one incretin-family receptor. It is used in laboratory work to study receptor signalling in cell-based assays. This page covers the physical product only."),
 ("bpc-157","BPC-157","Research peptide","A synthetic pentadecapeptide (15 amino acids) whose sequence is derived from a protein fragment found in gastric juice.",
  [("Class","Synthetic peptide, 15 residues"),("Format","Lyophilized powder, sterile vial"),("Offered as","BPC-157 / TB-500 blend, 10 mg and Recovery Duo bundle"),("Typical lab use","Cell-culture and tissue-model research")],
  "BPC-157 is a short synthetic peptide frequently referenced in preclinical literature. Nuvera Form lists it combined with TB-500 as a research blend. Product pages here describe the material, not any effect on people or animals."),
