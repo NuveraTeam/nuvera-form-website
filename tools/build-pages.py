@@ -96,19 +96,19 @@ def head(title,desc,path,extra="",og=True):
 <link rel="canonical" href="{url}"><link rel="icon" href="/favicon.ico?v=hd" sizes="any"><link rel="icon" href="/favicon-32.png?v=hd" type="image/png" sizes="32x32"><link rel="icon" href="/icon-192.png?v=hd" type="image/png" sizes="192x192"><link rel="apple-touch-icon" href="/apple-touch-icon.png?v=hd">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Nuvera Form"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}"><meta property="og:url" content="{url}"><meta property="og:image" content="{SITE}/og.png?v=hd"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="{SITE}/og.png?v=hd">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/site.css">{extra}</head>'''
+<link rel="stylesheet" href="/assets/site.css"><script defer src="/_vercel/insights/script.js"></script>{extra}</head>'''
 def crumbs_ld(items):
     return '<script type="application/ld+json">'+json.dumps({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":i+1,"name":n,"item":SITE+p} for i,(n,p) in enumerate(items)]})+'</script>'
 def top():
     return '''<body><a class="skip" href="#main">Skip to content</a>
 <header class="top"><div class="wrap bar"><a class="logo" href="/"><img src="/assets/nuvera-logo-hd-96.png" srcset="/assets/nuvera-logo-hd-96.png 1x, /assets/nuvera-logo-hd-144.png 2x, /assets/nuvera-logo-hd-192.png 3x" alt="" width="48" height="48" class="brandmark"><span class="t">Nuvera Form</span></a>
-<nav class="m" aria-label="Main"><a href="/#catalog">Catalog</a><a href="/compounds">Compounds</a><a href="/learn">Learn</a><a href="/#faq">FAQ</a></nav></div></header>'''
+<nav class="m" aria-label="Main"><a href="/#catalog">Catalog</a><a href="/compounds">Compounds</a><a href="/learn">Learn</a><a href="/about">About</a><a href="/#faq">FAQ</a></nav></div></header>'''
 def foot():
     return f'''<footer class="f"><div class="wrap"><div class="fg">
 <div><h4>Nuvera Form</h4><p>Research peptides and reconstitution reagents for qualified laboratories.</p></div>
 <div><h4>Compounds</h4><ul>{"".join(f'<li><a href="/compounds/{s}">{e(n)}</a></li>' for s,n,*_ in COMPOUNDS[:6])}<li><a href="/compounds">All compounds</a></li></ul></div>
 <div><h4>Learn</h4><ul>{"".join(f'<li><a href="/learn/{s}">{e(t)}</a></li>' for s,t,*_ in LEARN+[(x[0],x[1]) for x in NEW_LEARN])}</ul></div>
-<div><h4>Company</h4><ul><li><a href="/shipping-returns">Shipping &amp; Returns</a></li><li><a href="/privacy">Privacy Policy</a></li><li><a href="/terms">Terms of Sale</a></li><li><a href="/research-use-policy">Research Use Policy</a></li><li><a href="mailto:info@nuveraform.com">info@nuveraform.com</a></li></ul></div>
+<div><h4>Company</h4><ul><li><a href="/about">About us</a></li><li><a href="/shipping-returns">Shipping &amp; Returns</a></li><li><a href="/privacy">Privacy Policy</a></li><li><a href="/terms">Terms of Sale</a></li><li><a href="/research-use-policy">Research Use Policy</a></li><li><a href="mailto:info@nuveraform.com">info@nuveraform.com</a></li></ul></div>
 </div><div class="legal"><p><strong>{RUO}</strong></p><p>Copyright © 2026 Nuvera Form. All rights reserved.</p></div></div></footer></body></html>'''
 def write(path,content):
     fp=path.lstrip("/")+".html"
@@ -200,6 +200,17 @@ write("/learn",head("Learn | Research Peptide Guides | Nuvera Form","Plain-Engli
 for s,t,d,secs in LEGAL:
     write(f"/{s}",article(s,t,d,secs,"",""));urls.append((f"/{s}",0.3))
 
+
+ABOUT_SECS=[
+ ("Who we are","Nuvera Form is a small, Miami-based supplier of research peptides and reconstitution reagents, run by a two-person team. We started it to offer a short list of compounds presented clearly, with honest information and real people answering the phone."),
+ ("What we sell","A focused catalog of research peptides, research blends and bacteriostatic water, each with its own <a href=\"/compounds\">specification page</a>. Every vial carries our own label showing the compound and quantity. Everything we sell is for laboratory research use only."),
+ ("How we ship","Orders are packed in plain outer boxes and dispatched from the U.S. within 1–2 business days of payment. Ground shipping is a flat $25 and overnight is a flat $60. We email tracking when your order leaves, and replace damaged or incorrect items reported within 72 hours. Full details are on our <a href=\"/shipping-returns\">shipping and returns</a> page."),
+ ("Documentation","We publish analytical documentation batch by batch and do not claim results we cannot show. <a href=\"mailto:info@nuveraform.com?subject=Documentation%20request\">Email us</a> to ask what is available for your order."),
+ ("How we sell","We sell only to buyers aged 21 or older who confirm research use, and we do not answer questions about dosing or use in people or animals. Read our <a href=\"/research-use-policy\">research use policy</a>."),
+ ("Contact us","Email <a href=\"mailto:info@nuveraform.com\">info@nuveraform.com</a> or call <a href=\"tel:+13054573814\">305-457-3814</a> during regular business hours. Follow us on <a href=\"https://instagram.com/nuveraform\">Instagram</a>, <a href=\"https://tiktok.com/@nuveraform\">TikTok</a> and <a href=\"https://facebook.com/nuveraform\">Facebook</a> at @nuveraform."),
+]
+_ab_ld='<script type="application/ld+json">'+json.dumps({"@context":"https://schema.org","@type":"AboutPage","url":SITE+"/about","mainEntity":{"@type":"Organization","name":"Nuvera Form","url":SITE+"/","logo":SITE+"/assets/nuvera-logo-hd-1024.png","email":"info@nuveraform.com","telephone":"+1-305-457-3814","address":{"@type":"PostalAddress","addressLocality":"Miami","addressRegion":"FL","addressCountry":"US"},"sameAs":["https://instagram.com/nuveraform","https://tiktok.com/@nuveraform","https://facebook.com/nuveraform"]}})+'</script>'+crumbs_ld([("Home","/"),("About",'/about')])
+write("/about",head("About Nuvera Form | Miami Research Peptide Supplier","Nuvera Form is a small Miami-based supplier of research peptides and reagents. Who we are, how we ship and how to reach us.","/about",_ab_ld)+top()+f'''<main id="main"><div class="wrap prose"><p class="crumbs"><a href="/">Home</a> / About</p><h1>About Nuvera Form</h1><p class="lede">A small Miami-based supplier of research peptides, with clear information and real people on support.</p>{"".join(f"<h2>{e(a)}</h2><p>{b}</p>" for a,b in ABOUT_SECS)}<div class="note"><strong>Research use only.</strong> {RUO}</div>{cta()}</div></main>'''+foot()); urls.append(("/about",0.5))
 write("/404",head("Page not found | Nuvera Form","The page you are looking for could not be found.","/404").replace('index,follow','noindex')+top()+'<main id="main"><div class="wrap prose"><h1>Page not found</h1><p class="lede">That page does not exist or has moved.</p><p><a class="btn" href="/">Back to the home page</a> <a class="btn ghost" href="/compounds">Browse compounds</a></p></div></main>'+foot())
 os.rename("404.html","404.html") if os.path.exists("404.html") else None
 
