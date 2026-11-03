@@ -320,6 +320,9 @@ const P=[
 {id:'bac',n:'Bacteriostatic Water 10ml',cat:'water',v:{'10ml':{p:10,s:3}}},
 {id:'bn1',n:'Recovery Duo: BPC-157/TB-500 Blend + GHK-Cu 100mg',cat:'bundle',v:{'Bundle':{p:175,s:5}}},
 {id:'bn2',n:'GLP-3 10mg + Bacteriostatic Water 10ml',cat:'bundle',v:{'Bundle':{p:145,s:3}}}];
+/* product photos by product id and size; products without one fall back to the drawn vial */
+const IMG={ret:{'5mg':'/assets/products/glp-3-5mg.webp','10mg':'/assets/products/glp-3-10mg.webp','15mg':'/assets/products/glp-3-15mg.webp'}};
+const pic=(p,v)=>{const u=IMG[p.id]&&IMG[p.id][v];return u?`<img src="${u}" alt="${p.n} ${v.replace(/(\d)(m[gl])/,'$1 $2')} vial" width="200" height="311" loading="lazy" decoding="async" style="height:100%;width:auto;object-fit:contain;padding:.35rem 0">`:vial(v)};
 const CATS={all:'All',star:'Star product',blend:'Blends',recovery:'Recovery & repair',water:'Reconstitution',bundle:'Bundles'};
 let st={f:'all',q:'',sel:{},cart:JSON.parse(ls.get('nv_cart')||'[]'),promo:ls.get('nv_promo')==='1'&&ls.get('nv_first_done')!=='1',ship:ls.get('nv_ship')==='overnight'?'overnight':'ground'};
 const SHIP={ground:{l:'Ground',p:25},overnight:{l:'Overnight',p:60}};
@@ -346,7 +349,7 @@ const list=P.filter(p=>(st.f==='all'||p.cat===st.f)&&p.n.toLowerCase().includes(
 $('#grid').innerHTML=list.length?list.map(p=>{const vs=Object.keys(p.v),cur=p.v[st.sel[p.id]],out=cur.s===0;
 return `<article class="card p-5 flex flex-col ${p.star?'ring-2 ring-[#BF943C]':''}">
 <div class="flex justify-between items-start mb-3"><span class="badge ${cur.s!==null&&cur.s<=3?'warn':''}" id="b-${p.id}">${stockTxt(cur.s)}</span>${p.star?'<span class="badge" style="background:var(--gold);color:#fff;border-color:var(--gold)">Star product</span>':''}</div>
-<div class="h-36 flex items-center justify-center mb-3 rounded-2xl" style="background:linear-gradient(160deg,var(--sand),var(--champ))">${vial(st.sel[p.id])}</div>
+<div class="flex items-center justify-center mb-3 rounded-2xl" style="height:11rem;background:linear-gradient(160deg,var(--sand),var(--champ))">${pic(p,st.sel[p.id])}</div>
 <h3 class="font-bold leading-snug">${p.n}</h3>
 <p class="text-xs mt-1">Lyophilized powder · Research use only</p><button class="text-xs underline mt-1 text-left" data-coa="${p.n}">Request documentation</button>
 ${vs.length>1?`<div class="flex gap-2 mt-3 flex-wrap">${vs.map(v=>`<button class="pill ${st.sel[p.id]===v?'on':''}" data-p="${p.id}" data-v="${v}">${v}</button>`).join('')}</div>`:''}

@@ -140,13 +140,15 @@ SHIP_LD={"@type":"OfferShippingDetails","shippingRate":{"@type":"MonetaryAmount"
  "deliveryTime":{"@type":"ShippingDeliveryTime","handlingTime":{"@type":"QuantitativeValue","minValue":1,"maxValue":2,"unitCode":"DAY"},"transitTime":{"@type":"QuantitativeValue","minValue":1,"maxValue":5,"unitCode":"DAY"}}}
 RET_LD={"@type":"MerchantReturnPolicy","applicableCountry":"US","returnPolicyCategory":"https://schema.org/MerchantReturnNotPermitted"}
 
+# product photo per compound page (add more slugs as photos are made)
+PAGE_IMG={"glp-3":("/assets/products/glp-3-10mg-studio.jpg","GLP-3 10 mg vial")}
 for s,n,kind,tag,specs,body in COMPOUNDS:
     info=PRODUCTS[s]; path=f"/compounds/{s}"
     title=info["title"]; desc=info["desc"]
     rows=offers_for(info); low=min(r[2] for r in rows); high=max(r[2] for r in rows)
     avail=any(r[3] is None or r[3]>0 for r in rows)
     product={"@context":"https://schema.org","@type":"Product","name":n,"description":tag,"sku":"NF-"+info["ids"][0].upper(),
-        "brand":{"@type":"Brand","name":"Nuvera Form"},"category":kind,"image":[SITE+"/og.png"],"url":SITE+path,
+        "brand":{"@type":"Brand","name":"Nuvera Form"},"category":kind,"image":[SITE+PAGE_IMG[s][0]] if s in PAGE_IMG else [SITE+"/og.png"],"url":SITE+path,
         "offers":{"@type":"AggregateOffer","priceCurrency":"USD","lowPrice":low,"highPrice":high,"offerCount":len(rows),
           "availability":"https://schema.org/"+("InStock" if avail else "OutOfStock"),"url":SITE+path,
           "seller":{"@type":"Organization","name":"Nuvera Form"},"shippingDetails":SHIP_LD,"hasMerchantReturnPolicy":RET_LD}}
@@ -164,7 +166,7 @@ for s,n,kind,tag,specs,body in COMPOUNDS:
     page=head(title,desc,path,ld)+top()+f'''<main id="main"><div class="wrap prose">
 <p class="crumbs"><a href="/">Home</a> / <a href="/compounds">Compounds</a> / {e(n)}</p>
 <span class="badge">{e(kind)} · Research use only · 21+</span><h1>{e(n)}</h1><p class="lede">{e(tag)}</p>
-<p><strong>From {money(low)}</strong> · {"In stock" if avail else "Out of stock"} · Ships from the U.S. in 1–2 business days</p>
+{(f'<img src="{PAGE_IMG[s][0]}" alt="{e(PAGE_IMG[s][1])}" width="1200" height="1200" style="width:100%;max-width:22rem;height:auto;border-radius:1rem;display:block;margin:1rem 0" fetchpriority="high">\n') if s in PAGE_IMG else ""}<p><strong>From {money(low)}</strong> · {"In stock" if avail else "Out of stock"} · Ships from the U.S. in 1–2 business days</p>
 <h2>Specifications</h2><table>{"".join(f"<tr><th>{e(a)}</th><td>{e(b)}</td></tr>" for a,b in specs)}</table>
 <h2>Sizes and pricing</h2><table>{price_rows}{bundle_rows}</table>
 <p style="font-size:.85rem">Create a free account to order. First order: 10% off with NUVERA10. Flat shipping: $25 ground, $60 overnight.</p>
