@@ -2,6 +2,7 @@
 // emails the order to the store and a Zelle payment request to the customer via Resend.
 import { PRICES, SHIPPING, PROMO } from './_catalog.js';
 import { customerKeys, hasOrderedBefore, rememberCustomer } from './_customers.js';
+import { saveOrder, sign } from './_store.js';
 
 const hits = new Map();
 const esc = (v = '') => String(v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -68,7 +69,7 @@ export default async function handler(req, res) {
     const price = p && p.v[it.v];
     const q = Number(it && it.q);
     if (!price || !Number.isInteger(q) || q < 1 || q > 50) return res.status(400).json({ error: 'An item in your cart is no longer available. Refresh the page and try again.' });
-    lines.push({ name: p.name, v: it.v, q, price, total: price * q });
+    lines.push({ id: it.id, name: p.name, v: it.v, q, price, total: price * q });
   }
 
   const subtotal = lines.reduce((a, l) => a + l.total, 0);
@@ -100,6 +101,7 @@ ${discount ? `<tr><td style="padding:6px 0">${esc(code)} (${Math.round(rate * 10
     html: `<div style="font-family:Arial,sans-serif;color:#3A2816">
 <h2 style="margin:0 0 8px">New order ${order}</h2>
 <p style="margin:0 0 16px">Awaiting Zelle payment of <b>${money(total)}</b>. Customer was told to put <b>${order}</b> in the Zelle memo.</p>
+<p style="margin:0 0 16px">When it ships: <a href="https://www.nuveraform.com/api/ship?o=${order}&s=${sign('ship:' + order)}" style="display:inline-block;background:#BF943C;color:#fff;font-weight:700;text-decoration:none;border-radius:999px;padding:10px 18px">Mark as shipped &amp; email tracking</a></p>
 <table style="width:100%;max-width:520px;border-collapse:collapse;font-size:14px">${totalsHtml}</table>
 <h3 style="margin:20px 0 6px">Ship to</h3><p style="margin:0">${addressHtml}</p>
 <h3 style="margin:20px 0 6px">Contact</h3><p style="margin:0">${esc(c.email)}<br>${esc(c.phone)}</p>
@@ -108,6 +110,12 @@ ${c.notes ? `<h3 style="margin:20px 0 6px">Order notes</h3><p style="margin:0">$
   });
   if (!storeOk) return res.status(502).json({ error: 'Email provider error' });
   await rememberCustomer(keys, order);
+  // Order record for shipping updates, reviews and follow-ups. Never blocks the order.
+  try {
+    await saveOrder({ order, createdAt: new Date().toISOString(), email: c.email, first: c.first, last: c.last,
+      items: lines.map(l => ({ id: l.id, name: l.name, v: l.v, q: l.q })), total, ship: b.shipping,
+      shippedAt: null, carrier: null, tracking: null, reviewSentAt: null, reorderSentAt: null });
+  } catch (e) { console.error('saveOrder failed', order, e && e.message); }
 
   const payBlock = zelleTo
     ? `<p style="margin:0 0 6px">Send <b>${money(total)}</b> by Zelle to:</p>

@@ -38,5 +38,11 @@
       "destination": "/compounds/glp-3",
       "permanent": true
     }
+  ],
+  "crons": [
+    {
+      "path": "/api/followups",
+      "schedule": "0 15 * * *"
+    }
   ]
 }

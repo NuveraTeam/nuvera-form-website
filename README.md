@@ -37,3 +37,12 @@ The access key in `index.html` is a public key by design. In the Web3Forms dashb
 
 ## 6. Before taking payments
 Checkout takes orders for Zelle payment through `api/order.js`. Set `ZELLE_TO` (your Zelle email or phone) and `ZELLE_NAME` in Vercel so customers see payment details instantly; without them they are told details will follow by email. Orders are emailed to `ORDER_NOTIFY_TO` (default info@nuveraform.com). Prices are checked against `api/_catalog.js`; update it whenever prices in `index.html` change.
+
+## 7. Orders, shipping emails, reviews and follow-ups
+- Every order is saved (encrypted) in the Vercel Blob store. The new-order email has a **Mark as shipped** button: pick the carrier, paste the tracking number, and the customer gets a shipping email with a tracking link.
+- About 7 days after shipping, a daily job (`api/followups.js`, Vercel Cron) emails a review request. Reorder reminders are sent only for products with a number of weeks set in `REORDER_WEEKS` in `api/_catalog.js`.
+- Customers review at `/review` with their order number and order email. Each review is emailed to the store with an **Approve and publish** button; nothing appears until approved.
+- Env vars: `BLOB_READ_WRITE_TOKEN` (set by the Blob store), `CUSTOMER_SALT`, `ORDER_KEY`, `CRON_SECRET`. Do not change `ORDER_KEY` or `CUSTOMER_SALT` once set.
+
+## 8. Styles
+The homepage uses a prebuilt `assets/tw.css` (Tailwind) and `assets/icons.css` (only the Font Awesome icons in use). After changing Tailwind classes in `index.html`, run `tools/build-css.sh`. After editing product or Learn content, run `python3 tools/build-pages.py`.

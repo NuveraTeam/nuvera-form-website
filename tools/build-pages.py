@@ -173,6 +173,7 @@ for s,n,kind,tag,specs,body in COMPOUNDS:
 <h2>About this material</h2><p>{e(body)}</p>
 <h2>Handling</h2><p>Store lyophilized vials sealed, dry, cold and away from light, and follow your institution’s written protocol.</p><ul>{guide_links}</ul>
 <h2>Documentation</h2><p>Analytical documentation is being published batch by batch. <a href="mailto:info@nuveraform.com?subject=Documentation%20request%3A%20{e(n)}">Email us</a> to ask what is available for your order.</p>
+<h2>Reviews</h2><div id="reviews" data-ids="{",".join(info["ids"])}"><p data-summary></p><div data-list><p>Loading reviews…</p></div></div><script src="/assets/reviews.js" defer></script>
 <h2>{e(n)} FAQ</h2>{faq_html}
 <div class="note"><strong>Research use only.</strong> {RUO} Nothing on this page is a statement about effects, dosing or use in people or animals.</div>{cta()}
 <h2>Related compounds</h2><div class="grid">{rel}</div></div></main>'''+foot()
@@ -213,6 +214,33 @@ ABOUT_SECS=[
 ]
 _ab_ld='<script type="application/ld+json">'+json.dumps({"@context":"https://schema.org","@type":"AboutPage","url":SITE+"/about","mainEntity":{"@type":"Organization","name":"Nuvera Form","url":SITE+"/","logo":SITE+"/assets/nuvera-logo-hd-1024.png","email":"info@nuveraform.com","telephone":"+1-305-457-3814","address":{"@type":"PostalAddress","addressLocality":"Miami","addressRegion":"FL","addressCountry":"US"},"sameAs":["https://instagram.com/nuveraform","https://tiktok.com/@nuveraform","https://facebook.com/nuveraform"]}})+'</script>'+crumbs_ld([("Home","/"),("About",'/about')])
 write("/about",head("About Nuvera Form | Miami Research Peptide Supplier","Nuvera Form is a small Miami-based supplier of research peptides and reagents. Who we are, how we ship and how to reach us.","/about",_ab_ld)+top()+f'''<main id="main"><div class="wrap prose"><p class="crumbs"><a href="/">Home</a> / About</p><h1>About Nuvera Form</h1><p class="lede">A small Miami-based supplier of research peptides, with clear information and real people on support.</p>{"".join(f"<h2>{e(a)}</h2><p>{b}</p>" for a,b in ABOUT_SECS)}<div class="note"><strong>Research use only.</strong> {RUO}</div>{cta()}</div></main>'''+foot()); urls.append(("/about",0.5))
+
+_rv_js="""
+(function(){var f=document.getElementById('rf'),msg=document.getElementById('rmsg'),step2=document.getElementById('step2'),q=new URLSearchParams(location.search);
+if(q.get('o'))f.order.value=q.get('o');
+function show(t,ok){msg.textContent=t;msg.style.color=ok?'#2e6b3a':'#a33';}
+function post(d){return fetch('/api/review',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)}).then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j}})})}
+document.getElementById('find').onclick=function(){show('',1);post({order:f.order.value,email:f.email.value,lookup:true}).then(function(x){if(!x.ok)return show(x.j.error||'Something went wrong.');
+f.product.innerHTML=x.j.products.map(function(p){return '<option value="'+p.id+'">'+p.name+'</option>'}).join('');step2.hidden=false;f.order.readOnly=f.email.readOnly=true;}).catch(function(){show('Something went wrong. Try again.')})};
+f.onsubmit=function(e){e.preventDefault();var r=f.querySelector('input[name=rating]:checked');if(!r)return show('Choose a star rating.');
+var b=f.querySelector('button[type=submit]');b.disabled=true;post({order:f.order.value,email:f.email.value,product:f.product.value,rating:+r.value,name:f.name.value,text:f.text.value,website:f.website.value}).then(function(x){b.disabled=false;
+if(!x.ok)return show(x.j.error||'Something went wrong.');f.hidden=true;show('Thank you! Your review was received and will appear once it is checked.',1);}).catch(function(){b.disabled=false;show('Something went wrong. Try again.')})};})();
+"""
+_inp='style="padding:.6rem .8rem;border:1px solid var(--line);border-radius:12px;width:100%;max-width:26rem;font:inherit;background:#fff"'
+_stars="".join(f'<label style="margin-right:.6rem;cursor:pointer"><input type="radio" name="rating" value="{i}"> {"★"*i}</label>' for i in range(5,0,-1))
+write("/review",head("Leave a Review | Nuvera Form","Leave a verified review of your Nuvera Form order.","/review").replace('index,follow','noindex')+top()+f'''<main id="main"><div class="wrap prose"><h1>Leave a verified review</h1><p class="lede">Reviews are open to customers only. Enter your order number and the email you ordered with.</p>
+<form id="rf" novalidate><input name="website" style="display:none" tabindex="-1" autocomplete="off">
+<p><label>Order number<br><input name="order" required placeholder="NF-261103-ABCD" {_inp}></label></p>
+<p><label>Email used for the order<br><input name="email" type="email" required {_inp}></label></p>
+<p><button type="button" id="find" class="btn">Find my order</button></p>
+<div id="step2" hidden>
+<p><label>Product<br><select name="product" {_inp}></select></label></p>
+<p>Rating<br>{_stars}</p>
+<p><label>Your review<br><textarea name="text" rows="5" maxlength="1200" {_inp}></textarea></label></p>
+<p><label>Name to show (optional)<br><input name="name" maxlength="40" placeholder="e.g. Kelly G." {_inp}></label></p>
+<div class="note">Tell us about the order: shipping speed, packaging, labelling and service. Reviews that describe effects, dosing or use in people or animals cannot be published.</div>
+<p><button type="submit" class="btn">Submit review</button></p></div></form>
+<p id="rmsg" role="status" style="font-weight:600"></p></div></main><script>{_rv_js}</script>'''+foot())
 write("/404",head("Page not found | Nuvera Form","The page you are looking for could not be found.","/404").replace('index,follow','noindex')+top()+'<main id="main"><div class="wrap prose"><h1>Page not found</h1><p class="lede">That page does not exist or has moved.</p><p><a class="btn" href="/">Back to the home page</a> <a class="btn ghost" href="/compounds">Browse compounds</a></p></div></main>'+foot())
 os.rename("404.html","404.html") if os.path.exists("404.html") else None
 
