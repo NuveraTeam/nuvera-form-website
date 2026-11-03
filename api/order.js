@@ -1,6 +1,7 @@
 // Vercel serverless function: receives a checkout, re-prices it from the server price list,
 // emails the order to the store and a Zelle payment request to the customer via Resend.
 import { PRICES, SHIPPING, PROMO } from './_catalog.js';
+import { customerKeys, hasOrderedBefore, rememberCustomer } from './_customers.js';
 
 const hits = new Map();
 const esc = (v = '') => String(v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -73,6 +74,9 @@ export default async function handler(req, res) {
   const subtotal = lines.reduce((a, l) => a + l.total, 0);
   const code = str(b.promo, 20).toUpperCase();
   const rate = PROMO[code] || 0;
+  const keys = customerKeys(c);
+  if (rate && code === 'NUVERA10' && await hasOrderedBefore(keys))
+    return res.status(409).json({ code: 'promo_used', error: 'NUVERA10 is for first orders only, and we have an earlier order with this email, phone or address. We removed the code; check your new total and place the order again.' });
   const discount = Math.round(subtotal * rate * 100) / 100;
   const total = Math.round((subtotal - discount + ship.price) * 100) / 100;
   const order = orderNumber();
@@ -103,6 +107,7 @@ ${c.notes ? `<h3 style="margin:20px 0 6px">Order notes</h3><p style="margin:0">$
 <p style="font-size:12px;color:#7a6650;margin-top:20px">Buyer confirmed 21+ and research use only at checkout.</p></div>`
   });
   if (!storeOk) return res.status(502).json({ error: 'Email provider error' });
+  await rememberCustomer(keys, order);
 
   const payBlock = zelleTo
     ? `<p style="margin:0 0 6px">Send <b>${money(total)}</b> by Zelle to:</p>

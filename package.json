@@ -1,1 +1,9 @@
-{ "name": "nuvera-form", "version": "1.0.0", "private": true, "type": "module" }
+{
+  "name": "nuvera-form",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@vercel/blob": ">=1.0.0 <3"
+  }
+}
