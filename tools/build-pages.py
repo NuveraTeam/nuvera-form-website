@@ -76,7 +76,7 @@ LEGAL=[
  [("Payment","We accept Zelle. After you place an order we email your order number and Zelle details; include the order number in the Zelle memo."),
   ("Dispatch","Orders typically dispatch within 1–2 business days of receiving payment."),
   ("Delivery","Ground delivery is typically 3–5 business days after dispatch; overnight orders arrive the next business day after dispatch. A tracking link is emailed when your order leaves."),
-  ("Cost","Ground shipping is a flat $25 per order. Overnight shipping is a flat $60 per order."),
+  ("Cost","Ground shipping is a flat $25 per order, free on orders of $250 or more after discounts. Overnight shipping is a flat $60 per order."),
   ("Damaged or incorrect items","Email info@nuveraform.com within 72 hours of delivery with your order number and a photo. We will replace the item."),
   ("Returns","Because of the nature of the products, opened or used vials cannot be returned.")]),
 ("research-use-policy","Research Use Policy","The conditions under which Nuvera Form supplies its products.",
@@ -169,7 +169,7 @@ for s,n,kind,tag,specs,body in COMPOUNDS:
 {(f'<img src="{PAGE_IMG[s][0]}" alt="{e(PAGE_IMG[s][1])}" width="1200" height="1200" style="width:100%;max-width:22rem;height:auto;border-radius:1rem;display:block;margin:1rem 0" fetchpriority="high">\n') if s in PAGE_IMG else ""}<p><strong>From {money(low)}</strong> · {"In stock" if avail else "Out of stock"} · Ships from the U.S. in 1–2 business days</p>
 <h2>Specifications</h2><table>{"".join(f"<tr><th>{e(a)}</th><td>{e(b)}</td></tr>" for a,b in specs)}</table>
 <h2>Sizes and pricing</h2><table>{price_rows}{bundle_rows}</table>
-<p style="font-size:.85rem">Create a free account to order. First order: 10% off with NUVERA10. Flat shipping: $25 ground, $60 overnight.</p>
+<p style="font-size:.85rem">Create a free account to order. First order: 10% off with NUVERA10. Shipping: $25 ground, free on $250+; $60 overnight.</p>
 <h2>About this material</h2><p>{e(body)}</p>
 <h2>Handling</h2><p>Store lyophilized vials sealed, dry, cold and away from light, and follow your institution’s written protocol.</p><ul>{guide_links}</ul>
 <h2>Documentation</h2><p>Analytical documentation is being published batch by batch. <a href="mailto:info@nuveraform.com?subject=Documentation%20request%3A%20{e(n)}">Email us</a> to ask what is available for your order.</p>
@@ -207,7 +207,7 @@ for s,t,d,secs in LEGAL:
 ABOUT_SECS=[
  ("Who we are","Nuvera Form is a small, Miami-based supplier of research peptides and reconstitution reagents, run by a two-person team. We started it to offer a short list of compounds presented clearly, with honest information and real people answering the phone."),
  ("What we sell","A focused catalog of research peptides, research blends and bacteriostatic water, each with its own <a href=\"/compounds\">specification page</a>. Every vial carries our own label showing the compound and quantity. Everything we sell is for laboratory research use only."),
- ("How we ship","Orders are packed in plain outer boxes and dispatched from the U.S. within 1–2 business days of payment. Ground shipping is a flat $25 and overnight is a flat $60. We email tracking when your order leaves, and replace damaged or incorrect items reported within 72 hours. Full details are on our <a href=\"/shipping-returns\">shipping and returns</a> page."),
+ ("How we ship","Orders are packed in plain outer boxes and dispatched from the U.S. within 1–2 business days of payment. Ground shipping is a flat $25, free on orders of $250 or more after discounts, and overnight is a flat $60. We email tracking when your order leaves, and replace damaged or incorrect items reported within 72 hours. Full details are on our <a href=\"/shipping-returns\">shipping and returns</a> page."),
  ("Documentation","We publish analytical documentation batch by batch and do not claim results we cannot show. <a href=\"mailto:info@nuveraform.com?subject=Documentation%20request\">Email us</a> to ask what is available for your order."),
  ("How we sell","We sell only to buyers aged 21 or older who confirm research use, and we do not answer questions about dosing or use in people or animals. Read our <a href=\"/research-use-policy\">research use policy</a>."),
  ("Contact us","Email <a href=\"mailto:info@nuveraform.com\">info@nuveraform.com</a> or call <a href=\"tel:+13054573814\">305-457-3814</a> during regular business hours. Follow us on <a href=\"https://instagram.com/nuveraform\">Instagram</a>, <a href=\"https://tiktok.com/@nuveraform\">TikTok</a> and <a href=\"https://facebook.com/nuveraform\">Facebook</a> at @nuveraform."),

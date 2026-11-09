@@ -28,6 +28,9 @@ export function costOf(id, v) {
   return typeof c === 'number' && c >= 0 ? c : null;
 }
 
+// Ground shipping is free when the order subtotal after any discount is at least this much.
+export const FREE_GROUND_MIN = 250;
+
 export const SHIPPING = {
   ground: { label: 'Ground (3–5 business days)', price: 25 },
   overnight: { label: 'Overnight (next business day)', price: 60 }

@@ -1,6 +1,6 @@
 // Vercel serverless function: receives a checkout, re-prices it from the server price list,
 // emails the order to the store and a Zelle payment request to the customer via Resend.
-import { PRICES, SHIPPING, PROMO, costOf } from './_catalog.js';
+import { PRICES, SHIPPING, PROMO, FREE_GROUND_MIN, costOf } from './_catalog.js';
 import { customerKeys, hasOrderedBefore, rememberCustomer } from './_customers.js';
 import { saveOrder, sign } from './_store.js';
 
@@ -83,7 +83,8 @@ export default async function handler(req, res) {
   if (promo && PROMO[promo].firstOrder && await hasOrderedBefore(keys))
     return res.status(409).json({ code: 'promo_used', error: `${promo} is for first orders only, and we have an earlier order with this email, phone or address. We removed the code; check your new total and place the order again.` });
   const discount = Math.round(subtotal * rate * 100) / 100;
-  const total = Math.round((subtotal - discount + ship.price) * 100) / 100;
+  const shipPrice = b.shipping === 'ground' && subtotal - discount >= FREE_GROUND_MIN ? 0 : ship.price;
+  const total = Math.round((subtotal - discount + shipPrice) * 100) / 100;
   const order = orderNumber();
 
   const zelleTo = process.env.ZELLE_TO || '(305) 457-3814';
@@ -94,14 +95,14 @@ export default async function handler(req, res) {
   const totalsHtml = `${rows}
 <tr><td style="padding:6px 0;border-top:1px solid #E5D7BD">Subtotal</td><td style="padding:6px 0;text-align:right;border-top:1px solid #E5D7BD">${money(subtotal)}</td></tr>
 ${discount ? `<tr><td style="padding:6px 0">${esc(code)} (${Math.round(rate * 100)}%)</td><td style="padding:6px 0;text-align:right">−${money(discount)}</td></tr>` : ''}
-<tr><td style="padding:6px 0">Shipping: ${esc(ship.label)}</td><td style="padding:6px 0;text-align:right">${money(ship.price)}</td></tr>
+<tr><td style="padding:6px 0">Shipping: ${esc(ship.label)}</td><td style="padding:6px 0;text-align:right">${shipPrice ? money(shipPrice) : 'FREE'}</td></tr>
 <tr><td style="padding:8px 0;font-weight:700;font-size:16px">Total due</td><td style="padding:8px 0;text-align:right;font-weight:700;font-size:16px">${money(total)}</td></tr>`;
   const addressHtml = `${esc(c.first)} ${esc(c.last)}<br>${esc(c.addr1)}${c.addr2 ? '<br>' + esc(c.addr2) : ''}<br>${esc(c.city)}, ${esc(c.state)} ${esc(c.zip)}`;
 
   const storeOk = await send({
     to: storeTo,
     reply_to: c.email,
-    subject: `New order ${order}: ${money(total)} via Zelle (${ship.price === 60 ? 'OVERNIGHT' : 'Ground'})`,
+    subject: `New order ${order}: ${money(total)} via Zelle (${b.shipping === 'overnight' ? 'OVERNIGHT' : 'Ground'})`,
     html: `<div style="font-family:Arial,sans-serif;color:#3A2816">
 <h2 style="margin:0 0 8px">New order ${order}</h2>
 <p style="margin:0 0 16px">Awaiting Zelle payment of <b>${money(total)}</b>. Customer was told to put <b>${order}</b> in the Zelle memo.</p>
