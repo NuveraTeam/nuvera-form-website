@@ -12,6 +12,11 @@ export const PRICES = {
   klo: { name: 'KLOW Blend', v: { 'Blend': 145 } },
   kis: { name: 'Kisspeptin 10mg', v: { '10mg': 85 } },
   bac: { name: 'Bacteriostatic Water 10ml', v: { '10ml': 10 } },
+  cag: { name: 'Cagrilintide 5mg', v: { '5mg': 110 } },
+  dsi: { name: 'DSIP 10mg', v: { '10mg': 80 } },
+  tes: { name: 'Tesamorelin 10mg', v: { '10mg': 130 } },
+  kpv: { name: 'KPV 10mg', v: { '10mg': 85 } },
+  ami: { name: '5-Amino-1MQ 10mg', v: { '10mg': 85 } },
   bn1: { name: 'Recovery Duo: BPC-157/TB-500 Blend + GHK-Cu 100mg', v: { 'Bundle': 175 } },
   bn2: { name: 'GLP-3 10mg + Bacteriostatic Water 10ml', v: { 'Bundle': 145 } },
   // Skincare (cosmetics for external use). skin: true = no research-use confirmation needed.
@@ -63,6 +68,11 @@ export const REVIEWABLE = {
   mot: { name: 'MOTS-c', page: 'mots-c' },
   klo: { name: 'KLOW Blend', page: 'klow-blend' },
   kis: { name: 'Kisspeptin', page: 'kisspeptin' },
+  cag: { name: 'Cagrilintide', page: 'cagrilintide' },
+  dsi: { name: 'DSIP', page: 'dsip' },
+  tes: { name: 'Tesamorelin', page: 'tesamorelin' },
+  kpv: { name: 'KPV', page: 'kpv' },
+  ami: { name: '5-Amino-1MQ', page: '5-amino-1mq' },
   bac: { name: 'Bacteriostatic Water', page: 'bacteriostatic-water' }
 };
 export const BUNDLE_PARTS = { bn1: ['bpc', 'ghk'], bn2: ['ret', 'bac'] };

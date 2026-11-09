@@ -39,6 +39,21 @@ COMPOUNDS=[
 ("bacteriostatic-water","Bacteriostatic Water","Reconstitution reagent","Sterile water containing 0.9% benzyl alcohol as a bacteriostatic preservative, used as a laboratory diluent.",
  [("Class","Sterile diluent"),("Format","Multi-dose vial"),("Size listed","10 ml"),("Typical lab use","Reconstituting lyophilized research material")],
  "Bacteriostatic water is sterile water with a small amount of benzyl alcohol that inhibits bacterial growth in a multi-use vial. Laboratories use it as a diluent according to their written protocols."),
+("cagrilintide","Cagrilintide","Research peptide","A long-acting synthetic amylin-analogue peptide described in the literature as a model for amylin-receptor research.",
+ [("Class","Synthetic acylated peptide"),("Format","Lyophilized powder, sterile vial"),("Size listed","5 mg"),("Typical lab use","Receptor-binding and in-vitro metabolic assays")],
+ "Cagrilintide is a synthetic analogue of amylin, a peptide hormone studied alongside incretins in metabolic research. It is supplied here as a lyophilized research reagent. This page covers the physical product only."),
+("dsip","DSIP","Research peptide","Delta sleep-inducing peptide, a nine-amino-acid neuropeptide first characterized in the 1970s and produced synthetically for research.",
+ [("Class","Synthetic nonapeptide"),("Format","Lyophilized powder, sterile vial"),("Size listed","10 mg"),("Typical lab use","Neuropeptide and cell-signalling research")],
+ "DSIP is a short neuropeptide referenced in neuroscience literature. Nuvera Form supplies it only as a lyophilized research reagent for in-vitro work."),
+("tesamorelin","Tesamorelin","Research peptide","A synthetic 44-amino-acid analogue of growth hormone-releasing hormone (GHRH) with a modified N-terminus.",
+ [("Class","Synthetic peptide, 44 residues"),("Format","Lyophilized powder, sterile vial"),("Size listed","10 mg"),("Typical lab use","GHRH-receptor signalling assays")],
+ "Tesamorelin is a stabilized GHRH analogue used in laboratory studies of GHRH-receptor signalling. It is sold here as a research reagent only and is not a medicine."),
+("kpv","KPV","Research peptide","A three-amino-acid peptide (lysine-proline-valine) matching the C-terminal end of alpha-melanocyte-stimulating hormone.",
+ [("Class","Synthetic tripeptide"),("Format","Lyophilized powder, sterile vial"),("Size listed","10 mg"),("Typical lab use","Cell-culture research")],
+ "KPV is a tripeptide fragment of alpha-MSH studied in cell-culture models. It is supplied as a lyophilized reagent for laboratory investigation."),
+("5-amino-1mq","5-Amino-1MQ","Research compound","A small-molecule methylquinolinium compound studied as an inhibitor of the enzyme nicotinamide N-methyltransferase (NNMT).",
+ [("Class","Small molecule (quinolinium)"),("Format","Lyophilized powder, sterile vial"),("Size listed","10 mg"),("Typical lab use","Enzyme-inhibition assays")],
+ "5-Amino-1MQ is a small molecule used in biochemistry research on NNMT, an enzyme involved in cellular methylation and NAD+ metabolism. It is supplied as a research reagent only."),
 ]
 
 LEARN=[
@@ -141,7 +156,23 @@ SHIP_LD={"@type":"OfferShippingDetails","shippingRate":{"@type":"MonetaryAmount"
 RET_LD={"@type":"MerchantReturnPolicy","applicableCountry":"US","returnPolicyCategory":"https://schema.org/MerchantReturnNotPermitted"}
 
 # product photo per compound page (add more slugs as photos are made)
-PAGE_IMG={"glp-3":("/assets/products/glp-3-10mg-studio.jpg","GLP-3 10 mg vial")}
+PAGE_IMG={"glp-3":("/assets/products/glp-3-10mg-studio.jpg","GLP-3 10 mg vial",1200,1200),
+ "ghk-cu":("/assets/products/ghk-cu-100mg.jpg","GHK-Cu 100 mg vial",400,620),
+ "thymosin-alpha-1":("/assets/products/thymosin-alpha-1-10mg.jpg","Thymosin Alpha 1 10 mg vial",400,620),
+ "bpc-157":("/assets/products/bpc-157-tb-500-10mg.jpg","BPC-157 / TB-500 10 mg vial",400,620),
+ "tb-500":("/assets/products/bpc-157-tb-500-10mg.jpg","BPC-157 / TB-500 10 mg vial",400,620),
+ "nad-plus":("/assets/products/nad-plus-500mg.jpg","NAD+ 500 mg vial",400,620),
+ "cjc-1295-ipamorelin":("/assets/products/cjc-1295-ipamorelin-10mg.jpg","CJC-1295 / Ipamorelin 10 mg vial",400,620),
+ "mots-c":("/assets/products/mots-c-10mg.jpg","MOTS-c 10 mg vial",400,620),
+ "klow-blend":("/assets/products/klow-blend.jpg","KLOW blend vial",400,620),
+ "kisspeptin":("/assets/products/kisspeptin-10mg.jpg","Kisspeptin 10 mg vial",400,620),
+ "bacteriostatic-water":("/assets/products/bacteriostatic-water-10ml.jpg","Bacteriostatic water 10 ml vial",400,620),
+ "cagrilintide":("/assets/products/cagrilintide-5mg.jpg","Cagrilintide 5 mg vial",400,620),
+ "dsip":("/assets/products/dsip-10mg.jpg","DSIP 10 mg vial",400,620),
+ "tesamorelin":("/assets/products/tesamorelin-10mg.jpg","Tesamorelin 10 mg vial",400,620),
+ "kpv":("/assets/products/kpv-10mg.jpg","KPV 10 mg vial",400,620),
+ "5-amino-1mq":("/assets/products/5-amino-1mq-10mg.jpg","5-Amino-1MQ 10 mg vial",400,620),
+}
 for s,n,kind,tag,specs,body in COMPOUNDS:
     info=PRODUCTS[s]; path=f"/compounds/{s}"
     title=info["title"]; desc=info["desc"]
@@ -166,7 +197,7 @@ for s,n,kind,tag,specs,body in COMPOUNDS:
     page=head(title,desc,path,ld)+top()+f'''<main id="main"><div class="wrap prose">
 <p class="crumbs"><a href="/">Home</a> / <a href="/compounds">Compounds</a> / {e(n)}</p>
 <span class="badge">{e(kind)} · Research use only · 21+</span><h1>{e(n)}</h1><p class="lede">{e(tag)}</p>
-{(f'<img src="{PAGE_IMG[s][0]}" alt="{e(PAGE_IMG[s][1])}" width="1200" height="1200" style="width:100%;max-width:22rem;height:auto;border-radius:1rem;display:block;margin:1rem 0" fetchpriority="high">\n') if s in PAGE_IMG else ""}<p><strong>From {money(low)}</strong> · {"In stock" if avail else "Out of stock"} · Ships from the U.S. in 1–2 business days</p>
+{(f'<img src="{PAGE_IMG[s][0]}" alt="{e(PAGE_IMG[s][1])}" width="{PAGE_IMG[s][2]}" height="{PAGE_IMG[s][3]}" style="width:100%;max-width:{'22rem' if PAGE_IMG[s][2]==PAGE_IMG[s][3] else '16rem'};height:auto;border-radius:1rem;display:block;margin:1rem 0" fetchpriority="high">\n') if s in PAGE_IMG else ""}<p><strong>From {money(low)}</strong> · {"In stock" if avail else "Out of stock"} · Ships from the U.S. in 1–2 business days</p>
 <h2>Specifications</h2><table>{"".join(f"<tr><th>{e(a)}</th><td>{e(b)}</td></tr>" for a,b in specs)}</table>
 <h2>Sizes and pricing</h2><table>{price_rows}{bundle_rows}</table>
 <p style="font-size:.85rem">Create a free account to order. First order: 10% off with NUVERA10. Shipping: $25 ground, free on $250+; $60 overnight.</p>

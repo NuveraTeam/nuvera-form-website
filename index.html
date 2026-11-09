@@ -148,7 +148,7 @@ body{font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown)
 <li class="card p-5"><span class="badge">Step 3</span><h3 class="font-bold mt-2">We pack discreetly</h3><p class="text-sm mt-1">Plain outer box and a neutral billing descriptor, dispatched in 1–2 business days.</p></li>
 <li class="card p-5"><span class="badge">Step 4</span><h3 class="font-bold mt-2">Track and store</h3><p class="text-sm mt-1">A tracking link is emailed. Read the storage guide before opening a vial.</p></li></ol></section>
 <section class="max-w-7xl mx-auto px-4 pb-20"><div class="flex items-end justify-between flex-wrap gap-3 mb-6"><h2 class="text-3xl font-bold">Compound specifications</h2><a href="/compounds" class="underline text-sm font-semibold">All compounds</a></div>
-<div class="flex flex-wrap gap-2"><a class="pill" href="/compounds/glp-3">GLP-3</a><a class="pill" href="/compounds/bpc-157">BPC-157</a><a class="pill" href="/compounds/tb-500">TB-500</a><a class="pill" href="/compounds/ghk-cu">GHK-Cu</a><a class="pill" href="/compounds/thymosin-alpha-1">Thymosin Alpha 1</a><a class="pill" href="/compounds/nad-plus">NAD+</a><a class="pill" href="/compounds/cjc-1295-ipamorelin">CJC-1295 / Ipamorelin</a><a class="pill" href="/compounds/mots-c">MOTS-c</a><a class="pill" href="/compounds/klow-blend">KLOW Blend</a><a class="pill" href="/compounds/kisspeptin">Kisspeptin</a><a class="pill" href="/compounds/bacteriostatic-water">Bacteriostatic Water</a></div></section>
+<div class="flex flex-wrap gap-2"><a class="pill" href="/compounds/glp-3">GLP-3</a><a class="pill" href="/compounds/bpc-157">BPC-157</a><a class="pill" href="/compounds/tb-500">TB-500</a><a class="pill" href="/compounds/ghk-cu">GHK-Cu</a><a class="pill" href="/compounds/thymosin-alpha-1">Thymosin Alpha 1</a><a class="pill" href="/compounds/nad-plus">NAD+</a><a class="pill" href="/compounds/cjc-1295-ipamorelin">CJC-1295 / Ipamorelin</a><a class="pill" href="/compounds/mots-c">MOTS-c</a><a class="pill" href="/compounds/klow-blend">KLOW Blend</a><a class="pill" href="/compounds/kisspeptin">Kisspeptin</a><a class="pill" href="/compounds/cagrilintide">Cagrilintide</a><a class="pill" href="/compounds/dsip">DSIP</a><a class="pill" href="/compounds/tesamorelin">Tesamorelin</a><a class="pill" href="/compounds/kpv">KPV</a><a class="pill" href="/compounds/5-amino-1mq">5-Amino-1MQ</a><a class="pill" href="/compounds/bacteriostatic-water">Bacteriostatic Water</a></div></section>
 <section class="max-w-7xl mx-auto px-4 pb-20"><div class="flex items-end justify-between flex-wrap gap-3 mb-6"><h2 class="text-3xl font-bold">Learn</h2><a href="/learn" class="underline text-sm font-semibold">All guides</a></div><div class="grid md:grid-cols-3 gap-5">
 <a class="card p-6 block" href="/learn/what-research-use-only-means"><h3 class="font-bold">What “research use only” means</h3><p class="text-sm mt-1">What the RUO label covers and rules out.</p></a>
 <a class="card p-6 block" href="/learn/storing-lyophilized-peptides"><h3 class="font-bold">Storing lyophilized peptides</h3><p class="text-sm mt-1">General lab handling principles.</p></a>
@@ -342,15 +342,20 @@ const P=[
 {id:'mot',n:'MOTS-c 10mg',cat:'recovery',v:{'10mg':{p:95,s:null}}},
 {id:'klo',n:'KLOW Blend',cat:'blend',v:{'Blend':{p:145,s:null}}},
 {id:'kis',n:'Kisspeptin 10mg',cat:'recovery',v:{'10mg':{p:85,s:null}}},
-{id:'bac',n:'Bacteriostatic Water 10ml',cat:'water',v:{'10ml':{p:10,s:null}}},
+{id:'bac',n:'Bacteriostatic Water 10ml',cat:'water',form:'Sterile solution',v:{'10ml':{p:10,s:null}}},
+{id:'cag',n:'Cagrilintide 5mg',cat:'metabolic',isNew:1,v:{'5mg':{p:110,s:null}}},
+{id:'dsi',n:'DSIP 10mg',cat:'recovery',isNew:1,v:{'10mg':{p:80,s:null}}},
+{id:'tes',n:'Tesamorelin 10mg',cat:'metabolic',isNew:1,v:{'10mg':{p:130,s:null}}},
+{id:'kpv',n:'KPV 10mg',cat:'recovery',isNew:1,v:{'10mg':{p:85,s:null}}},
+{id:'ami',n:'5-Amino-1MQ 10mg',cat:'metabolic',isNew:1,v:{'10mg':{p:85,s:null}}},
 {id:'bn1',n:'Recovery Duo: BPC-157/TB-500 Blend + GHK-Cu 100mg',cat:'bundle',v:{'Bundle':{p:175,s:null}}},
 {id:'bn2',n:'GLP-3 10mg + Bacteriostatic Water 10ml',cat:'bundle',v:{'Bundle':{p:145,s:null}}},
 /* skincare: cosmetics for external use, shown in the Skincare section, not the research catalog. Keep in sync with api/_catalog.js */
 {id:'ser',n:'GHK-Cu Serum',cat:'skin',v:{'30ml':{p:49.99,s:null}}}];
 /* product photos by product id and size; products without one fall back to the drawn vial */
-const IMG={ser:{'30ml':'/assets/products/ghk-cu-serum-30ml.webp'},ret:{'5mg':'/assets/products/glp-3-5mg.webp','10mg':'/assets/products/glp-3-10mg.webp','15mg':'/assets/products/glp-3-15mg.webp'}};
-const pic=(p,v)=>{const u=IMG[p.id]&&IMG[p.id][v];return u?`<img src="${u}" alt="${p.n} ${v.replace(/(\d)(m[gl])/,'$1 $2')} vial" width="200" height="311" loading="lazy" decoding="async" style="height:100%;width:auto;object-fit:contain;padding:.35rem 0">`:vial(v)};
-const CATS={all:'All',star:'Star product',blend:'Blends',recovery:'Recovery & repair',water:'Reconstitution',bundle:'Bundles'};
+const IMG={ser:{'30ml':'/assets/products/ghk-cu-serum-30ml.webp'},ghk:{'100mg':'/assets/products/ghk-cu-100mg.webp'},ta1:{'10mg':'/assets/products/thymosin-alpha-1-10mg.webp'},bpc:{'10mg':'/assets/products/bpc-157-tb-500-10mg.webp'},nad:{'500mg':'/assets/products/nad-plus-500mg.webp'},cjc:{'10mg':'/assets/products/cjc-1295-ipamorelin-10mg.webp'},mot:{'10mg':'/assets/products/mots-c-10mg.webp'},klo:{'Blend':'/assets/products/klow-blend.webp'},kis:{'10mg':'/assets/products/kisspeptin-10mg.webp'},bac:{'10ml':'/assets/products/bacteriostatic-water-10ml.webp'},cag:{'5mg':'/assets/products/cagrilintide-5mg.webp'},dsi:{'10mg':'/assets/products/dsip-10mg.webp'},tes:{'10mg':'/assets/products/tesamorelin-10mg.webp'},kpv:{'10mg':'/assets/products/kpv-10mg.webp'},ami:{'10mg':'/assets/products/5-amino-1mq-10mg.webp'},ret:{'5mg':'/assets/products/glp-3-5mg.webp','10mg':'/assets/products/glp-3-10mg.webp','15mg':'/assets/products/glp-3-15mg.webp'}};
+const pic=(p,v)=>{const u=IMG[p.id]&&IMG[p.id][v];return u?`<img src="${u}" alt="${p.n} ${v.replace(/(\d)(m[gl])/,'$1 $2')} vial" width="200" height="311" loading="lazy" decoding="async" style="height:100%;width:auto;object-fit:contain;${p.id==='ret'?'padding:.35rem 0':'border-radius:.9rem;box-shadow:0 8px 22px -10px rgba(58,40,22,.45)'}">`:vial(v)};
+const CATS={all:'All',star:'Star product',blend:'Blends',metabolic:'Metabolic research',recovery:'Recovery & repair',water:'Reconstitution',bundle:'Bundles'};
 let st={f:'all',q:'',sel:{},cart:JSON.parse(ls.get('nv_cart')||'[]'),code:ls.get('nv_code')||(ls.get('nv_promo')==='1'?'NUVERA10':''),note:'',ship:ls.get('nv_ship')==='overnight'?'overnight':'ground'};
 const SHIP={ground:{l:'Ground',p:25},overnight:{l:'Overnight',p:60}};
 const FREE_MIN=250; /* free ground shipping at this subtotal after discount; keep in sync with api/_catalog.js */
@@ -386,10 +391,10 @@ function grid(){
 const list=P.filter(p=>p.cat!=='skin'&&(st.f==='all'||p.cat===st.f)&&p.n.toLowerCase().includes(st.q));
 $('#grid').innerHTML=list.length?list.map(p=>{const vs=Object.keys(p.v),cur=p.v[st.sel[p.id]],out=cur.s===0;
 return `<article class="card p-5 flex flex-col ${p.star?'ring-2 ring-[#BF943C]':''}">
-<div class="flex justify-between items-start mb-3"><span class="badge ${cur.s!==null&&cur.s<=3?'warn':''}" id="b-${p.id}">${stockTxt(cur.s)}</span>${p.star?'<span class="badge" style="background:var(--gold);color:#fff;border-color:var(--gold)">Star product</span>':''}</div>
-<div class="flex items-center justify-center mb-3 rounded-2xl" style="height:11rem;background:linear-gradient(160deg,var(--sand),var(--champ))">${pic(p,st.sel[p.id])}</div>
+<div class="flex justify-between items-start mb-3"><span class="badge ${cur.s!==null&&cur.s<=3?'warn':''}" id="b-${p.id}">${stockTxt(cur.s)}</span>${p.star?'<span class="badge" style="background:var(--gold);color:#fff;border-color:var(--gold)">Star product</span>':p.isNew?'<span class="badge" style="background:var(--brown);color:#fff;border-color:var(--brown)">New</span>':''}</div>
+<div class="flex items-center justify-center mb-3 rounded-2xl" style="height:14rem;padding:.5rem 0;background:linear-gradient(160deg,var(--sand),var(--champ))">${pic(p,st.sel[p.id])}</div>
 <h3 class="font-bold leading-snug">${p.n}</h3>
-<p class="text-xs mt-1">Lyophilized powder · Research use only</p><button class="text-xs underline mt-1 text-left" data-coa="${p.n}">Request documentation</button>
+<p class="text-xs mt-1">${p.form||'Lyophilized powder'} · Research use only</p><button class="text-xs underline mt-1 text-left" data-coa="${p.n}">Request documentation</button>
 ${vs.length>1?`<div class="flex gap-2 mt-3 flex-wrap">${vs.map(v=>`<button class="pill ${st.sel[p.id]===v?'on':''}" data-p="${p.id}" data-v="${v}">${v}</button>`).join('')}</div>`:''}
 <div class="mt-auto pt-4 flex items-center justify-between"><span class="text-2xl font-bold" style="color:var(--gold)" id="pr-${p.id}">${money(cur.p)}</span><button class="btn text-sm" data-add="${p.id}">Add to cart</button></div></article>`}).join(''):'<p class="col-span-full text-center py-10">No compounds match your search.</p>';
 $$('[data-p]').forEach(b=>b.onclick=()=>{st.sel[b.dataset.p]=b.dataset.v;grid()});
@@ -416,7 +421,7 @@ fbt();$('#attL').style.display=hasResearch()?'':'none';const t=totals();$('#tota
 $$('[name=shipm]').forEach(r=>r.checked=r.value===st.ship);
 $('#promoMsg').textContent=st.note||(st.code?st.code+' applied: '+Math.round(CODES[st.code].r*100)+'% off your subtotal.':'');st.note=''}
 /* frequently bought together: the GHK-Cu Serum is suggested on every cart, then items that pair with the cart */
-const FBT={ret:['bac','mot'],bpc:['ghk','bac'],ghk:['bpc','bac'],ta1:['bac','mot'],nad:['mot','bac'],cjc:['bac','nad'],mot:['nad','bac'],klo:['bac'],kis:['bac'],bn1:['bac'],bn2:['mot'],bac:['ret']};
+const FBT={ret:['bac','mot'],bpc:['ghk','bac'],ghk:['bpc','bac'],ta1:['bac','mot'],nad:['mot','bac'],cjc:['bac','nad'],mot:['nad','bac'],klo:['bac'],kis:['bac'],cag:['ret','bac'],dsi:['bac'],tes:['cjc','bac'],kpv:['bpc','bac'],ami:['mot','nad'],bn1:['bac'],bn2:['mot'],bac:['ret']};
 /* bundle switches: when every part is in the cart, offer the bundle at its lower price */
 const SWAP=[{b:'bn1',parts:[['bpc','10mg'],['ghk','100mg']]},{b:'bn2',parts:[['ret','10mg'],['bac','10ml']]}];
 function fbt(){const inCart=new Set(st.cart.map(i=>i.id)),out=[];
