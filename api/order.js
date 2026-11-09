@@ -1,6 +1,6 @@
 // Vercel serverless function: receives a checkout, re-prices it from the server price list,
 // emails the order to the store and a Zelle payment request to the customer via Resend.
-import { PRICES, SHIPPING, PROMO } from './_catalog.js';
+import { PRICES, SHIPPING, PROMO, costOf } from './_catalog.js';
 import { customerKeys, hasOrderedBefore, rememberCustomer } from './_customers.js';
 import { saveOrder, sign } from './_store.js';
 
@@ -56,7 +56,6 @@ export default async function handler(req, res) {
   if (!c.city) missing.push('city');
   if (!STATES.includes(c.state)) missing.push('state');
   if (!/^\d{5}(-\d{4})?$/.test(c.zip)) missing.push('a valid ZIP code');
-  if (b.ruo !== true) missing.push('the research-use confirmation');
   if (missing.length) return res.status(400).json({ error: 'Please add ' + missing.join(', ') + '.' });
 
   const ship = SHIPPING[b.shipping];
@@ -69,10 +68,13 @@ export default async function handler(req, res) {
     const price = p && p.v[it.v];
     const q = Number(it && it.q);
     if (!price || !Number.isInteger(q) || q < 1 || q > 50) return res.status(400).json({ error: 'An item in your cart is no longer available. Refresh the page and try again.' });
-    lines.push({ id: it.id, name: p.name, v: it.v, q, price, total: price * q });
+    lines.push({ id: it.id, name: p.name, v: it.v, q, price, total: Math.round(price * q * 100) / 100, skin: !!p.skin });
   }
+  // Research compounds need the research-use confirmation; skincare-only orders do not.
+  const research = lines.some(l => !l.skin);
+  if (research && b.ruo !== true) return res.status(400).json({ error: 'Please add the research-use confirmation.' });
 
-  const subtotal = lines.reduce((a, l) => a + l.total, 0);
+  const subtotal = Math.round(lines.reduce((a, l) => a + l.total, 0) * 100) / 100;
   // One code per order: the cart sends a single code, and only that code is priced.
   const promo = PROMO[str(b.promo, 20).toUpperCase()] ? str(b.promo, 20).toUpperCase() : '';
   const code = promo;
@@ -108,14 +110,14 @@ ${discount ? `<tr><td style="padding:6px 0">${esc(code)} (${Math.round(rate * 10
 <h3 style="margin:20px 0 6px">Ship to</h3><p style="margin:0">${addressHtml}</p>
 <h3 style="margin:20px 0 6px">Contact</h3><p style="margin:0">${esc(c.email)}<br>${esc(c.phone)}</p>
 ${c.notes ? `<h3 style="margin:20px 0 6px">Order notes</h3><p style="margin:0">${esc(c.notes)}</p>` : ''}
-<p style="font-size:12px;color:#7a6650;margin-top:20px">Buyer confirmed 21+ and research use only at checkout.</p></div>`
+<p style="font-size:12px;color:#7a6650;margin-top:20px">${research ? 'Buyer confirmed 21+ and research use only at checkout.' : 'Skincare-only order.'}</p></div>`
   });
   if (!storeOk) return res.status(502).json({ error: 'Email provider error' });
   await rememberCustomer(keys, order);
   // Order record for shipping updates, reviews and follow-ups. Never blocks the order.
   try {
     await saveOrder({ order, createdAt: new Date().toISOString(), email: c.email, first: c.first, last: c.last,
-      items: lines.map(l => ({ id: l.id, name: l.name, v: l.v, q: l.q })), total, ship: b.shipping,
+      items: lines.map(l => ({ id: l.id, name: l.name, v: l.v, q: l.q, cost: costOf(l.id, l.v) })), total, ship: b.shipping,
       subtotal, discount, promo: promo || null, rep: (promo && PROMO[promo].rep) || null, city: c.city, state: c.state,
       shippedAt: null, carrier: null, tracking: null, reviewSentAt: null, reorderSentAt: null });
   } catch (e) { console.error('saveOrder failed', order, e && e.message); }
@@ -138,7 +140,7 @@ ${c.notes ? `<h3 style="margin:20px 0 6px">Order notes</h3><p style="margin:0">$
 <table style="width:100%;max-width:520px;border-collapse:collapse;font-size:14px">${totalsHtml}</table>
 <h3 style="margin:20px 0 6px">Shipping to</h3><p style="margin:0">${addressHtml}</p>
 <p style="margin:20px 0 0">Orders dispatch within 1–2 business days of payment, and we email tracking when yours leaves. Questions? Reply to this email or call 305-457-3814.</p>
-<p style="font-size:12px;margin-top:20px">All products are for Research Use Only and are not for human or veterinary use.</p></div>`
+<p style="font-size:12px;margin-top:20px">${research ? 'Research compounds are for Research Use Only and are not for human or veterinary use.' : ''}${research && lines.some(l => l.skin) ? '<br>' : ''}${lines.some(l => l.skin) ? 'Skincare products are cosmetics for external use only.' : ''}</p></div>`
   });
 
   return res.status(200).json({ ok: true, order, total, zelle: zelleTo ? { to: zelleTo, name: zelleName } : null, emailed: customerOk });

@@ -137,7 +137,7 @@ td.n,th.n{text-align:right}
 <div class="eyebrow">Your exclusive code</div>
 <div class="code"><b id="code">FY305</b><button class="copy" id="cpCode"><svg class="ic"><use href="#i-copy"/></svg> Copy</button></div>
 <div class="link"><svg class="ic" style="color:var(--lgold)"><use href="#i-link"/></svg><span id="lnk"></span><button class="copy" id="cpLink" style="margin-left:auto">Copy link</button></div>
-<p class="hmeta" style="margin:.7rem 0 0;font-size:.75rem">Your link applies the code automatically. Codes cannot be combined, so FY305 replaces the 10% welcome offer.</p>
+<p class="hmeta" style="margin:.7rem 0 0;font-size:.75rem">Your code works on peptides and skincare. Your link applies it automatically. Codes cannot be combined, so FY305 replaces the 10% welcome offer.</p>
 </div>
 </div>
 </section>
@@ -190,7 +190,9 @@ td.n,th.n{text-align:right}
 <li><svg class="ic"><use href="#i-circle-check"/></svg>Lead with the code: FY305 for 20% off at nuveraform.com.</li>
 <li><svg class="ic"><use href="#i-circle-check"/></svg>Disclose the partnership in every post (#ad or the paid partnership label).</li>
 <li><svg class="ic"><use href="#i-circle-check"/></svg>Peptides are research use only. Show the brand, packaging, labels and unboxing.</li>
-<li><svg class="ic" style="color:#A33"><use href="#i-circle-xmark"/></svg>No dosing, injecting, results, before/after or health and body claims.</li>
+<li><svg class="ic"><use href="#i-circle-check"/></svg>Skincare can be shown in use on skin and hair. Keep claims cosmetic: smoother-looking, hydrated, fuller-looking.</li>
+<li><svg class="ic" style="color:#A33"><use href="#i-circle-xmark"/></svg>No dosing, injecting, results, before/after or health and body claims for peptides. Never show research peptides on skin or in use.</li>
+<li><svg class="ic" style="color:#A33"><use href="#i-circle-xmark"/></svg>No medical claims for skincare: avoid words like heals, treats, anti-inflammatory or regrows hair.</li>
 <li><svg class="ic" style="color:#A33"><use href="#i-circle-xmark"/></svg>Do not combine codes or promise extra discounts.</li>
 </ul>
 </div>
@@ -229,7 +231,7 @@ $('#whoN').textContent=d.rep.name;$('#av').textContent=d.rep.code.slice(0,2);
 $('#hi').textContent='Welcome back, '+d.rep.name;
 $('#bal').textContent=money(t.balance);
 $('#hmeta').innerHTML='Earned on shipped orders, minus payouts. <b style="color:#F6DFA6">'+money(t.pending)+'</b> more is pending.';
-$('#chips').innerHTML=['<svg class="ic"><use href="#i-tag"/></svg> '+Math.round(d.rep.discount*100)+'% off for your followers','<svg class="ic"><use href="#i-percent"/></svg> '+(Math.round(d.rep.commission*1000)/10)+'% commission on net sales'].map(function(c){return '<span class="chip">'+c+'</span>'}).join('');
+$('#chips').innerHTML=['<svg class="ic"><use href="#i-tag"/></svg> '+Math.round(d.rep.discount*100)+'% off for your followers','<svg class="ic"><use href="#i-percent"/></svg> '+(Math.round(d.rep.commission*1000)/10)+'% commission on profit'].map(function(c){return '<span class="chip">'+c+'</span>'}).join('');
 $('#code').textContent=d.rep.code;$('#lnk').textContent=d.rep.link.replace('https://','');
 $('#k1').textContent=money(t.net);$('#k1s').innerHTML=delta(d.thisMonth.net,d.lastMonth.net);
 $('#k2').textContent=t.orders;$('#k2s').textContent=d.thisMonth.orders+' this month';
@@ -238,7 +240,7 @@ $('#k4').textContent=money(t.pending);
 $('#k5').textContent=money(t.aov);
 $('#k6').textContent=t.customers;$('#k6s').textContent=t.repeat+' came back ('+t.repeatRate+'% repeat)';
 $('#k7').textContent=money(t.savings);$('#k8').textContent=t.units;
-$('#rateL').textContent=(Math.round(d.rep.commission*1000)/10)+'% of net sales';
+$('#rateL').textContent=(Math.round(d.rep.commission*1000)/10)+'% of sale after discount and product cost';
 $('#s1').textContent=money0(t.lifetime);$('#s2').textContent=money0(t.paid);$('#s3').textContent=money0(d.thisMonth.commission);
 donut(t);chart();
 $('#ot').innerHTML=d.orders.length?d.orders.map(function(o){var lab={earned:'<svg class="ic"><use href="#i-circle-check"/></svg> Earned',pending:'<svg class="ic"><use href="#i-clock"/></svg> Pending',void:'<svg class="ic"><use href="#i-ban"/></svg> Not completed'}[o.status];

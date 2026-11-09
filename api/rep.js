@@ -1,7 +1,7 @@
 // Rep portal data. POST { user, pass } to sign in, or { token } to refresh.
 // Returns sales, commission and payout figures for orders placed with the rep's code.
 // Customer details are never returned: only initials, state and items.
-import { REPS, PROMO } from './_catalog.js';
+import { REPS, PROMO, costOf } from './_catalog.js';
 import { checkLogin, PAYOUTS } from './_reps.js';
 import { listOrders, storeReady, sign, verify } from './_store.js';
 
@@ -22,6 +22,13 @@ export function buildReport(repId, orders, now = Date.now()) {
     const subtotal = typeof o.subtotal === 'number' ? o.subtotal : 0;
     const discount = typeof o.discount === 'number' ? o.discount : r2(subtotal * rate);
     const net = r2(subtotal - discount);
+    // Commission is paid on profit: sale after the discount minus product cost (no shipping).
+    // Uses the cost saved with the order, else today's cost list; unknown cost counts as $0.
+    const cost = r2((o.items || []).reduce((a, i) => {
+      const c = typeof i.cost === 'number' ? i.cost : costOf(i.id, i.v);
+      return a + (c || 0) * (i.q || 0);
+    }, 0));
+    const base = Math.max(0, r2(net - cost));
     const ageDays = (now - Date.parse(o.createdAt)) / 864e5;
     const status = o.shippedAt ? 'earned' : ageDays > STALE_DAYS ? 'void' : 'pending';
     const units = (o.items || []).reduce((a, i) => a + (i.q || 0), 0);
@@ -32,7 +39,7 @@ export function buildReport(repId, orders, now = Date.now()) {
       state: o.state || '',
       items: (o.items || []).map(i => ({ name: i.name, v: i.v, q: i.q })),
       units, subtotal: r2(subtotal), discount: r2(discount), net,
-      commission: status === 'void' ? 0 : r2(net * rep.commission), status,
+      commission: status === 'void' ? 0 : r2(base * rep.commission), status,
       _email: String(o.email || '').toLowerCase()
     };
   });
@@ -81,7 +88,7 @@ export function buildReport(repId, orders, now = Date.now()) {
   const states = [...st.entries()].map(([state, orders]) => ({ state, orders })).sort((a, b) => b.orders - a.orders).slice(0, 5);
 
   return {
-    rep: { id: repId, name: rep.name, code, discount: rate, commission: rep.commission,
+    rep: { id: repId, name: rep.name, code, discount: rate, commission: rep.commission, basis: 'profit',
       link: `https://www.nuveraform.com/?code=${code}` },
     updatedAt: new Date(now).toISOString(),
     totals: {

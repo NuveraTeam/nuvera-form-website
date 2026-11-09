@@ -13,8 +13,20 @@ export const PRICES = {
   kis: { name: 'Kisspeptin 10mg', v: { '10mg': 85 } },
   bac: { name: 'Bacteriostatic Water 10ml', v: { '10ml': 10 } },
   bn1: { name: 'Recovery Duo: BPC-157/TB-500 Blend + GHK-Cu 100mg', v: { 'Bundle': 175 } },
-  bn2: { name: 'GLP-3 10mg + Bacteriostatic Water 10ml', v: { 'Bundle': 145 } }
+  bn2: { name: 'GLP-3 10mg + Bacteriostatic Water 10ml', v: { 'Bundle': 145 } },
+  // Skincare (cosmetics for external use). skin: true = no research-use confirmation needed.
+  ser: { name: 'GHK-Cu Serum 30ml', v: { '30ml': 49.99 }, skin: true }
 };
+
+// Product cost per unit, used for rep commissions and margins. Kept out of this public code:
+// set the Vercel env var PRODUCT_COSTS to JSON like {"ret":{"10mg":7.5},"ghk":{"100mg":4.5}}.
+// A product with no cost listed counts as $0 cost (the rep is paid on the full sale).
+let _costs;
+export function costOf(id, v) {
+  if (_costs === undefined) { try { _costs = JSON.parse(process.env.PRODUCT_COSTS || '{}'); } catch { _costs = {}; } }
+  const c = _costs[id] && _costs[id][v];
+  return typeof c === 'number' && c >= 0 ? c : null;
+}
 
 export const SHIPPING = {
   ground: { label: 'Ground (3–5 business days)', price: 25 },
@@ -29,10 +41,11 @@ export const PROMO = {
   FY305: { rate: 0.20, rep: 'FY305' }
 };
 
-// Rep accounts for the rep portal. commission = share of the order subtotal after the
-// discount (shipping excluded). Change the rate here; the portal recalculates every order.
+// Rep accounts for the rep portal. Commission = rate x (order subtotal after the discount
+// minus product cost). Shipping is never counted. Default rate is 20% unless agreed otherwise.
+// Change the rate here; the portal recalculates every order.
 export const REPS = {
-  FY305: { name: 'FightingYo305', code: 'FY305', commission: 0.10 }
+  FY305: { name: 'FightingYo305', code: 'FY305', commission: 0.20 }
 };
 
 // What a customer can review, and where it shows: catalog id -> display name + product page.

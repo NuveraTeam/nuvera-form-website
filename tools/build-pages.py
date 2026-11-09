@@ -3,7 +3,7 @@
 import os, json, html
 from datetime import date
 SITE="https://www.nuveraform.com"; TODAY=date.today().isoformat()
-RUO="For laboratory research use only. Not for human or veterinary use. Not a drug, food, supplement or cosmetic."
+RUO="Research compounds are for laboratory research use only. Not for human or veterinary use. Not a drug, food, supplement or cosmetic. Nuvera Form skincare products are cosmetics for external use."
 
 COMPOUNDS=[
 ("glp-3","GLP-3","Research peptide","A long-chain synthetic peptide that appears in the scientific literature as a multi-receptor agonist studied in metabolic research models.",
