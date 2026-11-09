@@ -73,11 +73,13 @@ export default async function handler(req, res) {
   }
 
   const subtotal = lines.reduce((a, l) => a + l.total, 0);
-  const code = str(b.promo, 20).toUpperCase();
-  const rate = PROMO[code] || 0;
+  // One code per order: the cart sends a single code, and only that code is priced.
+  const promo = PROMO[str(b.promo, 20).toUpperCase()] ? str(b.promo, 20).toUpperCase() : '';
+  const code = promo;
+  const rate = promo ? PROMO[promo].rate : 0;
   const keys = customerKeys(c);
-  if (rate && code === 'NUVERA10' && await hasOrderedBefore(keys))
-    return res.status(409).json({ code: 'promo_used', error: 'NUVERA10 is for first orders only, and we have an earlier order with this email, phone or address. We removed the code; check your new total and place the order again.' });
+  if (promo && PROMO[promo].firstOrder && await hasOrderedBefore(keys))
+    return res.status(409).json({ code: 'promo_used', error: `${promo} is for first orders only, and we have an earlier order with this email, phone or address. We removed the code; check your new total and place the order again.` });
   const discount = Math.round(subtotal * rate * 100) / 100;
   const total = Math.round((subtotal - discount + ship.price) * 100) / 100;
   const order = orderNumber();
@@ -114,6 +116,7 @@ ${c.notes ? `<h3 style="margin:20px 0 6px">Order notes</h3><p style="margin:0">$
   try {
     await saveOrder({ order, createdAt: new Date().toISOString(), email: c.email, first: c.first, last: c.last,
       items: lines.map(l => ({ id: l.id, name: l.name, v: l.v, q: l.q })), total, ship: b.shipping,
+      subtotal, discount, promo: promo || null, rep: (promo && PROMO[promo].rep) || null, city: c.city, state: c.state,
       shippedAt: null, carrier: null, tracking: null, reviewSentAt: null, reorderSentAt: null });
   } catch (e) { console.error('saveOrder failed', order, e && e.message); }
 

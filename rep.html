@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rep Portal | Nuvera Form</title>
+<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#F7F0E3">
+<link rel="icon" href="/favicon.ico?v=hd" sizes="any"><link rel="icon" href="/favicon-32.png?v=hd" type="image/png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png?v=hd">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--champ:#F7F0E3;--gold:#BF943C;--dgold:#A27A2B;--lgold:#DEB25A;--rose:#B87A6C;--brown:#3A2816;--sand:#F0E4CE;--line:#E3D3B3;--card:#FFFDF8;--muted:#7A6650;--ok:#2E6B3A;--warn:#9A6A12}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:'Poppins',sans-serif;background:var(--champ);color:var(--brown);line-height:1.5}
+button,input{font:inherit;color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+.btn{background:var(--gold);color:#fff;font-weight:600;border-radius:999px;padding:.7rem 1.4rem;border:0;cursor:pointer;transition:transform .15s,box-shadow .2s}
+.btn:hover{box-shadow:0 8px 22px rgba(191,148,60,.35);transform:translateY(-1px)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--gold)}
+.btn.sm{padding:.45rem 1rem;font-size:.82rem}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.inp{width:100%;padding:.75rem .95rem;border:1.5px solid var(--line);border-radius:14px;background:#fff;font-size:16px}
+.inp:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold)}
+.muted{color:var(--muted)}.tnum{font-variant-numeric:tabular-nums}
+
+/* login */
+#login{min-height:100vh;display:grid;place-items:center;padding:24px 16px;background:radial-gradient(1200px 600px at 80% -10%,rgba(222,178,90,.28),transparent 60%),radial-gradient(900px 500px at -10% 110%,rgba(184,122,108,.18),transparent 60%),var(--champ)}
+.lcard{width:100%;max-width:400px;background:var(--card);border:1px solid var(--line);border-radius:28px;padding:34px 28px;box-shadow:0 30px 80px -30px rgba(58,40,22,.35)}
+.lcard img{display:block;margin:0 auto 14px}
+.lcard h1{text-align:center;font-size:1.5rem;margin:0}
+.lcard .sub{text-align:center;font-size:.85rem;margin:.25rem 0 1.5rem}
+.lcard label{display:block;font-size:.78rem;font-weight:600;margin:0 0 .35rem;letter-spacing:.02em}
+.lcard .f{margin-bottom:14px}
+.pw{position:relative}.pw button .ic{width:1.15em;height:1.15em}.pw button{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:0;cursor:pointer;color:var(--muted);padding:6px}
+#lerr{color:#A33;font-size:.82rem;font-weight:600;min-height:1.2em;margin:.2rem 0 .6rem}
+
+/* app */
+#app{display:none}
+.top{position:sticky;top:0;z-index:20;background:rgba(247,240,227,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:64px;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;text-decoration:none;color:var(--brown)}
+.brand small{display:block;font-weight:500;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-top:-3px}
+.who{display:flex;align-items:center;gap:10px;font-size:.85rem}
+.avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--lgold),var(--gold));color:#fff;font-weight:700;font-size:.75rem}
+
+.hero{margin:22px 0 18px;border-radius:28px;padding:28px;color:#FBF4E6;position:relative;overflow:hidden;
+background:radial-gradient(700px 300px at 100% 0%,rgba(222,178,90,.35),transparent 60%),radial-gradient(500px 260px at 0% 100%,rgba(184,122,108,.35),transparent 60%),linear-gradient(135deg,#3A2816,#2A1C0E)}
+.hero:after{content:"";position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;border:1px solid rgba(222,178,90,.35);box-shadow:0 0 0 30px rgba(222,178,90,.06),0 0 0 60px rgba(222,178,90,.04)}
+.hgrid{position:relative;z-index:1;display:grid;grid-template-columns:1.3fr 1fr;gap:24px;align-items:end}
+.eyebrow{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--lgold);font-weight:600}
+.hero h2{margin:.25rem 0 0;font-size:1.65rem;line-height:1.2}
+.big{font-size:3rem;font-weight:700;line-height:1.05;margin:.9rem 0 .2rem;background:linear-gradient(90deg,#F6DFA6,#DEB25A 60%,#C9A15A);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hmeta{font-size:.85rem;color:#E8D9BE}
+.codebox{background:rgba(255,255,255,.07);border:1px solid rgba(222,178,90,.4);border-radius:20px;padding:16px}
+.code{display:flex;align-items:center;justify-content:space-between;gap:10px;border:2px dashed var(--lgold);border-radius:14px;padding:10px 14px;margin:.5rem 0 .7rem}
+.code b{font-size:1.7rem;letter-spacing:.12em;color:#F6DFA6}
+.copy{white-space:nowrap;flex:none;background:var(--lgold);color:var(--brown);border:0;border-radius:999px;padding:.4rem .9rem;font-weight:600;font-size:.78rem;cursor:pointer}
+.link{display:flex;gap:8px;align-items:center;font-size:.78rem;color:#E8D9BE;word-break:break-all}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:.9rem}
+.chip{font-size:.72rem;border:1px solid rgba(222,178,90,.45);border-radius:999px;padding:.2rem .7rem;color:#F1E3C6}
+
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 1px 0 rgba(58,40,22,.03)}
+.kpi .l{font-size:.75rem;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:7px}
+.ic{width:1em;height:1em;display:inline-block;vertical-align:-.14em;flex:none}
+.kpi .l .ic{color:var(--gold)}
+.kpi .v{font-size:1.65rem;font-weight:700;margin-top:.35rem;line-height:1.15}
+.kpi .s{font-size:.75rem;color:var(--muted);margin-top:.2rem}
+.up{color:var(--ok);font-weight:600}.down{color:#A33;font-weight:600}
+
+.grid2{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:14px;margin-bottom:18px}.grid2>*,.hgrid>*{min-width:0}
+.ch{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:10px}
+.ch h3{margin:0;font-size:1rem}.ch span{font-size:.75rem;color:var(--muted)}
+.seg{display:inline-flex;background:var(--sand);border-radius:999px;padding:3px;border:1px solid var(--line)}
+.seg button{border:0;background:none;border-radius:999px;padding:.25rem .75rem;font-size:.75rem;font-weight:600;cursor:pointer;color:var(--muted)}
+.seg button.on{background:#fff;color:var(--brown);box-shadow:0 1px 3px rgba(58,40,22,.12)}
+.chart{position:relative}
+.chart svg{display:block;width:100%;height:220px}
+.tip{position:absolute;pointer-events:none;background:var(--brown);color:#FBF4E6;font-size:.75rem;border-radius:10px;padding:.45rem .65rem;white-space:nowrap;transform:translate(-50%,-110%);opacity:0;transition:opacity .12s}
+.tip b{color:#F6DFA6}
+.empty[hidden]{display:none}.empty{position:absolute;inset:0 0 28px;display:grid;place-items:center;text-align:center;font-size:.85rem;color:var(--muted);pointer-events:none}
+
+.meter{margin:.75rem 0}.meter .r{display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:.3rem}
+.track{height:8px;border-radius:99px;background:var(--sand);overflow:hidden}.fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--lgold),var(--gold))}
+
+.split{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:.5rem}
+.split>div{background:var(--sand);border-radius:14px;padding:10px 12px}
+.split .l{font-size:.7rem;color:var(--muted);font-weight:600}.split .v{font-weight:700;font-size:1.05rem}
+.donut{display:flex;align-items:center;gap:16px;margin-top:6px}
+
+table{width:100%;border-collapse:collapse;font-size:.84rem}
+th{text-align:left;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;padding:.6rem .5rem;border-bottom:1px solid var(--line)}
+td{padding:.7rem .5rem;border-bottom:1px solid #EFE4CF;vertical-align:top}
+td.n,th.n{text-align:right}
+.tw{overflow-x:auto;margin:0 -4px}.tw table{min-width:520px}
+.st{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:600;border-radius:999px;padding:.15rem .6rem;white-space:nowrap}
+.st.earned{background:#E4F0E2;color:var(--ok)}.st.pending{background:#F8ECCF;color:var(--warn)}.st.void{background:#EFE7DA;color:var(--muted)}
+.items{font-size:.75rem;color:var(--muted)}
+.rules li{margin:.45rem 0;font-size:.85rem}.rules .ic{color:var(--gold);margin-right:.45rem}
+.foot{font-size:.72rem;color:var(--muted);text-align:center;padding:26px 0 40px}
+.skel{animation:pulse 1.2s ease-in-out infinite}@keyframes pulse{50%{opacity:.45}}
+@media (max-width:900px){.hgrid,.grid2{grid-template-columns:minmax(0,1fr)}.kpis{grid-template-columns:repeat(2,1fr)}.big{font-size:2.5rem}}
+@media (max-width:520px){.hero{padding:22px 18px;border-radius:22px}.kpi .v{font-size:1.3rem}.split{grid-template-columns:1fr 1fr}.who span{display:none}.hide-sm{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-eye-slash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path d="M3 3l18 18"/></symbol><symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></symbol><symbol id="i-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></symbol><symbol id="i-sack-dollar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></symbol><symbol id="i-bag-shopping" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l1 14H5z"/><path d="M9 7a3 3 0 0 1 6 0"/></symbol><symbol id="i-coins" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15.5 9.5a6 6 0 1 1-6 6"/></symbol><symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol><symbol id="i-receipt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></symbol><symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"/></symbol><symbol id="i-tag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V3h9l9 9-9 9z"/><circle cx="7.5" cy="7.5" r="1.5"/></symbol><symbol id="i-box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9-4 9 4v10l-9 4-9-4z"/><path d="M3 7l9 4 9-4M12 11v10"/></symbol><symbol id="i-circle-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></symbol><symbol id="i-circle-xmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></symbol><symbol id="i-ban" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M6 6l12 12"/></symbol><symbol id="i-percent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 5L5 19"/><circle cx="7" cy="7" r="2"/><circle cx="17" cy="17" r="2"/></symbol></svg>
+
+<!-- Sign in -->
+<section id="login" aria-label="Rep sign in">
+<form class="lcard" id="lf" autocomplete="on">
+<img src="/assets/nuvera-logo-hd-144.png" alt="Nuvera Form" width="72" height="72">
+<h1>Rep Portal</h1>
+<p class="sub muted">Sign in to see your sales, commissions and payouts.</p>
+<div class="f"><label for="u">Username</label><input class="inp" id="u" name="username" autocomplete="username" autocapitalize="characters" required></div>
+<div class="f"><label for="p">Password</label><div class="pw"><input class="inp" id="p" type="password" name="password" autocomplete="current-password" required><button type="button" id="eye" aria-label="Show password"><svg class="ic"><use href="#i-eye"/></svg></button></div></div>
+<p id="lerr" role="alert"></p>
+<button class="btn" style="width:100%" id="lb">Sign in</button>
+<p class="sub muted" style="margin:1rem 0 0;font-size:.75rem">Trouble signing in? Email <a href="mailto:info@nuveraform.com" style="color:var(--dgold)">info@nuveraform.com</a></p>
+</form>
+</section>
+
+<!-- Dashboard -->
+<div id="app">
+<header class="top"><div class="wrap bar">
+<a class="brand" href="/"><img src="/assets/nuvera-logo-hd-96.png" alt="" width="38" height="38"><span>Nuvera Form<small>Rep Portal</small></span></a>
+<div class="who"><span id="whoN"></span><div class="avatar" id="av"></div><button class="btn ghost sm" id="out">Sign out</button></div>
+</div></header>
+
+<main class="wrap">
+<section class="hero">
+<div class="hgrid">
+<div>
+<div class="eyebrow">Commission balance</div>
+<h2 id="hi">Welcome back</h2>
+<div class="big tnum" id="bal">$0.00</div>
+<div class="hmeta" id="hmeta"></div>
+<div class="chips" id="chips"></div>
+</div>
+<div class="codebox">
+<div class="eyebrow">Your exclusive code</div>
+<div class="code"><b id="code">FY305</b><button class="copy" id="cpCode"><svg class="ic"><use href="#i-copy"/></svg> Copy</button></div>
+<div class="link"><svg class="ic" style="color:var(--lgold)"><use href="#i-link"/></svg><span id="lnk"></span><button class="copy" id="cpLink" style="margin-left:auto">Copy link</button></div>
+<p class="hmeta" style="margin:.7rem 0 0;font-size:.75rem">Your link applies the code automatically. Codes cannot be combined, so FY305 replaces the 10% welcome offer.</p>
+</div>
+</div>
+</section>
+
+<section class="kpis" aria-label="Key figures">
+<div class="card kpi"><div class="l"><svg class="ic"><use href="#i-sack-dollar"/></svg>Net sales</div><div class="v tnum" id="k1"></div><div class="s" id="k1s"></div></div>
+<div class="card kpi"><div class="l"><svg class="ic"><use href="#i-bag-shopping"/></svg>Orders</div><div class="v tnum" id="k2"></div><div class="s" id="k2s"></div></div>
+<div class="card kpi"><div class="l"><svg class="ic"><use href="#i-coins"/></svg>Commission earned</div><div class="v tnum" id="k3"></div><div class="s" id="k3s"></div></div>
+<div class="card kpi"><div class="l"><svg class="ic"><use href="#i-clock"/></svg>Pending commission</div><div class="v tnum" id="k4"></div><div class="s">Orders awaiting payment or shipping</div></div>
+<div class="card kpi"><div class="l"><svg class="ic"><use href="#i-receipt"/></svg>Avg. order value</div><div class="v tnum" id="k5"></div><div class="s">After the 20% discount</div></div>
+<div class="card kpi"><div class="l"><svg class="ic"><use href="#i-users"/></svg>Customers</div><div class="v tnum" id="k6"></div><div class="s" id="k6s"></div></div>
+<div class="card kpi"><div class="l"><svg class="ic"><use href="#i-tag"/></svg>Followers saved</div><div class="v tnum" id="k7"></div><div class="s">Total discount given with your code</div></div>
+<div class="card kpi"><div class="l"><svg class="ic"><use href="#i-box"/></svg>Units sold</div><div class="v tnum" id="k8"></div><div class="s">Across all FY305 orders</div></div>
+</section>
+
+<section class="grid2">
+<div class="card">
+<div class="ch"><div><h3 id="cT">Net sales</h3><span id="cS">Last 30 days</span></div>
+<div class="seg" role="tablist" aria-label="Chart range"><button class="on" data-r="days">30 days</button><button data-r="months">6 months</button></div></div>
+<div class="seg" style="margin-bottom:8px" aria-label="Measure"><button class="on" data-m="net">Sales</button><button data-m="commission">Commission</button><button data-m="orders">Orders</button></div>
+<div class="chart" id="chart"><svg id="svg" role="img" aria-label="Sales chart"></svg><div class="tip" id="tip"></div><div class="empty" id="empty" hidden>Your first FY305 order will show up here.</div></div>
+</div>
+<div class="card">
+<div class="ch"><h3>Commission breakdown</h3><span id="rateL"></span></div>
+<div class="donut"><svg width="120" height="120" viewBox="0 0 120 120" id="donut" aria-hidden="true"></svg>
+<div style="font-size:.82rem;line-height:1.9" id="dleg"></div></div>
+<div class="split"><div><div class="l">Lifetime</div><div class="v tnum" id="s1"></div></div><div><div class="l">Paid out</div><div class="v tnum" id="s2"></div></div><div><div class="l">This month</div><div class="v tnum" id="s3"></div></div></div>
+</div>
+</section>
+
+<section class="grid2">
+<div class="card">
+<div class="ch"><h3>Recent orders</h3><span>Customer details are kept private</span></div>
+<div class="tw"><table><thead><tr><th>Date</th><th>Order</th><th class="hide-sm">Customer</th><th class="n">Net sale</th><th class="n">Commission</th><th>Status</th></tr></thead><tbody id="ot"></tbody></table></div>
+</div>
+<div>
+<div class="card" style="margin-bottom:14px"><div class="ch"><h3>Top products</h3><span>By units</span></div><div id="tp"></div></div>
+<div class="card"><div class="ch"><h3>Top states</h3><span>By orders</span></div><div id="ts"></div></div>
+</div>
+</section>
+
+<section class="grid2">
+<div class="card">
+<div class="ch"><h3>Payout history</h3><span>Sent by Nuvera Form</span></div>
+<div class="tw"><table><thead><tr><th>Date</th><th>Note</th><th class="n">Amount</th></tr></thead><tbody id="pt"></tbody></table></div>
+</div>
+<div class="card">
+<div class="ch"><h3>Posting guidelines</h3><span>Keep it compliant</span></div>
+<ul class="rules" style="list-style:none;padding:0;margin:0">
+<li><svg class="ic"><use href="#i-circle-check"/></svg>Lead with the code: FY305 for 20% off at nuveraform.com.</li>
+<li><svg class="ic"><use href="#i-circle-check"/></svg>Disclose the partnership in every post (#ad or the paid partnership label).</li>
+<li><svg class="ic"><use href="#i-circle-check"/></svg>Peptides are research use only. Show the brand, packaging, labels and unboxing.</li>
+<li><svg class="ic" style="color:#A33"><use href="#i-circle-xmark"/></svg>No dosing, injecting, results, before/after or health and body claims.</li>
+<li><svg class="ic" style="color:#A33"><use href="#i-circle-xmark"/></svg>Do not combine codes or promise extra discounts.</li>
+</ul>
+</div>
+</section>
+<p class="foot" id="upd"></p>
+</main>
+</div>
+
+<script>
+(function(){
+var $=function(s){return document.querySelector(s)},$$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+var ss={get:function(k){try{return sessionStorage.getItem(k)}catch(e){return null}},set:function(k,v){try{sessionStorage.setItem(k,v)}catch(e){}},del:function(k){try{sessionStorage.removeItem(k)}catch(e){}}};
+var D=null,view={r:'days',m:'net'};
+var money=function(n){return '$'+(+n||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})};
+var money0=function(n){return '$'+Math.round(+n||0).toLocaleString('en-US')};
+var esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
+var fmtDay=function(d){var p=d.split('-');return new Date(+p[0],+p[1]-1,+p[2]).toLocaleDateString('en-US',{month:'short',day:'numeric'})};
+var fmtMonth=function(m){var p=m.split('-');return new Date(+p[0],+p[1]-1,1).toLocaleDateString('en-US',{month:'short'})};
+
+function call(body){return fetch('/api/rep',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}).then(function(r){return r.json().catch(function(){return {}}).then(function(j){j._s=r.status;return j})})}
+
+$('#eye').onclick=function(){var p=$('#p'),s=p.type==='password';p.type=s?'text':'password';this.innerHTML='<svg class="ic"><use href="#i-eye'+(s?'-slash':'')+'"/></svg>';this.setAttribute('aria-label',s?'Hide password':'Show password')};
+$('#lf').onsubmit=function(e){e.preventDefault();var b=$('#lb');b.disabled=true;b.textContent='Signing in…';$('#lerr').textContent='';
+call({user:$('#u').value,pass:$('#p').value}).then(function(j){b.disabled=false;b.textContent='Sign in';if(!j.ok){$('#lerr').textContent=j.error||'Could not sign in. Try again.';return}ss.set('nv_rep',j.token);$('#p').value='';show(j)}).catch(function(){b.disabled=false;b.textContent='Sign in';$('#lerr').textContent='Connection problem. Try again.'})};
+$('#out').onclick=function(){ss.del('nv_rep');D=null;$('#app').style.display='none';$('#login').style.display='grid';$('#u').focus()};
+function copy(t,btn){var done=function(){var o=btn.innerHTML;btn.textContent='Copied';setTimeout(function(){btn.innerHTML=o},1400)};if(navigator.clipboard)navigator.clipboard.writeText(t).then(done,done);else done()}
+$('#cpCode').onclick=function(){copy(D.rep.code,this)};$('#cpLink').onclick=function(){copy(D.rep.link,this)};
+$$('[data-r]').forEach(function(b){b.onclick=function(){view.r=b.dataset.r;$$('[data-r]').forEach(function(x){x.classList.toggle('on',x===b)});chart()}});
+$$('[data-m]').forEach(function(b){b.onclick=function(){view.m=b.dataset.m;$$('[data-m]').forEach(function(x){x.classList.toggle('on',x===b)});chart()}});
+
+function delta(a,b){if(!b)return a?'<span class="up">New this month</span>':'No sales yet this month';var p=Math.round((a-b)/b*100);return '<span class="'+(p>=0?'up':'down')+'">'+(p>=0?'▲ ':'▼ ')+Math.abs(p)+'%</span> vs last month'}
+
+function show(d){D=d;var t=d.totals;
+$('#login').style.display='none';$('#app').style.display='block';
+$('#whoN').textContent=d.rep.name;$('#av').textContent=d.rep.code.slice(0,2);
+$('#hi').textContent='Welcome back, '+d.rep.name;
+$('#bal').textContent=money(t.balance);
+$('#hmeta').innerHTML='Earned on shipped orders, minus payouts. <b style="color:#F6DFA6">'+money(t.pending)+'</b> more is pending.';
+$('#chips').innerHTML=['<svg class="ic"><use href="#i-tag"/></svg> '+Math.round(d.rep.discount*100)+'% off for your followers','<svg class="ic"><use href="#i-percent"/></svg> '+(Math.round(d.rep.commission*1000)/10)+'% commission on net sales'].map(function(c){return '<span class="chip">'+c+'</span>'}).join('');
+$('#code').textContent=d.rep.code;$('#lnk').textContent=d.rep.link.replace('https://','');
+$('#k1').textContent=money(t.net);$('#k1s').innerHTML=delta(d.thisMonth.net,d.lastMonth.net);
+$('#k2').textContent=t.orders;$('#k2s').textContent=d.thisMonth.orders+' this month';
+$('#k3').textContent=money(t.earned);$('#k3s').textContent='From shipped orders';
+$('#k4').textContent=money(t.pending);
+$('#k5').textContent=money(t.aov);
+$('#k6').textContent=t.customers;$('#k6s').textContent=t.repeat+' came back ('+t.repeatRate+'% repeat)';
+$('#k7').textContent=money(t.savings);$('#k8').textContent=t.units;
+$('#rateL').textContent=(Math.round(d.rep.commission*1000)/10)+'% of net sales';
+$('#s1').textContent=money0(t.lifetime);$('#s2').textContent=money0(t.paid);$('#s3').textContent=money0(d.thisMonth.commission);
+donut(t);chart();
+$('#ot').innerHTML=d.orders.length?d.orders.map(function(o){var lab={earned:'<svg class="ic"><use href="#i-circle-check"/></svg> Earned',pending:'<svg class="ic"><use href="#i-clock"/></svg> Pending',void:'<svg class="ic"><use href="#i-ban"/></svg> Not completed'}[o.status];
+return '<tr><td>'+fmtDay(o.day)+'</td><td><b class="tnum">'+esc(o.order)+'</b><div class="items">'+o.items.map(function(i){return esc(i.name)+' ×'+i.q}).join(', ')+'</div></td><td class="hide-sm">'+esc(o.customer)+(o.state?' · '+esc(o.state):'')+'</td><td class="n tnum">'+money(o.net)+'</td><td class="n tnum"><b>'+money(o.commission)+'</b></td><td><span class="st '+o.status+'">'+lab+'</span></td></tr>'}).join(''):'<tr><td colspan="6" class="muted" style="text-align:center;padding:2rem .5rem">No orders yet. Share your code and link to get started.</td></tr>';
+var mx=d.products.length?d.products[0].units:1;
+$('#tp').innerHTML=d.products.length?d.products.map(function(p){return '<div class="meter"><div class="r"><span>'+esc(p.name)+'</span><b class="tnum">'+p.units+'</b></div><div class="track"><div class="fill" style="width:'+Math.max(4,p.units/mx*100)+'%"></div></div></div>'}).join(''):'<p class="muted" style="font-size:.85rem">Best sellers from your code will appear here.</p>';
+var ms=d.states.length?d.states[0].orders:1;
+$('#ts').innerHTML=d.states.length?d.states.map(function(s){return '<div class="meter"><div class="r"><span>'+esc(s.state)+'</span><b class="tnum">'+s.orders+'</b></div><div class="track"><div class="fill" style="width:'+Math.max(4,s.orders/ms*100)+'%"></div></div></div>'}).join(''):'<p class="muted" style="font-size:.85rem">Where your customers order from will appear here.</p>';
+$('#pt').innerHTML=d.payouts.length?d.payouts.map(function(p){return '<tr><td>'+fmtDay(p.date)+'</td><td>'+esc(p.note||'Payout')+'</td><td class="n tnum"><b>'+money(p.amount)+'</b></td></tr>'}).join(''):'<tr><td colspan="3" class="muted" style="text-align:center;padding:1.5rem .5rem">No payouts yet.</td></tr>';
+$('#upd').textContent='Updated '+new Date(d.updatedAt).toLocaleString('en-US',{dateStyle:'medium',timeStyle:'short'})+' · Figures update as orders are paid and shipped.';
+}
+
+function donut(t){var parts=[{v:t.balance,c:'#BF943C',l:'Balance due'},{v:t.pending,c:'#E7C988',l:'Pending'},{v:t.paid,c:'#3A2816',l:'Paid out'}],tot=parts.reduce(function(a,p){return a+Math.max(0,p.v)},0),r=46,C=2*Math.PI*r,off=0,svg='<circle cx="60" cy="60" r="'+r+'" fill="none" stroke="#F0E4CE" stroke-width="14"/>';
+if(tot>0)parts.forEach(function(p){var L=Math.max(0,p.v)/tot*C;if(L>0){svg+='<circle cx="60" cy="60" r="'+r+'" fill="none" stroke="'+p.c+'" stroke-width="14" stroke-dasharray="'+Math.max(0,L-2)+' '+(C-Math.max(0,L-2))+'" stroke-dashoffset="'+(-off)+'" transform="rotate(-90 60 60)"/>';off+=L}});
+svg+='<text x="60" y="56" text-anchor="middle" font-size="10" fill="#7A6650" font-family="Poppins">Lifetime</text><text x="60" y="72" text-anchor="middle" font-size="14" font-weight="700" fill="#3A2816" font-family="Poppins">'+money0(t.lifetime)+'</text>';
+$('#donut').innerHTML=svg;
+$('#dleg').innerHTML=parts.map(function(p){return '<div><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:'+p.c+';margin-right:7px"></span>'+p.l+' <b class="tnum">'+money(p.v)+'</b></div>'}).join('')}
+
+function chart(){if(!D)return;var data=D[view.r],m=view.m,svg=$('#svg'),W=svg.clientWidth||600,H=220,pl=46,pr=8,pt=12,pb=28;
+var names={net:'Net sales',commission:'Commission',orders:'Orders'};$('#cT').textContent=names[m];$('#cS').textContent=view.r==='days'?'Last 30 days':'Last 6 months';
+var vals=data.map(function(x){return x[m]}),max=Math.max.apply(null,vals.concat([0])),empty=max===0;
+var nice=function(v){if(v<=0)return m==='orders'?4:100;var p=Math.pow(10,Math.floor(Math.log10(v))),f=v/p;return (f<=1?1:f<=2?2:f<=5?5:10)*p};var top=nice(max);if(m==='orders')top=Math.max(4,Math.ceil(top));
+var iw=W-pl-pr,ih=H-pt-pb,n=data.length,bw=iw/n,gap=Math.min(6,bw*.3),fmt=function(v){return m==='orders'?String(v):money0(v)};
+var g='';for(var i=0;i<=4;i++){var y=pt+ih-ih*i/4;g+='<line x1="'+pl+'" x2="'+(W-pr)+'" y1="'+y+'" y2="'+y+'" stroke="#E9DCC3" stroke-width="1"'+(i?' stroke-dasharray="2 4"':'')+'/><text x="'+(pl-8)+'" y="'+(y+4)+'" text-anchor="end" font-size="10" fill="#7A6650" font-family="Poppins">'+fmt(top*i/4)+'</text>'}
+var bars='',labs='';data.forEach(function(x,i){var v=x[m],h=v/top*ih,X=pl+i*bw+gap/2,w=Math.max(2,bw-gap),Y=pt+ih-h;
+if(h>0){var r=Math.min(4,w/2,h);bars+='<path d="M'+X+','+(pt+ih)+'V'+(Y+r)+'Q'+X+','+Y+' '+(X+r)+','+Y+'H'+(X+w-r)+'Q'+(X+w)+','+Y+' '+(X+w)+','+(Y+r)+'V'+(pt+ih)+'Z" fill="url(#gg)"/>'}
+bars+='<rect x="'+(pl+i*bw)+'" y="'+pt+'" width="'+bw+'" height="'+ih+'" fill="transparent" data-i="'+i+'"/>';
+var every=view.r==='days'?(W<520?10:5):1;if(i%every===0||i===n-1&&view.r==='months')labs+='<text x="'+(X+w/2)+'" y="'+(H-8)+'" text-anchor="middle" font-size="10" fill="#7A6650" font-family="Poppins">'+(view.r==='days'?fmtDay(x.day):fmtMonth(x.month))+'</text>'});
+svg.setAttribute('viewBox','0 0 '+W+' '+H);
+svg.innerHTML='<defs><linearGradient id="gg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C99A3E"/><stop offset="1" stop-color="#A27A2B"/></linearGradient></defs>'+g+bars+labs;
+$('#empty').hidden=!empty;
+var tip=$('#tip');$$('#svg [data-i]').forEach(function(r){var on=function(){var x=data[+r.dataset.i],cx=(+r.getAttribute('x')+bw/2)/W*svg.clientWidth,h=x[m]/top*ih;
+tip.innerHTML=(view.r==='days'?fmtDay(x.day):fmtMonth(x.month)+' '+x.month.slice(0,4))+'<br><b>'+money(x.net)+'</b> sales · '+x.orders+' order'+(x.orders===1?'':'s')+'<br>Commission <b>'+money(x.commission)+'</b>';
+tip.style.left=Math.min(Math.max(cx,80),svg.clientWidth-80)+'px';tip.style.top=(pt+ih-h)+'px';tip.style.opacity=1;r.setAttribute('fill','rgba(191,148,60,.08)')},off=function(){tip.style.opacity=0;r.setAttribute('fill','transparent')};
+r.addEventListener('mouseenter',on);r.addEventListener('mouseleave',off);r.addEventListener('touchstart',on,{passive:true})})}
+var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(chart,120)});
+
+var tok=ss.get('nv_rep');
+if(tok)call({token:tok}).then(function(j){if(j.ok){ss.set('nv_rep',j.token);show(j)}else ss.del('nv_rep')}).catch(function(){});
+})();
+</script>
+</body></html>

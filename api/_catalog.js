@@ -21,7 +21,19 @@ export const SHIPPING = {
   overnight: { label: 'Overnight (next business day)', price: 60 }
 };
 
-export const PROMO = { NUVERA10: 0.10 };
+// Promo codes. Only one code can be used per order.
+// firstOrder: usable only by customers with no earlier order (email, phone or address).
+// rep: the rep account credited with the sale in the rep portal (/rep).
+export const PROMO = {
+  NUVERA10: { rate: 0.10, firstOrder: true },
+  FY305: { rate: 0.20, rep: 'FY305' }
+};
+
+// Rep accounts for the rep portal. commission = share of the order subtotal after the
+// discount (shipping excluded). Change the rate here; the portal recalculates every order.
+export const REPS = {
+  FY305: { name: 'FightingYo305', code: 'FY305', commission: 0.10 }
+};
 
 // What a customer can review, and where it shows: catalog id -> display name + product page.
 // Bundles count as their parts. Old orders used the id 'ret' for GLP-3.
